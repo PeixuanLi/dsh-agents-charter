@@ -122,4 +122,4 @@ JSONL backend 在 memo 化前冻结解码后的 event graph。原生 decoder 与
 
 每个 pull request 多付出一个必需 Linux job；该 job 的 Session 部分运行多个短生命周期子进程，以换取冷 cache、独立 V8 heap、明确 GC 状态和可归因的失败。仓库级 benchmark 目录接受有意的跨包测试依赖，而不修改产品 package manifest。固定 Zstandard workload 同时覆盖事件规模与 frame 拓扑；first-open 测量保护一次性升级体验，reopen 测量防止后续打开退化，四阶段预算定位成本归属，首屏预算保护用户可见等待，Agent resume 预算与 GC 后增量保护完整冷恢复及常驻内存，128 MB 模式保护瞬时分配上限。
 
-Session 与 Node-fold 场景不测量网络传输、浏览器渲染或真实录制 Session，也不是持续性能趋势系统。[前端性能预算](2026-09-06-frontend-performance-budgets.zh.md)拥有浏览器工作流测量。Node 或 runner 变化需要用同一 workload 重新采样并评审预算；修改业务实现时不得顺带放宽预算而不提供新的正反例数据。
+Session 与 Node-fold 场景不测量网络传输、浏览器渲染或真实录制 Session，也不是持续性能趋势系统。前端性能预算 (`2026-09-06-frontend-performance-budgets.zh.md`)拥有浏览器工作流测量。Node 或 runner 变化需要用同一 workload 重新采样并评审预算；修改业务实现时不得顺带放宽预算而不提供新的正反例数据。

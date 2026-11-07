@@ -42,7 +42,7 @@ Status: proposed
 
 ### 我怎样参与？
 
-按[开发者迁移规则](2026-09-10-session-developer-transition.zh.md)的阅读顺序熟悉总览、目标协议、当前子系统文档和实现阶段。选择一个明确消费方，把类型和入口迁到抽象，补合约测试，并避免同时改变生命周期或 durable format。
+按开发者迁移规则 (`2026-09-10-session-developer-transition.zh.md`)的阅读顺序熟悉总览、目标协议、当前子系统文档和实现阶段。选择一个明确消费方，把类型和入口迁到抽象，补合约测试，并避免同时改变生命周期或 durable format。
 
 ## Alternatives considered
 

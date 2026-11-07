@@ -251,7 +251,7 @@ export function RemoteScope<This extends object, Args extends unknown[], Result>
 | `session/follow` | 同上 | 默认 resolver | 否 |
 | `remoteAccess/follow` | `global` | 无资源；remote-access 对任何 principal 放行 | 否 |
 
-对于 `session/attachment`，`sessionId` 指定 Gateway 检查的资源，不限制可读取哪张图片。该检查放行后，图片可以属于其他 Session 或不属于任何 Session，处理函数也不检查请求中的 Session 是否存在。policy 作者必须把此 action 视为整个附件存储的读取权限，具体规则见[图片访问规则](2026-10-23-store-scoped-image-reads.zh.md)。
+对于 `session/attachment`，`sessionId` 指定 Gateway 检查的资源，不限制可读取哪张图片。该检查放行后，图片可以属于其他 Session 或不属于任何 Session，处理函数也不检查请求中的 Session 是否存在。policy 作者必须把此 action 视为整个附件存储的读取权限，具体规则见图片访问规则 (`2026-10-23-store-scoped-image-reads.zh.md`)。
 
 subagent 地址读取的是子会话转录，因此其资源是子会话。Client 在重连后会重新读取已知会话的 projections，其中包括 subagent 会话的父会话；没有该父会话授权的读者，其 projection 读取被拒。父会话的授权是否覆盖其 subagent 子会话由 policy 决定，即是否为子会话给出 binding；通用层不推导父资源。
 
@@ -500,7 +500,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 |---|---|
 | principal 只能由进程内 Host 代码在创建 Peer 时给出 | `PeerScope.principal` 只读；`createPeer()` 不对应任何路由 |
 | wire 上任何字段都不能设置或覆盖 principal | principal 不来自 args、envelope、header、query 或 cookie。args 顶层多余字段被 `assertExactArguments` 拒绝；payload 必须恰为 `{ args }`；envelope 未知字段被 `clientRequestSchema` (`../../../../packages/client/connection/src/rpc-schema.ts`) 丢弃；请求体内同名字段只是业务数据 |
-| 浏览器网络准入为 owner | 通过[浏览器 token 认证](../../implemented/architecture/2026-08-24-browser-token-authentication.zh.md)的连接得到 `browserPeer` |
+| 浏览器网络准入为 owner | 通过浏览器 token 认证 (`../../implemented/architecture/2026-08-24-browser-token-authentication.zh.md`)的连接得到 `browserPeer` |
 | 没有隐式 Peer | Gateway 与 Connection 都不补默认 Peer；required 参数让漏传在编译期暴露 |
 | 已 dispose 的 Peer 不能再分派 | `gateway/peer-disposed` |
 | 非 owner 未经授权不能调用 | 只有 binding 的 role 显式列出该 action 且资源匹配时才放行；没有该 kind 的 policy 即拒；Gateway 依赖 `remoteAccess`，缺失时 Gateway 不启动 |
@@ -552,7 +552,7 @@ session-controller 类型 (`../../../../packages/api/session-controller/src/type
 
 ### 不在范围与 Future work
 
-- 仅供 API 的 `/connect` 握手、API Cookie、每条 API 连接一个 Peer 与 WebSocket 生命周期见 [Peer 作用域建连握手](2026-10-09-operator-scoped-connect-handshake.zh.md)。
+- 仅供 API 的 `/connect` 握手、API Cookie、每条 API 连接一个 Peer 与 WebSocket 生命周期见 Peer 作用域建连握手 (`2026-10-09-operator-scoped-connect-handshake.zh.md`)。
 - 浏览器多 Peer（如每标签页一个）：所有浏览器连接共享 `browserPeer`。
 - 交互参与属于 Peer；`interactions: 'answer'` 的非 owner 依然只能收到 RBAC 授权的广播，不能回答 owner 的 waterfall；按 principal 处理审批不在本机制内。
 - `agent-preset/selected` 等其余转发事件未声明资源，按 `global` 判定；读者需要某个会话事件时，#3854 为其声明资源并在 role 中列出 `event:<name>`。
@@ -565,10 +565,10 @@ session-controller 类型 (`../../../../packages/api/session-controller/src/type
 
 ### 与现有 Note 的关系
 
-- [Remote 双工流](../../implemented/architecture/2026-09-19-remote-duplex-stream.zh.md)：部分 supersede。被替换的部分包括：「Peer 不记录身份与权限」「本 Host 只有一个 Peer：operator」「in-process carrier 不给 Peer 即 operator」，以及其替代方案中「Access 机制属于业务语义」的表述；其余（双工流、uplink、`ctx.invocation` 绑定）保持。两篇保持 active 并互链，该 Note 的现行事实已同步更新。
-- [浏览器 token 认证](../../implemented/architecture/2026-08-24-browser-token-authentication.zh.md)：不受影响。该 Note 否决「按方法区分特权」针对的是 owner 的认证；通过认证的浏览器仍是 owner 且不受方法级检查。
+- Remote 双工流 (`../../implemented/architecture/2026-09-19-remote-duplex-stream.zh.md`)：部分 supersede。被替换的部分包括：「Peer 不记录身份与权限」「本 Host 只有一个 Peer：operator」「in-process carrier 不给 Peer 即 operator」，以及其替代方案中「Access 机制属于业务语义」的表述；其余（双工流、uplink、`ctx.invocation` 绑定）保持。两篇保持 active 并互链，该 Note 的现行事实已同步更新。
+- 浏览器 token 认证 (`../../implemented/architecture/2026-08-24-browser-token-authentication.zh.md`)：不受影响。该 Note 否决「按方法区分特权」针对的是 owner 的认证；通过认证的浏览器仍是 owner 且不受方法级检查。
 - [Typert Remote 方法调用](../../implemented/architecture/2026-08-02-typert-remote-method-calls.zh.md)：不受影响；`@Remote` 与 `@RemoteScope` 增加可选的 `resources` 读取函数（`@RemoteScope` 的第二个参数可为 `{ name?, resources? }`），只供 Gateway 的访问检查读取，不改变端点命名、调用模式与生成物。
-- [生产方拥有的消息来源](../../implemented/architecture/2026-09-09-producer-owned-message-sources.zh.md)：不受影响；`principal` 由构造 source 的生产者写入。
+- 生产方拥有的消息来源 (`../../implemented/architecture/2026-09-09-producer-owned-message-sources.zh.md`)：不受影响；`principal` 由构造 source 的生产者写入。
 
 ## 考虑过的替代方案
 

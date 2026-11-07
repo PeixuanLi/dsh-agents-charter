@@ -14,7 +14,7 @@ Changing event cardinality also changes Session sequence numbers. A released mig
 
 ## Decision
 
-The [V3 canonical-envelope decision](2026-09-06-v3-canonical-session-envelopes.md) owns current replacement-key and header-acceptance rules. It preserves the embedded streams, attempt settlements, and frozen v1-to-v2 conversion described here.
+The V3 canonical-envelope decision (`2026-09-06-v3-canonical-session-envelopes.md`) owns current replacement-key and header-acceptance rules. It preserves the embedded streams, attempt settlements, and frozen v1-to-v2 conversion described here.
 
 Session format v2 has no top-level `assistant/chunk` event. Each model attempt commits one durable settlement containing `stream: AssistantStreamRecord[]`:
 

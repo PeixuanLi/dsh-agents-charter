@@ -4,11 +4,11 @@ Status: implemented
 
 English | [中文](2026-10-09-stored-credential-precedence.zh.md)
 
-The [headless environment authentication](2026-10-12-headless-environment-auth.md) decision partially supersedes this note's per-run override policy: the shipped headless profile omits the store. The ordering below remains the store's contract when mounted.
+The headless environment authentication (`2026-10-12-headless-environment-auth.md`) decision partially supersedes this note's per-run override policy: the shipped headless profile omits the store. The ordering below remains the store's contract when mounted.
 
 ## Problem
 
-[Configuration source ownership](2026-08-04-configuration-source-ownership.md) ranked the inherited process environment above `$DSH_HOME/.credentials.yaml`, and `credentials-local` refused `set` and `unset` for a name the launching shell exported. Two kinds of stored credential then had opposite precedence. pi-ai's resolvers read the credential record stored under `llm-pi-ai/<provider>` before any environment variable, so a stored OAuth grant or `api-key` record won over an exported key. A key that the Models page stored under a reference lost to the same exported name. Which credential a request used therefore depended on the provider family, and the Models page disabled its key field whenever the name was exported (#5527).
+Configuration source ownership (`2026-08-04-configuration-source-ownership.md`) ranked the inherited process environment above `$DSH_HOME/.credentials.yaml`, and `credentials-local` refused `set` and `unset` for a name the launching shell exported. Two kinds of stored credential then had opposite precedence. pi-ai's resolvers read the credential record stored under `llm-pi-ai/<provider>` before any environment variable, so a stored OAuth grant or `api-key` record won over an exported key. A key that the Models page stored under a reference lost to the same exported name. Which credential a request used therefore depended on the provider family, and the Models page disabled its key field whenever the name was exported (#5527).
 
 ## Decision
 

@@ -91,7 +91,7 @@ Decorator 表达 Remote 参与、可选导出名称和流式投递；`@Remote` �
 
 SRC 模式下，decorator 把方法名和调用模式记录在 Service prototype 上的带版本描述符中。描述符使用稳定的字符串属性名，因此 `remoteMethods()` 可以读取 `dsh-typert-protocol` 另一个已安装副本生成的标记；它不会向 Service 实例、constructor 或方法函数写入任何内容。
 
-普通产物从每个端点唯一的静态方法 spec 构造惰性 Remote info 实例。其直接 `TypertRemoteMethod` 对象保留描述符字段，并增加具名 `input(options?)` 和 `invoke`。消费方通过 `input({ strict: true })` 选择配套的严格解析与投影；`input()` 保留普通处理。Host 参数 codec 与唯一的普通 `result` codec 保持不变。既有 Registry 查询保留这些对象，`TYPERT_REMOTE.methods` 则提供精确静态类型。严格源码启动预构建并加载普通 Typert 产物；fallback 无法恢复被擦除的 schema。[统一元数据 note](../../proposed/architecture/2026-09-20-unified-typert-remote-metadata.zh.md)记录该交付机制及尚未完成的消费方适配。
+普通产物从每个端点唯一的静态方法 spec 构造惰性 Remote info 实例。其直接 `TypertRemoteMethod` 对象保留描述符字段，并增加具名 `input(options?)` 和 `invoke`。消费方通过 `input({ strict: true })` 选择配套的严格解析与投影；`input()` 保留普通处理。Host 参数 codec 与唯一的普通 `result` codec 保持不变。既有 Registry 查询保留这些对象，`TYPERT_REMOTE.methods` 则提供精确静态类型。严格源码启动预构建并加载普通 Typert 产物；fallback 无法恢复被擦除的 schema。统一元数据 note (`../../proposed/architecture/2026-09-20-unified-typert-remote-metadata.zh.md`)记录该交付机制及尚未完成的消费方适配。
 
 LIB 的严格方法发现、类型解析和 descriptor 生成由 Typert compiler 完成。它接受 `TypertRemoteService` 直接 `super()` 调用中的字面量 service key，或显式 binding 回退；生成过程不改写业务源码，也不注入隐藏注册元数据。
 
@@ -183,7 +183,7 @@ import type { CreateGoalRequest, CreateGoalResult } from '@deepseek-ai/dsh-goal/
 
 Remote 方法本身使用 declaration map 导航。Typert 把 `InvocationModel.location` 固定在 Host 被装饰方法的方法名 token，并在 namespace interface 的对应属性上写入 source-map segment。对于由适配器支撑的 endpoint，TypeScript editor 从 `ctx.remote.models.list` 取得生成 declaration 后，再沿 `typert.remote-client.d.ts.map` 跳到 Host Service 的 `remoteExportList` 远程出口。该出口继续显式调用不改名的存量 `list()`，map 不把 decorator、class 或整个签名误当成方法定义位置。
 
-Typert 为同一 symbol key 生成 wire Zod codec。Host Gateway 用参数与身份 codec 校验输入。Client Remote 信任生成的 TypeScript 参数与 JSON 成功结果。二进制成功结果在 multipart 解码后执行生成的结果 codec，具体由[二进制 Remote 传输](2026-09-17-workspace-file-binary-transfer.zh.md)规定。复杂类型若无法生成严格 codec，LIB 构建失败，不降级为 `unknown` 或未校验 JSON。
+Typert 为同一 symbol key 生成 wire Zod codec。Host Gateway 用参数与身份 codec 校验输入。Client Remote 信任生成的 TypeScript 参数与 JSON 成功结果。二进制成功结果在 multipart 解码后执行生成的结果 codec，具体由二进制 Remote 传输 (`2026-09-17-workspace-file-binary-transfer.zh.md`)规定。复杂类型若无法生成严格 codec，LIB 构建失败，不降级为 `unknown` 或未校验 JSON。
 
 Remote 方法引用的命名业务类型必须从纯类型公共 subpath 导出。如果唯一可达入口会带入 Host Service、Cordis `Context` merge 或 Host-only 实现，构建失败并要求业务包提供安全的类型出口。原始值、字面量和 Typert 明确支持的简单组合不需要额外命名。
 
@@ -207,7 +207,7 @@ Client Program
 
 `remote-client` 是 Host Program 的第二个 emitter，不是第三个 Program，也不是 Client 本地 face。它不包含 Host Cordis merge、Service class、Context class 或实现代码，不进入 Host 本地 reflection registry。
 
-仅源码的 Host 分析在包编译之前写出 Host 本地 artifact 与 Remote 消费端 artifact。[生成顺序决策](../process/2026-10-18-source-first-metadata-builds.zh.md)负责生成位置及其取舍；[开发指南](../../../../docs/development.zh.md#typescript-project-layout)负责命令序列。
+仅源码的 Host 分析在包编译之前写出 Host 本地 artifact 与 Remote 消费端 artifact。生成顺序决策 (`../process/2026-10-18-source-first-metadata-builds.zh.md`)负责生成位置及其取舍；[开发指南](../../../../docs/development.zh.md#typescript-project-layout)负责命令序列。
 
 顶层 `build`、仅生成声明的 `typecheck` 与串行 `build:lib` 都在包编译之前准备元数据。`build:lib` 仍是 `build:bench` 使用的完整串行 lib 构建；其 Host 部分 `build:lib:host` 供 vendor 发布 workflow 使用，并保留 aggregate 检查。一次干净构建不能依赖上次残留的 `.d.ts`。
 

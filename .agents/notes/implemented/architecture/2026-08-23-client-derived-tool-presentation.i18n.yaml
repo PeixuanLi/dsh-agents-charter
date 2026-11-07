@@ -9,11 +9,11 @@
   en: 9f34c53e647c69ca
   zh: 551776c7cc9618b5
 /agent-note-client-derived-presentation-from-raw-session-tool-events/decision:
-  en: b05851a37bc5997e
-  zh: 6f8b33edb98ecc44
+  en: 4c80cb2df37975fe
+  zh: 7844854854318ccb
 /agent-note-client-derived-presentation-from-raw-session-tool-events/decision/goals-and-non-goals:
-  en: cf37142c378249d7
-  zh: 3034f4a2bc630046
+  en: 09a5cdd6bbfbfe02
+  zh: 89f1badee030718a
 /agent-note-client-derived-presentation-from-raw-session-tool-events/terminology:
   en: 021106dd41176715
   zh: 131caff7bd37251b
@@ -60,8 +60,8 @@
   en: 46a772ac51da43a2
   zh: 8709a7e3e6a872f1
 /agent-note-client-derived-presentation-from-raw-session-tool-events/client-session-and-conversation/root-and-ptc-dispatch-subcalls:
-  en: 2c8ff511a5527a72
-  zh: 3eeddc9686ff1709
+  en: 68d570c340435bb8
+  zh: 533eb101b4bcf1cd
 /agent-note-client-derived-presentation-from-raw-session-tool-events/client-session-and-conversation/missing-call-head:
   en: b9efc339173e546e
   zh: c7639861b3b96e83
@@ -75,8 +75,8 @@
   en: d336c77d1b09f349
   zh: 6e613f9c9108058f
 /agent-note-client-derived-presentation-from-raw-session-tool-events/client-card-model-design/terminal-card:
-  en: 492669c2134169b2
-  zh: 0247a38df2dd8a83
+  en: eb07e6221a1663c6
+  zh: 8de292cf499ad050
 /agent-note-client-derived-presentation-from-raw-session-tool-events/client-card-model-design/diff-card:
   en: ea384415c94f82da
   zh: 5f146c6cb534e1db
@@ -222,8 +222,8 @@
   en: d7e581086940fafa
   zh: d452320fee6ef875
 /agent-note-client-derived-presentation-from-raw-session-tool-events/relationship-to-existing-decisions:
-  en: 1f49b5ba17c0c509
-  zh: 5af16ec821466556
+  en: a3ceb7da3b7f8ff0
+  zh: 948c24c63b68925a
 /agent-note-client-derived-presentation-from-raw-session-tool-events/deferred:
   en: a60c9007c9d26dfd
   zh: 225b1f7544bca324

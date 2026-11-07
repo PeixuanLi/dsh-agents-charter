@@ -12,11 +12,11 @@
   en: a15c7c13f167e5ac
   zh: 63bcc2ef60c2f344
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/three-independent-sequences:
-  en: c167827addf45dfb
-  zh: e38077fa96b08ac5
+  en: ea3e64c5ddd1c553
+  zh: f8eddb6afa4a7ca0
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/versions-land-in-the-repository-from-a-local-command-ci-only-checks-and-uploads:
-  en: 71d4cda384013bfb
-  zh: 909d853c18496925
+  en: 8784b1ab423d2856
+  zh: 9144a22219d13321
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/vendor-advance-the-complete-family-with-per-package-tags:
   en: 321f48c7e4afac24
   zh: 974a7fa1a75c810d
@@ -27,14 +27,14 @@
   en: 82a7925d449fc283
   zh: 653358a1ffbad80a
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/published-dependency-faces-use-an-explicit-policy:
-  en: 38e6204e0eb003ba
-  zh: 55b43a49ed3b1746
+  en: 7bfd7336f91cf80b
+  zh: cc2ae369c14e7462
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/an-optional-dependency-is-never-loaded-at-module-scope:
   en: ffe2e6b7fd06205d
   zh: 31f9890a1b38ac33
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/release-family-objects:
-  en: 5bc6a83d124b682d
-  zh: 17383ec5c3c7e0e5
+  en: 5b8944286a080d95
+  zh: bb8e6607fe6eb77f
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/workflow-shape-pack-on-pr-push-publish-from-a-manual-dispatch-workflow:
   en: ea0acc6409da4d5c
   zh: ac0bd2fe41f4fe67

@@ -251,7 +251,7 @@ The table lists the endpoints #3854 viewers use and where their resources come f
 | `session/follow` | same as above | default resolver | no |
 | `remoteAccess/follow` | `global` | no resource; remote-access allows it for every principal | no |
 
-For `session/attachment`, `sessionId` identifies the resource for the Gateway check; it does not constrain which image may be read. Once that check permits the call, an image may belong to another Session or no Session, and the handler does not check whether the supplied Session exists. Policy authors must treat this action as access to the whole attachment store, as defined by the [image access rule](2026-10-23-store-scoped-image-reads.md).
+For `session/attachment`, `sessionId` identifies the resource for the Gateway check; it does not constrain which image may be read. Once that check permits the call, an image may belong to another Session or no Session, and the handler does not check whether the supplied Session exists. Policy authors must treat this action as access to the whole attachment store, as defined by the image access rule (`2026-10-23-store-scoped-image-reads.md`).
 
 A subagent address reads the child transcript, so its resource is the child Session. A Client rereads the projections of known Sessions after a reconnect, including the parent of a subagent Session; a reader without a grant on that parent has its projection read refused. Whether a grant on a parent Session covers its subagent children is the policy's decision, that is, whether it gives a binding for the child Session; the generic layer derives no parent resource.
 
@@ -500,7 +500,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 |---|---|
 | Only in-process Host code supplies a principal, when it creates a Peer | `PeerScope.principal` is read-only; `createPeer()` has no route |
 | No wire field can set or override a principal | Principals never come from args, the envelope, headers, the query, or cookies. Extra top-level args fields fail `assertExactArguments`; the payload must be exactly `{ args }`; `clientRequestSchema` (`../../../../packages/client/connection/src/rpc-schema.ts`) drops unknown envelope fields; a same-named field inside a request body is business data |
-| Browser network admission yields the owner | Connections that pass [browser token authentication](../../implemented/architecture/2026-08-24-browser-token-authentication.md) receive `browserPeer` |
+| Browser network admission yields the owner | Connections that pass browser token authentication (`../../implemented/architecture/2026-08-24-browser-token-authentication.md`) receive `browserPeer` |
 | No implicit Peer | Neither the Gateway nor Connection supplies a default Peer; required parameters expose a missing Peer at compile time |
 | A disposed Peer cannot dispatch | `gateway/peer-disposed` |
 | A non-owner cannot call without authorization | A call is allowed only when a binding's role explicitly lists the action and its resource matches; a kind without a policy is refused; the Gateway depends on `remoteAccess` and does not start without it |
@@ -552,7 +552,7 @@ The review rule's home is the "`@Remote` marks capability methods" section of [R
 
 ### Out of scope and future work
 
-- The API-only `/connect` handshake, API cookies, one Peer per API connection, and WebSocket lifetimes are described in [Peer-scoped connect handshake](2026-10-09-operator-scoped-connect-handshake.md).
+- The API-only `/connect` handshake, API cookies, one Peer per API connection, and WebSocket lifetimes are described in Peer-scoped connect handshake (`2026-10-09-operator-scoped-connect-handshake.md`).
 - Multiple browser Peers (such as one per tab): every browser connection shares `browserPeer`.
 - Interaction participation is attached to each Peer. A non-owner with `interactions: 'answer'` still receives only RBAC-authorized broadcast frames and cannot answer owner waterfalls; per-principal approval handling remains outside this mechanism.
 - `agent-preset/selected` and the other forwarded events declare no resources and are decided on `global`; when its viewers need a Session event, #3854 declares that event's resources and lists `event:<name>` in a role.
@@ -565,10 +565,10 @@ The review rule's home is the "`@Remote` marks capability methods" section of [R
 
 ### Relation to existing Notes
 
-- [Remote duplex stream](../../implemented/architecture/2026-09-19-remote-duplex-stream.md): partially superseded. The replaced parts are "the Peer records no identity or permission", "this Host has exactly one Peer, the operator", "an in-process carrier without a Peer means the operator", and its alternative stating that "the Access mechanism is business semantics"; the rest (the duplex stream, uplink, and `ctx.invocation` binding) stands. Both Notes stay active and cross-linked, and that Note's current facts are updated.
-- [Browser token authentication](../../implemented/architecture/2026-08-24-browser-token-authentication.md): unaffected. Its rejection of per-method privilege concerns owner authentication; an authenticated browser is still the owner and is not checked per method.
+- Remote duplex stream (`../../implemented/architecture/2026-09-19-remote-duplex-stream.md`): partially superseded. The replaced parts are "the Peer records no identity or permission", "this Host has exactly one Peer, the operator", "an in-process carrier without a Peer means the operator", and its alternative stating that "the Access mechanism is business semantics"; the rest (the duplex stream, uplink, and `ctx.invocation` binding) stands. Both Notes stay active and cross-linked, and that Note's current facts are updated.
+- Browser token authentication (`../../implemented/architecture/2026-08-24-browser-token-authentication.md`): unaffected. Its rejection of per-method privilege concerns owner authentication; an authenticated browser is still the owner and is not checked per method.
 - [Typert Remote method calls](../../implemented/architecture/2026-08-02-typert-remote-method-calls.md): unaffected; `@Remote` and `@RemoteScope` gain optional `resources` readers (the second argument of `@RemoteScope` may be `{ name?, resources? }`), read only by the Gateway's access check, and change neither endpoint naming, call modes, nor generated artifacts.
-- [Producer-owned message sources](../../implemented/architecture/2026-09-09-producer-owned-message-sources.md): unaffected; the producer that builds a source writes `principal`.
+- Producer-owned message sources (`../../implemented/architecture/2026-09-09-producer-owned-message-sources.md`): unaffected; the producer that builds a source writes `principal`.
 
 ## Alternatives considered
 

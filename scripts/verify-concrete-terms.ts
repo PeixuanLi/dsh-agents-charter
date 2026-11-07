@@ -54,9 +54,9 @@ function trackedFiles(repoRoot: string): string[] {
     .split('\0')
     .filter(file => file !== '')
   if (!files.includes('AGENTS.md')
-    || !files.some(file => file.startsWith('packages/'))
+    || !files.some(file => file.startsWith('scripts/'))
     || !files.some(file => file.startsWith('docs/'))
-    || !files.some(file => file.startsWith('vendor/'))
+    || !files.some(file => file.startsWith('.agents/notes/implemented/'))
     || !files.some(file => file.startsWith('.agents/notes/archived/'))) {
     throw new Error('verify-concrete-terms: tracked-file discovery omitted a required repository area')
   }

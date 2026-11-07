@@ -42,7 +42,7 @@ Stage 1 establishes the public logical session interface. Stage 2 centralizes se
 
 ### How can I contribute?
 
-Follow the reading order in [developer transition rules](2026-09-10-session-developer-transition.md): overview, target protocols, current subsystem docs, then implementation stages. Choose one explicit consumer, migrate its type and entry point, add contract coverage, and avoid combining that work with lifecycle or durable-format changes.
+Follow the reading order in developer transition rules (`2026-09-10-session-developer-transition.md`): overview, target protocols, current subsystem docs, then implementation stages. Choose one explicit consumer, migrate its type and entry point, add contract coverage, and avoid combining that work with lifecycle or durable-format changes.
 
 ## Alternatives considered
 

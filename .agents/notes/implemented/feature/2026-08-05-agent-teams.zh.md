@@ -10,11 +10,11 @@ subagent seam 已提供 fresh／fork provider、持久 child Session、FIFO foll
 
 同进程 Agent 还共享一个 checkout。文件系统 edit 工具可以拒绝已观察到的陈旧版本，但 Bash、formatter、generator 与外部 writer 会绕过该屏障。把 teammate name 或 task owner 当作文件锁只会掩盖而不是解决该并发边界。
 
-Team 协作需要显式开启；[Session 选择](../architecture/2026-10-20-session-team-mode.zh.md)负责选择粒度与默认组合。默认工具目录与简单任务行为必须保持不变；而显式请求的 Team 必须能跨越 child Activation settlement 与 mailbox 投递竞争，使 Lead 在进程 teardown 前汇总结果。
+Team 协作需要显式开启；Session 选择 (`../architecture/2026-10-20-session-team-mode.zh.md`)负责选择粒度与默认组合。默认工具目录与简单任务行为必须保持不变；而显式请求的 Team 必须能跨越 child Activation settlement 与 mailbox 投递竞争，使 Lead 在进程 teardown 前汇总结果。
 
 ## Decision
 
-每个普通根及其后代组成以根 `SessionId` 标识的 Team；持久任务状态从首个任务事件开始。[subagent 队友](../architecture/2026-10-15-agent-teams-as-subagents.zh.md)负责单一 agent 身份。[仅等待收件箱](../simplification/2026-10-29-inbox-only-agent-wait.zh.md)使任务板变更独立于收件箱等待。普通 Session fork 成为一棵新树的根，并排除继承的 Team 权限。
+每个普通根及其后代组成以根 `SessionId` 标识的 Team；持久任务状态从首个任务事件开始。subagent 队友 (`../architecture/2026-10-15-agent-teams-as-subagents.zh.md`)负责单一 agent 身份。[仅等待收件箱](../simplification/2026-10-29-inbox-only-agent-wait.zh.md)使任务板变更独立于收件箱等待。普通 Session fork 成为一棵新树的根，并排除继承的 Team 权限。
 
 实现拆分为 `@deepseek-ai/dsh-agent-team` 与 `@deepseek-ai/dsh-tool-agent-team`：前者负责 `ctx.agentTeams` 和持久语义，后者负责 scoped schema 与模型指引。每个 Team 工具都声明完整的结果 schema，并把该值渲染为紧凑 JSON，因此编译器会检查每个 `execute` 是否符合对模型的承诺，也没有结果把 token 花在缩进上。基础 bundle 挂载两个插件；Team 不注册与 subagent control 同名的工具。共享策略声明 Team 可用，并说明协调责任。两个包属于 subagent 家族 (`../../../../packages/subagent/README.zh.md`)；根 Session 保存的选择控制任务工具与策略。[Session 模式升级指南](../../../../docs/upgrade-guide/v0.2.1-rc.2/session-team-mode/guide.zh.md)说明 profile 迁移。
 
@@ -22,19 +22,19 @@ Lead 必须等待所需工作后才能给出最终答案。进程 teardown 仍�
 
 ## Profile delegation
 
-基础 bundle (`../../../../packages/bundle/base/README.zh.md`) 插入 Team 行，并保留 base 的委派与控制工具；teammate 按[subagent](../architecture/2026-10-15-agent-teams-as-subagents.zh.md)所述使用这些工具启动。普通 Session fork 保留历史；[当前身份处理](../architecture/2026-10-13-team-identity-runtime-context.zh.md)提供 fork 自己的角色。
+基础 bundle (`../../../../packages/bundle/base/README.zh.md`) 插入 Team 行，并保留 base 的委派与控制工具；teammate 按subagent (`../architecture/2026-10-15-agent-teams-as-subagents.zh.md`)所述使用这些工具启动。普通 Session fork 保留历史；当前身份处理 (`../architecture/2026-10-13-team-identity-runtime-context.zh.md`)提供 fork 自己的角色。
 
 ## Team identity
 
-成员共享统一系统策略和工具模式；执行时强制角色权限。Team 工具解析调用方所属 Team，并使用 Session id 作为任务负责人。[必需运行时身份](../architecture/2026-10-13-team-identity-runtime-context.zh.md)负责身份注入、保留和分叉处理。
+成员共享统一系统策略和工具模式；执行时强制角色权限。Team 工具解析调用方所属 Team，并使用 Session id 作为任务负责人。必需运行时身份 (`../architecture/2026-10-13-team-identity-runtime-context.zh.md`)负责身份注入、保留和分叉处理。
 
 ## Provisioning and recovery
 
-队友创建和冷恢复属于子代理运行时（[子代理队友](../architecture/2026-10-15-agent-teams-as-subagents.zh.md)）。历史 `team/member` 记录保留阶段和描述并继续可读；Team 不写入新成员记录。
+队友创建和冷恢复属于子代理运行时（子代理队友 (`../architecture/2026-10-15-agent-teams-as-subagents.zh.md`)）。历史 `team/member` 记录保留阶段和描述并继续可读；Team 不写入新成员记录。
 
 ## Mailbox and task transactions
 
-历史 Lead-log mailbox 仍可从原始 Session 日志读取。[仅投影任务的决策](../simplification/2026-10-29-team-task-only-projection.zh.md)取代邮箱投影、检查点保留和 Team 载荷校验。历史排队消息绝不再投递或确认。
+历史 Lead-log mailbox 仍可从原始 Session 日志读取。仅投影任务的决策 (`../simplification/2026-10-29-team-task-only-projection.zh.md`)取代邮箱投影、检查点保留和 Team 载荷校验。历史排队消息绝不再投递或确认。
 
 member 消息使用 subagent 的 `send_message` 操作，它对 running、idle 和 cold target 使用 Steer，并返回 inbox 接收结果。
 
@@ -46,7 +46,7 @@ member 消息使用 subagent 的 `send_message` 操作，它对 running、idle �
 
 所有 member 创建时使用 Lead 的当前目录，并立即观察共享文件系统写入。后续目录变更仅影响各自 Session。任务策略要求 member 认领就绪任务、使用提示性 write scope 和依赖，并在完成工作后完成任务。文件系统 stale-version 拒绝后必须重新读取并 rebase 修改意图。Bash、formatter、codegen 与直接外部写入不具备等价保证。
 
-Team 领域不会推断 branch、创建 worktree、merge 变更或静默改变 cwd。deployment 或调用方可以另外使用[显式工作树创建](2026-09-13-explicit-worktree-creation.zh.md)。这样保留既有 same-world subagent 与 sandbox 契约。
+Team 领域不会推断 branch、创建 worktree、merge 变更或静默改变 cwd。deployment 或调用方可以另外使用显式工作树创建 (`2026-09-13-explicit-worktree-creation.zh.md`)。这样保留既有 same-world subagent 与 sandbox 契约。
 
 ## Web projection
 
@@ -58,7 +58,7 @@ Web panel 读取 Lead Session 的 `agentTeam` 传输投影，因为现有投影�
 
 ## Alternatives considered
 
-**保留独立 Team 通信权限。** 后续的[整树通信决策](../architecture/2026-10-16-tree-wide-agent-communication.zh.md)将路由和授权置于 subagent 运行时；任务板不能授予另一条路由。
+**保留独立 Team 通信权限。** 后续的整树通信决策 (`../architecture/2026-10-16-tree-wide-agent-communication.zh.md`)将路由和授权置于 subagent 运行时；任务板不能授予另一条路由。
 
 **保留持久化 Team 邮箱。** 目标接纳和任务提交是独立操作。历史 Team 邮箱保持可读，当前通信使用目标收件箱。任务提交既不投递消息，也不结束等待。
 

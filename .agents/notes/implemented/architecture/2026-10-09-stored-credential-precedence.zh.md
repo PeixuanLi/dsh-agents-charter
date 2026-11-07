@@ -4,11 +4,11 @@ Status: implemented
 
 [English](2026-10-09-stored-credential-precedence.md) | 中文
 
-[Headless 环境认证](2026-10-12-headless-environment-auth.zh.md)决策部分取代本文的单次覆盖策略：随附 headless profile 不挂载存储。存储挂载时仍遵循下述顺序。
+Headless 环境认证 (`2026-10-12-headless-environment-auth.zh.md`)决策部分取代本文的单次覆盖策略：随附 headless profile 不挂载存储。存储挂载时仍遵循下述顺序。
 
 ## 问题
 
-[配置来源所有权](2026-08-04-configuration-source-ownership.zh.md) 把继承的进程环境排在 `$DSH_HOME/.credentials.yaml` 之前，并且 `credentials-local` 会拒绝对启动 shell 已导出的名字执行 `set` 和 `unset`。于是两类存储的凭据具有相反的优先级。pi-ai 的解析器先读取存储在 `llm-pi-ai/<provider>` 下的凭据记录，再读取任何环境变量，因此存储的 OAuth 授权或 `api-key` 记录会压过导出的密钥；而 Models 页面以引用形式存储的密钥会输给同名的导出变量。一次请求使用哪个凭据因此取决于提供方类别，而且只要该名字被导出，Models 页面就会禁用其密钥输入框（#5527）。
+配置来源所有权 (`2026-08-04-configuration-source-ownership.zh.md`) 把继承的进程环境排在 `$DSH_HOME/.credentials.yaml` 之前，并且 `credentials-local` 会拒绝对启动 shell 已导出的名字执行 `set` 和 `unset`。于是两类存储的凭据具有相反的优先级。pi-ai 的解析器先读取存储在 `llm-pi-ai/<provider>` 下的凭据记录，再读取任何环境变量，因此存储的 OAuth 授权或 `api-key` 记录会压过导出的密钥；而 Models 页面以引用形式存储的密钥会输给同名的导出变量。一次请求使用哪个凭据因此取决于提供方类别，而且只要该名字被导出，Models 页面就会禁用其密钥输入框（#5527）。
 
 ## 决策
 

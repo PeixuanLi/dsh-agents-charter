@@ -10,7 +10,7 @@ Status: implemented
 
 ## 决策
 
-普通 fork 保留完整的选定前缀、`isSeeded`、`inheritedEventCount` 及继承结束标记，但不记录来源 ID。子代理保留直接创建者，包括 backend 复制历史的情况。`origin: subagent` 提供粗粒度分类；有效的自身区间 descriptor 单独提供继续运行身份。历史父元数据保持可读且不变。运行时 Agent 归属仍遵循[显式身份决策](2026-08-31-explicit-agent-runtime-identity.zh.md)。
+普通 fork 保留完整的选定前缀、`isSeeded`、`inheritedEventCount` 及继承结束标记，但不记录来源 ID。子代理保留直接创建者，包括 backend 复制历史的情况。`origin: subagent` 提供粗粒度分类；有效的自身区间 descriptor 单独提供继续运行身份。历史父元数据保持可读且不变。运行时 Agent 归属仍遵循显式身份决策 (`2026-08-31-explicit-agent-runtime-identity.zh.md`)。
 
 V4 reader 仅在已验证的继承区间中允许其他 Session 的投递 ID。自身区间标记仍要求当前 ID，每个活动代际的 `throughSeq` 必须早于其标记。这些检查不需要持久来源关系。
 
@@ -30,6 +30,6 @@ V4 reader 仅在已验证的继承区间中允许其他 Session 的投递 ID。�
 
 ## 影响
 
-新数据有意不支持普通 fork 的来源追踪。手动排序保留已保存位置，将新 fork 当作其他普通会话处理。操作期间访问来源保留标题递增和工作区选择。[侧会话提案](../../proposed/feature/2026-07-08-interactive-side-sessions.zh.md)保留独立的交回设想，但不能使用普通 fork 的持久父字段。运行时归属、投影缓存身份和 Team 成员关系决策仍分别有用，未被取代。
+新数据有意不支持普通 fork 的来源追踪。手动排序保留已保存位置，将新 fork 当作其他普通会话处理。操作期间访问来源保留标题递增和工作区选择。侧会话提案 (`../../proposed/feature/2026-07-08-interactive-side-sessions.zh.md`)保留独立的交回设想，但不能使用普通 fork 的持久父字段。运行时归属、投影缓存身份和 Team 成员关系决策仍分别有用，未被取代。
 
 验证覆盖普通、嵌套、历史及子代理 seed 的真实 fork／持久化／重新打开路径，自身区间外来投递及非法坐标的无写入拒绝，SDK 通知分类、ACP 恢复、客户端排序与标题生成。TypeScript 和 Python 录制 SDK 场景创建普通及嵌套 fork 和携带历史父元数据的会话，同时保留真正子代理的预期生命周期。

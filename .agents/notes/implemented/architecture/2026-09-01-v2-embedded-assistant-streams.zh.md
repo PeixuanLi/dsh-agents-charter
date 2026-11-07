@@ -14,7 +14,7 @@ Token 粒度的 `assistant/chunk` 事件会保留精确的 stream 顺序、时�
 
 ## 决策
 
-[V3 规范信封决策](2026-09-06-v3-canonical-session-envelopes.zh.md)负责当前替换键与请求头接纳规则。它保留本文的嵌入式 stream、尝试结算与冻结的 v1-to-v2 转换。
+V3 规范信封决策 (`2026-09-06-v3-canonical-session-envelopes.zh.md`)负责当前替换键与请求头接纳规则。它保留本文的嵌入式 stream、尝试结算与冻结的 v1-to-v2 转换。
 
 Session format v2 没有顶层 `assistant/chunk` 事件。每个模型 attempt 提交一个包含 `stream: AssistantStreamRecord[]` 的持久 settlement：
 

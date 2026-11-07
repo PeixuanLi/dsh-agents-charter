@@ -14,7 +14,7 @@ Remove the common policy copy. Keep canonicalization in shared POSIX root deriva
 
 ## Alternatives considered
 
-**Keep common preprocessing.** It supplies every backend with one physical workspace identity, but POSIX repeats the filesystem work. Explicit Windows normalization preserves the [Windows ACL decision](../../implemented/feature/2026-08-08-windows-acl-restricted-token-sandbox.md).
+**Keep common preprocessing.** It supplies every backend with one physical workspace identity, but POSIX repeats the filesystem work. Explicit Windows normalization preserves the Windows ACL decision (`../../implemented/feature/2026-08-08-windows-acl-restricted-token-sandbox.md`).
 
 ## Acceptance criteria
 

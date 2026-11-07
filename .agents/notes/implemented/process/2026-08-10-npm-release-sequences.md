@@ -26,13 +26,13 @@ Two hard blockers sat in the way. All 217 workspace manifests set `private: true
 | vendored framework | the nine `vendor/*` packages | each package on its own version line | `vendor-<package>-v<version>` (one per package) | `release-vendor.yml` (pack) / `release-vendor-publish.yml` (publish) |
 | native | `native/system/packages/*` | its own `0.0.x` | `node-addon-system-v<version>` | `node-addon-system-release.yml` |
 
-All three publish to the `@deepseek-ai` scope on npmjs.com, and access is per sequence rather than per scope: the vendored framework and the native packages are `public`, and the dsh family has been `public` since its own sequence went public on 2026-08-13 ([rationale](../../archived/process/2026-08-13-public-vendor-and-native-sequences.md)). No publish path passes `--access`, because one flag cannot serve sequences that disagree and would override the manifest that owns the level.
+All three publish to the `@deepseek-ai` scope on npmjs.com, and access is per sequence rather than per scope: the vendored framework and the native packages are `public`, and the dsh family has been `public` since its own sequence went public on 2026-08-13 (rationale (`../../archived/process/2026-08-13-public-vendor-and-native-sequences.md`)). No publish path passes `--access`, because one flag cannot serve sequences that disagree and would override the manifest that owns the level.
 
 ### Versions land in the repository from a local command; CI only checks and uploads
 
 Each sequence has one bump-and-commit command: it derives the target version, writes it into the relevant manifests, runs `pnpm install --lockfile-only`, and commits the manifests with the lockfile. The published version is therefore readable from the repository. A human creates the tag after the commit merges to master; CI never writes to the repository and needs no write permission.
 
-`release:dsh` accepts `major`, `minor`, `patch`, or an explicit version, and writes one version across the publishable family, every private package under `packages/*/*`, **and the workspace root**. Private packages receive no release tag and remain outside pack and publish; they follow the version because [the static version-coherence gate](../../archived/process/2026-09-03-workspace-version-coherence-gate.md) requires every dsh package's version to equal the root's. The root check accepts a prerelease segment, so explicit versions such as `0.0.1-alpha.1`, `0.0.1-canary.1`, and `0.0.1-rc.1` drive the same pack, installed-artifact probe, and publication path. `dsh` publication maps `alpha` and `canary` to their matching npm dist-tags, maps other prereleases including `rc` to `next`, and leaves stable versions to npm's `latest` default. Other release families retain their own dist-tag policy.
+`release:dsh` accepts `major`, `minor`, `patch`, or an explicit version, and writes one version across the publishable family, every private package under `packages/*/*`, **and the workspace root**. Private packages receive no release tag and remain outside pack and publish; they follow the version because the static version-coherence gate (`../../archived/process/2026-09-03-workspace-version-coherence-gate.md`) requires every dsh package's version to equal the root's. The root check accepts a prerelease segment, so explicit versions such as `0.0.1-alpha.1`, `0.0.1-canary.1`, and `0.0.1-rc.1` drive the same pack, installed-artifact probe, and publication path. `dsh` publication maps `alpha` and `canary` to their matching npm dist-tags, maps other prereleases including `rc` to `next`, and leaves stable versions to npm's `latest` default. Other release families retain their own dist-tag policy.
 
 For equal release numbers, SemVer compares alphanumeric prerelease identifiers lexically: `alpha` is lower than `canary`, `canary` is lower than `rc`, and every prerelease is lower than the stable version. npm dist-tags are mutable aliases and do not participate in version precedence.
 
@@ -88,7 +88,7 @@ Every reference to a workspace member uses the `workspace:` protocol. Every depe
 
 ### Published dependency faces use an explicit policy
 
-`verify-package-dependencies` (`../../../../scripts/verify-package-dependencies.ts`) classifies workspace relationships by their published Client and Host use, keeps only Cordis as a peer in covered packages, and applies a small explicit Host roster. [Published dependency faces and bounded peer relays](2026-08-26-published-dependency-faces.md) owns the selection rules and rationale.
+`verify-package-dependencies` (`../../../../scripts/verify-package-dependencies.ts`) classifies workspace relationships by their published Client and Host use, keeps only Cordis as a peer in covered packages, and applies a small explicit Host roster. Published dependency faces and bounded peer relays (`2026-08-26-published-dependency-faces.md`) owns the selection rules and rationale.
 
 `pnpm run benchmark:npm-resolution` measures this graph manually with the installed npm executable. `pnpm run benchmark:npm-resolution:next` additionally tries each reachable unconfigured Host package and serially remeasures the leading candidates. Both commands use a loopback metadata registry and reject archive requests, so their duration excludes package downloads. Neither command is an aggregate gate because scheduler load and metadata completion order make wall-clock thresholds nondeterministic.
 
@@ -113,7 +113,7 @@ The entity in this domain is a **release family**: a set of packages sharing one
 | `publishOrder` | topological order over the sections npm installs plus peer declarations, ties broken by package name; a cycle among installed dependencies is reported rather than resolved arbitrarily, and a peer edge no order can honour is dropped and named |
 | `pack` | packs a whole family into one directory and records the upload order |
 | `verify` | the family's version baseline, the publish order it prints in full, and — when publishing — that the run comes from that family's tag and its members are publishable |
-| `verify-packed-install` | installs the tarballs of one or more pack directories into a throwaway consumer with an [owned npm cache](../bug-fix/2026-09-06-packed-install-private-npm-cache.md) and drives the installed executable |
+| `verify-packed-install` | installs the tarballs of one or more pack directories into a throwaway consumer with an owned npm cache (`../bug-fix/2026-09-06-packed-install-private-npm-cache.md`) and drives the installed executable |
 | `publish` | the three registry states above |
 | `process` / `tarball` | the one home for spawning commands and for reading a packed tarball, including the entry guard that keeps every script importable |
 

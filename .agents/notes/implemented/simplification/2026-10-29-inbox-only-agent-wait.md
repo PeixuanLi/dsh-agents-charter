@@ -14,7 +14,7 @@ A task-board commit changes shared state but does not deliver input to a member.
 
 Task commands append and flush their revisions without notifying waits or writing inbox messages. A caller sends an explicit message when a member needs to act on an update. No Agent method, shared waiting service, or task-specific waiting event is introduced.
 
-This supersedes only the wait-signal decision in [Team task boards](../architecture/2026-10-19-team-task-board-inbox.md). Its tree authority, durable task storage, historical non-authority, and separation from ordinary controls remain applicable. No Session event generation changes.
+This supersedes only the wait-signal decision in Team task boards (`../architecture/2026-10-19-team-task-board-inbox.md`). Its tree authority, durable task storage, historical non-authority, and separation from ordinary controls remain applicable. No Session event generation changes.
 
 ## Alternatives considered
 

@@ -30,7 +30,7 @@ A migration of the event/vocabulary API to runtime schemas touches, at minimum:
 - **The event producers** — 16 `session.append(...)` call sites in the loop — unchanged in shape but now validated at the boundary.
 - **~7 switch-consumers** that branch on these unions: `deriveMessages` and the package-owned invariant companion (`dsh-session`), `BlockAssembler` (`dsh-llm`), both LLM adapters (`dsh-llm-deepseek`, `dsh-llm-pi-ai`), and the tool schema layer (`dsh-tools`). The `assertNever`-on-closed-unions vs fall-through-on-extensible-unions convention (a documented lint rule) would need rethinking — runtime variants are not statically exhaustive.
 - **The `defineTool` `InferArgs` DSL** (`dsh-tools`), which derives zero-cast `execute` arg types from a compile-time schema spec — the showcase of the current approach.
-- **Docs**: architecture.md (the pattern is described as foundational), [dev-mode invariants](../../implemented/architecture/2026-06-11-dev-invariants-over-deep-readonly.md), and any Agent Note that references the pattern.
+- **Docs**: architecture.md (the pattern is described as foundational), dev-mode invariants (`../../implemented/architecture/2026-06-11-dev-invariants-over-deep-readonly.md`), and any Agent Note that references the pattern.
 
 This is a repository-wide vocabulary redesign, not a persistence implementation detail.
 

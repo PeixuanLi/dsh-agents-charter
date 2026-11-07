@@ -26,13 +26,13 @@ Status: implemented
 | vendored framework | `vendor/*` 九个包 | 每包各自一条版本线 | `vendor-<包名>-v<版本>`（每包一个） | `release-vendor.yml`（pack）/ `release-vendor-publish.yml`（发布） |
 | native | `native/system/packages/*` | 自己的 `0.0.x` | `node-addon-system-v<版本>` | `node-addon-system-release.yml` |
 
-三组一律发到 npmjs.com 的 `@deepseek-ai` scope，且 access 按序列而非按 scope 区分：vendored 框架与 native 包是 `public`，dsh 族自 2026-08-13 其自身序列公开发布起即为 `public`（[理由](../../archived/process/2026-08-13-public-vendor-and-native-sequences.md)）。没有任何发布路径传 `--access`——一个选项无法服务级别互不相同的序列，且会覆盖真正拥有该级别的 manifest。
+三组一律发到 npmjs.com 的 `@deepseek-ai` scope，且 access 按序列而非按 scope 区分：vendored 框架与 native 包是 `public`，dsh 族自 2026-08-13 其自身序列公开发布起即为 `public`（理由 (`../../archived/process/2026-08-13-public-vendor-and-native-sequences.md`)）。没有任何发布路径传 `--access`——一个选项无法服务级别互不相同的序列，且会覆盖真正拥有该级别的 manifest。
 
 ### 版本由本地命令写进仓库，CI 只核对与上传
 
 每条序列有一条 bump-and-commit 命令：算出目标版本，写进相关 manifest，跑 `pnpm install --lockfile-only`，再把 manifest 连 lockfile 一起 commit。发布版本因此在仓库里查得到。tag 由人工在 commit 合入 master 后打；CI 不写仓库，也不需要写权限。
 
-`release:dsh` 接受 `major`、`minor`、`patch` 或显式版本号，把同一个版本写进可发布族、`packages/*/*` 下的每个私有包**以及 workspace 根**。私有包不会获得发布 tag，仍位于 pack 与 publish 之外；它们跟随版本是因为[静态版本一致性门禁](../../archived/process/2026-09-03-workspace-version-coherence-gate.md)要求每个 dsh 包的版本等于根版本。根的检查接受预发布段，因此 `0.0.1-alpha.1`、`0.0.1-canary.1` 和 `0.0.1-rc.1` 等显式版本走同一条 pack、已安装产物探针和发布路径。发布 dsh 时，`alpha` 和 `canary` 分别映射到同名 npm dist-tag，包含 `rc` 在内的其他预发布版本映射到 `next`，稳定版本则沿用 npm 默认的 `latest`。其他发布家族保留各自的 dist-tag 规则。
+`release:dsh` 接受 `major`、`minor`、`patch` 或显式版本号，把同一个版本写进可发布族、`packages/*/*` 下的每个私有包**以及 workspace 根**。私有包不会获得发布 tag，仍位于 pack 与 publish 之外；它们跟随版本是因为静态版本一致性门禁 (`../../archived/process/2026-09-03-workspace-version-coherence-gate.md`)要求每个 dsh 包的版本等于根版本。根的检查接受预发布段，因此 `0.0.1-alpha.1`、`0.0.1-canary.1` 和 `0.0.1-rc.1` 等显式版本走同一条 pack、已安装产物探针和发布路径。发布 dsh 时，`alpha` 和 `canary` 分别映射到同名 npm dist-tag，包含 `rc` 在内的其他预发布版本映射到 `next`，稳定版本则沿用 npm 默认的 `latest`。其他发布家族保留各自的 dist-tag 规则。
 
 基础版本号相同时，SemVer 按字典序比较字母数字型预发布标识：`alpha` 小于 `canary`，`canary` 小于 `rc`，所有预发布版本都小于稳定版本。npm dist-tag 是可变别名，不参与版本优先级比较。
 
@@ -88,7 +88,7 @@ registry 的两个行为决定了「怎么尝试一次发布」。写入之间�
 
 ### 发布依赖门面使用显式策略
 
-`verify-package-dependencies` (`../../../../scripts/verify-package-dependencies.ts`) 按已发布的 Client 与 Host 用法分类 workspace 关系，让受管包只保留 Cordis peer，并应用一份较小的显式 Host 名册。[发布依赖门面与有限 peer 中继](2026-08-26-published-dependency-faces.zh.md)记录选包规则与理由。
+`verify-package-dependencies` (`../../../../scripts/verify-package-dependencies.ts`) 按已发布的 Client 与 Host 用法分类 workspace 关系，让受管包只保留 Cordis peer，并应用一份较小的显式 Host 名册。发布依赖门面与有限 peer 中继 (`2026-08-26-published-dependency-faces.zh.md`)记录选包规则与理由。
 
 `pnpm run benchmark:npm-resolution` 使用当前安装的 npm 手动测量该依赖图。`pnpm run benchmark:npm-resolution:next` 还会逐个尝试每个可达且未配置的 Host 包，再串行复测领先候选。两个命令都使用回环 metadata registry 并拒绝包归档请求，因此耗时不包含包下载。调度器负载与 metadata 完成顺序会使墙钟阈值失去确定性，所以两个命令都不进入聚合门禁。
 
@@ -113,7 +113,7 @@ registry 的两个行为决定了「怎么尝试一次发布」。写入之间�
 | `publishOrder` | 按 npm 会安装的依赖段加 peer 声明做拓扑序，同层按包名排；安装依赖成环是报错而不是随意定序，任何排不进去的 peer 边被丢弃并点名 |
 | `pack` | 把整族打进一个目录并记录上传顺序 |
 | `verify` | 族的版本基线、完整打印出来的发布顺序；发布时还要求本次运行来自该族的 tag、且成员可发布 |
-| `verify-packed-install` | 把一个或多个 pack 目录的 tarball 装进带[独立 npm 缓存](../bug-fix/2026-09-06-packed-install-private-npm-cache.zh.md)的一次性 consumer，并驱动已安装的可执行入口 |
+| `verify-packed-install` | 把一个或多个 pack 目录的 tarball 装进带独立 npm 缓存 (`../bug-fix/2026-09-06-packed-install-private-npm-cache.zh.md`)的一次性 consumer，并驱动已安装的可执行入口 |
 | `publish` | 上面那三态 |
 | `process` / `tarball` | 启动命令、读取打包 tarball 的唯一正家，其中的入口守卫让每个脚本都可被 import |
 

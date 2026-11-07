@@ -6,7 +6,7 @@ Status: proposed
 
 ## 问题
 
-目前自动化任务只能按时间规则运行。Host 保存每条规则，每到一个到期时间，就把任务的指令作为一条后续消息排进任务的原会话（[Host 拥有的定时消息](../../implemented/architecture/2026-09-16-host-schedule-storage.zh.md)）；模型通过按 preset 提供的工具创建和修改任务（[按 preset 提供的 Schedule 工具](../../implemented/architecture/2026-09-24-preset-scoped-schedule-tools.zh.md)）。有些工作应当在别处发生变化时开始，例如 PR（Pull Request）的检查失败、评审人要求修改、收到一条消息，这些都无法建成任务，用户只能在多个会话之间手动查看这些来源。
+目前自动化任务只能按时间规则运行。Host 保存每条规则，每到一个到期时间，就把任务的指令作为一条后续消息排进任务的原会话（Host 拥有的定时消息 (`../../implemented/architecture/2026-09-16-host-schedule-storage.zh.md`)）；模型通过按 preset 提供的工具创建和修改任务（按 preset 提供的 Schedule 工具 (`../../implemented/architecture/2026-09-24-preset-scoped-schedule-tools.zh.md`)）。有些工作应当在别处发生变化时开始，例如 PR（Pull Request）的检查失败、评审人要求修改、收到一条消息，这些都无法建成任务，用户只能在多个会话之间手动查看这些来源。
 
 响应变化会带来两个时间规则没有的问题。
 

@@ -14,7 +14,7 @@ Status: proposed
 
 ## Alternatives considered
 
-**保留公共预处理。** 它为每个后端提供统一的物理工作区标识，但 POSIX 会重复访问文件系统。显式保留 Windows 规范化可维持 [Windows ACL 决策](../../implemented/feature/2026-08-08-windows-acl-restricted-token-sandbox.zh.md)。
+**保留公共预处理。** 它为每个后端提供统一的物理工作区标识，但 POSIX 会重复访问文件系统。显式保留 Windows 规范化可维持 Windows ACL 决策 (`../../implemented/feature/2026-08-08-windows-acl-restricted-token-sandbox.zh.md`)。
 
 ## Acceptance criteria
 

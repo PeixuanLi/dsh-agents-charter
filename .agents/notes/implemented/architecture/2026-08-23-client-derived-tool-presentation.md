@@ -22,7 +22,7 @@ The required result is one raw Session journal and one Client presentation owner
 
 ## Decision
 
-The visual-equivalence requirements below exclude the separately approved nested terminal-card fix (`../../../../packages/client/ui-tool/README.md`), recorded tool details (`../../../../packages/client/ui-tool/README.md`), and [background Shell command display](../bug-fix/2026-10-10-background-shell-command-display.md); all other presentation and ownership constraints remain.
+The visual-equivalence requirements below exclude the separately approved nested terminal-card fix (`../../../../packages/client/ui-tool/README.md`), recorded tool details (`../../../../packages/client/ui-tool/README.md`), and background Shell command display (`../bug-fix/2026-10-10-background-shell-command-display.md`); all other presentation and ownership constraints remain.
 
 The Session Remote journal sends only raw, validated, persistable Session events. `session.page` and `session.follow` do not parse tool arguments, query the Tools registry, restore a presenter scope, execute `presentCall` or `presentResult`, or construct or clone any tool view.
 
@@ -51,7 +51,7 @@ The Host `ToolDefinition.presentCall`, `ToolDefinition.presentResult`, `ToolCall
 | Retained | the Session log format, Remote journal lifecycle, and Conversation identity/topology |
 | Retained | the existing keyed slot, Generic fallback, and Chat, Details, and Trajectory structure |
 | Forbidden | a new Client presenter service, parallel registry, or wire renderer id |
-| Forbidden | new cards, visual redesign, interaction redesign, or PTC dispatch rich-card enhancements except the nested terminal-card exception (`../../../../packages/client/ui-tool/README.md`), recorded tool details (`../../../../packages/client/ui-tool/README.md`), and [background Shell command display](../bug-fix/2026-10-10-background-shell-command-display.md) |
+| Forbidden | new cards, visual redesign, interaction redesign, or PTC dispatch rich-card enhancements except the nested terminal-card exception (`../../../../packages/client/ui-tool/README.md`), recorded tool details (`../../../../packages/client/ui-tool/README.md`), and background Shell command display (`../bug-fix/2026-10-10-background-shell-command-display.md`) |
 | Forbidden | compatibility dual-writing, version negotiation, or retention of the old `view` field |
 
 ## Terminology
@@ -248,7 +248,7 @@ Host presenter APIs describe top-level calls and results. PTC dispatch subcalls 
 
 PTC dispatch start and result events already carry `parentCallId`. Conversation preserves that existing fact on each child `ToolCallBlock`; root Session calls omit it. The diff, read, search, and web models accept only blocks without `parentCallId`; the terminal model and existing renderers that intentionally support nested calls accept child blocks.
 
-Shared card models apply the same terminal eligibility and nonterminal child restrictions wherever a block renders, so no second presentation surface needs a placement field; the details panel that once delegated a selected block was removed with the right-hand details column ([decision](../feature/2026-09-04-right-sidebar-docking-infrastructure.md)).
+Shared card models apply the same terminal eligibility and nonterminal child restrictions wherever a block renders, so no second presentation surface needs a placement field; the details panel that once delegated a selected block was removed with the right-hand details column (decision (`../feature/2026-09-04-right-sidebar-docking-infrastructure.md`)).
 
 The keyed slot continues dispatching every subcall by its real tool name. `parentCallId` restricts only the diff, read, search, and web structured models covered by this decision. Existing specialized renderers such as Skill and Cordis, which already read raw blocks, remain unchanged.
 
@@ -297,7 +297,7 @@ The title, kind, rawInput, content, and locations from Generic Host `presentCall
 <a id="terminal-card"></a>
 ### Terminal card
 
-The Client terminal model derives existing `TerminalBlock` props from the tool name, call arguments, result content, error, and Session cwd, independently of `parentCallId`. [Background Shell command display](../bug-fix/2026-10-10-background-shell-command-display.md) governs explicit background `bash`/`pwsh` launches; the remaining ownership and fallback rules below stay in force.
+The Client terminal model derives existing `TerminalBlock` props from the tool name, call arguments, result content, error, and Session cwd, independently of `parentCallId`. Background Shell command display (`../bug-fix/2026-10-10-background-shell-command-display.md`) governs explicit background `bash`/`pwsh` launches; the remaining ownership and fallback rules below stay in force.
 
 | Input | Preserved result |
 |---|---|
@@ -689,15 +689,15 @@ The absence of optional `view` is a prerelease wire-type decision shared by all 
 
 The current terminal-card rules (`../../../../packages/client/ui-tool/README.md`) permit nested terminal cards, replacing only the terminal child-card prohibition and its visual-equivalence requirement. This note remains active for raw-journal ownership, Client derivation, and the diff/read/search/web child restrictions.
 
-This note partially supersedes the implementation fact in [Client tool presentation ownership](../../archived/architecture/2026-08-08-client-tool-presentation-ownership.md) that “card models receive Host views.” Its core decisions remain: `ui-tool` owns presentation, business plugins use keyed slots, and Conversation owns only lifecycle and topology.
+This note partially supersedes the implementation fact in Client tool presentation ownership (`../../archived/architecture/2026-08-08-client-tool-presentation-ownership.md`) that “card models receive Host views.” Its core decisions remain: `ui-tool` owns presentation, business plugins use keyed slots, and Conversation owns only lifecycle and topology.
 
-This note preserves [toolview dissolution](../../archived/architecture/2026-07-23-toolview-dissolution.md): the Client still has one slot registration model and does not restore `ToolViewRegistry`.
+This note preserves toolview dissolution (`../../archived/architecture/2026-07-23-toolview-dissolution.md`): the Client still has one slot registration model and does not restore `ToolViewRegistry`.
 
 This note narrows the consumer scope of the [render-intent union](2026-07-02-tool-render-intent-union.md). The Host APIs and types remain, while the Session Remote and Web Client do not consume them. This note owns the transport split without rewriting that presenter decision.
 
-This note updates the entry contract from [Session history and Remote event transport](2026-08-18-session-history-and-event-transport.md): the journal transports only raw events plus an independent projection baseline, not transient tool views.
+This note updates the entry contract from Session history and Remote event transport (`2026-08-18-session-history-and-event-transport.md`): the journal transports only raw events plus an independent projection baseline, not transient tool views.
 
-This note follows [Conversation Node assembly](2026-08-09-client-conversation-node-assembly.md): the Tool Definition owns event pairing and the call tree, while concrete card models remain in `ui-tool`.
+This note follows Conversation Node assembly (`2026-08-09-client-conversation-node-assembly.md`): the Tool Definition owns event pairing and the call tree, while concrete card models remain in `ui-tool`.
 
 This note preserves result metadata from the canonical tool output contract (`../../../../packages/core/tools/README.md`), because it is the lossless, replayable input to Client derivation.
 

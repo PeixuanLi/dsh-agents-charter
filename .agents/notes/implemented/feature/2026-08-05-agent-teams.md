@@ -10,11 +10,11 @@ The subagent seam supplies fresh/fork providers, durable child Sessions, FIFO fo
 
 All same-process Agents also share one checkout. Filesystem edit tools can reject an observed stale version, but Bash, formatters, generators, and external writers bypass that fence. Treating a teammate name or task owner as a file lock would hide rather than solve this concurrency boundary.
 
-Team collaboration requires explicit opt-in; [Session selection](../architecture/2026-10-20-session-team-mode.md) owns its granularity and default composition. The default tool catalog and simple-task behavior must remain unchanged, while an explicitly requested Team must survive child Activation settlement and mailbox delivery races long enough for the Lead to aggregate the result before process teardown.
+Team collaboration requires explicit opt-in; Session selection (`../architecture/2026-10-20-session-team-mode.md`) owns its granularity and default composition. The default tool catalog and simple-task behavior must remain unchanged, while an explicitly requested Team must survive child Activation settlement and mailbox delivery races long enough for the Lead to aggregate the result before process teardown.
 
 ## Decision
 
-Every ordinary root and its descendants form the Team identified by the root `SessionId`; durable task state begins with the first task event. [Subagent teammates](../architecture/2026-10-15-agent-teams-as-subagents.md) owns the single agent identity. [Inbox-only waiting](../simplification/2026-10-29-inbox-only-agent-wait.md) keeps task-board changes independent of inbox waiting. An ordinary Session fork leads a new tree and excludes inherited Team authority.
+Every ordinary root and its descendants form the Team identified by the root `SessionId`; durable task state begins with the first task event. Subagent teammates (`../architecture/2026-10-15-agent-teams-as-subagents.md`) owns the single agent identity. [Inbox-only waiting](../simplification/2026-10-29-inbox-only-agent-wait.md) keeps task-board changes independent of inbox waiting. An ordinary Session fork leads a new tree and excludes inherited Team authority.
 
 The implementation is split into `@deepseek-ai/dsh-agent-team`, which owns `ctx.agentTeams` and durable semantics, and `@deepseek-ai/dsh-tool-agent-team`, which owns scoped schemas and model guidance. Every Team tool declares its complete result schema and renders that value as compact JSON, so the compiler checks each `execute` against what the model is promised and no result spends tokens on indentation. The base bundle mounts both plugins; Team registers no tool that shares a name with the subagent controls. The shared policy announces Team availability and describes coordination responsibilities. Both packages belong to the subagent family (`../../../../packages/subagent/README.md`); the root Session’s saved selection gates the task tools and policy. The [Session-mode upgrade guide](../../../../docs/upgrade-guide/v0.2.1-rc.2/session-team-mode/guide.md) describes profile migration.
 
@@ -22,19 +22,19 @@ The Lead must wait for required work before its final answer. Process teardown r
 
 ## Profile delegation
 
-The base bundle (`../../../../packages/bundle/base/README.md`) inserts the Team rows and keeps the base delegation and control tools; teammates are started with those tools as described in [subagents](../architecture/2026-10-15-agent-teams-as-subagents.md). Ordinary Session forks retain their history; [current identity handling](../architecture/2026-10-13-team-identity-runtime-context.md) supplies the fork's own role.
+The base bundle (`../../../../packages/bundle/base/README.md`) inserts the Team rows and keeps the base delegation and control tools; teammates are started with those tools as described in subagents (`../architecture/2026-10-15-agent-teams-as-subagents.md`). Ordinary Session forks retain their history; current identity handling (`../architecture/2026-10-13-team-identity-runtime-context.md`) supplies the fork's own role.
 
 ## Team identity
 
-Shared system policy and tool schemas stay uniform across members; execution enforces role restrictions. Team tools resolve the caller’s Team and use Session ids as task owners. [Required runtime-context identity](../architecture/2026-10-13-team-identity-runtime-context.md) owns identity injection, retention, and fork handling.
+Shared system policy and tool schemas stay uniform across members; execution enforces role restrictions. Team tools resolve the caller’s Team and use Session ids as task owners. Required runtime-context identity (`../architecture/2026-10-13-team-identity-runtime-context.md`) owns identity injection, retention, and fork handling.
 
 ## Provisioning and recovery
 
-Teammate creation and cold resume belong to the subagent runtime ([subagent teammates](../architecture/2026-10-15-agent-teams-as-subagents.md)). Historical `team/member` records remain readable with their phases and descriptions; Team writes no new membership records.
+Teammate creation and cold resume belong to the subagent runtime (subagent teammates (`../architecture/2026-10-15-agent-teams-as-subagents.md`)). Historical `team/member` records remain readable with their phases and descriptions; Team writes no new membership records.
 
 ## Mailbox and task transactions
 
-The historical Lead-log mailbox remains readable in original Session logs. The [task-only projection decision](../simplification/2026-10-29-team-task-only-projection.md) supersedes mailbox projection, checkpoint retention, and Team payload validation. Historical queued messages are never delivered or acknowledged.
+The historical Lead-log mailbox remains readable in original Session logs. The task-only projection decision (`../simplification/2026-10-29-team-task-only-projection.md`) supersedes mailbox projection, checkpoint retention, and Team payload validation. Historical queued messages are never delivered or acknowledged.
 
 Member messages use the subagent `send_message` operation, which steers running, idle, and cold targets and returns inbox acceptance.
 
@@ -46,7 +46,7 @@ Shared tasks are complete snapshots with Team-local ids and monotonic revisions.
 
 Members start in the Lead’s current directory and observe shared filesystem writes immediately. Later directory changes stay local to each Session. The task policy tells members to claim ready tasks, use advisory write scopes and dependencies, and complete tasks after doing the work. A filesystem stale-version rejection requires rereading and rebasing the intended change. No equivalent guarantee is claimed for Bash, formatters, code generation, or direct external writes.
 
-The Team domain does not infer branches, create worktrees, merge changes, or silently change cwd. A deployment or caller can use [explicit worktree creation](2026-09-13-explicit-worktree-creation.md) separately. This preserves the existing same-world subagent and sandbox contracts.
+The Team domain does not infer branches, create worktrees, merge changes, or silently change cwd. A deployment or caller can use explicit worktree creation (`2026-09-13-explicit-worktree-creation.md`) separately. This preserves the existing same-world subagent and sandbox contracts.
 
 ## Web projection
 
@@ -58,7 +58,7 @@ Publication requires `apply` to return a new state per applied event and replace
 
 ## Alternatives considered
 
-**Keep a separate Team communication authority.** The later [tree-wide communication decision](../architecture/2026-10-16-tree-wide-agent-communication.md) places routing and authorization in the subagent runtime; a task board cannot grant another route.
+**Keep a separate Team communication authority.** The later tree-wide communication decision (`../architecture/2026-10-16-tree-wide-agent-communication.md`) places routing and authorization in the subagent runtime; a task board cannot grant another route.
 
 **Keep a durable Team mailbox.** Target admission and task commit are independent operations. The historical Team mailbox remains readable, while current messaging uses the target inbox. Task commits neither deliver messages nor end waits.
 

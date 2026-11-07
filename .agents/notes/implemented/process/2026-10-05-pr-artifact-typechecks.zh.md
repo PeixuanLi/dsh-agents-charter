@@ -10,15 +10,15 @@ PR job 需要相同的编译包来运行 benchmark、兼容性、打包和运行
 
 ## Decision
 
-必需的 Linux consumer 与原生 Windows build job 保留普通构建，包括两个完整 aggregate program。公开的 `build` 和 `typecheck` 保留相同检查。[Node 版本职责](2026-10-15-node-24-runtime-floor.zh.md)与[原生 Windows 职责](2026-08-08-native-windows-pull-request-ci.zh.md)仍然有效。
+必需的 Linux consumer 与原生 Windows build job 保留普通构建，包括两个完整 aggregate program。公开的 `build` 和 `typecheck` 保留相同检查。[Node 版本职责](2026-10-15-node-24-runtime-floor.zh.md)与原生 Windows 职责 (`2026-08-08-native-windows-pull-request-ci.zh.md`)仍然有效。
 
-带检查的 PR 产物构建通过一个串行 `tsc -b` 进程编译各 compiler face 的全部现有 project reference，然后运行普通 Typert、bundling、Desktop 和 Web 阶段。helper 读取现有 Host 与 Client aggregate，而不维护另一份包清单。它只省略各 root 附加的测试和脚本 program；包诊断、emit 输出及 Host 先于 Client 的顺序仍然必需。非 PR 的 release 和真实 API 工作流构建保留普通检查。该产物构建即 `pnpm run build:artifacts`，其步骤与调度见[构建拆分](2026-10-11-build-artifacts-check-split.zh.md)。
+带检查的 PR 产物构建通过一个串行 `tsc -b` 进程编译各 compiler face 的全部现有 project reference，然后运行普通 Typert、bundling、Desktop 和 Web 阶段。helper 读取现有 Host 与 Client aggregate，而不维护另一份包清单。它只省略各 root 附加的测试和脚本 program；包诊断、emit 输出及 Host 先于 Client 的顺序仍然必需。非 PR 的 release 和真实 API 工作流构建保留普通检查。该产物构建即 `pnpm run build:artifacts`，其步骤与调度见构建拆分 (`2026-10-11-build-artifacts-check-split.zh.md`)。
 
 只有 CI benchmark helper 选择 `tsc -b --noCheck` 来 emit 包。benchmark 消费 JavaScript 和 Typert 运行时元数据；其声明与 build-information 文件是临时产物，不会发布。Typert 独立分析源码类型，语义诊断由必需的完整构建负责。语法与配置错误仍会拒绝 benchmark 准备。TypeScript 记录待检查状态，使后续普通增量构建无需删除缓存或强制重建，就能诊断相同源码。公开 benchmark script，以及所有 release、Python、preview、compatibility 和普通产物 builder，均保留带检查的默认行为。
 
 Python executable builder 在验证 runtime closure 后，通过 `--build-artifacts` 选择 `build:artifacts` 产物编译。无效 closure 在编译、部署或打包前失败；默认完整构建和复用预构建产物的 `--skip-build` 模式保留原有阶段。
 
-CI 的 PR 产物构建调用 root manifest 中的 `build:artifacts`；修改 root manifest 中这些 script 的 PR 会激活独立的 native-addon 平台矩阵，[构建拆分](2026-10-11-build-artifacts-check-split.zh.md)记录这一取舍。vendor 演练与 benchmark lane 直接调用内部 build helper。
+CI 的 PR 产物构建调用 root manifest 中的 `build:artifacts`；修改 root manifest 中这些 script 的 PR 会激活独立的 native-addon 平台矩阵，构建拆分 (`2026-10-11-build-artifacts-check-split.zh.md`)记录这一取舍。vendor 演练与 benchmark lane 直接调用内部 build helper。
 
 benchmark sample 数量保持固定。Linux 产物消费者只产出产物；聚合的 test 与 script 类型检查归 master lane；lint 与 duplication 单独占用一个 lane，该 lane 会先编译包声明（oxlint 的类型感知规则要读它们），因此 lint 变红不再让 snapshot 与 artifact 消费者整体重跑。两个 compatibility case 每次运行一个 job；两个 x64 Python runtime target 都在 CI Python 中于 keyless Python SDK job 成功后启动。五个 Linux lane、一个 compatibility job、三个 Windows lane 与 Python SDK job，初始最多占用十一个 worker job。SDK job 完成后，这五个 Linux lane、一个 compatibility job 与三个 Windows lane 与两个 runtime target 并行，最多占用十一个 job。每个 runtime 调用方的 plan 与 wheel 阶段先于其 target，各占一个 job。这允许 runtime 验证与 Node 24.9 构建重叠，同时保持十一个 job 的上限。覆盖率分区在各自的平台和 runner pool 内复用精简的文件成本元数据。并行 release 打包使用 pnpm 现有的有界调度器；串行发布保持 family 顺序。
 
@@ -42,4 +42,4 @@ benchmark sample 数量保持固定。Linux 产物消费者只产出产物；聚
 
 覆盖率权重累加 Vitest 互不重叠的 environment、preparation、setup、collection 和 execution 成本。CI 的平台/environment/pool cache prefix 不匹配原来的 `coverage-times-<run>` archive。持久化本地 checkout 在切换期间可能为未测量的文件保留墙钟权重；删除 `.coverage-times.json` 可重置该历史。这些参考权重影响分区分配，完整清单与合并后的覆盖率阈值仍然必需。
 
-带检查的产物构建有意不诊断仅属于 aggregate 的测试或脚本错误。必需的普通构建拒绝这些错误；fixture 检查还验证两个路径都会拒绝包错误，并比较 emit 的 JavaScript、声明、map 和 build 信息。删除或改变必需的完整构建前，必须先把两个 aggregate 检查转交另一处阻塞型 owner。master 串行 reference 按[现有政策](2026-07-21-serial-cross-platform-ci-reference.zh.md)保持完整。
+带检查的产物构建有意不诊断仅属于 aggregate 的测试或脚本错误。必需的普通构建拒绝这些错误；fixture 检查还验证两个路径都会拒绝包错误，并比较 emit 的 JavaScript、声明、map 和 build 信息。删除或改变必需的完整构建前，必须先把两个 aggregate 检查转交另一处阻塞型 owner。master 串行 reference 按现有政策 (`2026-07-21-serial-cross-platform-ci-reference.zh.md`)保持完整。
