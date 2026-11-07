@@ -6,10 +6,10 @@
 
 ## 本层机制
 
-- [mechanisms/agents-md-symlink.md](../mechanisms/agents-md-symlink.md) — 通过 CLAUDE.md → AGENTS.md 符号链接，一份规则源服务多个 agent 工具命名空间
-- [mechanisms/instruction-layering.md](../mechanisms/instruction-layering.md) — 常驻的 AGENTS.md 规则与按需的 skill 对照：后者的 description 写明精确触发条件
-- [mechanisms/doc-budget-ratchet.md](../mechanisms/doc-budget-ratchet.md) — 带余量的逐文件字数预算与只紧不松的棘轮：上下文经济成为受执法的资源
-- [mechanisms/prose-hygiene.md](../mechanisms/prose-hygiene.md) — slop 清单与推理痕迹判据把会话痕迹与 LLM（大语言模型）文档病态挡在产出之外
+- [mechanisms/agents-md-symlink.md](../mechanisms/agents-md-symlink.zh.md) — 通过 CLAUDE.md → AGENTS.md 符号链接，一份规则源服务多个 agent 工具命名空间
+- [mechanisms/instruction-layering.md](../mechanisms/instruction-layering.zh.md) — 常驻的 AGENTS.md 规则与按需的 skill 对照：后者的 description 写明精确触发条件
+- [mechanisms/doc-budget-ratchet.md](../mechanisms/doc-budget-ratchet.zh.md) — 带余量的逐文件字数预算与只紧不松的棘轮：上下文经济成为受执法的资源
+- [mechanisms/prose-hygiene.md](../mechanisms/prose-hygiene.zh.md) — slop 清单与推理痕迹判据把会话痕迹与 LLM（大语言模型）文档病态挡在产出之外
 
 ## 移植分析
 
