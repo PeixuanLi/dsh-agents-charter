@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for verify-the-world.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/verify-the-world.md
+/verify-the-world-not-the-self-report:
+  en: 31aeba436064a733
+  zh: 017620aef572b941
+/verify-the-world-not-the-self-report/rule-text:
+  en: 6875b5f33a01b176
+  zh: a777536a2167e300
+/verify-the-world-not-the-self-report/enforcement:
+  en: f7a8a340e6860f5e
+  zh: 634374247ac428a7
+/verify-the-world-not-the-self-report/cost-and-prerequisites:
+  en: e1b116e578af0d81
+  zh: 0b1850783d06bb28
+/verify-the-world-not-the-self-report/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/verify-the-world-not-the-self-report/porting-checklist:
+  en: d30b8edda44059a2
+  zh: e46d919d1f77fc95
+/verify-the-world-not-the-self-report/failure-mode:
+  en: 2b6aa740320efef9
+  zh: 13ca664d6188ce84

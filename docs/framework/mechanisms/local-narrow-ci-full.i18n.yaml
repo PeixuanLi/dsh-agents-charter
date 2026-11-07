@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for local-narrow-ci-full.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/local-narrow-ci-full.md
+/local-runs-stay-narrow-ci-owns-the-full-matrix:
+  en: fdc40c4ee5e329ca
+  zh: 38036ed3c74169e0
+/local-runs-stay-narrow-ci-owns-the-full-matrix/rule-text:
+  en: 9a6a51a106ecd7fb
+  zh: c959a2e50c1a7abb
+/local-runs-stay-narrow-ci-owns-the-full-matrix/enforcement:
+  en: 74cd46583a0b6c23
+  zh: 5d9b3fec952c06ea
+/local-runs-stay-narrow-ci-owns-the-full-matrix/cost-and-prerequisites:
+  en: 81063b1515301c92
+  zh: 65b029d368abc766
+/local-runs-stay-narrow-ci-owns-the-full-matrix/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/local-runs-stay-narrow-ci-owns-the-full-matrix/porting-checklist:
+  en: db0ccd2807d07164
+  zh: 7a663a34209b5d5b
+/local-runs-stay-narrow-ci-owns-the-full-matrix/failure-mode:
+  en: 63f295f899dac328
+  zh: 610b93d2554abcc6

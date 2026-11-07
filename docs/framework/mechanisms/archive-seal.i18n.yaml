@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for archive-seal.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/archive-seal.md
+/the-archive-seal-compares-against-a-git-baseline:
+  en: b5fff5f61853c0e5
+  zh: 9a1fe6ccdc023528
+/the-archive-seal-compares-against-a-git-baseline/rule-text:
+  en: d3403e3caa08d7ad
+  zh: f793c7af2c2da042
+/the-archive-seal-compares-against-a-git-baseline/enforcement:
+  en: 917f4a6f0de45096
+  zh: b8199b96ee681616
+/the-archive-seal-compares-against-a-git-baseline/cost-and-prerequisites:
+  en: dd59ef8556e985b2
+  zh: 13a1b56e8172a71d
+/the-archive-seal-compares-against-a-git-baseline/team-fit:
+  en: 0634b1cd703e8b9c
+  zh: f1248ee90fc23968
+/the-archive-seal-compares-against-a-git-baseline/porting-checklist:
+  en: 02168dfa3c6fe23d
+  zh: da7a391aa4e03410
+/the-archive-seal-compares-against-a-git-baseline/failure-mode:
+  en: 913602b7562360f4
+  zh: e030d5fa2781811b

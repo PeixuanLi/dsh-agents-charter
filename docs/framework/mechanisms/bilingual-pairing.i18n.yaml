@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for bilingual-pairing.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/bilingual-pairing.md
+/bilingual-documents-as-fingerprinted-pairs:
+  en: b2b58e1c7228a11d
+  zh: d05de98b3029853a
+/bilingual-documents-as-fingerprinted-pairs/rule-text:
+  en: 6b7733e0c3f38185
+  zh: b81a14251c48384b
+/bilingual-documents-as-fingerprinted-pairs/enforcement:
+  en: 69b9c621341a53f1
+  zh: 7265cfa6275f7057
+/bilingual-documents-as-fingerprinted-pairs/cost-and-prerequisites:
+  en: bc9b4666e0677878
+  zh: ac1ec26662bec0de
+/bilingual-documents-as-fingerprinted-pairs/team-fit:
+  en: 759591873d1b44fa
+  zh: e0659f904e37055d
+/bilingual-documents-as-fingerprinted-pairs/porting-checklist:
+  en: 276f1d41c640cef8
+  zh: e760cf7741f9176c
+/bilingual-documents-as-fingerprinted-pairs/failure-mode:
+  en: 76d61966d083380d
+  zh: 19009e7485b8573e

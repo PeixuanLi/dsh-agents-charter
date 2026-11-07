@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for gate-aggregate.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/gate-aggregate.md
+/the-gate-runner-as-tested-engineering-code:
+  en: cbc705df63612cd9
+  zh: 304b4c05e4ac7876
+/the-gate-runner-as-tested-engineering-code/rule-text:
+  en: ebdd935afaa85259
+  zh: 223275781390c83e
+/the-gate-runner-as-tested-engineering-code/enforcement:
+  en: 303773b46046a215
+  zh: 290f07552c477366
+/the-gate-runner-as-tested-engineering-code/cost-and-prerequisites:
+  en: a65e2bdb59f5313b
+  zh: e87dea582c4f1037
+/the-gate-runner-as-tested-engineering-code/team-fit:
+  en: de7754b71b4a479e
+  zh: f9d10840304c5e32
+/the-gate-runner-as-tested-engineering-code/porting-checklist:
+  en: e0cf18eb71996af3
+  zh: 84d140d02b9f0c65
+/the-gate-runner-as-tested-engineering-code/failure-mode:
+  en: 9637f731f67aa196
+  zh: a90d6fef4643f4c0

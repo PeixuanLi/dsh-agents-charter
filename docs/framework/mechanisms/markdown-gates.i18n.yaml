@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for markdown-gates.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/markdown-gates.md
+/documentation-is-machine-checked-output:
+  en: c6e7dca8bfe336e5
+  zh: aa4be2806e244c1c
+/documentation-is-machine-checked-output/rule-text:
+  en: 7c77edf918f1f2f5
+  zh: 7f3427067a46b535
+/documentation-is-machine-checked-output/enforcement:
+  en: c77fe24c5c45ea1c
+  zh: 5197e4b46c0feb0b
+/documentation-is-machine-checked-output/cost-and-prerequisites:
+  en: 34e40b92076291f0
+  zh: 0e70f88f2cacc876
+/documentation-is-machine-checked-output/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/documentation-is-machine-checked-output/porting-checklist:
+  en: b08df12b69d9c644
+  zh: 869a6d96bb5d872c
+/documentation-is-machine-checked-output/failure-mode:
+  en: c8be8fdc482b9aec
+  zh: db9784e8438490cc
