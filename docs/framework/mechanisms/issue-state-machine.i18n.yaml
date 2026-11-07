@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for issue-state-machine.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/issue-state-machine.md
+/issue-state-is-moved-by-events:
+  en: b3d469e70973dbe1
+  zh: ec5158b7e647bc4e
+/issue-state-is-moved-by-events/rule-text:
+  en: 457eec89a1997964
+  zh: e40b8a86ae252898
+/issue-state-is-moved-by-events/enforcement:
+  en: e1e517c363a0c943
+  zh: 9e8ff188c4df5376
+/issue-state-is-moved-by-events/cost-and-prerequisites:
+  en: 9b1cd6c41356433f
+  zh: 90b32968cc24754e
+/issue-state-is-moved-by-events/team-fit:
+  en: b0915b97451ccf82
+  zh: 69cb43b11d03eb63
+/issue-state-is-moved-by-events/porting-checklist:
+  en: 5fefe80d5bc35e15
+  zh: f7317801d2650f2d
+/issue-state-is-moved-by-events/failure-mode:
+  en: 766943fae6bb7cde
+  zh: 7cbe4136f8542d62

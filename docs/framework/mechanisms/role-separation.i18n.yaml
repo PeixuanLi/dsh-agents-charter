@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for role-separation.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/role-separation.md
+/ai-produces-humans-decide-machines-enforce:
+  en: 922566656a987de2
+  zh: f36577ea1ea794f1
+/ai-produces-humans-decide-machines-enforce/rule-text:
+  en: 28e74d5120cc28fd
+  zh: 9f59c83931a068bd
+/ai-produces-humans-decide-machines-enforce/enforcement:
+  en: dfd3e23234d9c5d3
+  zh: ef9fb4c9f19b3b70
+/ai-produces-humans-decide-machines-enforce/cost-and-prerequisites:
+  en: b6ba2a4883b7a3a0
+  zh: 0b8a6f9c7a218b52
+/ai-produces-humans-decide-machines-enforce/team-fit:
+  en: 5401597df6acbdcd
+  zh: 8fed40be3919636b
+/ai-produces-humans-decide-machines-enforce/porting-checklist:
+  en: c85ae049ec15f4b0
+  zh: d05cdcc8a822dae4
+/ai-produces-humans-decide-machines-enforce/failure-mode:
+  en: 4da8a90e1857d2a6
+  zh: e710080b7421e7e4

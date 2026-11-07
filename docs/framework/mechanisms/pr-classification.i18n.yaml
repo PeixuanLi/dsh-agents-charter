@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for pr-classification.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/pr-classification.md
+/one-kind-per-pr-areas-are-multi-select:
+  en: 77ef1b52bc696815
+  zh: 9767c36b67df4d98
+/one-kind-per-pr-areas-are-multi-select/rule-text:
+  en: 44c09764c980210f
+  zh: 7e717c6f2893513e
+/one-kind-per-pr-areas-are-multi-select/enforcement:
+  en: fb6574795ffad807
+  zh: 0e7a16c93118be14
+/one-kind-per-pr-areas-are-multi-select/cost-and-prerequisites:
+  en: 3eb4611e5468db06
+  zh: 2d26633b587fadfe
+/one-kind-per-pr-areas-are-multi-select/team-fit:
+  en: acf29ed32faa5b10
+  zh: 779db09523d66dac
+/one-kind-per-pr-areas-are-multi-select/porting-checklist:
+  en: bb748766dadeba52
+  zh: 49a1ad5719b636ae
+/one-kind-per-pr-areas-are-multi-select/failure-mode:
+  en: 876dc9a7ed13cc50
+  zh: 484e371fac1f61fb

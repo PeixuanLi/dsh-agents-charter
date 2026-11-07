@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for stacked-pr.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/stacked-pr.md
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately:
+  en: db7683eeffb63888
+  zh: ca3d44195b8da7f5
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/rule-text:
+  en: 75126ec4e88a8476
+  zh: a2f52ecd75a94648
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/enforcement:
+  en: 502e731d252aae77
+  zh: 010d7a4b905fce05
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/cost-and-prerequisites:
+  en: aec277372d3efbd8
+  zh: 3e79b23a984e346c
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/team-fit:
+  en: cce94c8daca3a372
+  zh: 28210ca5f5abab2e
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/porting-checklist:
+  en: 0833baf38e623416
+  zh: ae3f1fe3ca6e1e4b
+/stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/failure-mode:
+  en: 7d1cf2941404545a
+  zh: d578b4a24947fc04

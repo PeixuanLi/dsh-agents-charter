@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for weighted-review.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/weighted-review.md
+/review-authority-is-a-published-formula:
+  en: c4448bb582b1ef24
+  zh: 134374585b48010f
+/review-authority-is-a-published-formula/rule-text:
+  en: e6e74152e27b6fb8
+  zh: cbb4da9941b7bfa1
+/review-authority-is-a-published-formula/enforcement:
+  en: 93ab1b89f081b7e1
+  zh: 3db0fcaeca6ec0b2
+/review-authority-is-a-published-formula/cost-and-prerequisites:
+  en: 777679c607d3463b
+  zh: 1a3a3648e352f854
+/review-authority-is-a-published-formula/team-fit:
+  en: 9e10538ec087df73
+  zh: 1d75640eb7601f13
+/review-authority-is-a-published-formula/porting-checklist:
+  en: fbb69a37af06e470
+  zh: 665e8a5ab9ea904e
+/review-authority-is-a-published-formula/failure-mode:
+  en: 29e62c9c6801cab3
+  zh: 1a0bf625d701d9bf

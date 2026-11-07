@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for release-double-gate.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/release-double-gate.md
+/rehearse-every-pr-dispatch-the-release-by-hand:
+  en: 16e3924c53215c61
+  zh: f452eeeec930d50e
+/rehearse-every-pr-dispatch-the-release-by-hand/rule-text:
+  en: f36461c378ebf51c
+  zh: a9d8f19515781709
+/rehearse-every-pr-dispatch-the-release-by-hand/enforcement:
+  en: 9c852ea67800a485
+  zh: ceb10e0b952800c5
+/rehearse-every-pr-dispatch-the-release-by-hand/cost-and-prerequisites:
+  en: f80d080d86839957
+  zh: a2bfaf4947f60cb0
+/rehearse-every-pr-dispatch-the-release-by-hand/team-fit:
+  en: 6abccfa20da818b3
+  zh: 4c14ad1cf2b75501
+/rehearse-every-pr-dispatch-the-release-by-hand/porting-checklist:
+  en: e1a524a58c99ad61
+  zh: 78e6e5370f3a373b
+/rehearse-every-pr-dispatch-the-release-by-hand/failure-mode:
+  en: 39dc846a2305331b
+  zh: e415216ca4a16a7d
