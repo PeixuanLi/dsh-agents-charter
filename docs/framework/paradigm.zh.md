@@ -19,6 +19,6 @@
 3. 外部化记忆靠敢于删除保持可用。它的价值在于删除了多少，而不在于保存了多少；常驻内容受配额约束、删除是常规运维，两者在笔记持续新增时维持信噪比。
 4. 门禁是每条规则的终点：约定产生漂移实证，漂移实证产生门禁。这条规律递归适用于治理自身——关于规则的规则同样是门禁，不能让 CI 变红的规则终将漂移。
 
-## 材料来源
+## 来源
 
-框架材料来自三处：`worktree-agents-framework` 分支上裁剪为 agent 约束语料的 deepseek-harness 仓库（提交 `2a616084ea` 与 `a9c1a7f42a`）、调研报告 `survey-dsh-paradigm/report.md`（未跟踪的工作目录，未提交），以及作为框架第一个 JS monorepo 实例的 `ai-mono-template`（github.com/PeixuanLi/ai-mono-template）。
+框架来自三类材料。主要材料是 deepseek-harness 仓库在 `worktree-agents-framework` 分支上裁剪为 agent 约束语料后的状态，其两笔奠基提交分别是 `strip(dsh): reduce tree to agents collaboration framework skeleton` 与 `strip(dsh): thin Agent Notes to inbound rationale plus category examples`。范式分析来自调研报告 `survey-dsh-paradigm/report.md`，它是未提交的未跟踪工作目录。`ai-mono-template`（github.com/PeixuanLi/ai-mono-template）是框架的第一个 JS monorepo 实例。

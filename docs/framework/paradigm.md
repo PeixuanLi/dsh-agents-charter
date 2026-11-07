@@ -19,6 +19,6 @@ This framework turns collaboration norms that previously depended on human tacit
 3. External memory stays useful by daring to delete. Its value lies in how much is removed, not in how much is stored; quotas on resident content and routine deletion keep the signal-to-noise ratio while notes keep arriving.
 4. The gate is the end point of every rule: convention produces observed drift, and observed drift produces an enforced gate. The progression applies recursively to governance itself — the rules about rules are also gates, and a rule that cannot turn CI red eventually drifts.
 
-## Provenance
+## Sources
 
-Three material sources define the framework: the deepseek-harness repository stripped to its agent-constraint corpus on branch `worktree-agents-framework` (commits `2a616084ea` and `a9c1a7f42a`), the research report `survey-dsh-paradigm/report.md` (an untracked working directory, not committed), and `ai-mono-template` (github.com/PeixuanLi/ai-mono-template) as the first JS-monorepo instance of the framework.
+The framework derives from three material sources. The primary source is the deepseek-harness repository stripped to its agent-constraint corpus on branch `worktree-agents-framework`, whose two foundation commits are `strip(dsh): reduce tree to agents collaboration framework skeleton` and `strip(dsh): thin Agent Notes to inbound rationale plus category examples`. The paradigm analysis comes from the research report `survey-dsh-paradigm/report.md`, an untracked working directory that is not committed. `ai-mono-template` (github.com/PeixuanLi/ai-mono-template) is the framework's first JS-monorepo instance.
