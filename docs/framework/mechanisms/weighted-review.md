@@ -31,4 +31,4 @@ Solo ✗ · Small ✗ · Medium ✓ · Large ✓ — the formula reads history a
 
 ## Failure mode
 
-Authority without a formula ossifies into seniority or volume: the loudest or longest-tenured reviewer becomes the gate, and nobody can state by what rule. With the formula, review weight tracks actual ownership — the people who know the code are the ones whose review counts, and that property survives any individual's departure.
+Authority without a formula ossifies into seniority or volume: the loudest or longest-tenured reviewer becomes the gate, and nobody can state by what rule; with a formula, review weight tracks actual ownership instead.

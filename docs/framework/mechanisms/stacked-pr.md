@@ -23,7 +23,7 @@ Team fit follows the work's shape rather than headcount: wherever parallel depen
 
 ## Porting checklist
 
-- Require the native stack object for every same-repository dependency chain, each PR based on the head branch immediately below it.
+- Require the native stack object for every same-repository dependency chain, each PR based on the head branch immediately below it — the [dsh-merging-stacked-prs skill](../../../.agents/skills/dsh-merging-stacked-prs/SKILL.md) is the enforcement companion for landing a stack.
 - Rewrite pushed branches only with `--force-with-lease`; treat raw `--force` as a blocked command.
 - Before `gh stack sync`, require a clean worktree and record the official stack order with exact remote head OIDs.
 - After sync, immediately re-query every head and the stack order, run the affected layers' checks, and hold merges until the evidence passes; on failure, repair and publish the correction on top of the published heads.

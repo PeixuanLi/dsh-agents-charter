@@ -31,4 +31,4 @@ Solo ✓ · Small ✓ · Medium ✓ · Large ✓ — one CI job and one dispatch
 
 ## Failure mode
 
-Release by memory misses a step exactly when pressure is highest: the rollout is today, the checklist lives in someone's head, and the missed step ships. The rehearsal makes packaging failures ordinary CI noise instead of release-day emergencies; the human dispatch keeps the decision to ship a decision.
+Release by memory misses a step exactly when pressure is highest: the rollout is today, the checklist lives in someone's head, and the missed step ships; the rehearsal exists so every step has already run before release day.

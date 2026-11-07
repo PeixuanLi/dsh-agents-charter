@@ -15,7 +15,7 @@ The template enforces at authoring time by asking the kind question once and onl
 
 ## Cost and prerequisites
 
-A taxonomy everyone agrees to hold still: the kind vocabulary must be small enough to choose from in seconds and stable enough for consumers to build against. The template is the cheap prerequisite; the real one is at least one consumer — routing, metrics, or review assignment — because a classification with no reader is pure form-filling.
+A taxonomy everyone agrees to hold still: the kind vocabulary must be small enough to choose from in seconds and stable enough for consumers to build against. The template is the cheap prerequisite; the real one is at least one consumer — routing, metrics, review assignment, or the [issue state machine](../mechanisms/issue-state-machine.md)'s `typed`/`untyped` listeners — because a classification with no reader is pure form-filling.
 
 ## Team fit
 
@@ -30,4 +30,4 @@ Solo ✗ · Small ✓ · Medium ✓ · Large ✓ — a taxonomy pays when someon
 
 ## Failure mode
 
-Classification without a consumer is form-filling tax: authors pick the nearest value, the taxonomy rots, and nobody notices because nothing reads it. With consumers, the same fields compound — routing moves work, metrics aggregate kinds, and a missing category becomes visible the first time a query needs it.
+Classification without a consumer is form-filling tax: authors pick the nearest value, the taxonomy rots, and nobody notices because nothing reads it; with consumers, routing and metrics compound on the same fields.

@@ -23,7 +23,7 @@
 
 ## 移植清单
 
-- 每条同仓库依赖链都要求原生 stack 对象，每个 PR 以紧邻其下的 head 分支为基。
+- 每条同仓库依赖链都要求原生 stack 对象，每个 PR 以紧邻其下的 head 分支为基——[dsh-merging-stacked-prs skill](../../../.agents/skills/dsh-merging-stacked-prs/SKILL.md) 是落地一条 stack 的执法配套。
 - 已推送分支只用 `--force-with-lease` 重写；把 raw `--force` 当作被禁命令。
 - `gh stack sync` 之前，要求干净的工作区并记录官方 stack 顺序与精确的远端 head OID。
 - sync 之后立即重查每个 head 与 stack 顺序，跑受影响层的检查，证据通过前扣住合并；失败时在已发布的 head 之上修复并发布更正。
@@ -31,4 +31,4 @@
 
 ## 失效模式
 
-raw `--force` 会毁掉别人的基：租约本可拦下的并发前进被无声覆盖。未验证的 sync 是镜像的失败——重写在没有任何人跑过检查的情况下就发往每个下游层，破坏在最顶层的 PR 现形，也最难归因。
+raw `--force` 会毁掉别人的基础分支：租约本可拦下的并发推进被无声覆盖。未验证的 sync 是镜像的失败——重写在没有任何人跑过检查的情况下就发往每个下游层，破坏在最顶层的 PR 现形，也最难归因。
