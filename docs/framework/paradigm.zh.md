@@ -6,11 +6,11 @@
 
 ## 五个机制层
 
-- [L1 — 角色分权](layers/l1-role-separation.md) — AI 产出，人类裁决，机器执行；三种权力相互分离
-- [L2 — 外部化记忆](layers/l2-external-memory.md) — Agent Note 系统把经验从 agent 上下文移入仓库
-- [L3 — 机器验证](layers/l3-machine-verification.md) — 以门禁取代信任
-- [L4 — 指令分层](layers/l4-instruction-layering.md) — 常驻规则与按需 skill（技能）；上下文经济
-- [L5 — 流程自动化](layers/l5-process-automation.md) — 事件驱动的流程执行
+- [L1 — 角色分权](layers/l1-role-separation.zh.md) — AI 产出，人类裁决，机器执行；三种权力相互分离
+- [L2 — 外部化记忆](layers/l2-external-memory.zh.md) — Agent Note 系统把经验从 agent 上下文移入仓库
+- [L3 — 机器验证](layers/l3-machine-verification.zh.md) — 以门禁取代信任
+- [L4 — 指令分层](layers/l4-instruction-layering.zh.md) — 常驻规则与按需 skill（技能）；上下文经济
+- [L5 — 流程自动化](layers/l5-process-automation.zh.md) — 事件驱动的流程执行
 
 ## 四条论断
 
@@ -21,4 +21,4 @@
 
 ## 材料来源
 
-框架材料来自三处：`worktree-agents-framework` 分支上裁剪为智能体约束语料的 deepseek-harness 仓库（提交 `2a616084ea` 与 `a9c1a7f42a`）、调研报告 `survey-dsh-paradigm/report.md`（未跟踪的工作目录，未提交），以及作为框架第一个 JS monorepo 实例的 `ai-mono-template`（github.com/PeixuanLi/ai-mono-template）。
+框架材料来自三处：`worktree-agents-framework` 分支上裁剪为 agent 约束语料的 deepseek-harness 仓库（提交 `2a616084ea` 与 `a9c1a7f42a`）、调研报告 `survey-dsh-paradigm/report.md`（未跟踪的工作目录，未提交），以及作为框架第一个 JS monorepo 实例的 `ai-mono-template`（github.com/PeixuanLi/ai-mono-template）。
