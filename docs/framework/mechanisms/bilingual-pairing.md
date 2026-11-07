@@ -31,4 +31,4 @@ Follows bilingual capacity, not headcount: where a team sustains two languages, 
 
 ## Failure mode
 
-Without bilingual manpower the triplet becomes zombie tax, per the porting analysis: records drift, the gate goes permanently red, and teams learn to ignore it — the red then stops protecting the pairs that still deserve protection.
+Without bilingual manpower the [English, Chinese, and sidecar triplet](../mechanisms/note-triplet.md) becomes zombie tax: records drift, the gate goes permanently red, and teams learn to ignore it — the red then stops protecting the pairs that still deserve protection.

@@ -7,7 +7,7 @@ English | [中文](local-narrow-ci-full.zh.md)
 
 ## Rule text
 
-[lefthook.yml](../../../lefthook.yml) keeps the hooks narrow — pre-commit checks staged translation-pairing records, archive metadata, staged lint, and whitespace; pre-push runs one incremental typecheck — and its header comment states the split: keep local checkpoints fast, the `doc-sync` aggregate owns the repository-wide gate matrix. The evidence-selection rule lives in the [dsh-pre-push-checks skill](../../../.agents/skills/dsh-pre-push-checks/SKILL.md): run the narrowest check that would fail for the regression, never manually repeat a passing check, and rehearse the full suite only on explicit request, for CI diagnosis, or for an irreducibly repository-wide change.
+[lefthook.yml](../../../lefthook.yml) keeps the hooks narrow — pre-commit checks staged translation-pairing records, archive metadata, staged lint, and whitespace; pre-push runs one typecheck — and its header comment states the split: keep local checkpoints fast, the `doc-sync` aggregate owns the repository-wide gate matrix. The evidence-selection rule lives in the [dsh-pre-push-checks skill](../../../.agents/skills/dsh-pre-push-checks/SKILL.md): run the narrowest check that would fail for the regression, never manually repeat a passing check, and rehearse the full suite only on explicit request, for CI diagnosis, or for an irreducibly repository-wide change.
 
 ## Enforcement
 
@@ -23,11 +23,11 @@ Solo ✓ · Small ✓ · Medium ✓ · Large ✓
 
 ## Porting checklist
 
-- Keep hooks to fast, staged-scope jobs: staged lint and whitespace at commit, one incremental typecheck at push.
+- Keep hooks to fast, staged-scope jobs: staged lint and whitespace at commit, one typecheck at push.
 - State the split where the hooks are defined: fast local checkpoints; the full gate matrix elsewhere.
 - Select evidence per change with a written checklist: the narrowest check that would fail for the regression.
 - Never repeat a passing check; full rehearsal only on explicit request or CI diagnosis.
-- Inspect the outgoing scope before choosing evidence: `pnpm run change-scope --base <verified-base-ref>`.
+- Inspect the outgoing scope with the linked skill's change-scope report before choosing evidence.
 
 ## Failure mode
 

@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-[lefthook.yml](../../../lefthook.yml) 把钩子保持得很窄——pre-commit 检查暂存的翻译配对记录、归档元数据、暂存 lint 与空白；pre-push 只运行一条增量 `pnpm run typecheck`——头部注释写明了分界：本地检查点保持快速，`doc-sync` 聚合拥有仓库级门禁矩阵。证据选择规则住在 [dsh-pre-push-checks skill（技能）](../../../.agents/skills/dsh-pre-push-checks/SKILL.md)：运行能对该回归失败的最窄检查，绝不手动重复已通过的检查；只有显式要求、诊断 CI 失败或变更宽到无法收敛时才完整演练。
+[lefthook.yml](../../../lefthook.yml) 把钩子保持得很窄——pre-commit 检查暂存的翻译配对记录、归档元数据、暂存 lint 与空白；pre-push 只运行一条 `pnpm run typecheck`——头部注释写明了分界：本地检查点保持快速，`doc-sync` 聚合拥有仓库级门禁矩阵。证据选择规则住在 [dsh-pre-push-checks skill（技能）](../../../.agents/skills/dsh-pre-push-checks/SKILL.md)：运行能对该回归失败的最窄检查，绝不手动重复已通过的检查；只有显式要求、诊断 CI 失败或变更宽到无法收敛时才完整演练。
 
 ## 执法
 
@@ -23,11 +23,11 @@ Solo ✓ · Small ✓ · Medium ✓ · Large ✓
 
 ## 移植清单
 
-- 钩子只保留快速、暂存范围的任务：commit 时暂存 lint 与空白，push 时一条增量类型检查。
+- 钩子只保留快速、暂存范围的任务：commit 时暂存 lint 与空白，push 时一条类型检查。
 - 把分界写在钩子定义处：本地检查点快速；完整门禁矩阵在别处。
 - 用成文的清单按变更选择证据：能对该回归失败的最窄检查。
 - 不重复已通过的检查；只在显式要求或 CI 诊断时完整演练。
-- 选择证据前先看变更范围：`pnpm run change-scope --base <verified-base-ref>`。
+- 选择证据前，先用上文 skill 的 change-scope 报告查看变更范围。
 
 ## 失效模式
 

@@ -15,7 +15,7 @@ The archive-format, triplet, and immutable-manifest helpers live in [scripts/arc
 
 ## Cost and prerequisites
 
-The append-only manifest plus the discipline of never touching sealed files; everything beyond that is the archive freeze's cost, not the seal's. The baseline read is what makes removal a decision instead of an edit — worth it wherever frozen history must survive team turnover.
+The append-only manifest plus the discipline of never touching sealed files; everything beyond that is the [archive freeze](../mechanisms/archive-freeze.md)'s cost, not the seal's. The baseline read is what makes removal a decision instead of an edit — worth it wherever frozen history must survive team turnover.
 
 ## Team fit
 
