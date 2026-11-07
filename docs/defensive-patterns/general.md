@@ -2,7 +2,7 @@
 
 English | [中文](general.zh.md)
 
-Hard-won bug-class rules: each pattern below is a class of defect that actually shipped or nearly shipped here, stated as the rule that prevents its recurrence. Read this before writing lifecycle, concurrency, subprocess, or teardown code. Test-tier counterparts (real entry path, world-verification, resource ownership) are in [testing.md](../testing.md); the type-level definitions these rules refer to live in [subsystems/](../subsystems/README.md).
+Hard-won bug-class rules: each pattern below is a class of defect that actually shipped or nearly shipped here, stated as the rule that prevents its recurrence. Read this before writing lifecycle, concurrency, subprocess, or teardown code. Test-tier counterparts (real entry path, world-verification, resource ownership) are in [testing.md](../testing.md); the type-level definitions these rules refer to live in subsystems/ (`../subsystems/README.md`).
 
 ## Report orthogonal outcomes independently
 
@@ -72,7 +72,7 @@ The wrong form keeps the contract vague and swallows the error, so the next call
 
 An unknown value, an empty collection or string, and a genuinely absent field are three different facts and take three representations. One `undefined` or `null` never stands for several of them, and a consumer that must act differently on each discriminates explicitly instead of collapsing them at the boundary.
 
-The judged condition is whether a single "no value" carries more than one semantic: not yet queried, queried and empty, and cannot be determined. A discriminated union or an explicit enum value is the ordinary implementation, documented where the type is defined in [core.md](../subsystems/core.md#repo-wide-type-patterns).
+The judged condition is whether a single "no value" carries more than one semantic: not yet queried, queried and empty, and cannot be determined. A discriminated union or an explicit enum value is the ordinary implementation, documented where the type is defined in core.md (`../subsystems/core.md#repo-wide-type-patterns`).
 
 ```ts
 type ValueState<T> = { kind: 'unknown' } | { kind: 'empty' } | { kind: 'value'; value: T }
@@ -125,7 +125,7 @@ The wrong form lets instances overwrite each other, makes reclamation timing unk
 
 A business capability lives in its own package and attaches through a registration surface — a registry, `slots.inject`, a waterfall, or an event subscription. A runtime, controller, manager, or gateway carries generic orchestration: it may hold the registry structure and the disposal lifecycle, while the entries are written by the packages that own them, and it never hardcodes a central table of business rows.
 
-Establish whether a new distinction, field, or adapter is needed before choosing its owner; moving an unnecessary concept does not remove its maintenance cost. For required behavior, prefer an existing extension point near its producer or consumer when the local implementation adds little complexity. A producer can declare a feature variant through [declaration merging](../subsystems/core.md#the-map--derived-union-pattern) in its own package, without editing the package that declares the shared type. Obligations common to all consumers belong in the shared owner.
+Establish whether a new distinction, field, or adapter is needed before choosing its owner; moving an unnecessary concept does not remove its maintenance cost. For required behavior, prefer an existing extension point near its producer or consumer when the local implementation adds little complexity. A producer can declare a feature variant through declaration merging (`../subsystems/core.md#the-map--derived-union-pattern`) in its own package, without editing the package that declares the shared type. Obligations common to all consumers belong in the shared owner.
 
 The judged condition is whether the capability declares and registers itself, with the center layer only forwarding and managing lifetime rather than making business decisions. The boundary is that the center layer holds the registry structure and the disposal lifecycle while the entries come from the owning packages. One exception: pure infrastructure — logging, transport, storage — does not attach through a business registration surface. A new branch in a center layer must explain why it cannot live in the owning package.
 
@@ -156,7 +156,7 @@ The judged condition: under one environment and one input, any of the three metr
 
 The baseline is the same path without the change under measurement — normally the native implementation that carries no measurement hook, not the previous implementation. Comparing old against new with the same hook attached on both sides dilutes the difference until it disappears: both sides pay the same overhead, so the measurement reports "no change" while both are slow.
 
-Measurement is owned by [benchmarks/](../../benchmarks/AGENTS.md), one directory per measured user path, and its scenarios are the entry point:
+Measurement is owned by benchmarks/ (`../../benchmarks/AGENTS.md`), one directory per measured user path, and its scenarios are the entry point:
 
 ```sh
 # Run the owning scenario before and after the change; the numbers go into the PR.

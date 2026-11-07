@@ -10,13 +10,13 @@ Large cached projection states can monopolize the Host while a Session list is a
 
 ## Decision
 
-[ApiSessionList](../../../../packages/api/session-controller/src/list.ts) uses one monotonic deadline for classification and summary generation. It yields only after elapsed work exhausts the configured `listWorkSliceMs`, then starts a new deadline after the wait. The optional deployment setting defaults to 16 positive integral milliseconds. Small lists have no forced final yield or no-op asynchronous helper. Cancellation is checked per row, after each yield, and before returning; no partial list is returned.
+ApiSessionList (`../../../../packages/api/session-controller/src/list.ts`) uses one monotonic deadline for classification and summary generation. It yields only after elapsed work exhausts the configured `listWorkSliceMs`, then starts a new deadline after the wait. The optional deployment setting defaults to 16 positive integral milliseconds. Small lists have no forced final yield or no-op asynchronous helper. Cancellation is checked per row, after each yield, and before returning; no partial list is returned.
 
 Every row remains synchronous. Live rows precede queued cold rows before the stable activity sort; the list promises no cross-Session atomic cut. A cold row already queued before an attachment remains cached, and Client mutation replay plus [cached/sequenced precedence](../architecture/2026-09-19-projection-cache-listing-identity-and-cached-rows.md) reconcile the newer live state. No projection data or validation is omitted.
 
 ## Measurement and calibration
 
-The [production-entry benchmark](../../../../benchmarks/session-corpus/projection-list.bench.ts) measures the real Session Controller, query engine, persistence, projection registry/cache and storage domain. Persisted fixtures use `generationLogPath`, `toHeaderLine` and `compressZstdFrame` from the persistence owner. All content is deterministic generated data. Setup and explicit GC are outside timing; complete results and JSON remain reachable during memory sampling.
+The production-entry benchmark (`../../../../benchmarks/session-corpus/projection-list.bench.ts`) measures the real Session Controller, query engine, persistence, projection registry/cache and storage domain. Persisted fixtures use `generationLogPath`, `toHeaderLine` and `compressZstdFrame` from the persistence owner. All content is deterministic generated data. Setup and explicit GC are outside timing; complete results and JSON remain reachable during memory sampling.
 
 | Workload | Sessions | State observations | Request records | State JSON |
 |---|---:|---:|---:|---:|
@@ -64,6 +64,6 @@ The existing [3,000-Session corpus lane](../testing/2026-09-28-session-corpus-pe
 
 ## Consequences
 
-[Controlled-clock tests](../../../../packages/api/session-controller/tests/list-scheduling.host.spec.ts) require cheap rows to remain in one synchronous slice, budget exhaustion and post-wait reset to govern yields, and cancellation to stop work even when no yield is due. They also preserve stable ties and attachment/removal/status interleavings. The time-based benchmark guard rejects unyielded or first-only-yield heavy work without forbidding efficient batches.
+Controlled-clock tests (`../../../../packages/api/session-controller/tests/list-scheduling.host.spec.ts`) require cheap rows to remain in one synchronous slice, budget exhaustion and post-wait reset to govern yields, and cancellation to stop work even when no yield is due. They also preserve stable ties and attachment/removal/status interleavings. The time-based benchmark guard rejects unyielded or first-only-yield heavy work without forbidding efficient batches.
 
 A single row, provider enumeration, GC, final sorting and serialization can exceed the target. Concurrent lists and operating-system scheduling also affect latency. The budget is not a hard global bound, and these measurements do not claim browser paint or model/network latency improvements.

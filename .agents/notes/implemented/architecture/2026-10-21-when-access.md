@@ -50,7 +50,7 @@ export interface WhenAccess {
 | Synchronous run | When the answer is already true, the callback runs synchronously; the owner's answer is always true, so registration order matches direct registration |
 | Stream failure | A non-owner's answer turns false and the installed effects dispose |
 | Callback failure | A setup failure at the call throws synchronously; a setup failure on a later grant stops the controller and is rethrown in a microtask |
-| Layering | remote-access knows only `global`; the Session and Workspace versions are built over remote-access's lower-level `whenResourceAccess(kind, id, action, callback)`, as their Hooks are built over `source(kind, id, action)`. Only the package that owns a resource kind calls `source` and `whenResourceAccess`; other plugins use only the access Hooks and `whenAccess` and pass no kind. All four entry points share [`when-allowed.ts`](../../../../packages/api/remote-access/src/client/when-allowed.ts) |
+| Layering | remote-access knows only `global`; the Session and Workspace versions are built over remote-access's lower-level `whenResourceAccess(kind, id, action, callback)`, as their Hooks are built over `source(kind, id, action)`. Only the package that owns a resource kind calls `source` and `whenResourceAccess`; other plugins use only the access Hooks and `whenAccess` and pass no kind. All four entry points share `when-allowed.ts` (`../../../../packages/api/remote-access/src/client/when-allowed.ts`) |
 
 ### Plugin migration
 
@@ -81,7 +81,7 @@ export interface WhenAccess {
 | Registrations follow access changes | Without a grant, a migrated plugin registers none of the corresponding entries for a non-owner; they appear after a grant and disappear after a revocation; the owner's answer is always true, so its registrations match direct registration |
 | The callback must hand back disposers | An effect registered through the plugin's `ctx` inside the callback also hangs on the plugin fiber; a registration whose disposer is not yielded does not dispose on access loss, only when the plugin unloads |
 | Readers receive all plugin code | Plugins load as before; the Gateway decides each call, and `whenAccess` and the Hooks control the UI |
-| Test stand-ins | [`dsh-client-test-runtime`](../../../../packages/test-support/client-runtime/README.md) replaces remote-access with fixed answers through `StaticRemoteAccess`, `staticAccessPlugin`, and `TestClientOptions.access`, so plugin specs cover the refused path |
+| Test stand-ins | `dsh-client-test-runtime` (`../../../../packages/test-support/client-runtime/README.md`) replaces remote-access with fixed answers through `StaticRemoteAccess`, `staticAccessPlugin`, and `TestClientOptions.access`, so plugin specs cover the refused path |
 
 ## Related
 

@@ -17,8 +17,8 @@ description: "Session 工作目录替代内置 cwd 配置，工具展示元数�
 
 ## 迁移
 
-1. 在 home、profile 或本次调用的 `personaSuffix` 配置，以及 preset 的 `suffix` 字段中，移除引用 `{{cwd}}` 的目录语句，保留其他文本。suffix 变为空时省略或清空该字段。[工作目录服务](../../../../packages/session/working-directory/README.zh.md)负责提供目录上下文。
-2. 从 profile patch 中的 ACP 与 DSH-SDK 子代理 provider 行移除 `config.cwd`。为单个子代理选择目录时，在其[启动请求](../../../subsystems/subagent.zh.md)中传入 `cwd`。改变父代理执行目录时，先调用 `working_directory({ cd: "/absolute/project" })`，再启动子代理。
+1. 在 home、profile 或本次调用的 `personaSuffix` 配置，以及 preset 的 `suffix` 字段中，移除引用 `{{cwd}}` 的目录语句，保留其他文本。suffix 变为空时省略或清空该字段。工作目录服务 (`../../../../packages/session/working-directory/README.zh.md`)负责提供目录上下文。
+2. 从 profile patch 中的 ACP 与 DSH-SDK 子代理 provider 行移除 `config.cwd`。为单个子代理选择目录时，在其启动请求 (`../../../subsystems/subagent.zh.md`)中传入 `cwd`。改变父代理执行目录时，先调用 `working_directory({ cd: "/absolute/project" })`，再启动子代理。
 3. 在相关 Session 中调用 `working_directory({})` 并确认报告的目录。启动一个不带目录覆盖的子代理并检查其执行目录；子代理需要另一个 checkout 时，显式提供启动 `cwd`。仅用 `Session.header.cwd` 读取原始项目标识或权限根目录，当前目录操作使用工作目录服务。
 4. 保持自定义 `output.presentationMeta` 投影纯净，并从调用参数和规范结果返回可用于 JSON 的元数据。分别执行原生调用和嵌套 PTC 调用，确认记录的元数据指向操作的实际目标，同时不改变调用结果。
 

@@ -16,7 +16,7 @@ SDK 消费方接收 Session 事件，而 job 注册和结算此前只存在于�
 
 事实在注册表提交时同步追加，先于运行期 hub 的反应和完成等待方恢复。记录错误单独发出警告：已启动的工作仍有可控制的 id，日志追加失败不能阻止清理或释放等待方。追加后的投递由 Session 既有的持久化和 SDK 通知路径负责。SDK `run()` 结果只覆盖有界观察窗口，可能收到注册属于更早运行的结算；结算记录为这个消费方保留注册事实。
 
-[注册表约定](../../../../packages/jobs/jobs/README.zh.md)和[seam 收敛说明](../architecture/2026-09-03-jobs-seam-consolidation.zh.md)负责运行期执行、资源归属和事件路由。本日志增加持久化观测，不替代这些职责。
+注册表约定 (`../../../../packages/jobs/jobs/README.zh.md`)和[seam 收敛说明](../architecture/2026-09-03-jobs-seam-consolidation.zh.md)负责运行期执行、资源归属和事件路由。本日志增加持久化观测，不替代这些职责。
 
 ## Alternatives considered
 

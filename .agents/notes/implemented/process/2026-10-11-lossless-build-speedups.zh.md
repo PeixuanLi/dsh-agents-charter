@@ -42,8 +42,8 @@ Status: implemented
 ### 1. React 类型包只由根 manifest 声明
 
 - **目的：** 把 Client 测试聚合程序看到的 `@types/react` 位置数 N 从 65 降到 1，消除随 N 线性增长的 module specifier 计算。
-- **改动：** 根 `package.json` 的 `devDependencies` 声明 `@types/react` `~18.3.1` 与 `@types/react-dom` `~18.3.0`，沿用各包原先统一的版本范围；`apps/*`、`packages/*/*` 与 `vendor/*` 的 manifest 在任何依赖区段都不声明它们。TypeScript 从任一包向上查找时都解析到根 `node_modules/@types/react`。runtime `react` 与 `react-dom` 仍按 [Client 依赖声明规则](../../../../packages/client/AGENTS.md#dependency-declaration)由各包声明；只通过 `import type` 引用 React 的 `packages/client/ui-slots` 在 `devDependencies` 中声明 `react`。pnpm `dedupeDirectDeps` 保持关闭。lockfile 的变化集中在 importers 区段（另有一条 integrity 相同的 `papaparse` 条目重排）。
-- **防回退：** [`verify-package-dependencies`](../../../../scripts/verify-package-dependencies.ts) 在 `hygiene` 与 CI 中要求根 manifest 的 `devDependencies` 声明这两个包，并拒绝 `apps/*`、`packages/*/*`、`vendor/*` 中任一 manifest 在 `dependencies`、`devDependencies`、`optionalDependencies` 或 `peerDependencies` 中声明它们；诊断指明要删除的条目，并链接 Client 依赖声明规则第 8 条。规则只匹配这两个精确包名，其他 `@types/*` 包仍按 DefinitelyTyped 类型提供方处理。依赖区段推导不把这两个包视为 `react`/`react-dom` 的类型提供方：包缺少 `react` 声明时，验证器报告 `react` 缺失，`--fix` 拒绝修复并要求先声明版本范围；`--fix` 也不写回或删除这两个包。[`verify-package-dependencies.spec.ts`](../../../../scripts/verify-package-dependencies.spec.ts) 覆盖各依赖区段的拒绝、根 manifest 缺失声明、被接受的布局，以及类型提供方排除。
+- **改动：** 根 `package.json` 的 `devDependencies` 声明 `@types/react` `~18.3.1` 与 `@types/react-dom` `~18.3.0`，沿用各包原先统一的版本范围；`apps/*`、`packages/*/*` 与 `vendor/*` 的 manifest 在任何依赖区段都不声明它们。TypeScript 从任一包向上查找时都解析到根 `node_modules/@types/react`。runtime `react` 与 `react-dom` 仍按 Client 依赖声明规则 (`../../../../packages/client/AGENTS.md#dependency-declaration`)由各包声明；只通过 `import type` 引用 React 的 `packages/client/ui-slots` 在 `devDependencies` 中声明 `react`。pnpm `dedupeDirectDeps` 保持关闭。lockfile 的变化集中在 importers 区段（另有一条 integrity 相同的 `papaparse` 条目重排）。
+- **防回退：** `verify-package-dependencies` (`../../../../scripts/verify-package-dependencies.ts`) 在 `hygiene` 与 CI 中要求根 manifest 的 `devDependencies` 声明这两个包，并拒绝 `apps/*`、`packages/*/*`、`vendor/*` 中任一 manifest 在 `dependencies`、`devDependencies`、`optionalDependencies` 或 `peerDependencies` 中声明它们；诊断指明要删除的条目，并链接 Client 依赖声明规则第 8 条。规则只匹配这两个精确包名，其他 `@types/*` 包仍按 DefinitelyTyped 类型提供方处理。依赖区段推导不把这两个包视为 `react`/`react-dom` 的类型提供方：包缺少 `react` 声明时，验证器报告 `react` 缺失，`--fix` 拒绝修复并要求先声明版本范围；`--fix` 也不写回或删除这两个包。`verify-package-dependencies.spec.ts` (`../../../../scripts/verify-package-dependencies.spec.ts`) 覆盖各依赖区段的拒绝、根 manifest 缺失声明、被接受的布局，以及类型提供方排除。
 - **性能：**
 
   | 测量项 | 各包自声明（N = 65） | 根 manifest 声明（N = 1） |
@@ -77,7 +77,7 @@ Status: implemented
 - **改动：** `PackageRegistration.config` 是 `caches.config(configPath)` 的 getter，首次读取时解析。注册清单的顺序、face、包名、根目录与导出子路径不变。
 - **性能：** Host tsdown 16.99 s → 16.25 s（各 3 个样本的中位数），在 2.5 s 的组内跨度以内。第 2–4 项合计在隔离基准中把 Typert 发现从 5.9–7.1 s 降到 0.36–0.40 s，tsconfig 解析从 362 次降到 28 次，表面遍历从 322 次降到 28 次，Typert 总耗时从 9.7–11.8 s 降到 4.4–4.5 s。
 - **无损依据：** 注册清单比较与第 3 项相同（逐字节一致），产物逐字节一致。测试 `reads only the project configs of manifests selected for discovery` 固定只解析所选包的配置。
-- **取舍（非无损）：** Typert 不解析它不分析的包的 tsconfig，因此这类 tsconfig 的语法或配置错误不会使 Typert 失败。同一构建中，先于 Host bundle 运行的 Host 包编译 `tsc -b` 与 Client 包编译 `tsc -b` 解析每个被引用的 tsconfig，并拒绝其中的错误；`PackageRegistration.config` 的 JSDoc 与 [Typert generator README](../../../../packages/typert/generator/README.zh.md) 写明这一归属。单独调用 Typert 而不运行 `tsc -b` 的使用方不会得到这些诊断。
+- **取舍（非无损）：** Typert 不解析它不分析的包的 tsconfig，因此这类 tsconfig 的语法或配置错误不会使 Typert 失败。同一构建中，先于 Host bundle 运行的 Host 包编译 `tsc -b` 与 Client 包编译 `tsc -b` 解析每个被引用的 tsconfig，并拒绝其中的错误；`PackageRegistration.config` 的 JSDoc 与 Typert generator README (`../../../../packages/typert/generator/README.zh.md`) 写明这一归属。单独调用 Typert 而不运行 `tsc -b` 的使用方不会得到这些诊断。
 
 ### 5. Typert 工作区根目录同时要求 `packages/`
 
@@ -90,7 +90,7 @@ Status: implemented
 ### 6. Typert 在 Worker Thread 中生成
 
 - **目的：** 让 Typert 分析与 tsdown 主线程上的打包重叠，而不是在第一个 `writeBundle` 中阻塞全部包构建。
-- **改动：** [`src/worker.ts`](../../../../packages/typert/generator/src/worker.ts) 是 Worker Thread 入口，运行 `generateContributors(faces)` 并回传一条 `artifacts` 或 `failure` 消息。workspace 模式下，本次构建的第一个 `buildStart` 以 `options.cwd` 定位工作区根目录并启动生成；`writeBundle` 是异步的，第一个完成的打包认领写入并等待结果，之后的打包立即返回。分析错误、worker 崩溃或提前退出、格式错误或无法反序列化的响应、worker 无法终止，都以指明工作区与原因的 `TypertWorkerError` 使认领写入的打包失败，从而使整个 tsdown 阶段失败；结果敲定前 worker 已终止，未被认领的结果不会成为未处理的 rejection。构建产物从 `./worker.js` 启动 worker；源码运行（测试）通过 `tsx/esm/api` 加载 `worker.ts`。`package` 模式仍在主线程中生成。
+- **改动：** `src/worker.ts` (`../../../../packages/typert/generator/src/worker.ts`) 是 Worker Thread 入口，运行 `generateContributors(faces)` 并回传一条 `artifacts` 或 `failure` 消息。workspace 模式下，本次构建的第一个 `buildStart` 以 `options.cwd` 定位工作区根目录并启动生成；`writeBundle` 是异步的，第一个完成的打包认领写入并等待结果，之后的打包立即返回。分析错误、worker 崩溃或提前退出、格式错误或无法反序列化的响应、worker 无法终止，都以指明工作区与原因的 `TypertWorkerError` 使认领写入的打包失败，从而使整个 tsdown 阶段失败；结果敲定前 worker 已终止，未被认领的结果不会成为未处理的 rejection。构建产物从 `./worker.js` 启动 worker；源码运行（测试）通过 `tsx/esm/api` 加载 `worker.ts`。`package` 模式仍在主线程中生成。
 - **性能：** Host tsdown 15.39 s → 10.25 s（各 3 个样本的中位数）。最终配置（第 2–7 项）的 profile：主线程 10.1 s，第一个 `buildStart` 出现在 4.18 s（tsdown 配置解析），主线程上的 `writeBundle` 只占 0.37 s；worker 5.0 s（模块加载约 0.4 s、发现 0.28 s、生成 3.88 s，其中 `createProgram` 2.21 s），约在 9.3 s 结束。Host tsdown 的 wall 约为 max(打包, 4.2 s + Typert)。
 - **无损依据：** 第二轮的 54 次运行全部以 0 退出，每次的 743 个产物文件均与基线一致（generator 自身的 `lib/index.js` 除外）。测试 `writes the artifacts in-process generation produces` 比较 worker 与进程内生成的产物；在临时工作区中把一个包的 `files` 改坏后，tsdown 在 2.4 s 内以 1 退出，报告 `TypertWorkerError` 及 worker 内的 `TypertAnalysisError`，不写入任何产物。各失败路径由 `typertPlugin workspace mode` 测试组覆盖。
 - **取舍：** worker 堆约 300–420 MiB；最终配置的 Host tsdown 最大 RSS 中位数为 6,296–6,408 MiB，基线为 5,676 MiB。共享主机高负载时 worker 可能落在关键路径上：一次样本为 21.91 s，拥有产物的包构建等待 worker 约 14 s，其后 10 个样本未复现；load average 约 100 时两次运行为 17.86 s 与 14.3 s。worker 在 1,024 MiB 堆上限下也能完成，因此不是 GC 压力；归因于主机争用尚未证实。
@@ -105,7 +105,7 @@ Status: implemented
 ### 8. Client tsdown 预设按包目录读取 manifest
 
 - **目的：** 每个包配置只读取自己的 `package.json`，消除按包名遍历全部 manifest 的 glob。
-- **改动：** [`packages/client/tsdown.client.ts`](../../../../packages/client/tsdown.client.ts) 的 `clientBundle`、`staticLinked` 与 `clientLibrary` 的第一个参数是包目录（通常为配置文件的 `import.meta.dirname`），预设读取一次 `<packageDir>/package.json`，以其中的 `name` 作为插件 id 与诊断名称；该 manifest 缺失、不可读或缺少 `name` 时，配置加载以指明路径与原因的错误失败。82 个包配置调用这些预设。预设不保留模块级 manifest 缓存；Node 半边的生产依赖 external 列表在首次 resolve 时由该 manifest 计算，并缓存在该配置的闭包中。
+- **改动：** `packages/client/tsdown.client.ts` (`../../../../packages/client/tsdown.client.ts`) 的 `clientBundle`、`staticLinked` 与 `clientLibrary` 的第一个参数是包目录（通常为配置文件的 `import.meta.dirname`），预设读取一次 `<packageDir>/package.json`，以其中的 `name` 作为插件 id 与诊断名称；该 manifest 缺失、不可读或缺少 `name` 时，配置加载以指明路径与原因的错误失败。82 个包配置调用这些预设。预设不保留模块级 manifest 缓存；Node 半边的生产依赖 external 列表在首次 resolve 时由该 manifest 计算，并缓存在该配置的闭包中。
 - **性能：** Client tsdown 从 12.78 s 降到 8.73 s（各 3 个样本的中位数），−4.05 s（−31.7%），两组样本区间不重叠；user CPU 从 26.1 s 降到 25.2 s，sys 从 5.9 s 降到 4.9 s，因此收益主要来自解除主线程阻塞，而不是减少 CPU 总量。原型（一次 glob 建立按包名索引）为 11.72 s → 7.46 s（−36%）。Host tsdown 中只有 5 个 `hostPhase` 包经过该查找，一对样本为 11.92 s → 10.71 s，置信度低。
 - **无损依据：** 11 次运行的 11,566 个 lib 文件逐字节一致。82 个调用处改为传入包目录后，没有一个解析出的包名与原先手写的包名不同。进程内比较 82 个配置 × 3 个 face × 1,600 个 specifier 的 external 判定，结果与原实现完全一致；负对照（多加一个 external）使 75 个判定不同。`client-bundle-purity.spec.ts` 覆盖这些 manifest 错误。
 - **行为差异：** 预设的调用约定从包名改为包目录。
@@ -120,7 +120,7 @@ Status: implemented
 - **缓存解析结果并把发现队列改为 O(1)（Typert）：** 第 2–4 项之后只剩 28 次表面遍历，约 0.18 s，低于噪声。
 - **在产物构建中把 Typert 移到独立构建步骤（Typert）：** 第 6 项之后 worker 已与打包重叠，剩余收益不超过约 1 s。不需要 bundle 的类型检查运行只读源码的生成步骤（[本地门禁提速](2026-10-12-local-gate-speedups.zh.md)）。 [先生成顺序决策](2026-10-18-source-first-metadata-builds.zh.md)为了编译依赖顺序而选择独立步骤，并记录无改动构建的代价；公开 worker 插件仍可使用。
 - **按代码内容过滤 `transform`（第 7 项）：** rolldown 以 Rust 正则语义解释 `^` 与 `\s`，在孤立 CR、U+2028 与 BOM 上与 JavaScript 不同，可能漏掉含装饰器的模块。
-- **在 `globalThis` 上建立进程级 manifest 索引（第 8 项）：** 原型收益与第 8 项相当，但它是没有 owner 的进程全局状态，违反[包规则](../../../../packages/AGENTS.md)中的共享状态归属要求。
+- **在 `globalThis` 上建立进程级 manifest 索引（第 8 项）：** 原型收益与第 8 项相当，但它是没有 owner 的进程全局状态，违反包规则 (`../../../../packages/AGENTS.md`)中的共享状态归属要求。
 - **关闭 tsdown 的 gzip 报告（第 8 项）：** `--no-report` 使 Client tsdown 降低 0.95 s，在 1.56 s 的基线跨度内。
 - **为 DSH 的 `resolveId`/`load` 钩子加 rolldown 过滤器（第 8 项）：** 降低 1.16 s，在噪声内。
 - **按模块 id 缓存输入隔离检查（第 8 项）：** 降低 0.93 s，在噪声内；叠加在 manifest 索引之上只再降低 0.18 s。

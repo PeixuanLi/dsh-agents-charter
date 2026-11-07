@@ -8,7 +8,7 @@ Status: proposed
 
 一个 disposer（清理函数）可能仍在等待消费者，另一个 disposer 却已经移除消费者需要的监听器或关闭资源。因此，等待 provider（提供者）的最终释放 promise，不能保证资源在此期间一直可用。这会影响关闭与插件替换，包括最终 Session 事件、已接受的提醒投递、凭据提交和远程进程终止。
 
-[Cordis 审查 skill](../../../skills/cordis-styling-nitpicking/SKILL.md#p0-cleanup-dependency-released-before-consumer-completion) 将这种生命周期违规归为 P0。[Fiber 卸载 (`Fiber._unload`)](../../../../vendor/cordis/src/fiber.ts) 并发启动同级 disposer；[服务撤销 (`ReflectService.provide`)](../../../../vendor/cordis/src/reflect.ts) 仅在自己的 disposer 内等待依赖 fiber。服务注入建立依赖追踪，却不能阻止同级资源关闭。[事件订阅 (`EventsService.register`)](../../../../vendor/cordis/src/events.ts) 是独立拥有的 effect，包括通过追踪调用方的服务上下文建立的订阅。
+[Cordis 审查 skill](../../../skills/cordis-styling-nitpicking/SKILL.md#p0-cleanup-dependency-released-before-consumer-completion) 将这种生命周期违规归为 P0。Fiber 卸载 (`Fiber._unload`) (`../../../../vendor/cordis/src/fiber.ts`) 并发启动同级 disposer；服务撤销 (`ReflectService.provide`) (`../../../../vendor/cordis/src/reflect.ts`) 仅在自己的 disposer 内等待依赖 fiber。服务注入建立依赖追踪，却不能阻止同级资源关闭。事件订阅 (`EventsService.register`) (`../../../../vendor/cordis/src/events.ts`) 是独立拥有的 effect，包括通过追踪调用方的服务上下文建立的订阅。
 
 ## 提案
 
@@ -20,7 +20,7 @@ Status: proposed
 
 ### Session 持久化丢失清理期间发出的事件
 
-**所有者与证据。** [JSONL 插件 (`apply`)](../../../../packages/session/session-persistence-jsonl/src/index.ts)通过组合清理，先撤回服务，再释放追踪器。[追踪器 (`JsonlBackendTracker.install`)](../../../../packages/session/session-persistence-jsonl/src/storage.ts)先移除实时事件监听器，再关闭句柄。这能保护由 provider 撤回触发卸载的消费方，但根资源并发释放可能在服务撤回发现消费方 fiber 之前，就已将其注销；插件明确不保证这种情形的释放顺序。Agent loop [取消运行，等待 idle 与 scope 释放，然后关闭句柄 (`AgentLoop.prepare`)](../../../../packages/core/agent-loop/src/index.ts)。`AgentLoop.prepare` 的清理注释明确要求后端实时事件监听器在驱动器关闭期间保持挂载，以接收结束事件。其[轮次收尾 (`ReactLoopAgent.turn`)](../../../../packages/core/agent-loop/src/agent.ts)可能在 await 后发布补齐的工具结果与结束事件。
+**所有者与证据。** JSONL 插件 (`apply`) (`../../../../packages/session/session-persistence-jsonl/src/index.ts`)通过组合清理，先撤回服务，再释放追踪器。追踪器 (`JsonlBackendTracker.install`) (`../../../../packages/session/session-persistence-jsonl/src/storage.ts`)先移除实时事件监听器，再关闭句柄。这能保护由 provider 撤回触发卸载的消费方，但根资源并发释放可能在服务撤回发现消费方 fiber 之前，就已将其注销；插件明确不保证这种情形的释放顺序。Agent loop 取消运行，等待 idle 与 scope 释放，然后关闭句柄 (`AgentLoop.prepare`) (`../../../../packages/core/agent-loop/src/index.ts`)。`AgentLoop.prepare` 的清理注释明确要求后端实时事件监听器在驱动器关闭期间保持挂载，以接收结束事件。其轮次收尾 (`ReactLoopAgent.turn`) (`../../../../packages/core/agent-loop/src/agent.ts`)可能在 await 后发布补齐的工具结果与结束事件。
 
 **失败与修正。** 根资源释放时，暂停轮次的取消收尾。JSONL 可以先移除路由监听器，并关闭当前已缓冲的前缀，然后轮次才发出最终事件。这些事件进入实时 Session，却从未进入写入器；之后幂等的句柄关闭无法恢复它们。应保留路由、写入器与写所有权，直到所有生产者结束，再执行最终排空。此项由源码追踪确认；仍需完整 Session 复现。
 
@@ -28,29 +28,29 @@ Status: proposed
 
 ### Storage 在 Schedule 提交已接受的投递前关闭
 
-**所有者与证据。** storage-domain 插件独立注册[设施关闭与服务提供 (`apply / DomainFacility.closeAll`)](../../../../packages/storage/storage-domain/src/index.ts)。[Domain close (`DomainImpl.runClose`)](../../../../packages/storage/storage-domain/src/domain.ts) 将 domain 标记为 disposing，[之后的入队会拒绝 (`DomainImpl.enqueue`)](../../../../packages/storage/storage-domain/src/domain.ts)。Schedule [等待运行时与管理工作后才关闭自己的 domain (`ScheduleService`)](../../../../packages/schedule/schedule/src/index.ts)。已接受的投递[先 flush Session，再结束任务或推进下一次执行 (`ScheduleRuntime.drive`)](../../../../packages/schedule/schedule/src/runtime.ts)。
+**所有者与证据。** storage-domain 插件独立注册设施关闭与服务提供 (`apply / DomainFacility.closeAll`) (`../../../../packages/storage/storage-domain/src/index.ts`)。Domain close (`DomainImpl.runClose`) (`../../../../packages/storage/storage-domain/src/domain.ts`) 将 domain 标记为 disposing，之后的入队会拒绝 (`DomainImpl.enqueue`) (`../../../../packages/storage/storage-domain/src/domain.ts`)。Schedule 等待运行时与管理工作后才关闭自己的 domain (`ScheduleService`) (`../../../../packages/schedule/schedule/src/index.ts`)。已接受的投递先 flush Session，再结束任务或推进下一次执行 (`ScheduleRuntime.drive`) (`../../../../packages/schedule/schedule/src/runtime.ts`)。
 
-**失败与修正。** 暂停该 Session flush，卸载 storage-domain，然后放行 flush。provider 的同级关闭器可以在 Schedule 仍在排空时将 domain 标记为关闭，导致最终任务提交失败。已持久化到 inbox 的提醒在任务存储中仍处于活动状态，重启后可能再次投递。应先撤销服务并等待消费者，再关闭剩余 domain；在 domain 排空期间保留后端存储单元。[JSON 后端](../../../../packages/storage/storage-json/src/index.ts)与 [SQLite 后端](../../../../packages/storage/storage-sqlite/src/index.ts)也存在同级关闭的所有权风险，应纳入同一次实现审查，而不应在未确认消费者时另立发现。
+**失败与修正。** 暂停该 Session flush，卸载 storage-domain，然后放行 flush。provider 的同级关闭器可以在 Schedule 仍在排空时将 domain 标记为关闭，导致最终任务提交失败。已持久化到 inbox 的提醒在任务存储中仍处于活动状态，重启后可能再次投递。应先撤销服务并等待消费者，再关闭剩余 domain；在 domain 排空期间保留后端存储单元。JSON 后端 (`../../../../packages/storage/storage-json/src/index.ts`)与 SQLite 后端 (`../../../../packages/storage/storage-sqlite/src/index.ts`)也存在同级关闭的所有权风险，应纳入同一次实现审查，而不应在未确认消费者时另立发现。
 
 使用实际 Cordis 与 storage-domain 实现的内存实验，在注入消费者最终写入前暂停，开始释放 provider，再放行消费者，得到 `domain 'audit' is closed`。这复现了资源提前关闭；完整 Schedule 重启后果由源码追踪得出。Session 持久化与任务提交之间已有的崩溃窗口仍然存在；有序关闭不应通过提前关闭存储主动制造这个窗口。
 
 ### Authorization 丢失必需的提交观察或已接受的凭据写入
 
-**所有者与证据。** Authorization 的[提交观察器 (`AuthorizationService.attempt`)](../../../../packages/credentials/authorization/src/index.ts)是调用方拥有的 `ctx.on` effect。[提交操作 (`AuthorizationService.attempt`)](../../../../packages/credentials/authorization/src/index.ts)等待凭据存储，而[成功要求观察到更新 (`AuthorizationService.attempt`)](../../../../packages/credentials/authorization/src/index.ts)。账号服务[不会中止正在提交的尝试，并等待其完成 (`PlatformAccount`)](../../../../packages/credentials/deepseek-account-platform/src/index.ts)。
+**所有者与证据。** Authorization 的提交观察器 (`AuthorizationService.attempt`) (`../../../../packages/credentials/authorization/src/index.ts`)是调用方拥有的 `ctx.on` effect。提交操作 (`AuthorizationService.attempt`) (`../../../../packages/credentials/authorization/src/index.ts`)等待凭据存储，而成功要求观察到更新 (`AuthorizationService.attempt`) (`../../../../packages/credentials/authorization/src/index.ts`)。账号服务不会中止正在提交的尝试，并等待其完成 (`PlatformAccount`) (`../../../../packages/credentials/deepseek-account-platform/src/index.ts`)。
 
 **写入成功，却报告失败。** 暂停凭据写入，释放账号消费者，再完成写入并发出更新。观察器可以与账号的排空并发自动退订；随后 Authorization 即使存储成功也会以 `NOT_COMMITTED` 拒绝。应让操作拥有观察器直到结果确定，或直接确认成功的 `session.commit`，同时给旧式直接写入观察明确的生命周期。使用实际 Cordis 与 Authorization、配合延迟的内存凭据 provider 的实验，复现了 provider 写入成功后返回 `NOT_COMMITTED`；完整浏览器登录路径由源码追踪确认。
 
-**provider 释放期间拒绝已接受的写入。** 另一个问题是，credentials-local [先设置 `closed` 再等待队列操作 (`LocalCredentialProvider[Service.init]`)](../../../../packages/credentials/credentials-local/src/index.ts)，而[排队中的记录写入再次检查该标志 (`LocalCredentialProvider.modifyRecord`)](../../../../packages/credentials/credentials-local/src/index.ts)。当较早的文档操作暂停时，账号已进入提交阶段；provider 开始释放后队列继续推进，该已接受写入仍可能被拒绝。应区分新工作准入与已接受操作，并保留写入能力直到依赖者的提交排空。此变体由源码追踪确认，未单独复现。仅修复观察器无法解决它。
+**provider 释放期间拒绝已接受的写入。** 另一个问题是，credentials-local 先设置 `closed` 再等待队列操作 (`LocalCredentialProvider[Service.init]`) (`../../../../packages/credentials/credentials-local/src/index.ts`)，而排队中的记录写入再次检查该标志 (`LocalCredentialProvider.modifyRecord`) (`../../../../packages/credentials/credentials-local/src/index.ts`)。当较早的文档操作暂停时，账号已进入提交阶段；provider 开始释放后队列继续推进，该已接受写入仍可能被拒绝。应区分新工作准入与已接受操作，并保留写入能力直到依赖者的提交排空。此变体由源码追踪确认，未单独复现。仅修复观察器无法解决它。
 
 ### SSH 在依赖者的进程清理完成前禁用清理请求
 
-**所有者与证据。** SSH 服务的[释放逻辑 (`SshConnection.disposeOnce`)](../../../../packages/ssh/ssh/src/index.ts)在等待 helper 关闭前设置 `closed` 并中止自身 lifetime。[请求检查 (`SshConnection.assertOpen`)](../../../../packages/ssh/ssh/src/index.ts)拒绝后续使用。注入该服务的 subprocess provider [在清理时终止并等待存活进程与终端 (`SshSubprocessRuntime`)](../../../../packages/ssh/subprocess-ssh/src/index.ts)，这些工作需要 SSH 请求。
+**所有者与证据。** SSH 服务的释放逻辑 (`SshConnection.disposeOnce`) (`../../../../packages/ssh/ssh/src/index.ts`)在等待 helper 关闭前设置 `closed` 并中止自身 lifetime。请求检查 (`SshConnection.assertOpen`) (`../../../../packages/ssh/ssh/src/index.ts`)拒绝后续使用。注入该服务的 subprocess provider 在清理时终止并等待存活进程与终端 (`SshSubprocessRuntime`) (`../../../../packages/ssh/subprocess-ssh/src/index.ts`)，这些工作需要 SSH 请求。
 
 **失败与修正。** 即使有 `inject = ['ssh']`，SSH provider 释放仍可以在 subprocess 清理需要终止和退出确认时关闭请求准入。依赖者因此报告无法确认 SSH 进程清理。应保留清理请求能力直到依赖者结束，再关闭 helper、socket 和 master。helper 自身的 close 也会尝试远程清理：证据证明清理能力丢失与可能的释放错误，并不证明必然留下远程孤儿进程。聚焦复现使用实际 Cordis、SSH 与 subprocess provider，模拟子进程和文件系统传输。启动进程，并在退出等待 RPC 准入后卸载 SSH，句柄以 `SSH connection is closed` 拒绝；helper 收到 `close`，却未收到 `process.terminate`。这验证了 provider 组合中的缺陷，没有验证实际远程进程是否完全停止。
 
 ### Windows sandbox 在消费者清理期间释放进程临时资源
 
-**所有者与证据。** 本地 sandbox 的[同级清理 effect (`LocalSandboxProvider`)](../../../../packages/sandbox/sandbox-local/src/index.ts)调用[权限撤销与临时目录移除 (`LocalSandboxProvider.revokeAclGrants`)](../../../../packages/sandbox/sandbox-local/src/index.ts)。[临时能力 (`LocalSandboxProvider.materializeAclGrant`)](../../../../packages/sandbox/sandbox-local/src/index.ts)属于 provider，并被嵌入受限 runner 的参数中。注入该服务的 Node PTC runtime [中止并等待已接受的运行 (`NodePtcRuntime`)](../../../../packages/ptc-runtime/ptc-runtime-node/src/index.ts)；[完成流程等待进程退出与输出排空 (`NodePtcRuntime.execute`)](../../../../packages/ptc-runtime/ptc-runtime-node/src/index.ts)。
+**所有者与证据。** 本地 sandbox 的同级清理 effect (`LocalSandboxProvider`) (`../../../../packages/sandbox/sandbox-local/src/index.ts`)调用权限撤销与临时目录移除 (`LocalSandboxProvider.revokeAclGrants`) (`../../../../packages/sandbox/sandbox-local/src/index.ts`)。临时能力 (`LocalSandboxProvider.materializeAclGrant`) (`../../../../packages/sandbox/sandbox-local/src/index.ts`)属于 provider，并被嵌入受限 runner 的参数中。注入该服务的 Node PTC runtime 中止并等待已接受的运行 (`NodePtcRuntime`) (`../../../../packages/ptc-runtime/ptc-runtime-node/src/index.ts`)；完成流程等待进程退出与输出排空 (`NodePtcRuntime.execute`) (`../../../../packages/ptc-runtime/ptc-runtime-node/src/index.ts`)。
 
 **失败与修正。** 卸载 sandbox 时，PTC 消费者可能仍在等待进程终止，但存活进程的临时目录权限已被撤销，目录已被移除。最终临时文件访问可能失败，删除操作也可能遇到仍在运行的进程。应在已准入进程存活期间保留临时能力，在进程真正停止后再撤销权限并移除目录。长期工作区权限有意保留；本项只涉及可撤销的临时资源。由持有者管理的 shell 进程也需要与进程生命周期绑定的所有权，因此仅排列 executor 卸载顺序并不足够。
 

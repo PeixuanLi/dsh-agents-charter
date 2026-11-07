@@ -6,15 +6,15 @@ Status: proposed
 
 ## 问题
 
-[shell 环境注册表](../../../../packages/shell/shell-env/src/index.ts) 要求每个声明变量提供描述，并暴露 `list()` 枚举它。运行时收集仅使用贡献方身份、声明键和解析后的值。[Bash](../../../../packages/shell/tool-bash/src/index.ts) 与 [PowerShell](../../../../packages/shell/tool-pwsh/src/index.ts) 调用 `collect`；[Web 组合包](../../../../packages/bundle/web-app/src/index.ts) 贡献 `DSH_WEB_URL`。搜索未发现 `list()` 的固定生产调用方或其描述的消费方。
+shell 环境注册表 (`../../../../packages/shell/shell-env/src/index.ts`) 要求每个声明变量提供描述，并暴露 `list()` 枚举它。运行时收集仅使用贡献方身份、声明键和解析后的值。Bash (`../../../../packages/shell/tool-bash/src/index.ts`) 与 PowerShell (`../../../../packages/shell/tool-pwsh/src/index.ts`) 调用 `collect`；Web 组合包 (`../../../../packages/bundle/web-app/src/index.ts`) 贡献 `DSH_WEB_URL`。搜索未发现 `list()` 的固定生产调用方或其描述的消费方。
 
-但该方法可通过 [Cordis 检查提供方](../../../../packages/extensions/tool-cordis/src/providers.ts) 发现，因此这是显式 API 收缩，而非删除不可达代码。[最初的身份与日志位置记录](../../archived/feature/2026-07-10-agent-session-identity-and-log-location.md) 预期它会服务于诊断以及未来提示/UI 消费方。当前 TODO 与 [README 限制](../../../../packages/shell/shell-env/README.zh.md) 仍描述一个未包含内置变量的不完整目录。
+但该方法可通过 Cordis 检查提供方 (`../../../../packages/extensions/tool-cordis/src/providers.ts`) 发现，因此这是显式 API 收缩，而非删除不可达代码。[最初的身份与日志位置记录](../../archived/feature/2026-07-10-agent-session-identity-and-log-location.md) 预期它会服务于诊断以及未来提示/UI 消费方。当前 TODO 与 README 限制 (`../../../../packages/shell/shell-env/README.zh.md`) 仍描述一个未包含内置变量的不完整目录。
 
 ## 提案
 
 将贡献方声明表示为显式只读键集合。删除描述对象、`BashEnvVariable`、`BashEnvVariableInfo`、`list()`、仅针对描述的校验，以及完整目录 TODO。同时更新 Web 贡献方、README 配对与生成的服务/类型声明。
 
-保留 `register`、`collect`、保留键、所有权冲突、拒绝未声明输出、确定性的环境输出和 effect 释放。[PowerShell 对齐参考](../../../../packages/shell/shell-env/README.zh.md) 继续拥有共享注册表及两个 shell 消费方。提案删除一个公共方法、两个元数据类型及其校验/枚举测试；在少量键成员判定适配前，已定位可删除约 32 行源码。
+保留 `register`、`collect`、保留键、所有权冲突、拒绝未声明输出、确定性的环境输出和 effect 释放。PowerShell 对齐参考 (`../../../../packages/shell/shell-env/README.zh.md`) 继续拥有共享注册表及两个 shell 消费方。提案删除一个公共方法、两个元数据类型及其校验/枚举测试；在少量键成员判定适配前，已定位可删除约 32 行源码。
 
 ## 考虑过的替代方案
 

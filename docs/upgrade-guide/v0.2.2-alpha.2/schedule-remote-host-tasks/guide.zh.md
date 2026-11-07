@@ -11,7 +11,7 @@ description: "Schedule 客户端改用统一的宿主管理 API 和带类型时�
 
 Schedule 管理按 id 寻址宿主全部任务。原生与 Remote API 共用一个服务；移除先前按 Session 绑定的 `delete` 和 `update` 方法。原生创建接收带类型的 `timing`，目录结果通过 `kind` 区分 After、At、Every、Daily、Weekly、Cron 和 RRULE。
 
-现有 `schedule` 领域写入版本 2，读取版本 1 时不进行启动写入，保留路由、封套和布局。SQLite 物理 schema 保持版本 1。升级前备份存储：首次成功的 v2 写入将单元标记为 v2，v1 程序会拒绝打开。降级需要恢复该备份。编辑和投递保存当前行，无需独立迁移命令。插件 README 拥有[存储 schema、升级时机与成本](../../../../packages/schedule/schedule/README.zh.md#storage-format)。
+现有 `schedule` 领域写入版本 2，读取版本 1 时不进行启动写入，保留路由、封套和布局。SQLite 物理 schema 保持版本 1。升级前备份存储：首次成功的 v2 写入将单元标记为 v2，v1 程序会拒绝打开。降级需要恢复该备份。编辑和投递保存当前行，无需独立迁移命令。插件 README 拥有存储 schema、升级时机与成本 (`../../../../packages/schedule/schedule/README.zh.md#storage-format`)。
 
 ## 迁移
 

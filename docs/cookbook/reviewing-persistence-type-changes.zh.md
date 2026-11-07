@@ -8,7 +8,7 @@ description: "在创建 PR 前，本地生成、确认并验证会话持久化�
 
 ## 概述
 
-在已安装依赖的贡献者检出目录中修改会话持久化类型声明后，使用本教程。提供双语兼容性说明，再用一条命令分类变更并生成记录。[记录参考](../persistence-changes/README.zh.md)解释文件和自动规则。所有比较输入都在检出目录中；不需要基线分支或网络访问。
+在已安装依赖的贡献者检出目录中修改会话持久化类型声明后，使用本教程。提供双语兼容性说明，再用一条命令分类变更并生成记录。记录参考 (`../persistence-changes/README.zh.md`)解释文件和自动规则。所有比较输入都在检出目录中；不需要基线分支或网络访问。
 
 ## 目录
 
@@ -43,12 +43,12 @@ pnpm --silent run persistence-review --before .artifacts/base.schema.json --afte
 
 在报告旁记录这些文件对应的 commit。添加 `--json` 可获取结构化输出。此只读比较将共享变更与受影响的根类型归组，使用实际字面量 `kind`/`form` 值代替联合类型位置。无法唯一匹配的候选项保留为独立的新增与删除。兼容性部分复制每个根类型的权威分类结果；结构说明不替代确认检查。当前目录标签和声明名称是描述元数据；结构锚点和指纹标识类型。
 
-所有清单都使用[节点表布局](../persistence-changes/README.zh.md#files-and-ownership)；两个比较输入都必须由当前工具生成。`formatVersion` 标识规范化规则；存储布局不改变根指纹，也不需要确认记录。
+所有清单都使用节点表布局 (`../persistence-changes/README.zh.md#files-and-ownership`)；两个比较输入都必须由当前工具生成。`formatVersion` 标识规范化规则；存储布局不改变根指纹，也不需要确认记录。
 
 <a id="acknowledge"></a>
 ## 1. 记录变更
 
-先检查[已接受基线](../session-format-status.zh.md#finalization-record)，保留其锁定记录。按[兼容性规则](../persistence-changes/README.zh.md#compatibility-rules)评估两个读取方向。若有安全解释或拒绝的证据，结构差异可以保留同一版本，不会自动要求更高的写入器版本。
+先检查[已接受基线](../session-format-status.zh.md#finalization-record)，保留其锁定记录。按兼容性规则 (`../persistence-changes/README.zh.md#compatibility-rules`)评估两个读取方向。若有安全解释或拒绝的证据，结构差异可以保留同一版本，不会自动要求更高的写入器版本。
 
 编写包含 `en` 和 `zh` 的本地 JSON 文件，两者分别包含 `summary`、`compatibility` 和 `verification` 字符串。以下输入描述一个经过验证的钩子审计字段从必选改为可选的变更。用你所做变更的事实替换说明和测试证据；CLI（命令行界面）不会证明这些声明。
 

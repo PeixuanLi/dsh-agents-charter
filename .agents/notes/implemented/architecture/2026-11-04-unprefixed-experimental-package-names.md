@@ -10,11 +10,11 @@ An experimental package named `@deepseek-ai/dsh-experimental-<name>` must be ren
 
 ## Decision
 
-New experimental packages use `@deepseek-ai/dsh-<name>` and never the `experimental` prefix. Each one is declared in `EXPERIMENTAL_PACKAGE_NAME_EXCEPTIONS` in the [experimental package policy](../../../../scripts/experimental-package-policy.ts), because isolation checks and plugin-record ownership recognize an unprefixed experimental name only through that map. Promotion moves the package and removes its map entry; its npm name stays the same.
+New experimental packages use `@deepseek-ai/dsh-<name>` and never the `experimental` prefix. Each one is declared in `EXPERIMENTAL_PACKAGE_NAME_EXCEPTIONS` in the experimental package policy (`../../../../scripts/experimental-package-policy.ts`), because isolation checks and plugin-record ownership recognize an unprefixed experimental name only through that map. Promotion moves the package and removes its map entry; its npm name stays the same.
 
 Existing packages with the prefix are listed in `LEGACY_PREFIXED_EXPERIMENTAL_PACKAGE_DIRECTORIES`. `pnpm run constraints` rejects the prefix in any other directory and rejects a listed directory that no longer holds a prefixed package, so the list can only shrink. A legacy package is renamed when it is promoted; renaming it earlier needs the release and migration evidence that the [plugin identity decision](2026-10-06-web-desktop-plugin-identity-compatibility.md) requires.
 
-This decision replaces the deferred cleanup that the plugin identity decision recorded, which gave every experimental package the prefix. The [package rules](../../../../packages/experimental/AGENTS.md) state the naming rule for authors.
+This decision replaces the deferred cleanup that the plugin identity decision recorded, which gave every experimental package the prefix. The package rules (`../../../../packages/experimental/AGENTS.md`) state the naming rule for authors.
 
 ## Alternatives considered
 

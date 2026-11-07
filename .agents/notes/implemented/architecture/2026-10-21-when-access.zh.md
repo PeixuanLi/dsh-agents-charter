@@ -50,7 +50,7 @@ export interface WhenAccess {
 | 同步执行 | 调用时答案为 true 则回调同步执行；owner 的答案恒为 true，注册顺序与直接注册相同 |
 | 快照流失败 | 非 owner 的答案变为 false，已安装的效果撤销 |
 | 回调失败 | 调用时安装失败同步抛出；之后重新授权时安装失败，控制器停止并在微任务中抛出 |
-| 分层 | remote-access 只认识 global；会话版与工作区版经 remote-access 的底层方法 `whenResourceAccess(kind, id, action, callback)` 实现，与它们用 `source(kind, id, action)` 构造 Hook 相同。`source` 与 `whenResourceAccess` 只由拥有该资源种类的包调用，其他插件只用访问 Hook 与 `whenAccess`，不传 kind。四个入口共用 [`when-allowed.ts`](../../../../packages/api/remote-access/src/client/when-allowed.ts) |
+| 分层 | remote-access 只认识 global；会话版与工作区版经 remote-access 的底层方法 `whenResourceAccess(kind, id, action, callback)` 实现，与它们用 `source(kind, id, action)` 构造 Hook 相同。`source` 与 `whenResourceAccess` 只由拥有该资源种类的包调用，其他插件只用访问 Hook 与 `whenAccess`，不传 kind。四个入口共用 `when-allowed.ts` (`../../../../packages/api/remote-access/src/client/when-allowed.ts`) |
 
 ### 插件迁移
 
@@ -81,7 +81,7 @@ export interface WhenAccess {
 | 注册跟随授权变化 | 迁移的插件在非 owner 无授权时不注册相应入口，授予后出现，撤销后消失；owner 的答案恒为 true，注册与直接注册相同 |
 | 回调必须交还 disposer | 回调里经插件 `ctx` 注册的效果也挂在插件 fiber 上；不 yield 其 disposer 的注册在失权时不会撤销，只在插件卸载时撤销 |
 | 读者拿到全部插件代码 | 插件照常加载；访问由 Gateway 逐次判定，界面由 `whenAccess` 与 Hook 控制 |
-| 测试替身 | [`dsh-client-test-runtime`](../../../../packages/test-support/client-runtime/README.zh.md) 的 `StaticRemoteAccess`、`staticAccessPlugin` 与 `TestClientOptions.access` 以固定答案替换 remote-access，供插件测试无权限路径 |
+| 测试替身 | `dsh-client-test-runtime` (`../../../../packages/test-support/client-runtime/README.zh.md`) 的 `StaticRemoteAccess`、`staticAccessPlugin` 与 `TestClientOptions.access` 以固定答案替换 remote-access，供插件测试无权限路径 |
 
 ## 相关
 

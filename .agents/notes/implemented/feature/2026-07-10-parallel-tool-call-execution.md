@@ -14,7 +14,7 @@ The session log remains authoritative: every started call has an audit event, or
 
 ## Decision
 
-Each tool may provide an optional `isConcurrencySafe(args)` classifier. It is synchronous and pure: it examines only the current call's parsed arguments and performs no I/O or mutation. Only an explicit `true` opts in; a missing classifier, invalid arguments, a thrown classifier, or any other return value makes the call exclusive. The canonical type contract lives in the [tool data structures](../../../../docs/subsystems/tools.md).
+Each tool may provide an optional `isConcurrencySafe(args)` classifier. It is synchronous and pure: it examines only the current call's parsed arguments and performs no I/O or mutation. Only an explicit `true` opts in; a missing classifier, invalid arguments, a thrown classifier, or any other return value makes the call exclusive. The canonical type contract lives in the tool data structures (`../../../../docs/subsystems/tools.md`).
 
 The classifier is deliberately unary. Returning `true` is the tool's promise that this call may overlap with any sibling call that also returns `true`; the scheduler does not compare calls or prove that their resource accesses are compatible.
 
@@ -46,9 +46,9 @@ Only dispatch and the tool body overlap. `tools/pre-execute` and `tools/post-exe
 
 Each started call appends `tool/call` immediately before its pre-execute gate. Completed dispatches occupy model-order slots, and a commit cursor appends `tool/result` and collects `additionalContexts` only when the next slot is ready. Live surfaces may show several pending calls, but results and post-tool context remain model-ordered.
 
-An abort stops replenishment, waits for already-started calls, commits their results in order, drains accepted batch context after those results, and records synthetic aborted call/result pairs for undispatched calls. An unexpected scheduler failure stops new dispatches, waits for every already-started dispatch to settle, and rethrows the first failure. The driver records missing results before closing the failed step under the [failed-step recovery reference](../../../../packages/core/agent-loop/README.md).
+An abort stops replenishment, waits for already-started calls, commits their results in order, drains accepted batch context after those results, and records synthetic aborted call/result pairs for undispatched calls. An unexpected scheduler failure stops new dispatches, waits for every already-started dispatch to settle, and rethrows the first failure. The driver records missing results before closing the failed step under the failed-step recovery reference (`../../../../packages/core/agent-loop/README.md`).
 
-The loop schedules native sibling calls and each outer `run_code` call. A `run_code` program has its own bounded dispatch pool, which uses the same parallel/exclusive classification; the [PTC execution reference](../../../../packages/core/tools/README.md#ptc-mode) owns that nested scheduling.
+The loop schedules native sibling calls and each outer `run_code` call. A `run_code` program has its own bounded dispatch pool, which uses the same parallel/exclusive classification; the PTC execution reference (`../../../../packages/core/tools/README.md#ptc-mode`) owns that nested scheduling.
 
 ## Safety contract
 
@@ -58,7 +58,7 @@ Any shared state touched during execution must be concurrency-safe. This include
 
 ## Configuration and declarations
 
-`maxParallelToolCalls` is a positive AgentLoop deployment cap shared by every agent the factory creates. It defaults to `10`; `1` preserves serial execution. Exact fields and defaults live in the generated [configuration catalog](../../../../docs/config-catalog.md).
+`maxParallelToolCalls` is a positive AgentLoop deployment cap shared by every agent the factory creates. It defaults to `10`; `1` preserves serial execution. Exact fields and defaults live in the generated configuration catalog (`../../../../docs/config-catalog.md`).
 
 The shipped declarations are conservative. Web search, web fetch, filesystem read, the session-query trace/read tools, and subagent delegation opt in — delegation because a child works in its own session and its run never mutates the parent session, with sibling workspace coordination owned by the model ([parallel subagent Agent Note](../../archived/feature/2026-08-09-parallel-subagent-delegations.md)). Filesystem writes and edits, bash tools, the session-query search tools, workflow, user interaction, todo mutation, PTC mode, and Cordis mutation tools remain exclusive. Bash has no proven input-sensitive classifier and remains exclusive.
 
@@ -102,6 +102,6 @@ Ordered commits may hold a fast result behind a slow earlier sibling. This prese
 
 Concurrent external calls can compete for quota or process capacity. Providers own their capacity controls; the loop cap only limits calls from one agent step.
 
-Tool registration is a scheduling boundary. Registry mutations affect not-yet-started calls because the scheduler reclassifies after each barrier and before every pool replenishment. A call runs only the registration its step declared ([conditional tools](../../../../packages/core/tools/README.md)), so a hot reload, MCP reconnect, or skill reload that re-registers a tool mid-step fails that step's unstarted calls of it; the next step declares and runs the new registration. Already-started calls retain the scheduling decision under which they entered the pool.
+Tool registration is a scheduling boundary. Registry mutations affect not-yet-started calls because the scheduler reclassifies after each barrier and before every pool replenishment. A call runs only the registration its step declared (conditional tools (`../../../../packages/core/tools/README.md`)), so a hot reload, MCP reconnect, or skill reload that re-registers a tool mid-step fails that step's unstarted calls of it; the next step declares and runs the new registration. Already-started calls retain the scheduling decision under which they entered the pool.
 
 A terminal scheduler failure reaches step recovery only after live dispatches settle. Recovery reports uncommitted outcomes as unknown, preserving quiescence and the original failure while keeping later model history usable.

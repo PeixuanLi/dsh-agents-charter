@@ -10,15 +10,15 @@ Status: implemented
 
 ## 决策
 
-`apply_patch` 接收一份 Codex 风格补丁，支持新增、更新、删除和移动，以及多个文件和 hunk。[dsh-fs-patch 纯库](../../../../packages/fs/fs-patch/README.zh.md)遵循 Codex `rust-v0.158.0` 的解析、顺序匹配、空白容忍和 `NormalizeToLf` 重建。匹配器只接收 LF 文本，因此不实现 Codex `PreserveLineEndings`。
+`apply_patch` 接收一份 Codex 风格补丁，支持新增、更新、删除和移动，以及多个文件和 hunk。dsh-fs-patch 纯库 (`../../../../packages/fs/fs-patch/README.zh.md`)遵循 Codex `rust-v0.158.0` 的解析、顺序匹配、空白容忍和 `NormalizeToLf` 重建。匹配器只接收 LF 文本，因此不实现 Codex `PreserveLineEndings`。
 
-[文件系统服务](../../../../packages/fs/fs/README.zh.md)提供 `patchText`、`deleteFile` 和 `moveFile`；本地、沙箱和 SSH 提供方均实现它们。`fs/delete-intent` 与 `fs/edit-intent` 要求相同的存在观察，移动目标使用 `fs/write-intent`。版本防护和沙箱约束仍由提供方负责。移动先发布目标，再删除源；`sourceDeleted` 区分已完成的移动与目标已发布但源未能删除的情况。
+文件系统服务 (`../../../../packages/fs/fs/README.zh.md`)提供 `patchText`、`deleteFile` 和 `moveFile`；本地、沙箱和 SSH 提供方均实现它们。`fs/delete-intent` 与 `fs/edit-intent` 要求相同的存在观察，移动目标使用 `fs/write-intent`。版本防护和沙箱约束仍由提供方负责。移动先发布目标，再删除源；`sourceDeleted` 区分已完成的移动与目标已发布但源未能删除的情况。
 
-[工具执行器](../../../../packages/fs/tool-fs/README.zh.md)在整份补丁预检时解析路径并模拟预期状态，包括重复路径和移动，不写入文件；预检拒绝时没有提交。提交时为每条操作重新获取观察防护，在首次失败或取消时停止，不回滚。I/O 或取消失败后，`stat` 比较检查所有受影响目标是否仍保持先前版本；状态变化或比较失败会产生 `unknown`，要求重试前重新读取。报告保留已完成、失败、未知和跳过的操作，包括部分发布的移动。
+工具执行器 (`../../../../packages/fs/tool-fs/README.zh.md`)在整份补丁预检时解析路径并模拟预期状态，包括重复路径和移动，不写入文件；预检拒绝时没有提交。提交时为每条操作重新获取观察防护，在首次失败或取消时停止，不回滚。I/O 或取消失败后，`stat` 比较检查所有受影响目标是否仍保持先前版本；状态变化或比较失败会产生 `unknown`，要求重试前重新读取。报告保留已完成、失败、未知和跳过的操作，包括部分发布的移动。
 
 提交报告返回 `isError: false`，让已完成的 diff 元数据在补丁中止后仍被保留；操作状态和 stopped 标记暴露失败。语法和预检拒绝产生工具错误。成功移动的摘要使用 `M <destination>`。已应用 diff 的路径采用规范绝对 `processPath`，供客户端导航使用；操作记录保留显示路径，未解析的路径保留补丁原始写法。
 
-[Review 采集](../../../../packages/deliverables/workspace-changes/README.zh.md)使用文件系统 intent 监听器，不解析参数。`tools/pre-execute` 将执行关联到轮次记录器；前置的 write、edit 和 delete 监听器先等待策略决策，再等待捕获完成，然后提供方才修改文件。移动捕获两端。每轮保留首次基线，比较实际最终字节，因此重复编辑形成一份净 diff，还原的变化不再显示。现有大小、数量、时间、位置和 Session 生命周期限制保持适用。
+Review 采集 (`../../../../packages/deliverables/workspace-changes/README.zh.md`)使用文件系统 intent 监听器，不解析参数。`tools/pre-execute` 将执行关联到轮次记录器；前置的 write、edit 和 delete 监听器先等待策略决策，再等待捕获完成，然后提供方才修改文件。移动捕获两端。每轮保留首次基线，比较实际最终字节，因此重复编辑形成一份净 diff，还原的变化不再显示。现有大小、数量、时间、位置和 Session 生命周期限制保持适用。
 
 `tool-fs.applyPatch` 默认为 `false`；每个启用 `edit` 的随发行版交付的 `tool-fs` 行都显式写出自己的值，因此开关该工具是每个组合一行改动，没有 preset 拥有该行时可通过针对 `tool-fs` id 的 profile patch 开启。该工具像 `write` 和 `edit` 一样咨询 `fs/*` intent waterfall，因此已挂载的观察策略对每个补丁操作要求先读并拒绝过期版本。这些行以及 `fs-observation-policy` 行随发行版交付的值由[随发行版交付的文件系统修改默认值](2026-10-29-shipped-fs-mutation-defaults.zh.md)决定，该 Note 取代本 Note 的 opt-in 基线。schema 沿用 Codex 的参数名 `input`：在 2,226 条 DS-Bench 与 DeepSWE 录制轨迹中，14% 的 `apply_patch` 调用带着这个键发出，而参数名为 `patch` 时它们都被拒绝。工具通过插件 effect 注册 schema、指导文本、native/PTC 执行与调用展示；不修改 agent loop（智能体循环）。
 

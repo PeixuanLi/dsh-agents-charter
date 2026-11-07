@@ -6,9 +6,9 @@ Status: proposed
 
 ## 问题
 
-[指令发现](../../../../packages/context/agent-instructions/src/files.ts)为元数据探测、根标记发现和有界读取维护了提供方与直接 Node 两条路径。`nodeStatFile`、`nodeTextChunks` 和可选的提供方/目标字段支持后者。导出的 `discoverBaselineInstructionFiles` 包装函数选择该路径；`loadBaselineInstructions` 则允许调用方通过省略提供方来使用它。
+指令发现 (`../../../../packages/context/agent-instructions/src/files.ts`)为元数据探测、根标记发现和有界读取维护了提供方与直接 Node 两条路径。`nodeStatFile`、`nodeTextChunks` 和可选的提供方/目标字段支持后者。导出的 `discoverBaselineInstructionFiles` 包装函数选择该路径；`loadBaselineInstructions` 则允许调用方通过省略提供方来使用它。
 
-仓库中的每个生产调用方都传入提供方。[插件](../../../../packages/context/agent-instructions/src/index.ts)读取 `ctx.get('fs')`，缺失时直接返回；[协调逻辑](../../../../packages/context/agent-instructions/src/state.ts)要求传入 `FileSystem`。直接 Node 路径的消费方都是测试。因此，维护两条路径增加了独立的错误与取消覆盖，却没有服务于已交付的产品路径。
+仓库中的每个生产调用方都传入提供方。插件 (`../../../../packages/context/agent-instructions/src/index.ts`)读取 `ctx.get('fs')`，缺失时直接返回；协调逻辑 (`../../../../packages/context/agent-instructions/src/state.ts`)要求传入 `FileSystem`。直接 Node 路径的消费方都是测试。因此，维护两条路径增加了独立的错误与取消覆盖，却没有服务于已交付的产品路径。
 
 ## 提案
 
@@ -16,9 +16,9 @@ Status: proposed
 
 保留插件缺少提供方时不执行操作的行为，以及纯函数 `renderAgentInstructions` API。保留候选优先级、源文件与渲染输出的字节预算、取消、符号链接跟随和错误语义：候选不可用不能表示应移除已有内容，根标记失败仍是错误。独立的 `skill-filesystem` 所有者保留其现有的无提供方行为。
 
-让直接调用辅助函数的测试改用显式管理生命周期的本地或受控提供方。[测试套件](../../../../packages/context/agent-instructions/tests/agent-instructions.spec.ts)已经挂载了这两类实现。保留独有断言，把重复的 Node mock 场景合并到提供方覆盖中。预计在更新签名和文档之前删除约 50–65 行生产源码，另加冗余测试机制；实施时测量实际减少量。
+让直接调用辅助函数的测试改用显式管理生命周期的本地或受控提供方。测试套件 (`../../../../packages/context/agent-instructions/tests/agent-instructions.spec.ts`)已经挂载了这两类实现。保留独有断言，把重复的 Node mock 场景合并到提供方覆盖中。预计在更新签名和文档之前删除约 50–65 行生产源码，另加冗余测试机制；实施时测量实际减少量。
 
-[agent-instructions 参考](../../../../packages/context/agent-instructions/README.zh.md)负责保留的符号链接加载行为。实施时更新其中对提供方读取的描述及英文对侧。[已归档的工作区上下文说明](../../archived/feature/2026-06-24-workspace-context.md)保持冻结；本提案无需修改该历史记录。
+agent-instructions 参考 (`../../../../packages/context/agent-instructions/README.zh.md`)负责保留的符号链接加载行为。实施时更新其中对提供方读取的描述及英文对侧。[已归档的工作区上下文说明](../../archived/feature/2026-06-24-workspace-context.md)保持冻结；本提案无需修改该历史记录。
 
 ## 备选方案
 

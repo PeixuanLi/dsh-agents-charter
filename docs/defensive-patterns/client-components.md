@@ -2,7 +2,7 @@
 
 English | [中文](client-components.zh.md)
 
-Rules for client components, their state, and their effects. [packages/client/AGENTS.md](../../packages/client/AGENTS.md) carries the detailed discipline; [slots.md](../subsystems/slots.md) owns the Slot design and [web-styling.md](../web-styling.md) the styling rules. Each section below states the requirement, how a reviewer judges it, where its boundary and exception sit, and a correct and a wrong example.
+Rules for client components, their state, and their effects. packages/client/AGENTS.md (`../../packages/client/AGENTS.md`) carries the detailed discipline; slots.md (`../subsystems/slots.md`) owns the Slot design and web-styling.md (`../web-styling.md`) the styling rules. Each section below states the requirement, how a reviewer judges it, where its boundary and exception sit, and a correct and a wrong example.
 
 ## State arrives through injection
 
@@ -11,7 +11,7 @@ A Slot's component receives everything it renders through the inject face of its
 - Judged by: at the registration and at its render site, the author must be able to name which sub-states the rendered component subscribes to and which of its incoming props keep a stable identity across renders. Watch the mutability of every prop: a value rebuilt each render — a fresh object, array, or inline callback — propagates re-renders even when nothing in it changed.
 - Not covered: the component's own local state (`useState` for a fold, a hover, a draft) is not injection content, and a component that subscribes to nothing outside React needs no new seat.
 - Exception: a new hook seat changes the Slot contract, so that change states its impact — which components subscribe to what — in review; using an existing face needs no per-component approval.
-- Fix: narrow the injection to what the view renders, expose one field per read through a hook seat, and pass a narrow action set instead of a store or service handle. [Component inputs](../subsystems/slots.md#component-inputs) owns the inject factory, the standard hook seats, and how each becomes a prop.
+- Fix: narrow the injection to what the view renders, expose one field per read through a hook seat, and pass a narrow action set instead of a store or service handle. Component inputs (`../subsystems/slots.md#component-inputs`) owns the inject factory, the standard hook seats, and how each becomes a prop.
 
 The registration carries plain data, a narrow action set, and one hook seat; the render site passes owner data, and the component reads only the field it renders:
 
@@ -59,7 +59,7 @@ A prop is data or a callback; a React node travels through a declared slot. Pass
 - Judged by: `ReactNode`, `ReactElement`, or a `() => JSX.Element` in a component's props type, in an inject factory's return value, or in an owner-props object at a render site.
 - Not covered: node-valued fields that already shipped keep working. The rule triggers when a change touches one, and that change converts it rather than extending it.
 - Exception: when the conversion cannot happen in the same change, the owning domain expert confirms the deferral and the change records that confirmation; the author never self-approves.
-- Fix: declare the location in the parent registration's `children`, render it with `renderSlot`, and pass data through the child's props. [Extension rules](../subsystems/slots.md#extension-rules) own which package may declare and render which slot.
+- Fix: declare the location in the parent registration's `children`, render it with `renderSlot`, and pass data through the child's props. Extension rules (`../subsystems/slots.md#extension-rules`) own which package may declare and render which slot.
 
 The header location is a declared child slot, so the host passes data and the registered component owns its markup:
 
@@ -190,7 +190,7 @@ The wrong form makes instances cross-talk, and ownership of state becomes unaudi
 An element that shows a resource reads it through the injected `useResource` hook, addressed by the resource's protocol and address. A domain wrapper — a Tab, a panel — composes its own hook over `useResource`, and its return structure is free, but the fetch, cache, and subscription underneath are not rebuilt. A second read path per protocol splits cache and invalidation policy, so one address can be live in one place and stale in another.
 
 - Judged by: the read path. `useResource<Protocol>(address)`, or a business hook whose body calls it, passes; a hand-built subscribe-and-cache, a copy of a provider's stream handling, or a flat generic hook such as `useTabStream` fails.
-- Not covered: non-resource local UI state — a collapse, a hover, a draft — stays `useState` and gets no resource address. [Client resources](../subsystems/client-resources.md) owns the status values and what holds a resource open.
+- Not covered: non-resource local UI state — a collapse, a hover, a draft — stays `useState` and gets no resource address. Client resources (`../subsystems/client-resources.md`) owns the status values and what holds a resource open.
 - Exception: reshaping the snapshot is free, but a wrapper that hides protocol differences behind conditional branches states its ownership in review, and a new protocol's hook comes from that protocol's owner.
 - Fix: call `useResource` inside the domain hook, map its result onto what the component renders, and delete the bespoke cache.
 
@@ -232,7 +232,7 @@ A front-end store carries shared viewing or interaction state. Its spec declares
 
 - Judged by: whether the injected face is a narrow interface or the store object itself, and whether the handle is built inside `apply` or at module level.
 - Persistence: the spec's `persist` key is the whole mechanism, run by the framework; the engine instance exposes `getSnapshot`, `subscribe`, the baked actions, and `clearPersisted`, and nothing hydrates it by hand.
-- Not covered: render state in a store is fine while it does not change a setting, and component-local state is not store content. [Store contracts](../subsystems/slots.md#component-inputs) own how a declared store becomes props, and [Web Client architecture](../subsystems/web-client.md) owns where business data lives.
+- Not covered: render state in a store is fine while it does not change a setting, and component-local state is not store content. Store contracts (`../subsystems/slots.md#component-inputs`) own how a declared store becomes props, and Web Client architecture (`../subsystems/web-client.md`) owns where business data lives.
 - Exception: a store handle exported at module level is forbidden — module-cache identity is a disguised singleton across plugin reloads; restructuring an injection face into a narrow one needs no separate approval.
 - Fix: replace the store handle in the inject return with the fields and action callbacks the component renders, and keep the handle inside `apply`.
 
@@ -384,7 +384,7 @@ The parent renders twice for data it could have had on the first pass, the heade
 Every build adjustment for a client package goes through the tsdown plugin for that package, and a package does not grow its own build branch. Styling goes through CSS Modules, and only images, GIFs, and SVG are inlined — inlined into CSS rather than into JSX. Large text never appears inline in TSX, and a `style` object holds only runtime-computed values, because static values and style variants belong to CSS Module class names.
 
 - Judged by: a new build branch inside a package instead of the tsdown plugin; a literal color, a component library, or Tailwind in feature styling; base64 data or large text in TSX; and a `style` object carrying static values or a variant switch.
-- Not covered: a runtime-computed value such as a measured gutter or a progress percentage may enter `style`, and a component-local custom property may carry a layout value. [Component rules](../web-styling.md#component-rules) own the tokens, CSS Module, and class-name rules.
+- Not covered: a runtime-computed value such as a measured gutter or a progress percentage may enter `style`, and a component-local custom property may carry a layout value. Component rules (`../web-styling.md#component-rules`) own the tokens, CSS Module, and class-name rules.
 - Exception: a new build branch or a new inline form is explained in review before it lands, and the owning package's rules decide whether it stays.
 - Fix: move the variant into a CSS Module class switched by `className`, keep base64 in CSS produced by the build chain, and delete the large text constant from the TSX module.
 
@@ -462,7 +462,7 @@ A feature absorbs its requirement in its own package, and how much separation it
 
 - Judged by: whether the diff puts a feature-specific branch, field, or concept into any layer but the feature's own package.
 - Not covered: code the feature owns, and a change to a shared layer that is genuinely general rather than one feature's need.
-- Exception: a shared-layer change carries the owning domain expert's confirmation and regresses every consumer; a GUI change runs the minimum check in [packages/client/AGENTS.md](../../packages/client/AGENTS.md).
+- Exception: a shared-layer change carries the owning domain expert's confirmation and regresses every consumer; a GUI change runs the minimum check in packages/client/AGENTS.md (`../../packages/client/AGENTS.md`).
 - Fix: absorb the requirement in the feature package, or, when the need is genuinely general, promote it to the shared layer in its own change with the owner's sign-off.
 
 The feature owns its row rendering and its ordering rule, and the base component is consumed unchanged:

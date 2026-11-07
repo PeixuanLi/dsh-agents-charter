@@ -10,7 +10,7 @@ Status: implemented
 
 ## Decision
 
-[`breakdown-projection.ts`](../../../../packages/llm/token-meter/src/breakdown-projection.ts) 按 surface 顺序保留存活的 `system/message` 节点及其启发式价格、一个 surface 运行总量，以及至多一个已武装的影子价 claim。状态版本 6 丢弃版本 5 的行；其他 projection key 保留各自的行。
+`breakdown-projection.ts` (`../../../../packages/llm/token-meter/src/breakdown-projection.ts`) 按 surface 顺序保留存活的 `system/message` 节点及其启发式价格、一个 surface 运行总量，以及至多一个已武装的影子价 claim。状态版本 6 丢弃版本 5 的行；其他 projection key 保留各自的行。
 
 - 追加加上其价格；`system/message` 追加还会加入系统列表末尾。
 - `compaction/summary` 和 `compaction/prune` 依据 `shadowedRange`、`shadowedTokenCount` 以及 `shadowedSeqs` 中列出的已保留系统提示词武装 claim。下一个事件消费或使其失效。覆盖所 claim 范围的替换减去 claim 价格并移除这些提示词；指向其他范围的替换，或以 `system/message` 取代已计量范围的替换，会抛出错误。

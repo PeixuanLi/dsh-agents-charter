@@ -14,7 +14,7 @@ Status: implemented
 - **发现面向声明，并包含禁用行。** 收集器遍历 Loader 将接收的每一行，包括字面量禁用或表达式禁用的行，并导入它们的模块。因此禁用行的导入或 include 失败会使可启动的 profile 被标为不完整。唯一的例外遵循 Loader：未设置 `group: true` 的禁用 group 或 include 从不创建其子项，所以缺失的承载 config 记录为没有子项的树，entry schema 也不验证其子声明。
 - **放宽而不是模拟原生修改。** 当原生解析可能在后续验证读取前改变输入（容器写回适配值、字典键改名、loose 回退、lazy 元数据传播到共享节点）时，投影保留可获得的声明细节，同时并列一个不受限制的备选项，并记录一条限制。它绝不模拟该修改。放宽的范围限定于该机制：只有容器会写回适配值，因此作为前序 union 分支的裸原始类型 transform 保留 `anyOf`。
 
-[CLI 参考](../../../../apps/cli/reference/README.zh.md#config-schema-dump)记录了由此产生的行为；[app-boot](../../../../packages/boot/app-boot/README.zh.md) 负责收集器 API。
+CLI 参考 (`../../../../apps/cli/reference/README.zh.md#config-schema-dump`)记录了由此产生的行为；app-boot (`../../../../packages/boot/app-boot/README.zh.md`) 负责收集器 API。
 
 ## Alternatives considered
 

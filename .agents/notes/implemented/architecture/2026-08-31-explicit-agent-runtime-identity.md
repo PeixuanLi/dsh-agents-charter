@@ -20,7 +20,7 @@ Scope-aware registries continue to use the opaque scope key only for registratio
 
 `SubagentManager.rootOf(agent)` reads runtime membership from existing Activations; both the child and root must match their live registry objects. Ordinary Sessions resolve to themselves, and unmanaged subagent headers grant no membership. Durable `parentSession` describes creation edges; an Activation retains the exact root while intermediate creators are offline, and same-id replacements cannot inherit it. Root-only consumers classify the explicit subagent origin.
 
-The [scope reference](../../../../packages/core/scope/README.md) and [Agent loop reference](../../../../packages/core/agent-loop/README.md) document registration and lifecycle behavior. The [initiator-scope decision](2026-07-15-agent-initiator-scope.md) owns private-chain rationale; explicit runtime ownership does not change causal initiation or registration lifetime.
+The scope reference (`../../../../packages/core/scope/README.md`) and Agent loop reference (`../../../../packages/core/agent-loop/README.md`) document registration and lifecycle behavior. The [initiator-scope decision](2026-07-15-agent-initiator-scope.md) owns private-chain rationale; explicit runtime ownership does not change causal initiation or registration lifetime.
 
 ## Verification
 

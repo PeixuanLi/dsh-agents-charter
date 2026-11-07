@@ -15,11 +15,11 @@
   en: f2874c3fc946cf7a
   zh: 4c32b9f94e1f9709
 /agent-note-replace-plugins-whose-loaded-package-files-changed-during-profile-recomposition/decision/detecting-changed-modules:
-  en: 1fedf2dde87f41bf
-  zh: c2249267d1c2bc78
+  en: fa7b4380325b492a
+  zh: 61af6ce72d71cbb5
 /agent-note-replace-plugins-whose-loaded-package-files-changed-during-profile-recomposition/decision/replacing-them:
-  en: 6fe2cbe5aa3a9786
-  zh: fe30fbf672ea8c21
+  en: 3bf55a45f332f27e
+  zh: af6f911bc9222df0
 /agent-note-replace-plugins-whose-loaded-package-files-changed-during-profile-recomposition/decision/plugin-manager-and-runtime-resolution:
   en: 794ed33204d91014
   zh: b08daa2a43cbe3b3
@@ -27,8 +27,8 @@
   en: a67d0c6bc4957060
   zh: 32e02ab45b8e71cc
 /agent-note-replace-plugins-whose-loaded-package-files-changed-during-profile-recomposition/consequences:
-  en: 2cb3f39c6a910685
-  zh: e14938c868390f39
+  en: b644eb4728c8454e
+  zh: d389153a448700ec
 /agent-note-replace-plugins-whose-loaded-package-files-changed-during-profile-recomposition/verification:
   en: d4750abb810faac2
   zh: 78c9c4d86d719b9b

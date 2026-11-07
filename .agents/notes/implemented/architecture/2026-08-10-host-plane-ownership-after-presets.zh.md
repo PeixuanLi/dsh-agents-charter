@@ -20,7 +20,7 @@ Status: implemented
 
 **入口显式让 Agent 加入。** 没有运行时检查会拒绝未加入的 Agent，因为未绑定的 Agent 可以合法地稍后通过 `recompose` 绑定。
 
-投影 key 是否存在不能代表逐会话能力（[会话投影](../../../../packages/session/session-projection/README.zh.md)）。通过 `cordis_mount` 挂载的临时插件属于组装，而非调用会话（[Cordis 工具](../../../../packages/extensions/tool-cordis/README.zh.md)）。[声明式 preset](2026-09-18-declarative-agent-presets.zh.md) 负责代际保留，在最后一个引用释放后回收退役树。
+投影 key 是否存在不能代表逐会话能力（会话投影 (`../../../../packages/session/session-projection/README.zh.md`)）。通过 `cordis_mount` 挂载的临时插件属于组装，而非调用会话（Cordis 工具 (`../../../../packages/extensions/tool-cordis/README.zh.md`)）。[声明式 preset](2026-09-18-declarative-agent-presets.zh.md) 负责代际保留，在最后一个引用释放后回收退役树。
 
 ## 测试
 

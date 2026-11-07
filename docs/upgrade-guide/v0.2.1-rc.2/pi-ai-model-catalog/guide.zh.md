@@ -49,5 +49,5 @@ pi-ai 依赖从 1.1.0 升级到 1.3.0。以下聊天模型 ID 不再包含在目
 ## 迁移
 
 1. 在“设置 → 模型”中，将已移除的 ID 替换为受支持的模型。检查端点、能力和价格；ID 没有自动替代项。
-2. 更新 `cordis.patch.yml`、preset patch 和受影响 Session 中的模型选择。移除过时的 `providers.<provider>.modelOverrides.<id>` 条目，并替换 `providers.<provider>.models` 列表中已移除的 ID。参见[配置参考](../../../../packages/llm/llm-pi-ai/README.zh.md)。
+2. 更新 `cordis.patch.yml`、preset patch 和受影响 Session 中的模型选择。移除过时的 `providers.<provider>.modelOverrides.<id>` 条目，并替换 `providers.<provider>.models` 列表中已移除的 ID。参见配置参考 (`../../../../packages/llm/llm-pi-ai/README.zh.md`)。
 3. 根据端点支持的值检查容量与推理覆盖配置。启动 profile，确认模型没有配置诊断，再发送一个简短提示。

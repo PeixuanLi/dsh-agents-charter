@@ -9,11 +9,11 @@
   en: 22aec3ac5b197342
   zh: 0cd0b1f8094addb3
 /agent-note-client-resource-model/decision:
-  en: 78afa8698a884b98
-  zh: b33cfcae7e75660f
+  en: a30c2b181091ba69
+  zh: 5eb4abaad20a16c0
 /agent-note-client-resource-model/decision/addresses:
-  en: f369df55e7e0bf77
-  zh: 593d4741326dc536
+  en: cfd2c718d673f0bd
+  zh: 22f19e7a40c05084
 /agent-note-client-resource-model/decision/the-service:
   en: f42277e961bb7209
   zh: 9f3f8a50ad55cf4a
@@ -24,8 +24,8 @@
   en: bc1c4e9a9e8e9b20
   zh: f80a77ee66943ce4
 /agent-note-client-resource-model/decision/lifecycle:
-  en: b67e81a19faa5605
-  zh: 1244213c3fc7ae4e
+  en: ecee072d7b65e126
+  zh: 43f288e86a1f82f9
 /agent-note-client-resource-model/alternatives-considered:
   en: 288b448e7f1de8af
   zh: 997e10c66decce34
@@ -36,5 +36,5 @@
   en: ca2c610e4f0352ac
   zh: fbaa69ee8de7e4c1
 /agent-note-client-resource-model/deferred:
-  en: 312b46f16d88f301
-  zh: a530b3940859079c
+  en: f06593d9134bde58
+  zh: 58c02ed888b12f71

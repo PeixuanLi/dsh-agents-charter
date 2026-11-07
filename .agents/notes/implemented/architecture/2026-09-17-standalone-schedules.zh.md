@@ -32,4 +32,4 @@ create、update 或 delete 提交后，Schedule 在独立的链上排队一条�
 
 ## Consequences
 
-任务寿命长于 Agent，并按 id 管理。归档准入报告活动 Session 目标；显式停止删除任务。宿主可用性、跨存储至少一次投递、尽力通知和每次新建目标的无界并发仍是限制。[Schedule 参考](../../../../docs/subsystems/schedule.zh.md)拥有精确的当前契约，[管理升级指南](../../../../docs/upgrade-guide/v0.2.2-alpha.2/schedule-remote-host-tasks/guide.zh.md)说明调用方变更。
+任务寿命长于 Agent，并按 id 管理。归档准入报告活动 Session 目标；显式停止删除任务。宿主可用性、跨存储至少一次投递、尽力通知和每次新建目标的无界并发仍是限制。Schedule 参考 (`../../../../docs/subsystems/schedule.zh.md`)拥有精确的当前契约，[管理升级指南](../../../../docs/upgrade-guide/v0.2.2-alpha.2/schedule-remote-host-tasks/guide.zh.md)说明调用方变更。

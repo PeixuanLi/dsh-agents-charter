@@ -51,8 +51,8 @@ Status: implemented
 
 ## 相关记录
 
-[Trajectory 参考](../../../../packages/client/ui-trajectory/README.zh.md)说明列表计数与详情面板附件布局。
+Trajectory 参考 (`../../../../packages/client/ui-trajectory/README.zh.md`)说明列表计数与详情面板附件布局。
 
-[输入回显入档参考](../../../../packages/api/session-controller/README.zh.md)负责有无附件提交的按展示归属回收和迟到 Inbox 排除。
+输入回显入档参考 (`../../../../packages/api/session-controller/README.zh.md`)负责有无附件提交的按展示归属回收和迟到 Inbox 排除。
 
 [输入框在加入时上传图片](2026-10-21-composer-image-upload-on-add.zh.md) 记录把这条后台上传队列扩展到普通 Session 草稿里的图片。

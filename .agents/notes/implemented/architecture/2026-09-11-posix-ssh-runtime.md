@@ -34,7 +34,7 @@ The explicit `launch.kind` selects remote `node-script` or `executable` invocati
 
 The executable embeds Node, the helper, managed subprocess runners and the PTC worker. It reuses the [SDK executable packaging decision](2026-07-10-single-file-executable-sdk-runtime-distribution.md): `pkg --sea` preserves a package tree and dynamic module resolution instead of maintaining a separate static plugin registry. That record owns the comparison with bare Node SEA. The embedded runtime serves these private entry points; project commands still depend on the remote machine's development tools.
 
-The four release targets cover Linux and macOS on x64 and arm64, matching the POSIX providers and their supported native resources. Packaging does not add Windows or musl support. Landlock and macOS PTY launchers remain real files beside the executable because the operating system cannot execute paths inside pkg's virtual filesystem. The installation unit is therefore the complete archive directory, with native resources and integrity metadata, rather than the executable alone. The [helper runtime reference](../../../../packages/ssh/ssh-helper-runtime/README.md) owns the build matrix, deployment baselines and archive verification commands.
+The four release targets cover Linux and macOS on x64 and arm64, matching the POSIX providers and their supported native resources. Packaging does not add Windows or musl support. Landlock and macOS PTY launchers remain real files beside the executable because the operating system cannot execute paths inside pkg's virtual filesystem. The installation unit is therefore the complete archive directory, with native resources and integrity metadata, rather than the executable alone. The helper runtime reference (`../../../../packages/ssh/ssh-helper-runtime/README.md`) owns the build matrix, deployment baselines and archive verification commands.
 
 ## Alternatives considered
 
@@ -62,4 +62,4 @@ Security evidence requires both a same-user connector and a replaced socket list
 
 ## Deferred work
 
-Persistent remote reconnection needs a separate operation-identity and recovery design; it cannot reuse live callback handles after disconnect. Broader Web support needs provider-owned workspace resources. Stronger resource accounting or revised PTC yield/wait and timeout policy belongs to the [Node runtime reference](../../../../packages/ptc-runtime/ptc-runtime-node/README.md), not the SSH administrative request deadline.
+Persistent remote reconnection needs a separate operation-identity and recovery design; it cannot reuse live callback handles after disconnect. Broader Web support needs provider-owned workspace resources. Stronger resource accounting or revised PTC yield/wait and timeout policy belongs to the Node runtime reference (`../../../../packages/ptc-runtime/ptc-runtime-node/README.md`), not the SSH administrative request deadline.

@@ -15,4 +15,4 @@ description: "配置和目录均未描述容量的 pi-ai 模型会继承更大�
 
 1. 核对自定义端点的实际限制。如果限制不同，在 `cordis.patch.yml` 的 `llm-pi-ai` 配置中设置 `providers.<provider>.defaultContextWindow` 和 `providers.<provider>.defaultMaxTokens`。如需保留原默认值，分别填写 `262144` 和 `32768`。
 2. 同一提供方的模型限制不同时，在相应 `providers.<provider>.models` 条目上设置 `contextWindow` 和 `maxTokens`。显式配置的模型 `maxTokens` 同时提供 Harness 请求默认值。
-3. 重新打开 profile 配置，确认保存的数值。参见[提供方配置参考](../../../../packages/llm/llm-pi-ai/README.zh.md)。
+3. 重新打开 profile 配置，确认保存的数值。参见提供方配置参考 (`../../../../packages/llm/llm-pi-ai/README.zh.md`)。

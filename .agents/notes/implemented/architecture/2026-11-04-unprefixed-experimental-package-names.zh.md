@@ -10,11 +10,11 @@ Status: implemented
 
 ## 决策
 
-新实验包使用 `@deepseek-ai/dsh-<name>`，不使用 `experimental` 前缀。每个新实验包都在[实验包命名策略](../../../../scripts/experimental-package-policy.ts)的 `EXPERIMENTAL_PACKAGE_NAME_EXCEPTIONS` 中声明，因为隔离检查和插件记录归属只通过这个映射识别不带前缀的实验包名。晋升时移动该包并删除其映射条目；其 npm 名称保持不变。
+新实验包使用 `@deepseek-ai/dsh-<name>`，不使用 `experimental` 前缀。每个新实验包都在实验包命名策略 (`../../../../scripts/experimental-package-policy.ts`)的 `EXPERIMENTAL_PACKAGE_NAME_EXCEPTIONS` 中声明，因为隔离检查和插件记录归属只通过这个映射识别不带前缀的实验包名。晋升时移动该包并删除其映射条目；其 npm 名称保持不变。
 
 带前缀的既有包列在 `LEGACY_PREFIXED_EXPERIMENTAL_PACKAGE_DIRECTORIES` 中。`pnpm run constraints` 拒绝其他目录中出现该前缀，也拒绝已列出但不再包含带前缀包的目录，因此该清单只能缩减。遗留包在晋升时重命名；提前重命名需要[插件身份决策](2026-10-06-web-desktop-plugin-identity-compatibility.zh.md)要求的发布与迁移依据。
 
-本决策取代插件身份决策记录的暂缓清理，该清理为每个实验包加上前缀。[包规则](../../../../packages/experimental/AGENTS.md)向作者说明命名规则。
+本决策取代插件身份决策记录的暂缓清理，该清理为每个实验包加上前缀。包规则 (`../../../../packages/experimental/AGENTS.md`)向作者说明命名规则。
 
 ## 考虑过的替代方案
 

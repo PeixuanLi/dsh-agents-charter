@@ -29,7 +29,7 @@ Status: proposed
 
 ### 稳定版订阅与通道切换
 
-本提案的这一部分已由[桌面渠道设置](../../../../apps/desktop/README.zh.md#local-desktop-settings)和[打包渠道策略](../../../../apps/desktop/packaging/README.zh.md)取代。已实现的选择器持久化用户的显式选择；发布者独立于渠道名称选择版本，切换渠道不允许降级。
+本提案的这一部分已由桌面渠道设置 (`../../../../apps/desktop/README.zh.md#local-desktop-settings`)和打包渠道策略 (`../../../../apps/desktop/packaging/README.zh.md`)取代。已实现的选择器持久化用户的显式选择；发布者独立于渠道名称选择版本，切换渠道不允许降级。
 
 ### 自动安装设置
 
@@ -50,7 +50,7 @@ Status: proposed
 
 ### updater 依赖验证
 
-一期依赖声明仍由 [Desktop 包元数据](../../../../apps/desktop/package.json)负责。electron-builder 27 / electron-updater 7 配套迁移是评估候选，不是本文授权的依赖升级。以下 API 与平台项目需针对选定版本和真实安装包核验；本提案不宣称已在本机执行验证。
+一期依赖声明仍由 Desktop 包元数据 (`../../../../apps/desktop/package.json`)负责。electron-builder 27 / electron-updater 7 配套迁移是评估候选，不是本文授权的依赖升级。以下 API 与平台项目需针对选定版本和真实安装包核验；本提案不宣称已在本机执行验证。
 
 | 候选项目 | 必需验证 |
 |---|---|

@@ -53,17 +53,17 @@
 
 有经评审的中文对侧的生成英文参考文档和图文档遵循配对规则。生成器把生成数据放在生成区域中，并把每个区域写入两种语言的页面，因此重新生成不需要手工更新中文，也不需要重新记录；只有区域外的说明文字需要翻译并计入记录。新鲜度门禁与配对门禁各自独立强制其约束。
 
-共享生成区域（例如 Cordis 子系统区域和[配置目录](../config-catalog.zh.md)中每个包的区域）在两种语言间保持每个生成字节相同，仅配对文档路径按语言本地化；区域内的标签使用代码标识符而非译文。整页生成器也可以从相同的结构数据渲染源码维护的双语说明，例如 [persistence-catalog-text.ts](../../scripts/persistence-catalog-text.ts)，并保持 Markdown 结构对应、代码块完全相同。它同时重新生成两页及其一致性记录；评审仍须验证双语说明的含义与术语。
+共享生成区域（例如 Cordis 子系统区域和配置目录 (`../config-catalog.zh.md`)中每个包的区域）在两种语言间保持每个生成字节相同，仅配对文档路径按语言本地化；区域内的标签使用代码标识符而非译文。整页生成器也可以从相同的结构数据渲染源码维护的双语说明，例如 persistence-catalog-text.ts (`../../scripts/persistence-catalog-text.ts`)，并保持 Markdown 结构对应、代码块完全相同。它同时重新生成两页及其一致性记录；评审仍须验证双语说明的含义与术语。
 
 生成的英文源文件不含普通撰写文档所带的语言切换行，因为添加该行会使生成器新鲜度检查失败；中文对侧仍链接回英文源。人工维护的中文对侧只能改写若直译便不再符合经评审译文事实的自指生成与维护说明；所有技术内容仍受普通忠实性规则约束。
 
 **排除**（永不配对，门禁拒绝为它们建 `.zh.md` 或 `.i18n.yaml`）：
 
-- [cordis-api/inherited.md](../cordis-api/inherited.md)：该生成文档没有经评审的中文对侧，因此网站的两个 locale 都投影英文源文件。
+- cordis-api/inherited.md (`../cordis-api/inherited.md`)：该生成文档没有经评审的中文对侧，因此网站的两个 locale 都投影英文源文件。
 - `docs/AGENTS.md`、`.agents/notes/**/AGENTS.md` 以及指向它们的 `CLAUDE.md` 指令符号链接：agent 指令，与根 `AGENTS.md` 一样只以英文维护。
 - `docs/i18n/terminology.md` 与 [style-samples.md](style-samples.md)：二者本身即为中英对照文档。
 - [translation-prompt.md](translation-prompt.md)：自动翻译流水线的提示词模板；正文逐字进入模型请求，配对翻译会改变流水线行为。
-- [review-ownership/README.md](../../.github/review-ownership/README.md)：仓库内部审批策略，只以英文维护。
+- review-ownership/README.md (`../../.github/review-ownership/README.md`)：仓库内部审批策略，只以英文维护。
 - `.agents/notes/archived/`：冻结的历史三文件配对。[`verify-archived-agent-notes`](../../scripts/verify-archived-agent-notes.ts) 校验其完整性和内容封存记录；翻译维护绝不能重写这些文件。
 
 **统一要求**：当前及今后纳入范围的每篇文档，合并时都必须构成完整的双语配对。[scripts/translation-pairing.manifest.json](../../scripts/translation-pairing.manifest.json) 只包含显式排除项；不存在逐文件推进清单、日期分界或 README 专用政策类别。

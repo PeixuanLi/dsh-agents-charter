@@ -15,4 +15,4 @@ In `dsh-tool-web`, the `searchMaxQueries` default rises from 4 to 10 and the `se
 
 1. To keep the previous limits, set `searchMaxQueries: 4` and `searchMaxResults: 8` in the `tool-web` entry's `config` in `cordis.patch.yml`.
 2. If several processes share one DeepSeek account through the Search API, lower `searchRequestsPerSecond` in the `web-deepseek-api` entry so that their combined rate stays at or below 5.
-3. Confirm the result by running a task that sends 10 queries in one `web_search` call: it returns results instead of `Error: queries must contain at most 4 queries`. See the [tool-web configuration](../../../../packages/web/tool-web/README.md).
+3. Confirm the result by running a task that sends 10 queries in one `web_search` call: it returns results instead of `Error: queries must contain at most 4 queries`. See the tool-web configuration (`../../../../packages/web/tool-web/README.md`).

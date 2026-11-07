@@ -6,11 +6,11 @@
   en: 705c6fd43858bdac
   zh: 2bbc6491368fb4c0
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/problem:
-  en: 80cf8dc578552364
-  zh: a54441ea02664483
+  en: 71d1b0acfb73e98b
+  zh: db8ee626a7a1a06e
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision:
-  en: 3fbdb8769322e05f
-  zh: f46f68f8eba74d67
+  en: f21c8fdfcb91832c
+  zh: 950c1c2cab49a02f
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision/a-separate-workflow-not-a-job-in-ci-yml:
   en: e4745c43611b96bb
   zh: 8fb980401b0c5e9b
@@ -27,11 +27,11 @@
   en: 07904c7ad53be5ad
   zh: 67d84d4dc6f082a9
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision/secret-mapping-and-hygiene:
-  en: fbbcc9a926dfc943
-  zh: 506acdb4e034574b
+  en: eeca2b653a15fe6f
+  zh: d8b3efd1ed456339
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision/scope-runtime-shape:
-  en: 31cf2f272a42f476
-  zh: b3f879aa0fc47bdb
+  en: 17e5b730e1a4cdae
+  zh: 453d270c84a812a6
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/security:
   en: 1fd3925ab26c11d4
   zh: 0d7103fd0b1afa89

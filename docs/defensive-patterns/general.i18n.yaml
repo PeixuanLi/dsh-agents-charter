@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/defensive-patterns/general.md
 /defensive-patterns:
-  en: 324de84cf5239e89
-  zh: b3bdfb17d01e5a6c
+  en: b38a88be9ce89485
+  zh: 85bd24a0b2eaf8d0
 /defensive-patterns/report-orthogonal-outcomes-independently:
   en: c16f636f8f522db4
   zh: 94c523b536df786d
@@ -21,8 +21,8 @@
   en: 243e275fee74f54e
   zh: a58e04b6e3ac0e7a
 /defensive-patterns/one-value-states-one-fact:
-  en: 598d9041ccfaba7c
-  zh: 2ac9f98c97015f66
+  en: c258a2f1f480d420
+  zh: 18eb656ec87668aa
 /defensive-patterns/a-new-active-current-singleton-is-refused:
   en: 8bf36acf96fa4c33
   zh: bb6db31a63bcf383
@@ -30,11 +30,11 @@
   en: 053e2c485eec2613
   zh: 2817da00572c789f
 /defensive-patterns/a-business-capability-owns-itself:
-  en: f74f2467e507455f
-  zh: fe1bae04be5ad63a
+  en: 18947486cf5149e5
+  zh: fe6d7aba000d9f52
 /defensive-patterns/changes-carry-performance-evidence:
-  en: 0d6855d1ae0ef4ae
-  zh: 0f771999398ce052
+  en: fc7da10f54959f5c
+  zh: fde35f9ef3a2392f
 /defensive-patterns/migrations-preserve-behavior:
   en: 6213e051f51437b8
   zh: 853580b3a4fec100

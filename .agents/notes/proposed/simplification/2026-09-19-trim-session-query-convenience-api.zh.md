@@ -6,13 +6,13 @@ Status: proposed
 
 ## 问题
 
-[`SessionQueryEngine`](../../../../packages/session-query/session-query/src/index.ts) 维护了 `readSession`、`readTitle`、`readTitleSnapshot` 和 `listEvents`，但没有执行这些方法的第一方产品调用方。精确名称和调用点搜索只找到内部委托、测试和生成的发现元数据。当前消费方使用可保留的观测、批量标题、模型可见事件读取和追踪。生成的目录向插件作者展示这些方法，但不执行其中列出的操作。
+`SessionQueryEngine` (`../../../../packages/session-query/session-query/src/index.ts`) 维护了 `readSession`、`readTitle`、`readTitleSnapshot` 和 `listEvents`，但没有执行这些方法的第一方产品调用方。精确名称和调用点搜索只找到内部委托、测试和生成的发现元数据。当前消费方使用可保留的观测、批量标题、模型可见事件读取和追踪。生成的目录向插件作者展示这些方法，但不执行其中列出的操作。
 
 这些入口增加了回放验证和结果复制路径、包装层、公开类型及入口专属测试。删除它们可以减少需要维护的 API 义务，无须替换共享查询实现。
 
 ## 提案
 
-删除这四个方法、不再被引用的 [`SessionLogSnapshot`](../../../../packages/session-query/session-query/src/types.ts) 结果类型和 [`eventRecords`](../../../../packages/session-query/session-query/src/tracing.ts)。删除相关导入及当前文档，包括两个子系统页面中的 `SessionLogSnapshot` 类型等价代码块和说明段落。删除[类型等价 manifest](../../../../scripts/type-equiv.manifest.json) 中手工维护的条目，以及[目录生成器](../../../../scripts/gen-cordis-catalog.ts) 中的 `LINK_MAP` 条目，然后重新生成发现元数据。选定定义在清理导入和元数据之前约占八十行源代码；无须新增替代服务。
+删除这四个方法、不再被引用的 `SessionLogSnapshot` (`../../../../packages/session-query/session-query/src/types.ts`) 结果类型和 `eventRecords` (`../../../../packages/session-query/session-query/src/tracing.ts`)。删除相关导入及当前文档，包括两个子系统页面中的 `SessionLogSnapshot` 类型等价代码块和说明段落。删除类型等价 manifest (`../../../../scripts/type-equiv.manifest.json`) 中手工维护的条目，以及目录生成器 (`../../../../scripts/gen-cordis-catalog.ts`) 中的 `LINK_MAP` 条目，然后重新生成发现元数据。选定定义在清理导入和元数据之前约占八十行源代码；无须新增替代服务。
 
 保留 `filterEvents` 和 `_filterEvents`，以及语义提取和过滤辅助函数。保留 `observeSession`、`readTitleSnapshots`、`readSurface`、`readEvent`、列举、搜索和追踪。保留共享会话集合解析及其现有所有权和失败行为。
 
@@ -22,7 +22,7 @@ Status: proposed
 
 **为外部调用方保留所有已记录的方法。** 这样可以避免已安装插件迁移，但会保留四个没有当前产品调用方的 API。尚未稳定的 API 策略允许在明确迁移代价后有意删除它们。
 
-**同时删除 `filterEvents`。** 不采用，因为其提供方无关的字面子串扫描不同于 FTS 的 token 匹配。[SQLite 查询文档](../../../../packages/session-query/session-query-sqlite/README.zh.md) 明确推荐该操作；删除它会撤销一项独立的查询能力。
+**同时删除 `filterEvents`。** 不采用，因为其提供方无关的字面子串扫描不同于 FTS 的 token 匹配。SQLite 查询文档 (`../../../../packages/session-query/session-query-sqlite/README.zh.md`) 明确推荐该操作；删除它会撤销一项独立的查询能力。
 
 ## 验收标准
 

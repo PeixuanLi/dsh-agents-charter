@@ -30,5 +30,5 @@ Approval outcomes, audit events, policy defaults, and synchronous business metho
    await ctx.plugin(ApprovalService)
    ```
 
-3. Let the host and registry complete Session recovery before exposing historical state to synchronous readers. Follow the [registry lifecycle](../../../../packages/session/session-projection/README.md); do not add history loading to approval getters or replay runtime hooks.
+3. Let the host and registry complete Session recovery before exposing historical state to synchronous readers. Follow the registry lifecycle (`../../../../packages/session/session-projection/README.md`); do not add history loading to approval getters or replay runtime hooks.
 4. Confirm activation completes and the existing approval tests still produce the same outcomes and audit records. Registration errors must fail activation instead of selecting a full-log fallback.

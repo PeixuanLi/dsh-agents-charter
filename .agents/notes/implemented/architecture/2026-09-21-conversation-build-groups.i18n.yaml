@@ -9,14 +9,14 @@
   en: 83dd98f48ee30a1a
   zh: 66dec35b4b54f291
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/decision:
-  en: d4216ce4d80382e8
-  zh: 9ee608af410e81e0
+  en: 70e8a8ff42f4d50a
+  zh: 9bd0e96a7b965a9e
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/decision/responsibilities:
   en: d7cf1bd544f163ee
   zh: 2433f3faa5f5abcb
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/decision/related-decisions:
-  en: 0889aeb088ed31b2
-  zh: 539f03253b48c59b
+  en: 9b8fa1b96e7720cd
+  zh: ca488c9635fb3356
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/definition-input-state-and-registration:
   en: 9fb89bddbfd75627
   zh: 950c319db123c637
@@ -27,8 +27,8 @@
   en: 52a1bbfe6e9bcac7
   zh: dabbcd108f68bd14
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/concrete-implementation-locations:
-  en: 85715eb77bf73713
-  zh: 7e6c90830b65281b
+  en: a89fcf0710c2ac57
+  zh: 167b063eea1b5207
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/react-reading-and-presentation:
   en: 7636207f33e971a4
   zh: ace1f5bbaf5a01b5
@@ -36,8 +36,8 @@
   en: 21a74f9031f86a92
   zh: c6abd0a5dfbf56a8
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/verification:
-  en: ff829b9a2772df95
-  zh: df0e6524d00034df
+  en: f2ad9380d10005d9
+  zh: 708bf2f75e44484e
 /agent-note-definition-owned-grouping-with-generic-node-group-assembly/consequences:
   en: 236ddec90acc6ca1
   zh: d4807f635e217766

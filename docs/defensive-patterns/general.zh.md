@@ -2,7 +2,7 @@
 
 [English](general.md) | 中文
 
-来之不易的缺陷类别规则：下面每条模式都是本项目实际发布或差点发布的一类缺陷，以防止其复发的规则形式陈述。在编写生命周期、并发、子进程或清理代码之前请先阅读本文。测试层面的对应规则（真实入口路径、验证实际结果、资源归属）见 [testing.zh.md](../testing.zh.md)；这些规则引用的类型定义正家见 [subsystems/](../subsystems/README.zh.md)。
+来之不易的缺陷类别规则：下面每条模式都是本项目实际发布或差点发布的一类缺陷，以防止其复发的规则形式陈述。在编写生命周期、并发、子进程或清理代码之前请先阅读本文。测试层面的对应规则（真实入口路径、验证实际结果、资源归属）见 [testing.zh.md](../testing.zh.md)；这些规则引用的类型定义正家见 subsystems/ (`../subsystems/README.zh.md`)。
 
 <a id="report-orthogonal-outcomes-independently"></a>
 
@@ -84,7 +84,7 @@ const value = a?.b?.c?.d ?? fallback   // four layers of fallback hide whether d
 
 未知值、空集合或空字符串、以及字段真的不存在，是三件不同的事实，用三种不同的表示。一个 `undefined` 或 `null` 绝不代表其中多个；需要在三者上分别处理的消费方显式判别，而不是在边界处把它们压平。
 
-判定条件是：同一个「无值」是否承载了多种语义——**未查询**、**查到为空**、**无法判定**。通常的实现是可辨识联合或显式枚举值，并在类型定义处记录（见 [core.zh.md](../subsystems/core.zh.md#repo-wide-type-patterns)）。
+判定条件是：同一个「无值」是否承载了多种语义——**未查询**、**查到为空**、**无法判定**。通常的实现是可辨识联合或显式枚举值，并在类型定义处记录（见 core.zh.md (`../subsystems/core.zh.md#repo-wide-type-patterns`)）。
 
 ```ts
 type ValueState<T> = { kind: 'unknown' } | { kind: 'empty' } | { kind: 'value'; value: T }
@@ -143,7 +143,7 @@ globalThis.__dshCache = new Map()   // shared across instances, reclaimed never
 
 业务能力住在自己的包里，经注册面接入——registry、`slots.inject`、waterfall 或事件订阅。runtime、controller、manager、gateway 承载通用编排：它可以持有注册表结构与 disposal 生命周期，但条目由拥有它们的包写入，且绝不硬编码一张业务中心表。
 
-先确定新增的区分、字段或适配器是否必要，再选择其所有者；移动不必要的概念并不能消除维护成本。对于必需的行为，如果局部实现只增加少量复杂度，就优先使用靠近生产者或消费方的现有扩展点。生产者可以在自己的包内通过[声明合并](../subsystems/core.zh.md#the-map--derived-union-pattern)声明功能专属变体，无需修改声明该共享类型的包。所有消费方共同依赖的义务由共享所有者负责。
+先确定新增的区分、字段或适配器是否必要，再选择其所有者；移动不必要的概念并不能消除维护成本。对于必需的行为，如果局部实现只增加少量复杂度，就优先使用靠近生产者或消费方的现有扩展点。生产者可以在自己的包内通过声明合并 (`../subsystems/core.zh.md#the-map--derived-union-pattern`)声明功能专属变体，无需修改声明该共享类型的包。所有消费方共同依赖的义务由共享所有者负责。
 
 判定条件是：该能力是否由业务包自己声明并注册，中心层只做转发与生命周期管理、不做业务判定。边界是：中心层持有注册表结构与 disposal 生命周期，条目来自拥有它们的包。一条例外：纯基础设施能力——日志、传输、存储——不经业务注册面接入。中心层新增分支必须说明它为何无法下沉到业务包。
 
@@ -176,7 +176,7 @@ if (pluginName === 'ui-attachment') { /* business branch inside the manager */ }
 
 基线是被测路径**不带本次改动**的形态——通常是不挂测量 hook 的原生实现，而不是旧实现。新旧两侧挂着同一个 hook、共同开销把真实差值稀释掉，测量就会报告「没变化」，而实际上两边一起慢。
 
-测量的正家是 [benchmarks/](../../benchmarks/AGENTS.md)，按被测用户路径分目录，它的场景就是入口：
+测量的正家是 benchmarks/ (`../../benchmarks/AGENTS.md`)，按被测用户路径分目录，它的场景就是入口：
 
 ```sh
 # Run the owning scenario before and after the change; the numbers go into the PR.

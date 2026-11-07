@@ -15,4 +15,4 @@ English | [中文](guide.zh.md)
 
 1. Check the per-request image limit of each pi-ai provider. In the `llm-pi-ai` configuration in `cordis.patch.yml`, set `providers.<provider>.maxRequestImages` to that limit when it is higher than 50.
 2. To change how many images one overflow offloads, set `providers.<provider>.imageOffloadCountQuantum`; it must not exceed `maxRequestImages`.
-3. Reopen the profile configuration and confirm the saved values. See the [provider configuration reference](../../../../packages/llm/llm-pi-ai/README.md).
+3. Reopen the profile configuration and confirm the saved values. See the provider configuration reference (`../../../../packages/llm/llm-pi-ai/README.md`).

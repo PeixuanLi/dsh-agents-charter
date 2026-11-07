@@ -27,4 +27,4 @@ description: "自动模型切换要求有效的目标压力预算与成功的压
            maxTokens: 4096
    ```
 
-3. 将 `local` 与 `small-context` 替换为已注册路由。策略的 `maxTokens` 限制摘要输出；目标请求自身的输出上限单独设置。解析后的保留预算必须低于触发阈值。先用短历史切换一次以验证配置，再用长历史验证压缩。切换失败时，修正所报原因后重试，或选择更大的模型。详见[包配置参考](../../../../packages/compaction/compaction-basic/README.zh.md#use-this-package)。
+3. 将 `local` 与 `small-context` 替换为已注册路由。策略的 `maxTokens` 限制摘要输出；目标请求自身的输出上限单独设置。解析后的保留预算必须低于触发阈值。先用短历史切换一次以验证配置，再用长历史验证压缩。切换失败时，修正所报原因后重试，或选择更大的模型。详见包配置参考 (`../../../../packages/compaction/compaction-basic/README.zh.md#use-this-package`)。

@@ -6,7 +6,7 @@ Status: implemented
 
 ## 问题
 
-Host 上的 Remote 方法此前无法得知本次调用代表谁，也无法按调用方限制可调用的方法。[`PeerScope`](../../../../packages/typert/protocol/src/types.ts) 的契约曾写明「Who the Peer is and what it may do are not recorded here」；[Connection](../../../../packages/client/connection/src/rpc-host.ts) 只有一个 operator Peer，`admit()` 对每个通过认证的请求都返回它，`/api` 路由与 interceptor 的 Fetch handler 固定使用它而不使用准入结果；[Gateway](../../../../packages/api/gateway/src/index.ts) 在调用方未给出 Peer 时隐式回退到 `operatorPeer()`。
+Host 上的 Remote 方法此前无法得知本次调用代表谁，也无法按调用方限制可调用的方法。`PeerScope` (`../../../../packages/typert/protocol/src/types.ts`) 的契约曾写明「Who the Peer is and what it may do are not recorded here」；Connection (`../../../../packages/client/connection/src/rpc-host.ts`) 只有一个 operator Peer，`admit()` 对每个通过认证的请求都返回它，`/api` 路由与 interceptor 的 Fetch handler 固定使用它而不使用准入结果；Gateway (`../../../../packages/api/gateway/src/index.ts`) 在调用方未给出 Peer 时隐式回退到 `operatorPeer()`。
 
 首个非 owner 调用方是 liveshare 读者。读者请求经 Relay 到达 owner 的 liveshare Host 插件，插件此前在 owner 进程内以 operator 身份分派，owner 的 Session 因此把读者的 prompt 当作 owner 本人的输入。PR #3854 为此把 liveshare 语义塞进 session-controller：请求体携带 `origin`，每条 prompt 都写 required 的 `prompt/origin` 事件并按 requestId 关联，controller 内做来源 fold，`serializeAdmission` 扩到全部 prompt，新增 `api-session/external-admission` 钩子；liveshare 自己维护接口白名单 `READ_ENDPOINTS` 并裁剪 list/follow 结果；前端的 `clientWritePolicy` 定义在 ui-conversation，5 个包三种读法，7 处靠「是否注入某回调」隐藏界面。
 
@@ -336,7 +336,7 @@ class RemoteAccessService {            // ctx.remoteAccess; Remote namespace rem
 | 求值时机 | 每次 `decide()`、`allows()` 与快照计算都调用一次 `bindings()`，不缓存；依赖时间的状态（如过期）即时生效，长流（如 `workspace/follow`、`session/control`）在 binding 增删后的下一次逐项判定即反映；快照只在 `invalidate()` 后重算，业务包在过期等时间事件发生时也须调用 `invalidate()` |
 | 通知 | 业务状态变化（授权、撤权、模式切换）改变 binding 或 condition 的结论时，业务包必须调用 `invalidate(principal?)`；快照只在 `invalidate()` 与 policy 注册、撤回后重算 |
 | `remote-access/denied` | 只有调用的拒绝变成错误，details `{ action, reason }`，reason 为 condition 或 `explain` 给出的原因、`no-allow`、`policy-failed`，或 Gateway 对非法资源给出的 `resource-invalid`；被拒的事件只是不推送 |
-| 必需服务 | Gateway `static inject = ['typert', 'remoteAccess']`；挂载 Gateway 的组合必须挂载 remote-access，[`bundle/base`](../../../../packages/bundle/base/cordis.patch.yml) 紧随 `typert-gateway` 装配；plugin manager 像保护 Gateway 一样保护它，插件页面无法禁用 |
+| 必需服务 | Gateway `static inject = ['typert', 'remoteAccess']`；挂载 Gateway 的组合必须挂载 remote-access，`bundle/base` (`../../../../packages/bundle/base/cordis.patch.yml`) 紧随 `typert-gateway` 装配；plugin manager 像保护 Gateway 一样保护它，插件页面无法禁用 |
 
 #### 示例：分享读者
 
@@ -499,7 +499,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 | 不变量 | 依据与落点 |
 |---|---|
 | principal 只能由进程内 Host 代码在创建 Peer 时给出 | `PeerScope.principal` 只读；`createPeer()` 不对应任何路由 |
-| wire 上任何字段都不能设置或覆盖 principal | principal 不来自 args、envelope、header、query 或 cookie。args 顶层多余字段被 `assertExactArguments` 拒绝；payload 必须恰为 `{ args }`；envelope 未知字段被 [`clientRequestSchema`](../../../../packages/client/connection/src/rpc-schema.ts) 丢弃；请求体内同名字段只是业务数据 |
+| wire 上任何字段都不能设置或覆盖 principal | principal 不来自 args、envelope、header、query 或 cookie。args 顶层多余字段被 `assertExactArguments` 拒绝；payload 必须恰为 `{ args }`；envelope 未知字段被 `clientRequestSchema` (`../../../../packages/client/connection/src/rpc-schema.ts`) 丢弃；请求体内同名字段只是业务数据 |
 | 浏览器网络准入为 owner | 通过[浏览器 token 认证](../../implemented/architecture/2026-08-24-browser-token-authentication.zh.md)的连接得到 `browserPeer` |
 | 没有隐式 Peer | Gateway 与 Connection 都不补默认 Peer；required 参数让漏传在编译期暴露 |
 | 已 dispose 的 Peer 不能再分派 | `gateway/peer-disposed` |
@@ -511,7 +511,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 
 ### 消息来源落盘
 
-[session-controller 类型](../../../../packages/api/session-controller/src/types.ts) 的 `MessageSourceMap` 条目增加可选字段：
+session-controller 类型 (`../../../../packages/api/session-controller/src/types.ts`) 的 `MessageSourceMap` 条目增加可选字段：
 
 ```text
 'user-rpc': {
@@ -527,8 +527,8 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 
 | 生产者 | 位置 |
 |---|---|
-| `SessionController.prompt()` 构造 source，`SessionCommandController.prompt(request, source)` 只负责投递 | [`session-controller/src/index.ts`](../../../../packages/api/session-controller/src/index.ts)、[`commands.ts`](../../../../packages/api/session-controller/src/commands.ts) |
-| subagent `prompt()`（`BrowserPromptSource`）；没有 role 列出它，非 owner 只能经进程内 Host 代码到达，不能经 Gateway 到达 | [`subagent/src/index.ts`](../../../../packages/subagent/subagent/src/index.ts) |
+| `SessionController.prompt()` 构造 source，`SessionCommandController.prompt(request, source)` 只负责投递 | `session-controller/src/index.ts` (`../../../../packages/api/session-controller/src/index.ts`)、`commands.ts` (`../../../../packages/api/session-controller/src/commands.ts`) |
+| subagent `prompt()`（`BrowserPromptSource`）；没有 role 列出它，非 owner 只能经进程内 Host 代码到达，不能经 Gateway 到达 | `subagent/src/index.ts` (`../../../../packages/subagent/subagent/src/index.ts`) |
 
 业务代码不把 principal 当函数参数逐层传递：身份只在 Remote 方法内从 invocation 读一次，向下传的是已构造的 source。Agent inbox 没有可在消息入队时统一补字段的拦截点（`followup` / `steer` 接受已构造的消息，SDK、调度等进程内生产者不在 Remote 调用中），因此按生产者落实，并由代码评审标准约束新增的生产者。
 
@@ -536,7 +536,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 |---|---|
 | `kind` 不变 | 仍为 `'user'`；现有 `kind === 'user'` 判断不受影响 |
 | owner 消息不变 | owner 调用时不写字段，source 与引入 principal 之前逐字节相同；没有该字段的消息（含全部旧会话）即为 owner |
-| 不进入模型请求 | llm 适配器只读 model source（[`llm-deepseek/src/replay.ts`](../../../../packages/llm/llm-deepseek/src/replay.ts)） |
+| 不进入模型请求 | llm 适配器只读 model source（`llm-deepseek/src/replay.ts` (`../../../../packages/llm/llm-deepseek/src/replay.ts`)） |
 | 会话格式 | 不 bump `SESSION_FORMAT_VERSION`；按 [persistence 类型变更 cookbook](../../../../docs/cookbook/reviewing-persistence-type-changes.zh.md) 为该持久化类型变更记录 acknowledgement |
 
 消费方用法示例（不在本 Note 范围内实现）：工具守卫与 pre-step 复检按 turn 读取该 turn 内用户消息的 `source.principal`，任一条带非 owner principal 即按该调用方判定；同一 turn 混有 owner 与读者消息时取最严格者。
@@ -547,7 +547,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 
 | 文档 | 内容 |
 |---|---|
-| [`docs/subsystems/typert.md`](../../../../docs/subsystems/typert.zh.md)、[`docs/api-gateway.md`](../../../../docs/api-gateway.zh.md) | `PeerScope`、`RemoteInvocation`、`InvokeRemoteRequest`、显式 Peer、`@Remote` 的 `resources`、访问检查顺序 |
+| `docs/subsystems/typert.md` (`../../../../docs/subsystems/typert.zh.md`)、`docs/api-gateway.md` (`../../../../docs/api-gateway.zh.md`) | `PeerScope`、`RemoteInvocation`、`InvokeRemoteRequest`、显式 Peer、`@Remote` 的 `resources`、访问检查顺序 |
 | connection、gateway、typert-protocol、typert-registry、api-remotes、remote-access、session-controller、workspace-controller、ui-session、ui-workspace、ui-slots、client-test-runtime 的 README | 以 Peer / `browserPeer` 取代 operator；remote-access 的 role、binding、policy 契约；access hooks |
 
 ### 不在范围与 Future work
@@ -651,7 +651,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 | owner 消息 | source 与本变更之前逐字节相同；现有 keyless recorded-session snapshot 不变 | `pnpm run test:snapshot` 不需要重录 |
 | 持久化记录 | `verify-persistence-changes` 通过 | doc-sync |
 
-SDK 投影不受影响：TypeScript SDK server 自行构造 `{ kind: 'user' }` 消息（[`sdk/server/src/server.ts`](../../../../packages/sdk/server/src/server.ts)），不经 Gateway，也不投影 source；Python SDK 不读取 user source。
+SDK 投影不受影响：TypeScript SDK server 自行构造 `{ kind: 'user' }` 消息（`sdk/server/src/server.ts` (`../../../../packages/sdk/server/src/server.ts`)），不经 Gateway，也不投影 source；Python SDK 不读取 user source。
 
 ### 代价与限制
 

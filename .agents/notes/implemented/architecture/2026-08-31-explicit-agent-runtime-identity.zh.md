@@ -20,7 +20,7 @@ Agent 的 Cordis Context 拥有注册及其清理。Agent 身份则为某项操�
 
 `SubagentManager.rootOf(agent)` 从已有 Activation 读取运行时成员关系；子级和树根都必须匹配注册表中的存活对象。普通 Session 返回自身，非托管的 subagent header 不授予成员身份。持久化 `parentSession` 描述创建关系；中间创建者离线时，Activation 保留确切树根，同 id 替代实例不能继承它。仅限根级的消费方依据显式 subagent 来源分类。
 
-[作用域参考](../../../../packages/core/scope/README.zh.md)与 [Agent loop 参考](../../../../packages/core/agent-loop/README.zh.md)说明注册和生命周期行为。[发起方作用域决策](2026-07-15-agent-initiator-scope.zh.md)负责私有调用链理由；显式运行时归属不改变因果发起关系或注册生命周期。
+作用域参考 (`../../../../packages/core/scope/README.zh.md`)与 Agent loop 参考 (`../../../../packages/core/agent-loop/README.zh.md`)说明注册和生命周期行为。[发起方作用域决策](2026-07-15-agent-initiator-scope.zh.md)负责私有调用链理由；显式运行时归属不改变因果发起关系或注册生命周期。
 
 ## 验证
 

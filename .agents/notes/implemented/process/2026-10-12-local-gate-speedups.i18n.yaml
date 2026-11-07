@@ -15,11 +15,11 @@
   en: 7430353afba96352
   zh: 6d2a09619a67ecba
 /agent-note-local-gate-hook-and-test-speed-ups/decision/1-type-checks-generate-typert-declarations-without-bundling:
-  en: e9c08ebd00049b44
-  zh: 36e90dc485b4acb7
+  en: 460e4227668cd0dd
+  zh: 938ae8ac2d4806c6
 /agent-note-local-gate-hook-and-test-speed-ups/decision/2-the-pre-commit-hook-does-not-regenerate-third-party-notices:
-  en: e2e344f184621172
-  zh: 97d8785aaf9105bf
+  en: 22a3fb0653192d71
+  zh: 785a54ab74f1ec02
 /agent-note-local-gate-hook-and-test-speed-ups/decision/3-local-default-worker-budget:
   en: e9649c40d67e26e0
   zh: c99f22a41c4fc4af
@@ -27,17 +27,17 @@
   en: 2c945250337c88cf
   zh: d4bfa34cc858782b
 /agent-note-local-gate-hook-and-test-speed-ups/decision/5-documentation-gates-parse-each-document-once:
-  en: c22d38399a2bb87f
-  zh: 9ae97e5a6e3fbf48
+  en: a6fcd0e0579e55d1
+  zh: d531caa53aea2b9a
 /agent-note-local-gate-hook-and-test-speed-ups/decision/6-repository-file-walks-list-each-directory-once:
   en: 2f0d35b0a688c938
   zh: 7184fd260c066a01
 /agent-note-local-gate-hook-and-test-speed-ups/decision/7-cli-help-reads-run-concurrently-doc-graph-probes-are-memoized:
-  en: 965503ba8a31c039
-  zh: fe02a394a677d018
+  en: 4465042b786b3965
+  zh: 0cec051d87f39a49
 /agent-note-local-gate-hook-and-test-speed-ups/decision/8-type-model-spec-ts-runs-against-an-in-memory-workspace:
-  en: d519ec362903aa2f
-  zh: f49ee6547cb954f6
+  en: 8135f5c1c2803f28
+  zh: d8b38c245edf3f74
 /agent-note-local-gate-hook-and-test-speed-ups/decision/repository-wide-comparison:
   en: 7c9388dc859e0f93
   zh: 5df1fc58eb7a46e8

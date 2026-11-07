@@ -6,7 +6,7 @@ Status: implemented
 
 ## 问题
 
-如果 [verify-package-dependencies](../../../../scripts/verify-package-dependencies.ts) 的检查范围是 `packages/!(experimental)/*/package.json`，整个 experimental 组就不受“浏览器和类型关系只放 devDependencies”（[client 依赖规则](../../../../packages/client/AGENTS.md#dependency-declaration)）的约束，[发布依赖面](2026-08-26-published-dependency-faces.zh.md)也曾把覆盖范围写成“非实验包”。在这一范围下，有 4 个实验 client 包把 client、api、session 等包写成 peerDependencies。webworker packer 会沿 workspace peer 把这些包收进镜像，浏览器静态库因此成了扫描起点，agent-team-profile 打包时出现 82 条无法解析的请求。[实验包规则](../../../../packages/experimental/AGENTS.md)写明实验身份不放宽工程要求，这一豁免与之矛盾。
+如果 verify-package-dependencies (`../../../../scripts/verify-package-dependencies.ts`) 的检查范围是 `packages/!(experimental)/*/package.json`，整个 experimental 组就不受“浏览器和类型关系只放 devDependencies”（client 依赖规则 (`../../../../packages/client/AGENTS.md#dependency-declaration`)）的约束，[发布依赖面](2026-08-26-published-dependency-faces.zh.md)也曾把覆盖范围写成“非实验包”。在这一范围下，有 4 个实验 client 包把 client、api、session 等包写成 peerDependencies。webworker packer 会沿 workspace peer 把这些包收进镜像，浏览器静态库因此成了扫描起点，agent-team-profile 打包时出现 82 条无法解析的请求。实验包规则 (`../../../../packages/experimental/AGENTS.md`)写明实验身份不放宽工程要求，这一豁免与之矛盾。
 
 按同一套规则检查 6 个带 `dsh.client` 的实验包，全量共 46 条违规，全部出在实验包。另外，只从 Host 入口追踪运行时导入的 verifier 会把 inspector 的 `ws` 误判为只该放 devDependencies，因为它只在 worker_threads 入口里使用。
 
@@ -32,9 +32,9 @@ Status: implemented
 
 - 发布的实验包清单只把浏览器和类型关系列为 dev 依赖，通过 npm 单独安装这些包的用户得到的 peer 提示更少。
 - verifier 看不到 tsdown `banner` 注入的导入，例如 inspector worker 的 `@deepseek-ai/dsh-app-boot/worker/profile-resolution-bootstrap`。这类依赖只因为已经声明而被保留；如果被误删，verifier 发现不了。
-- `readHostBuildEntries` 会 import 每个受覆盖、带 Host face 的包的 `tsdown.config.ts`，并在两个构建 face 下求值其默认导出，所以门禁依赖每个这样的配置模块都能干净地 import，这些模块的 import 副作用也会在门禁进程里执行；例如 inspector 的配置会 import 包内的 [`scripts/build-devtools.ts`](../../../../packages/experimental/inspector/scripts/build-devtools.ts)。
+- `readHostBuildEntries` 会 import 每个受覆盖、带 Host face 的包的 `tsdown.config.ts`，并在两个构建 face 下求值其默认导出，所以门禁依赖每个这样的配置模块都能干净地 import，这些模块的 import 副作用也会在门禁进程里执行；例如 inspector 的配置会 import 包内的 `scripts/build-devtools.ts` (`../../../../packages/experimental/inspector/scripts/build-devtools.ts`)。
 - 实测：新增的 127 个 tsdown 配置加载约 2 s，全量耗时基本不变（不扫描时 4:27，扫描时 4:21）。
 
 ## 测试
 
-[verify-package-dependencies.spec.ts](../../../../scripts/verify-package-dependencies.spec.ts) 锁定三种情形：实验 client 包把浏览器包写成 peer 时会被拒绝；列入 `hostPackages` 的实验包按 configured Host 包检查；只在 `tsdown.config.ts` 指定的 worker 入口里使用的运行时依赖保留在 dependencies。同一份 spec 还锁定 translator 的 `TranslationError` 属于 peer-required 分类。
+verify-package-dependencies.spec.ts (`../../../../scripts/verify-package-dependencies.spec.ts`) 锁定三种情形：实验 client 包把浏览器包写成 peer 时会被拒绝；列入 `hostPackages` 的实验包按 configured Host 包检查；只在 `tsdown.config.ts` 指定的 worker 入口里使用的运行时依赖保留在 dependencies。同一份 spec 还锁定 translator 的 `TranslationError` 属于 peer-required 分类。

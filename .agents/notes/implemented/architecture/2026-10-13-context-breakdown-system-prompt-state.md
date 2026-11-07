@@ -10,7 +10,7 @@ English | [中文](2026-10-13-context-breakdown-system-prompt-state.zh.md)
 
 ## Decision
 
-[`breakdown-projection.ts`](../../../../packages/llm/token-meter/src/breakdown-projection.ts) retains the surviving `system/message` nodes in surface order with their heuristic prices, one running surface total, and at most one armed shadow-price claim. State version 6 discards version-5 rows; other projection keys keep their rows.
+`breakdown-projection.ts` (`../../../../packages/llm/token-meter/src/breakdown-projection.ts`) retains the surviving `system/message` nodes in surface order with their heuristic prices, one running surface total, and at most one armed shadow-price claim. State version 6 discards version-5 rows; other projection keys keep their rows.
 
 - An append adds its price; a `system/message` append also joins the end of the system list.
 - `compaction/summary` and `compaction/prune` arm a claim from `shadowedRange`, `shadowedTokenCount`, and the retained system prompts named by `shadowedSeqs`. The next event consumes or expires it. A replacement over the claimed range subtracts the claim price and drops those prompts; a replacement naming another range, or putting a `system/message` in place of a metered range, throws.

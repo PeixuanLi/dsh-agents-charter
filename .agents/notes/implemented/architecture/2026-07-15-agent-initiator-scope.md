@@ -12,7 +12,7 @@ Deep process-local infrastructure sometimes needs a trusted initiating Agent bel
 
 ## Decision
 
-The mandatory `ctx.agents` service uses Node `AsyncLocalStorage` to carry the initiating Agent. It stores the exact `Agent` directly rather than introducing a one-field frame; a separate private run token records nested boundary lineage only for teardown bookkeeping and carries no identity. The [core-data catalog](../../../../docs/subsystems/core.md#initiating-agent) identifies the carried type.
+The mandatory `ctx.agents` service uses Node `AsyncLocalStorage` to carry the initiating Agent. It stores the exact `Agent` directly rather than introducing a one-field frame; a separate private run token records nested boundary lineage only for teardown bookkeeping and carries no identity. The core-data catalog (`../../../../docs/subsystems/core.md#initiating-agent`) identifies the carried type.
 
 `currentInitiator()` reads optionally, `requireInitiator()` throws `no initiating agent is active`, and `withInitiator(agent, operation)` preserves the operation's exact synchronous value or Promise. `withoutInitiator(operation)` establishes a clearing boundary for work that must not inherit an Agent. Session remains derived as `agent.session`; turn, step, tool call, `signal`, model, `cwd`, sandbox, and authorization stay with their existing owners.
 
@@ -28,7 +28,7 @@ Initiator scope does not own detached work: registry drain tracks only the Promi
 
 A host-aware transport may derive a deployment-owned header such as `X-Harness-Session-Id` from `ctx.agents.requireInitiator().session.id`; the header is absent from model-visible schema and arguments. No production MCP or Web transport adopts such a header in this decision. A test-double transport proves the trusted boundary without assigning host routing policy to an existing provider-neutral seam.
 
-This decision extends the [Agent registration-scope contract](../../../../packages/core/scope/README.md) and its [runtime design](../../../../packages/core/agent-loop/README.md); it does not change their static `agent.ctx` meaning. The [explicit runtime-identity decision](2026-08-31-explicit-agent-runtime-identity.md) keeps initiator scope limited to private asynchronous chains while lifecycle, ownership, event, and wire interfaces carry their subjects directly.
+This decision extends the Agent registration-scope contract (`../../../../packages/core/scope/README.md`) and its runtime design (`../../../../packages/core/agent-loop/README.md`); it does not change their static `agent.ctx` meaning. The [explicit runtime-identity decision](2026-08-31-explicit-agent-runtime-identity.md) keeps initiator scope limited to private asynchronous chains while lifecycle, ownership, event, and wire interfaces carry their subjects directly.
 
 ## Verification
 

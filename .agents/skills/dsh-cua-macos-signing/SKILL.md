@@ -19,7 +19,7 @@ Do not recommend developer keys merely because a user is using the installed DSH
 
 Source builds default to `sourceSigning: ad-hoc`. They need no developer certificate. An ad-hoc designated requirement includes the code hash, so changed binaries, clean rebuilds, or different worktrees can require fresh Accessibility and Screen Recording grants even when their sources are unchanged. For developers who want fewer repeated grants, configure one fixed certificate and use it across builds. The first grant is still manual; verify actual permission retention rather than claiming that matching signatures alone prove it.
 
-The [macOS provider](../../../packages/experimental/cua-macos/README.md#use-this-package) owns the two configuration choices: `ad-hoc`, or `{ identity, keychain }`. The build consumes an existing certificate; it never creates or unlocks one. Developer key material stays outside DSH home. DSH home stores only the configuration selecting it.
+The macOS provider (`../../../packages/experimental/cua-macos/README.md#use-this-package`) owns the two configuration choices: `ad-hoc`, or `{ identity, keychain }`. The build consumes an existing certificate; it never creates or unlocks one. Developer key material stays outside DSH home. DSH home stores only the configuration selecting it.
 
 ## Create or reuse an identity
 

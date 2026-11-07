@@ -29,7 +29,7 @@ Do not use `0.1.3-dsk.1` to repair stable `0.1.3`: SemVer orders it below the st
 
 ### Stable subscription and channel switching
 
-This part of the proposal is superseded by [Desktop channel settings](../../../../apps/desktop/README.md#local-desktop-settings) and the [packaging channel policy](../../../../apps/desktop/packaging/README.md). The implemented selector persists explicit user choices; publishers select versions independently of channel names, and channel changes do not permit downgrades.
+This part of the proposal is superseded by Desktop channel settings (`../../../../apps/desktop/README.md#local-desktop-settings`) and the packaging channel policy (`../../../../apps/desktop/packaging/README.md`). The implemented selector persists explicit user choices; publishers select versions independently of channel names, and channel changes do not permit downgrades.
 
 ### Automatic-installation setting
 
@@ -50,7 +50,7 @@ Use the already prepared target instead of delaying launch for a fresh package d
 
 ### Updater dependency qualification
 
-The initial dependency declaration remains in [Desktop package metadata](../../../../apps/desktop/package.json). A coordinated electron-builder 27 / electron-updater 7 migration is an evaluation candidate, not a dependency bump authorized here. The following API and platform items require verification against the selected release and real packages; this proposal does not claim they have been exercised locally.
+The initial dependency declaration remains in Desktop package metadata (`../../../../apps/desktop/package.json`). A coordinated electron-builder 27 / electron-updater 7 migration is an evaluation candidate, not a dependency bump authorized here. The following API and platform items require verification against the selected release and real packages; this proposal does not claim they have been exercised locally.
 
 | Candidate item | Required qualification |
 |---|---|

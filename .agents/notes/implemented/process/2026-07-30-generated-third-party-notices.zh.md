@@ -12,9 +12,9 @@ Status: implemented
 
 ## 决策
 
-[`THIRD_PARTY_NOTICES.md`](../../../../THIRD_PARTY_NOTICES.md) 由 [`scripts/gen-third-party-notices.ts`](../../../../scripts/gen-third-party-notices.ts) 依据各工作区 manifest、`vendor/README.md`、`pyproject.toml`、`pnpm-workspace.yaml` 与 [共享运行时锁文件](../../../../scripts/primary-runtime/lock.json)生成。根 README 双语两侧都从「许可证」一节链到该文件。
+`THIRD_PARTY_NOTICES.md` (`../../../../THIRD_PARTY_NOTICES.md`) 由 `scripts/gen-third-party-notices.ts` (`../../../../scripts/gen-third-party-notices.ts`) 依据各工作区 manifest、`vendor/README.md`、`pyproject.toml`、`pnpm-workspace.yaml` 与 共享运行时锁文件 (`../../../../scripts/primary-runtime/lock.json`)生成。根 README 双语两侧都从「许可证」一节链到该文件。
 
-**新鲜度由测试 lane 保证。** 已提交的字节由 [`scripts/gen-third-party-notices.spec.ts`](../../../../scripts/gen-third-party-notices.spec.ts) 断言，而测试 lane 本就会跑这个文件，其中包括 PR 必过的 `node 24 / coverage` lane——这项校验不增加门禁进程、不占调度位、也不新增 CI 步骤。改动生成器任一输入——任何 manifest、工作区声明、根锁文件或共享运行时锁文件、`vendor/README.md`、某个 `pyproject.toml`、生成器自身，或持有构建期 pin 的脚本——的贡献者运行 `pnpm run gen-third-party-notices`；需要单独校验时，`pnpm run verify-third-party-notices` 仍然可用。没有 Git 钩子重新生成该文件：浏览器输入使每个包源码文件都成为生成器输入，钩子会让几乎每个提交都运行约 16 秒的生成器，而改变输出的提交很少。
+**新鲜度由测试 lane 保证。** 已提交的字节由 `scripts/gen-third-party-notices.spec.ts` (`../../../../scripts/gen-third-party-notices.spec.ts`) 断言，而测试 lane 本就会跑这个文件，其中包括 PR 必过的 `node 24 / coverage` lane——这项校验不增加门禁进程、不占调度位、也不新增 CI 步骤。改动生成器任一输入——任何 manifest、工作区声明、根锁文件或共享运行时锁文件、`vendor/README.md`、某个 `pyproject.toml`、生成器自身，或持有构建期 pin 的脚本——的贡献者运行 `pnpm run gen-third-party-notices`；需要单独校验时，`pnpm run verify-third-party-notices` 仍然可用。没有 Git 钩子重新生成该文件：浏览器输入使每个包源码文件都成为生成器输入，钩子会让几乎每个提交都运行约 16 秒的生成器，而改变输出的提交很少。
 
 文件默认只披露**直接**依赖；完整的 npm 与 Python SDK 闭包保留在各自锁文件中。两组独立分发的载荷会明确列出：`@anthropic-ai/claude-agent-sdk` 声明的官方 Claude 可执行包，以及共享运行时锁文件 `pythonPackages` 中的每个分发包。内置条目包含归一化名称、精确版本和已记录的许可证元数据；元数据缺失、归一化后名称重复或版本冲突都会使生成失败。共享 wheel 集合独立于 `python/` 下的 manifest，仅扫描后者会遗漏已打包的 Office 库。内置分发包同样通过运行时许可证检查，其中包括 Pillow 与 typing-extensions 声明的宽松许可证标识 `MIT-CMU` 和 `PSF-2.0`。
 

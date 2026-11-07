@@ -14,4 +14,4 @@ The next release makes `@deepseek-ai/dsh-llm-mock-server` emit the Messages even
 ## Migration
 
 1. Consume the named Messages events and parse their `data` fields. Do not filter the stream to unnamed events.
-2. Verify a complete text response, tool-call response, and the fault behaviors your test uses. The [mock server reference](../../../../packages/test-support/llm-mock-server/README.md) describes the available scripts.
+2. Verify a complete text response, tool-call response, and the fault behaviors your test uses. The mock server reference (`../../../../packages/test-support/llm-mock-server/README.md`) describes the available scripts.

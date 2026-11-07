@@ -6,11 +6,11 @@ Status: implemented
 
 ## Problem
 
-自托管 Windows 串行 lane 在运行 36227311113（作业 108363684565）中失败 13 个用例，其中 12 个同一成因：[github-connection.spec.ts](../../../../packages/boot/plugin-manager/tests/github-connection.spec.ts) 9 个（六种安装地址形式与三个代理用例）与 [manager.spec.ts](../../../../packages/boot/plugin-manager/tests/manager.spec.ts) 3 个真实 Git 安装用例。该宿主机携带 Git 的索引式命令行配置——`GIT_CONFIG_COUNT` 加上 `GIT_CONFIG_KEY_0` / `GIT_CONFIG_VALUE_0`，即 Git 交给 `git -c` 调用及其 hook 子进程的那一组变量。共享的子进程清洗（`scrubbedParentEnv`）按凭据形态的名字移除变量，于是移除了键却保留了计数；Git 先读计数，每个子进程都在打开任何配置文件之前以 `error: missing config key GIT_CONFIG_KEY_0` / `fatal: unable to parse command-line config`（退出码 128）失败。
+自托管 Windows 串行 lane 在运行 36227311113（作业 108363684565）中失败 13 个用例，其中 12 个同一成因：github-connection.spec.ts (`../../../../packages/boot/plugin-manager/tests/github-connection.spec.ts`) 9 个（六种安装地址形式与三个代理用例）与 manager.spec.ts (`../../../../packages/boot/plugin-manager/tests/manager.spec.ts`) 3 个真实 Git 安装用例。该宿主机携带 Git 的索引式命令行配置——`GIT_CONFIG_COUNT` 加上 `GIT_CONFIG_KEY_0` / `GIT_CONFIG_VALUE_0`，即 Git 交给 `git -c` 调用及其 hook 子进程的那一组变量。共享的子进程清洗（`scrubbedParentEnv`）按凭据形态的名字移除变量，于是移除了键却保留了计数；Git 先读计数，每个子进程都在打开任何配置文件之前以 `error: missing config key GIT_CONFIG_KEY_0` / `fatal: unable to parse command-line config`（退出码 128）失败。
 
 ## Decision
 
-这两个 spec 文件在派生 Git 之前，从自身进程环境里删除 Git 的命令行配置组，由 [isolateGitCommandLineConfig](../../../../packages/boot/plugin-manager/tests/git-environment.ts) 完成。这些 spec 判定的是 profile 行为——profile 的 Git 配置、真实安装——而不是宿主机状态，因此导出该组的宿主机不再改变它们的结果。辅助函数在文件结束后用 `vi.stubEnv(name, undefined)` 与 `vi.unstubAllEnvs()` 还原被移除的条目。
+这两个 spec 文件在派生 Git 之前，从自身进程环境里删除 Git 的命令行配置组，由 isolateGitCommandLineConfig (`../../../../packages/boot/plugin-manager/tests/git-environment.ts`) 完成。这些 spec 判定的是 profile 行为——profile 的 Git 配置、真实安装——而不是宿主机状态，因此导出该组的宿主机不再改变它们的结果。辅助函数在文件结束后用 `vi.stubEnv(name, undefined)` 与 `vi.unstubAllEnvs()` 还原被移除的条目。
 
 ## Alternatives considered
 

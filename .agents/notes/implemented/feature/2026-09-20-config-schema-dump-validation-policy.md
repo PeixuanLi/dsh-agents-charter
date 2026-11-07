@@ -14,7 +14,7 @@ English | [中文](2026-09-20-config-schema-dump-validation-policy.zh.md)
 - **Discovery is declaration-oriented and includes disabled rows.** The collector walks every row the Loader would receive, including rows disabled literally or by expression, and imports their modules. A disabled row's import or include failure therefore makes a bootable profile incomplete. The one exception follows the Loader: a disabled group or include without `group: true` never creates its children, so a missing carrier config is recorded as a childless tree and the entry schema does not validate its child declarations.
 - **Widen instead of simulating native mutation.** Where native resolution can alter the input before later validation reads it (adapted values written back by a container, renamed dictionary keys, loose fallbacks, lazy metadata propagation into shared nodes), the projection keeps the available declaration detail beside an unrestricted alternative and records a limitation. It never emulates the mutation. Widening is scoped to the mechanism: only containers write adapted values back, so a bare primitive transform as an earlier union branch keeps `anyOf`.
 
-The [CLI reference](../../../../apps/cli/reference/README.md#config-schema-dump) documents the resulting behavior; [app-boot](../../../../packages/boot/app-boot/README.md) owns the collector API.
+The CLI reference (`../../../../apps/cli/reference/README.md#config-schema-dump`) documents the resulting behavior; app-boot (`../../../../packages/boot/app-boot/README.md`) owns the collector API.
 
 ## Alternatives considered
 

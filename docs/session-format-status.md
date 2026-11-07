@@ -17,13 +17,13 @@ Use this reference to distinguish the checkout writer, the accepted compatibilit
 <a id="sources-of-truth"></a>
 ## Sources of truth
 
-- **Checkout writer:** `SESSION_FORMAT_VERSION` in [core Session types](../packages/core/session/src/types.ts) is the only hand-maintained current-writer number in code. The [catalog generator](../scripts/gen-session-format-catalog.ts) derives codec ordering and checks that adjacent migrations reach it. A package version, codec export name, fixture filename, or projection-cache version is not the writer authority.
+- **Checkout writer:** `SESSION_FORMAT_VERSION` in core Session types (`../packages/core/session/src/types.ts`) is the only hand-maintained current-writer number in code. The catalog generator (`../scripts/gen-session-format-catalog.ts`) derives codec ordering and checks that adjacent migrations reach it. A package version, codec export name, fixture filename, or projection-cache version is not the writer authority.
 - **Latest released format:** `latestReleasedVersion` in the following record identifies the published Session format. `evidenceTag` names a published product release whose tagged writer has that value; it need not be the first release carrying the format. The bilingual copy is checked against the same record, not maintained as a separate decision.
 - **Release status:** compare the writer constant with the verified release record. Equality means the writer format has shipped. A greater writer version is not yet recorded as published; its finalization record independently identifies the accepted compatibility baseline. When comparing an older checkout against a newer branch’s verified record, a lower writer version identifies an older writer format; the local consistency gate rejects that ordering within one checkout. No separate released boolean is maintained. Before declaring a greater version unreleased, verify that no published release has advanced the record.
 
 An alpha, beta, or release-candidate product publication establishes released Session-format obligations. GitHub’s prerelease flag does not make persisted user data disposable. A missing release record is not evidence of non-publication. The [versioning and authority decision](../.agents/notes/implemented/architecture/2026-08-10-session-log-version-mechanism.md) owns compatibility decisions; [released-format migration](../.agents/notes/implemented/architecture/2026-08-31-released-session-format-migrations.md) owns immutable generations and adjacent conversion.
 
-The [format references](persistence-changes/historical-formats/README.md) document every integer from zero through the checkout writer, with historical schemas and the existing current catalog.
+The format references (`persistence-changes/historical-formats/README.md`) document every integer from zero through the checkout writer, with historical schemas and the existing current catalog.
 
 <a id="finalization-record"></a>
 ## Finalization record
@@ -32,7 +32,7 @@ The [format references](persistence-changes/historical-formats/README.md) docume
 latestFinalizedVersion: 4
 ```
 
-V4 has an accepted compatibility baseline in the [checkpoint](persistence-changes/finalized/v4.json). Schema changes may remain V4 when the [reader-compatibility rules](persistence-changes/README.md#compatibility-rules) are satisfied and the required review is recorded. A version-bump decision requires a higher writer version and its own header transition; it cannot reuse the accepted 3→4 transition. Accepted machine records and after schemas remain immutable.
+V4 has an accepted compatibility baseline in the checkpoint (`persistence-changes/finalized/v4.json`). Schema changes may remain V4 when the reader-compatibility rules (`persistence-changes/README.md#compatibility-rules`) are satisfied and the required review is recorded. A version-bump decision requires a higher writer version and its own header transition; it cannot reuse the accepted 3→4 transition. Accepted machine records and after schemas remain immutable.
 
 Finalization does not freeze every future V4 addition and does not assert publication. The release record below retains the independently verified published version. Ordinary comments, aliases, source locations, and implementation fixes preserving the accepted meaning do not change this baseline.
 

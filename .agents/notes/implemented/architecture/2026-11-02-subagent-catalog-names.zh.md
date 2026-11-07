@@ -18,7 +18,7 @@ Session id 仍是路由、授权、持久化、任务归属和导航使用的唯
 
 根的名称始终为 `lead`。后代的完整名称是从根开始、以斜杠分隔的名称路径，不带 `lead/` 前缀，例如 `reviewer/checker`。同级唯一的各段使完整名称在整棵树中唯一。目录条目早于名称机制的子级及其下所有后代继续以 Session id 作为名称。
 
-`ctx.subagents.resolveName()` 只读取路径上的目录，为 `lead` 或完整名称返回 Session id；其他文本原样作为 Session id 返回。工具先解析名称，再调用消息、中断或 Team 分配，由这些操作对解析出的 Session id 授权。解析本身不授予权限。运行时撰写的文本以完整名称指称 agent，而 `senderSessionId` 和 Team `ownerId` 等持久归属仍保留 Session id。[subagent 运行时](../../../../packages/subagent/subagent/README.zh.md#agent-names)定义 API 约定，[升级指南](../../../../docs/upgrade-guide/v0.2.2-alpha.3/subagent-names/guide.zh.md)负责调用方迁移。
+`ctx.subagents.resolveName()` 只读取路径上的目录，为 `lead` 或完整名称返回 Session id；其他文本原样作为 Session id 返回。工具先解析名称，再调用消息、中断或 Team 分配，由这些操作对解析出的 Session id 授权。解析本身不授予权限。运行时撰写的文本以完整名称指称 agent，而 `senderSessionId` 和 Team `ownerId` 等持久归属仍保留 Session id。subagent 运行时 (`../../../../packages/subagent/subagent/README.zh.md#agent-names`)定义 API 约定，[升级指南](../../../../docs/upgrade-guide/v0.2.2-alpha.3/subagent-names/guide.zh.md)负责调用方迁移。
 
 本决策取代 [Agent Teams 队友是子代理](2026-10-15-agent-teams-as-subagents.zh.md)中对“以唯一名称选择性启用同级路由”的否决以及“创建不接收成员名称”的表述，并取代[必需运行时身份](2026-10-13-team-identity-runtime-context.zh.md)中以 Session id 表述身份的文本。它们的单一身份、Team 和运行时上下文保留决策仍然有效。
 
@@ -34,7 +34,7 @@ Session id 仍是路由、授权、持久化、任务归属和导航使用的唯
 
 ## Consequences
 
-第 3 版目录载荷是同格式增量：`SESSION_FORMAT_VERSION` 不变，当前读取器接受第 0 至第 3 版，早于名称机制的发布会明确拒绝第 3 版。`subagentCatalog` 投影状态版本保持为 6，因为旧检查点事实的含义不变，且能继续处理具名后缀事件；使其失效会在冷后代观察时增加完整目录折叠，却不改变恢复结果。原生准入会拒绝自身目录事实中重复的同级名称，因此会让名称查找产生歧义的日志在解析任何成员之前就失败。[持久化确认记录](../../../../docs/persistence-changes/2026-11-02-subagent-catalog-names.zh.md)记录了该类型变更。
+第 3 版目录载荷是同格式增量：`SESSION_FORMAT_VERSION` 不变，当前读取器接受第 0 至第 3 版，早于名称机制的发布会明确拒绝第 3 版。`subagentCatalog` 投影状态版本保持为 6，因为旧检查点事实的含义不变，且能继续处理具名后缀事件；使其失效会在冷后代观察时增加完整目录折叠，却不改变恢复结果。原生准入会拒绝自身目录事实中重复的同级名称，因此会让名称查找产生歧义的日志在解析任何成员之前就失败。持久化确认记录 (`../../../../docs/persistence-changes/2026-11-02-subagent-catalog-names.zh.md`)记录了该类型变更。
 
 每个委派工具的 schema 增加一个可选 `name` 参数，`send_message` 和 `interrupt_agent` 把 `agent_id` 改名为 `agent`。这些 schema 变更会在升级后使缓存的请求前缀失效一次。对浅层树而言，身份运行时上下文、回执、结算通知、agent 消息和列表行都变短，完整名称则随嵌套深度变长。`list_agents` 不再携带父级 id 和深度，因为完整名称已包含这两项信息。
 

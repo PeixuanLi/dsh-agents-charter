@@ -12,7 +12,7 @@ PDF 转换会丢失工作表导航以及公式与已保存值之间的关系。�
 
 ## 决策
 
-[文档预览](../../../../packages/client/ui-sidebar-documentpreview/README.zh.md#excel-preview)使用 FortuneSheet 与包内 ExcelJS、SheetJS CE 和 PapaParse 适配层打开 XLSX、XLS、CSV 和 TSV。适配层接收字节、格式和限制并返回工作表数据，不包含 React 状态设置器、计时器或组件引用。依赖库负责文件解析，适配层复用显示格式化和初始选区，不引入另一种工作簿模型。CSV/TSV 保留字面字符串和纯文本选项；隐式类型推断可能丢失前导零或把源文本解释为公式。共享文档读取器调用 `remote.workspaceFiles.readBytes(sessionId, path, {}, signal)`，并通过二进制 Remote 直接接收原生字节，保留 Session 授权、文件版本、重新载入和临时字节，无需 base64 解码。Workspace Files 负责有界文件读取，格式解析留在 Client。注册仅将 XLSX/XLS 标为 `binaryExtensions`，共享文档容器因此为 CSV/TSV 提供纯文本选项。每个渲染器以自己的 id 注册正文。
+文档预览 (`../../../../packages/client/ui-sidebar-documentpreview/README.zh.md#excel-preview`)使用 FortuneSheet 与包内 ExcelJS、SheetJS CE 和 PapaParse 适配层打开 XLSX、XLS、CSV 和 TSV。适配层接收字节、格式和限制并返回工作表数据，不包含 React 状态设置器、计时器或组件引用。依赖库负责文件解析，适配层复用显示格式化和初始选区，不引入另一种工作簿模型。CSV/TSV 保留字面字符串和纯文本选项；隐式类型推断可能丢失前导零或把源文本解释为公式。共享文档读取器调用 `remote.workspaceFiles.readBytes(sessionId, path, {}, signal)`，并通过二进制 Remote 直接接收原生字节，保留 Session 授权、文件版本、重新载入和临时字节，无需 base64 解码。Workspace Files 负责有界文件读取，格式解析留在 Client。注册仅将 XLSX/XLS 标为 `binaryExtensions`，共享文档容器因此为 CSV/TSV 提供纯文本选项。每个渲染器以自己的 id 注册正文。
 
 预览为只读，同时保留公式文本与已保存结果。它不重新计算，因此不受支持的函数不会用错误覆盖有效的已保存结果。没有已保存结果的公式保持为空。包含公式的工作簿会在公式图标旁显示紧凑提示，不再用整行提示占用工作表高度。该表格既不是编写工具，也不是完整的 Excel 渲染引擎。
 
@@ -20,9 +20,9 @@ PDF 转换会丢失工作表导航以及公式与已保存值之间的关系。�
 
 独立可释放的浏览器 Worker 承担解析 CPU 工作。解析前检查源文件字节限制，FortuneSheet 分配矩阵前检查矩形区域合计限制，并通过超时终止停滞的解析。这些限制不代表严格的内存沙箱。样式限定在渲染器区域内，外部超链接仅显示为文本。
 
-固定版本的 FortuneSheet React 依赖带有一个[补丁](../../../../patches/@fortune-sheet__react@1.0.4.patch)：只读输入框仅在启用公式引用高亮时才提交布局状态更新。无条件更新会在仓库交付的 React 18.3.1 运行时下切换工作表时触发最大更新深度错误。激活工作表时还会保留适配层提供的完整初始选区，避免清空后留下空白或无效地址。浏览器场景通过打包后的 ESM 入口覆盖这些故障。
+固定版本的 FortuneSheet React 依赖带有一个补丁 (`../../../../patches/@fortune-sheet__react@1.0.4.patch`)：只读输入框仅在启用公式引用高亮时才提交布局状态更新。无条件更新会在仓库交付的 React 18.3.1 运行时下切换工作表时触发最大更新深度错误。激活工作表时还会保留适配层提供的完整初始选区，避免清空后留下空白或无效地址。浏览器场景通过打包后的 ESM 入口覆盖这些故障。
 
-只读公式栏直接读取原始 `cell.f`，通过 `textContent` 写入公式和单元格文本。FortuneSheet 的公式格式化器会生成含有文档文本的 HTML span，其 HTML 辅助函数会原样放行公式和以 `<span` 开头的字符串。只读模式和解析 Worker 都不能隔离这部分 DOM。[core 补丁](../../../../patches/@fortune-sheet__core@1.0.4.patch)会对复制的单元格内容进行 HTML 转义，包括字面字符串和已保存的公式结果，同时保留剪贴板表格及其格式。
+只读公式栏直接读取原始 `cell.f`，通过 `textContent` 写入公式和单元格文本。FortuneSheet 的公式格式化器会生成含有文档文本的 HTML span，其 HTML 辅助函数会原样放行公式和以 `<span` 开头的字符串。只读模式和解析 Worker 都不能隔离这部分 DOM。core 补丁 (`../../../../patches/@fortune-sheet__core@1.0.4.patch`)会对复制的单元格内容进行 HTML 转义，包括字面字符串和已保存的公式结果，同时保留剪贴板表格及其格式。
 
 core 补丁还在 `allowEdit === false` 时跳过冻结分隔线的绘制，保留冻结窗格计算和编辑模式下的分隔线。这些分隔线由 Canvas 绘制，因此局部 CSS 无法修改。预览区域内的 CSS 隐藏行列冻结拖拽条。ESM 和 CommonJS 入口应用相同补丁。升级 FortuneSheet 时需要重新检查工作表切换、完整初始选区、公式栏字面文本、经过转义的表格复制，以及冻结窗格的绘制和滚动。
 
@@ -36,7 +36,7 @@ core 补丁还在 `allowEdit === false` 时跳过冻结分隔线的绘制，保�
 
 **替换 ExcelJS 或要求用户重写文件。** 更换解析器会使现有字体、边框、合并及冻结窗格的保留面临风险。重写源文件则把查看器缺陷交给用户处理。临时预览副本同时保留现有适配器和用户文件。
 
-**保留 PDF 作为 Excel 兜底，或在导入时计算所有公式。** PDF 无法保留表格交互与公式查看，而重新计算可能改变已保存结果。[Office 引擎参考](../../../../packages/document/office-to-pdf/README.zh.md)仍适用于 Word/PowerPoint 预览与独立转换使用方；转换能力仍支持表格。
+**保留 PDF 作为 Excel 兜底，或在导入时计算所有公式。** PDF 无法保留表格交互与公式查看，而重新计算可能改变已保存结果。Office 引擎参考 (`../../../../packages/document/office-to-pdf/README.zh.md`)仍适用于 Word/PowerPoint 预览与独立转换使用方；转换能力仍支持表格。
 
 ## 影响
 

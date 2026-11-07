@@ -20,7 +20,7 @@ Nothing named an agent that joined no preset. The join is a scope-parent link; w
 
 **Entry points join Agents explicitly.** No runtime check rejects an unjoined Agent, because a bare Agent can legally be bound later through `recompose`.
 
-Projection key presence is not a per-session capability signal ([session projection](../../../../packages/session/session-projection/README.md)). Temporary plugins mounted through `cordis_mount` belong to the composition rather than the invoking session ([tool Cordis](../../../../packages/extensions/tool-cordis/README.md)). [Declarative presets](2026-09-18-declarative-agent-presets.md) own revision retention and reclaim retired trees after their final reference releases.
+Projection key presence is not a per-session capability signal (session projection (`../../../../packages/session/session-projection/README.md`)). Temporary plugins mounted through `cordis_mount` belong to the composition rather than the invoking session (tool Cordis (`../../../../packages/extensions/tool-cordis/README.md`)). [Declarative presets](2026-09-18-declarative-agent-presets.md) own revision retention and reclaim retired trees after their final reference releases.
 
 ## Testing
 

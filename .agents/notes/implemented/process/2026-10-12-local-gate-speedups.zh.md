@@ -39,11 +39,11 @@ Status: implemented
 ### 1. 类型检查不打包地生成 Typert 声明
 
 - **目的：** 让 `typecheck` 以及 `lint`、`lint:fix`、`doc-typecheck` 与 CI `typert-contracts` 门禁的前置步骤得到它们读取的声明，即 `tsc` 产出的包声明与 Typert 声明，而不运行 Host tsdown 阶段或 Desktop bundle。
-- **改动：** `typecheck` 是 `tsx scripts/build.ts --scope typecheck`，它通过 run-gates 调度器运行下表中的步骤（[`scripts/build.ts`](../../../../scripts/build.ts)）。该 scope 不构建 native addon、tsdown bundle、Desktop bundle 或 Web 产物，不写 client build record，可运行的 `lib/` 产物保持上一次 `build:artifacts` 的状态；启动或测试构建产物之前先运行 `build:artifacts`。`lint`、`lint:fix`、`doc-typecheck` 与 `typert-contracts` 的前置步骤是 `compile-referenced-projects.ts host-contracts`，它在 host-src 之前运行 host-typert（[`compile-referenced-projects.ts`](../../../../scripts/compile-referenced-projects.ts)）。`build`、`build:artifacts`、benchmark 构建与 vendor 演练都在编译前采用同一仅源码生成（[顺序决策](2026-10-18-source-first-metadata-builds.zh.md)）。
+- **改动：** `typecheck` 是 `tsx scripts/build.ts --scope typecheck`，它通过 run-gates 调度器运行下表中的步骤（`scripts/build.ts` (`../../../../scripts/build.ts`)）。该 scope 不构建 native addon、tsdown bundle、Desktop bundle 或 Web 产物，不写 client build record，可运行的 `lib/` 产物保持上一次 `build:artifacts` 的状态；启动或测试构建产物之前先运行 `build:artifacts`。`lint`、`lint:fix`、`doc-typecheck` 与 `typert-contracts` 的前置步骤是 `compile-referenced-projects.ts host-contracts`，它在 host-src 之前运行 host-typert（`compile-referenced-projects.ts` (`../../../../scripts/compile-referenced-projects.ts`)）。`build`、`build:artifacts`、benchmark 构建与 vendor 演练都在编译前采用同一仅源码生成（[顺序决策](2026-10-18-source-first-metadata-builds.zh.md)）。
 
-- **共用生成：** [`scripts/generate-typert.ts`](../../../../scripts/generate-typert.ts) 对 `WORKSPACE_TYPERT_FACES`（[`scripts/typert-faces.ts`](../../../../scripts/typert-faces.ts)，即仓库生成的 face）调用 `WorkspaceTypertGenerator.generateContributors()`，并用 [`artifact-files.ts`](../../../../packages/typert/generator/src/artifact-files.ts) 中插件同样使用的 `writeWorkspaceArtifacts()` 写出结果。与插件一样，它跳过 TypeScript 诊断，这些诊断由 Host 包编译报告；Typert 分析错误使 host-typert 失败，依赖它的编译不会启动。host-typert 由 Node 加 tsx 的 ESM 钩子运行，而不经 `pnpm exec`，因为后者的启动开销会拉长通往 Client 编译的路径。
+- **共用生成：** `scripts/generate-typert.ts` (`../../../../scripts/generate-typert.ts`) 对 `WORKSPACE_TYPERT_FACES`（`scripts/typert-faces.ts` (`../../../../scripts/typert-faces.ts`)，即仓库生成的 face）调用 `WorkspaceTypertGenerator.generateContributors()`，并用 `artifact-files.ts` (`../../../../packages/typert/generator/src/artifact-files.ts`) 中插件同样使用的 `writeWorkspaceArtifacts()` 写出结果。与插件一样，它跳过 TypeScript 诊断，这些诊断由 Host 包编译报告；Typert 分析错误使 host-typert 失败，依赖它的编译不会启动。host-typert 由 Node 加 tsx 的 ESM 钩子运行，而不经 `pnpm exec`，因为后者的启动开销会拉长通往 Client 编译的路径。
 - **以 build mode 运行聚合检查：** host-check 与 client-check 在本侧 face 的包编译之后才开始，因此 build mode 发现所有 references 都是最新的，只检查聚合根程序，并在根程序的 tsbuildinfo 为最新时跳过它。
-- **只读源码的分析：** host-typert 能在 host-src 之前运行，是因为它的 Host program 不读取任何工作区构建产物。`tsconfig.base.json` 把 `@deepseek-ai/dsh-client-file-upload/types` 映射到源码；没有这条别名时，该说明符经包 `exports` 解析到 `lib/types/types.d.ts`。有了它，Host program 加载 1,289 个文件，其中没有一个位于工作区包的 `lib/` 下。`generate-typert.ts` 开启 `rejectBuildOutputs`：face program 加载工作区包 `lib/` 目录下的文件，或无法解析对工作区包的 import（例如包尚未编译的工作区）时，[`build-output-guard.ts`](../../../../packages/typert/generator/src/build-output-guard.ts) 以 `TypertAnalysisError` 使分析失败，并指出每个这样的 import 说明符，以及把它映射到源码的 `paths` 条目。因此无论 host-src 是否已运行，缺失的别名都会使生成失败。公开 tsdown 插件保留独立的生成策略；根产物构建使用仅源码阶段。[Typert generator README](../../../../packages/typert/generator/README.zh.md) 记录了这些写入函数与该选项。
+- **只读源码的分析：** host-typert 能在 host-src 之前运行，是因为它的 Host program 不读取任何工作区构建产物。`tsconfig.base.json` 把 `@deepseek-ai/dsh-client-file-upload/types` 映射到源码；没有这条别名时，该说明符经包 `exports` 解析到 `lib/types/types.d.ts`。有了它，Host program 加载 1,289 个文件，其中没有一个位于工作区包的 `lib/` 下。`generate-typert.ts` 开启 `rejectBuildOutputs`：face program 加载工作区包 `lib/` 目录下的文件，或无法解析对工作区包的 import（例如包尚未编译的工作区）时，`build-output-guard.ts` (`../../../../packages/typert/generator/src/build-output-guard.ts`) 以 `TypertAnalysisError` 使分析失败，并指出每个这样的 import 说明符，以及把它映射到源码的 `paths` 条目。因此无论 host-src 是否已运行，缺失的别名都会使生成失败。公开 tsdown 插件保留独立的生成策略；根产物构建使用仅源码阶段。Typert generator README (`../../../../packages/typert/generator/README.zh.md`) 记录了这些写入函数与该选项。
 - **无损依据：** 没有任何工作区 tsconfig 设置 `allowJs`，每个 `exports` 的 `types` 条件都指向 `lib/types/` 内或 `lib/typert.*`，每个 tsdown 配置都设置 `dts: false`，因此没有类型检查读取 tsdown 产物。140 个 Typert 文件（28 个包 × 5 个输出）在以下场景中逐字节一致：基线 tsdown 阶段、当前 tsdown 阶段、删除全部 Typert 输出后运行 `generate-typert.ts`、隐藏全部 344 个 `lib/types` 目录后运行 `generate-typert.ts`；临时给 `packages/goal/goal` 加一个 Remote 方法时，tsdown 阶段与 `generate-typert.ts` 写出的文件也相同。`typecheck` 检查两个 face 的全部包 project 与两个聚合根程序，即 `build` 检查的程序。
 - **性能：** 无需重查时 `typecheck` 为 34.1/35.0 → 21.9/20.0 s。两个聚合根程序都需要重查时为 83.5 → 76.0/72.1 s，其关键路径是约 66–70 s 的 Host 聚合检查。`lint` 与 `doc-typecheck` 的前置步骤为 52.2/29.6 → 12.5/11.3 s。
 - **取舍：** `typecheck`、`lint`、`lint:fix`、`doc-typecheck` 与 `typert-contracts` 写出 Typert 声明但不写 bundle，因此在下一次 `build:artifacts` 之前，可运行的 `lib/` JavaScript 可能落后于这些声明。
@@ -52,7 +52,7 @@ Status: implemented
 
 ### 2. pre-commit 钩子不重新生成第三方声明
 
-- **改动：** [`lefthook.yml`](../../../../lefthook.yml) 中的 `pre-commit` 钩子没有第三方声明任务。[`gen-third-party-notices.spec.ts`](../../../../scripts/gen-third-party-notices.spec.ts) 在测试 lane（包括必过的 `node 24 / coverage` lane）中断言 `THIRD_PARTY_NOTICES.md` 已提交的字节，过期时指出 `pnpm run gen-third-party-notices`。[生成的第三方声明 Note](2026-07-30-generated-third-party-notices.zh.md) 拥有这一新鲜度决策。
+- **改动：** [`lefthook.yml`](../../../../lefthook.yml) 中的 `pre-commit` 钩子没有第三方声明任务。`gen-third-party-notices.spec.ts` (`../../../../scripts/gen-third-party-notices.spec.ts`) 在测试 lane（包括必过的 `node 24 / coverage` lane）中断言 `THIRD_PARTY_NOTICES.md` 已提交的字节，过期时指出 `pnpm run gen-third-party-notices`。[生成的第三方声明 Note](2026-07-30-generated-third-party-notices.zh.md) 拥有这一新鲜度决策。
 - **性能：** 暂存一个位于包 `src/` 子目录下的文件的提交，钩子耗时由 16.5/17.8 s 降为 4.3/4.5 s，其中第三方声明任务占 12.4/13.4 s。
 - **取舍：** 使第三方声明过期的提交会在推送后于测试 lane 失败，而不是在提交时被修正。
 
@@ -90,11 +90,11 @@ Status: implemented
 | markdown links（[`verify-md-links.ts`](../../../../scripts/verify-md-links.ts)） | 一个按运行划分的缓存对每个文件只解析一次，同时取得其 destination 与锚点，并对每个解析后的目标只探测一次 | 53.4/51.6 → 25.9/25.1 s |
 | translation pairing（[`verify-translation-pairing.ts`](../../../../scripts/verify-translation-pairing.ts)） | 一次 glob 覆盖所有范围 pattern；record 在下述守卫条件下复用原文语法树 | 51.0/47.1 → 30.3/29.3 s |
 | package README model experience、package README limitations | 每项检查对一个 README 只解析一次，并把语法树传给 `markdownProseLines()` 与 `markdownHeadingLines()` | 各约 12 → 5.9 s |
-| type equivalence（[`verify-type-equiv.ts`](../../../../scripts/verify-type-equiv.ts)） | 文本预筛跳过不可能含源码等价围栏的文档；manifest（元数据清单）中的每个 TypeScript 源文件只解析一次 | 23.0/22.5 → 6.0/5.5 s |
+| type equivalence（`verify-type-equiv.ts` (`../../../../scripts/verify-type-equiv.ts`)） | 文本预筛跳过不可能含源码等价围栏的文档；manifest（元数据清单）中的每个 TypeScript 源文件只解析一次 | 23.0/22.5 → 6.0/5.5 s |
 | Session format references | persistence 渲染器把它解析出的语法树传给配对 record | 10.2 → 5.3 s |
 
 - **配对复用守卫：** [`translation-pairing-record.ts`](../../../../scripts/translation-pairing-record.ts) 中的 `normalizedTopLevelBlocks()` 仅在以下条件同时成立时，才为归一化后的文本复用原文语法树：每处链接归一化编辑都替换一个完整、无 title 且不在行首开始的 destination，原文等于该节点的 `url`，且原文与替换文本都只含 `[A-Za-z0-9._/:#%-]`。这些字符既不能结束 destination，也不能开始或结束其他语法结构，因此归一化后的文本解析出相同的节点，只是偏移量随之移动。其他任何编辑都回退为对归一化文本的完整解析。
-- **type equivalence 预筛：** [`type-equiv-prefilter.ts`](../../../../scripts/type-equiv-prefilter.ts) 在文档含 `type-equiv` 或 `public-api`，或者某个含 `` ``` `` 或 `~~~` 的行同时含 `&` 或 `\` 时，保留该文档进行解析。解析只会通过解码字符引用与反斜杠转义改变信息字符串，因此 `ts type&#45;equiv` 与 `ts type\-equiv` 所在的文档都会被保留；[`type-equiv-prefilter.spec.ts`](../../../../scripts/type-equiv-prefilter.spec.ts) 覆盖这两种写法。
+- **type equivalence 预筛：** `type-equiv-prefilter.ts` (`../../../../scripts/type-equiv-prefilter.ts`) 在文档含 `type-equiv` 或 `public-api`，或者某个含 `` ``` `` 或 `~~~` 的行同时含 `&` 或 `\` 时，保留该文档进行解析。解析只会通过解码字符引用与反斜杠转义改变信息字符串，因此 `ts type&#45;equiv` 与 `ts type\-equiv` 所在的文档都会被保留；`type-equiv-prefilter.spec.ts` (`../../../../scripts/type-equiv-prefilter.spec.ts`) 覆盖这两种写法。
 - **无损依据：** 每个门禁在仓库上的输出逐字节一致，人为注入的错误也被同样报告。对配对而言，语料中全部 1,886 个文档的顶层块与全部 943 个配对的 record 都与完整重新解析的结果一致，随机 destination 的结果也一致。
 
 ### 6. 仓库文件遍历每个目录只列一次
@@ -106,14 +106,14 @@ Status: implemented
 
 ### 7. CLI help 读取并发运行；doc graphs 的探测做 memo
 
-- **CLI help：** [`scripts/gen-cli-help.ts`](../../../../scripts/gen-cli-help.ts) 中的 `prefetchHelp()` 在默认 worker 预算内启动 12 个顶层 `dsh … --help` 读取（启动器、`plugin`，以及每个 profile 的简写与 `--profile` 形式），每个读取使用独立的临时 `DSH_HOME` 与 `DSH_AGENTS_HOME`，并由按原顺序进行的遍历消费；嵌套读取共享同一上限。失败的读取在遍历请求该调用时才交给遍历；`close()` 中止排队与运行中的读取，并等待每个已启动的子进程结束。该门禁为 49.9/53.9 → 6.9/7.2 s。
-- **doc graphs：** [`scripts/gen-doc-graphs.ts`](../../../../scripts/gen-doc-graphs.ts) 中的 `withMemoizedFileSystemProbes()` 在 `renderDocs` 运行期间对 `ts.sys` 的 `fileExists`、`directoryExists`、`realpath`、`readDirectory` 与 `getDirectories` 做 memo，使一次运行中的所有编译器 host 与配置解析共享同一个文件系统视图。运行期间工作区不得改变，写出页面之前恢复原方法。该门禁为 48.7/44.7 → 32.7/34.2 s。
+- **CLI help：** `scripts/gen-cli-help.ts` (`../../../../scripts/gen-cli-help.ts`) 中的 `prefetchHelp()` 在默认 worker 预算内启动 12 个顶层 `dsh … --help` 读取（启动器、`plugin`，以及每个 profile 的简写与 `--profile` 形式），每个读取使用独立的临时 `DSH_HOME` 与 `DSH_AGENTS_HOME`，并由按原顺序进行的遍历消费；嵌套读取共享同一上限。失败的读取在遍历请求该调用时才交给遍历；`close()` 中止排队与运行中的读取，并等待每个已启动的子进程结束。该门禁为 49.9/53.9 → 6.9/7.2 s。
+- **doc graphs：** `scripts/gen-doc-graphs.ts` (`../../../../scripts/gen-doc-graphs.ts`) 中的 `withMemoizedFileSystemProbes()` 在 `renderDocs` 运行期间对 `ts.sys` 的 `fileExists`、`directoryExists`、`realpath`、`readDirectory` 与 `getDirectories` 做 memo，使一次运行中的所有编译器 host 与配置解析共享同一个文件系统视图。运行期间工作区不得改变，写出页面之前恢复原方法。该门禁为 48.7/44.7 → 32.7/34.2 s。
 - **无损依据：** 两个生成器生成的页面逐字节一致。
 - **取舍：** 并发的 help 进程合计峰值约占 3.6 GB 内存。
 
 ### 8. `type-model.spec.ts` 在内存工作区上运行
 
-- **改动：** [`type-model.spec.ts`](../../../../packages/typert/generator/tests/type-model.spec.ts) 用 [`type-model-workspace.ts`](../../../../packages/typert/generator/tests/type-model-workspace.ts) 中的 `memoryFileSystem()` mock `node:fs` 与 `ts.sys` host，使内存根目录下的 fixture 复制、用例编辑、写模式注解、tsconfig 展开与模块解析都不触及磁盘。每个工作区挂载最小的 `zod` 与 `@types/node` 声明桩；只有 Emitter 用例保留真实 zod。fixture 的 `tsconfig.base.json` 设置 `lib: ["ES2024"]`，不含 DOM lib；读取未修改 fixture 的用例共享一份深度冻结的分析结果。generator 源码没有任何测试专用路径。
+- **改动：** `type-model.spec.ts` (`../../../../packages/typert/generator/tests/type-model.spec.ts`) 用 `type-model-workspace.ts` (`../../../../packages/typert/generator/tests/type-model-workspace.ts`) 中的 `memoryFileSystem()` mock `node:fs` 与 `ts.sys` host，使内存根目录下的 fixture 复制、用例编辑、写模式注解、tsconfig 展开与模块解析都不触及磁盘。每个工作区挂载最小的 `zod` 与 `@types/node` 声明桩；只有 Emitter 用例保留真实 zod。fixture 的 `tsconfig.base.json` 设置 `lib: ["ES2024"]`，不含 DOM lib；读取未修改 fixture 的用例共享一份深度冻结的分析结果。generator 源码没有任何测试专用路径。
 - **性能：** 单独运行该文件为 316.3/329.1 → 14.65/15.04 s。
 - **行为覆盖保持不变的依据：** 61 个用例名及其断言相同。快照只有一行不同，即外部 zod 符号路径，它指向桩（`<external>:node_modules/zod/index.d.ts#ZodType`），而不是某个 pnpm store 版本。
 - **取舍：** 除 Emitter 用例外，该 spec 不针对真实文件系统、DOM lib 以及真实 zod 与 `@types/node` 声明检验分析器。内存文件系统只实现分析器使用的 `node:fs` 调用（`existsSync`、`readFileSync`、`realpathSync` 与 `writeFileSync`）；对内存路径的其他调用会落到真实文件系统，而该路径并不存在。

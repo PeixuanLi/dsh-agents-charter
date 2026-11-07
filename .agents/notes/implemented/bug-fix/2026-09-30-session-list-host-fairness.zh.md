@@ -10,13 +10,13 @@ Status: implemented
 
 ## 决策
 
-[ApiSessionList](../../../../packages/api/session-controller/src/list.ts) 对分类和摘要生成共享一个单调时钟截止时间。仅当经过的工作时间耗尽配置的 `listWorkSliceMs` 时才让出，并在等待结束后建立新的截止时间。这个可选部署设置默认为 16 毫秒，要求正整数。小列表没有强制的最后一次让出，也不经过空操作异步 helper。每行、每次让出之后以及返回前检查取消；不会返回部分列表。
+ApiSessionList (`../../../../packages/api/session-controller/src/list.ts`) 对分类和摘要生成共享一个单调时钟截止时间。仅当经过的工作时间耗尽配置的 `listWorkSliceMs` 时才让出，并在等待结束后建立新的截止时间。这个可选部署设置默认为 16 毫秒，要求正整数。小列表没有强制的最后一次让出，也不经过空操作异步 helper。每行、每次让出之后以及返回前检查取消；不会返回部分列表。
 
 每行仍同步计算。live 行先于已进入队列的 cold 行，随后按活动时间稳定排序；列表不承诺跨 Session 的原子 cut。接入前已经排入队列的冷行仍是缓存行，Client 变更重放与 [cached/sequenced 优先级](../architecture/2026-09-19-projection-cache-listing-identity-and-cached-rows.zh.md)协调较新的 live 状态。不省略任何投影数据或校验。
 
 ## 测量与校准
 
-[生产入口基准](../../../../benchmarks/session-corpus/projection-list.bench.ts)测量真实 Session Controller、查询引擎、持久化、投影注册表与缓存，以及 storage domain。持久化夹具使用持久化拥有方的 `generationLogPath`、`toHeaderLine` 和 `compressZstdFrame`。全部内容都是确定性生成数据。准备和显式 GC 不计入耗时；内存采样时完整结果与 JSON 仍可达。
+生产入口基准 (`../../../../benchmarks/session-corpus/projection-list.bench.ts`)测量真实 Session Controller、查询引擎、持久化、投影注册表与缓存，以及 storage domain。持久化夹具使用持久化拥有方的 `generationLogPath`、`toHeaderLine` 和 `compressZstdFrame`。全部内容都是确定性生成数据。准备和显式 GC 不计入耗时；内存采样时完整结果与 JSON 仍可达。
 
 | 负载 | Session 数 | 状态观测数 | 请求记录数 | 状态 JSON |
 |---|---:|---:|---:|---:|
@@ -64,6 +64,6 @@ CI 使用经过时间的排队延迟与粗粒度吞吐量上限，而不是精�
 
 ## 后果
 
-[受控时钟测试](../../../../packages/api/session-controller/tests/list-scheduling.host.spec.ts)要求低开销行保持在同一同步时间片内，由预算耗尽和等待后重置决定让出，并在无需让出时也能响应取消。测试还保留了稳定并列排序和接入、移除、状态变更的交错行为。按时间判断的基准保护会拒绝不让出或仅首次让出的大状态工作，同时允许高效批处理。
+受控时钟测试 (`../../../../packages/api/session-controller/tests/list-scheduling.host.spec.ts`)要求低开销行保持在同一同步时间片内，由预算耗尽和等待后重置决定让出，并在无需让出时也能响应取消。测试还保留了稳定并列排序和接入、移除、状态变更的交错行为。按时间判断的基准保护会拒绝不让出或仅首次让出的大状态工作，同时允许高效批处理。
 
 单行、提供方枚举、GC、最终排序和序列化都可能超出目标。并发列表和操作系统调度也会影响延迟。预算不是全局硬上限，这些测量也不宣称改善浏览器绘制或模型、网络延迟。

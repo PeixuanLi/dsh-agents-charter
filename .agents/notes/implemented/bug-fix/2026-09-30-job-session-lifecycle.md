@@ -16,7 +16,7 @@ The terminal record distinguishes a producer report from forced bookkeeping: `pr
 
 Facts are appended synchronously at the registry commit before live hub reactions and completion waiters resume. Recording errors warn independently: already-started work still has its control id, and a failed journal append cannot prevent cleanup or release of waiters. The Session's ordinary persistence and SDK notification paths own delivery after append. SDK `run()` results cover bounded observation windows and can receive a settlement whose registration belongs to an earlier run; settlement records retain the registration facts for that consumer.
 
-The [registry contract](../../../../packages/jobs/jobs/README.md) and [seam consolidation note](../architecture/2026-09-03-jobs-seam-consolidation.md) own live execution, resource ownership, and event routing. This journal adds durable observations without replacing those responsibilities.
+The registry contract (`../../../../packages/jobs/jobs/README.md`) and [seam consolidation note](../architecture/2026-09-03-jobs-seam-consolidation.md) own live execution, resource ownership, and event routing. This journal adds durable observations without replacing those responsibilities.
 
 ## Alternatives considered
 

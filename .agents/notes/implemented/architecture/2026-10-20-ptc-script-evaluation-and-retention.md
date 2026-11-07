@@ -14,7 +14,7 @@ The Node provider adds `executionMode: vm-script` and a separate `scriptPersiste
 
 This extends the mode-naming decision in [best-effort persistent PTC](2026-09-23-best-effort-persistent-ptc.md), whose ownership, non-durability and recovery decisions remain active. The Node provider selects its evaluator once and shares managed process mechanisms across temporary and retained lifetimes. AsyncFunction, REPL and Script remain separate evaluator implementations, so process reuse does not define syntax.
 
-VM Script uses a separate realm inside the managed child process. Top-level await uses the Node.js v26.6.0 REPL transform, with Acorn and acorn-walk supplying parsing and traversal. Detection precedes native compilation because non-strict Script can compile `await` as an identifier. The adapted visitors traverse computed method keys without entering method bodies. The source retains upstream attribution and license; the [package reference](../../../../packages/ptc-runtime/ptc-runtime-node/README.md#known-limitations-and-deferred-work) owns declaration and realm limitations.
+VM Script uses a separate realm inside the managed child process. Top-level await uses the Node.js v26.6.0 REPL transform, with Acorn and acorn-walk supplying parsing and traversal. Detection precedes native compilation because non-strict Script can compile `await` as an identifier. The adapted visitors traverse computed method keys without entering method bodies. The source retains upstream attribution and license; the package reference (`../../../../packages/ptc-runtime/ptc-runtime-node/README.md#known-limitations-and-deferred-work`) owns declaration and realm limitations.
 
 ## Alternatives considered
 

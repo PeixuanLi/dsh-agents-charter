@@ -27,4 +27,4 @@ pi-ai 从 1.1.0 升级到 1.3.0 时改变了以下默认行为。显式 profile 
 1. 检查 `cordis.patch.yml` 中的 `providers.<provider>.baseURL`、`api` 和 `compat` 覆盖配置。对于跟随上游 Kimi Coding 端点的覆盖配置，使用 Completions 协议和 `/v1` 路径。自定义网关必须显式保留其实际协议和路径。按需将 OpenCode URL 更新为 `/inference`。若希望使用目录默认值，请省略覆盖配置。
 2. 将 profile、preset 和 Session 中不受支持的推理选项替换为当前模型元数据列出的级别。
 3. 将切换模型后仍需要的事实放入用户消息或普通 assistant 回复；不要依赖先前的私有推理转换为可见文本。
-4. 出现 `MALFORMED_RESPONSE` 时，检查诊断中的无效参数，并修正模型或网关输出。用一个简短提示和一次工具调用验证受影响的路由。参见[配置参考](../../../../packages/llm/llm-pi-ai/README.zh.md)。
+4. 出现 `MALFORMED_RESPONSE` 时，检查诊断中的无效参数，并修正模型或网关输出。用一个简短提示和一次工具调用验证受影响的路由。参见配置参考 (`../../../../packages/llm/llm-pi-ai/README.zh.md`)。

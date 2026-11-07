@@ -8,9 +8,9 @@ English | [中文](reviewing-ui-design.zh.md)
 
 ## Summary
 
-Use this cookbook for explicitly requested comprehensive reviews and for evidence steps justified by a change's impact or regression risk. Ordinary development follows the lightweight path in the [UI change workflow](../../.agents/skills/dsh-client-ui-ux/SKILL.md#required-review-loop); it does not execute every section below. The [principles and case reference](../ui-design-review-cases.md) supplies judgment criteria, not a mandatory checklist. Existing tests, GUI PR GIFs and designer/product approval remain governed by their original owners.
+Use this cookbook for explicitly requested comprehensive reviews and for evidence steps justified by a change's impact or regression risk. Ordinary development follows the lightweight path in the [UI change workflow](../../.agents/skills/dsh-client-ui-ux/SKILL.md#required-review-loop); it does not execute every section below. The principles and case reference (`../ui-design-review-cases.md`) supplies judgment criteria, not a mandatory checklist. Existing tests, GUI PR GIFs and designer/product approval remain governed by their original owners.
 
-Check the complete icon box, including intentional internal whitespace, text columns and gaps before judging the drawn contour. Hit targets are not icon boxes; do not align each glyph’s painted pixels independently. See the [alignment principle](../ui-design-review-cases.md#alignment).
+Check the complete icon box, including intentional internal whitespace, text columns and gaps before judging the drawn contour. Hit targets are not icon boxes; do not align each glyph’s painted pixels independently. See the alignment principle (`../ui-design-review-cases.md#alignment`).
 
 Check associated icons and text against the [same-foreground rule](../../.agents/skills/dsh-client-ui-ux/references/icons.md#placement-and-use), including submenu values with chevrons and search placeholders with magnifiers. Compare rendered color and opacity in both themes; preserve semantic exceptions.
 
@@ -30,9 +30,9 @@ Check associated icons and text against the [same-foreground rule](../../.agents
 
 Identify the user task and affected page or modal. Record scope when several regions, consumers or design choices need coordination; a straightforward local change needs no separate plan. For an explicitly requested comprehensive review, enumerate the requested pages/modals and relevant states. Do not present local inspection as a whole-page result.
 
-Use the [judgment priorities](../ui-design-review-cases.md#judgment) across that scope: alignment and spatial grouping first, then density, hierarchy, states, component choice, icon optics and geometry. Express each finding as an observable relationship, such as content appearing closer to the next group than to its own label. Follow the user’s requested order and authorization; a full review can identify multiple related defects, and permission to implement routine adjustments does not replace the [required designer/product review](../../.agents/skills/dsh-client-ui-ux/SKILL.md#design-review-escalation).
+Use the judgment priorities (`../ui-design-review-cases.md#judgment`) across that scope: alignment and spatial grouping first, then density, hierarchy, states, component choice, icon optics and geometry. Express each finding as an observable relationship, such as content appearing closer to the next group than to its own label. Follow the user’s requested order and authorization; a full review can identify multiple related defects, and permission to implement routine adjustments does not replace the [required designer/product review](../../.agents/skills/dsh-client-ui-ux/SKILL.md#design-review-escalation).
 
-Read the [client UI skill](../../.agents/skills/dsh-client-ui-ux/SKILL.md) and the applicable architecture before editing. Use the [responsive skill](../../.agents/skills/dsh-responsive-ui/SKILL.md) for width and input changes, the [style reference](../web-styling.md) for tokens, and the [radius standard](../ui-radius.md) for corner geometry. This workflow adds review and evidence steps, not another set of visual tokens.
+Read the [client UI skill](../../.agents/skills/dsh-client-ui-ux/SKILL.md) and the applicable architecture before editing. Use the [responsive skill](../../.agents/skills/dsh-responsive-ui/SKILL.md) for width and input changes, the style reference (`../web-styling.md`) for tokens, and the radius standard (`../ui-radius.md`) for corner geometry. This workflow adds review and evidence steps, not another set of visual tokens.
 
 <a id="review-scope"></a>
 ### Select scope by visual impact
@@ -62,9 +62,9 @@ When diagnosing spacing, record layout boxes, margins, padding, line boxes and v
 
 ### Reconcile the baseline across the whole interface
 
-Use the [applicable-standards map](../ui-design-review-cases.md#review-baseline) to gather the current radius, material, typography, component, feedback, responsive and artwork rules that apply to this task. Record named exceptions and the relevant existing variants. When a personal or external skill differs, use the repository owner; when implementation differs from the owner, preserve the discrepancy as a finding rather than silently choosing one.
+Use the applicable-standards map (`../ui-design-review-cases.md#review-baseline`) to gather the current radius, material, typography, component, feedback, responsive and artwork rules that apply to this task. Record named exceptions and the relevant existing variants. When a personal or external skill differs, use the repository owner; when implementation differs from the owner, preserve the discrepancy as a finding rather than silently choosing one.
 
-Apply the [whole-page and modal principles](../ui-design-review-cases.md#whole-interface-review) to the selected scope. Keep the whole composition as context and compare affected regions and repeated relationships before using local fixtures for detail. Explicit full reviews cover every region; local corrections must preserve neighboring alignment, grouping, nested corners, clipping and focus.
+Apply the whole-page and modal principles (`../ui-design-review-cases.md#whole-interface-review`) to the selected scope. Keep the whole composition as context and compare affected regions and repeated relationships before using local fixtures for detail. Explicit full reviews cover every region; local corrections must preserve neighboring alignment, grouping, nested corners, clipping and focus.
 
 ### Make the relationships explicit
 
@@ -156,9 +156,9 @@ For an all-changes summary, trace each claim to the cumulative diff, current own
 
 Use these owners for the details needed by a particular review.
 
-- [UI design principles and review cases](../ui-design-review-cases.md) — whole-page and modal judgment, applicable rules, and explanatory examples.
+- UI design principles and review cases (`../ui-design-review-cases.md`) — whole-page and modal judgment, applicable rules, and explanatory examples.
 - [Rule ownership and maintenance](../../.agents/skills/dsh-client-ui-ux/SKILL.md#maintain-one-owner-per-rule) — where to change a principle and how local tools consume it.
-- [Web UI style reference](../web-styling.md) — component reuse and styling ownership.
+- Web UI style reference (`../web-styling.md`) — component reuse and styling ownership.
 
 <a id="dev-note"></a>
 ## Dev Note

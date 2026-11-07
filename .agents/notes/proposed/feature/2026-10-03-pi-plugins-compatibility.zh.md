@@ -96,8 +96,8 @@ Pi 把每个 Session 隔离在一个 worker 进程中，并计划通过其注册
 | 属性 | Chord 与 Pi | DSH | 受影响的级别 |
 |---|---|---|---|
 | 提供方替换 | 消费方持有句柄，每次访问时解析当前提供方；重载在句柄背后替换实现。 | 所注入服务发生变化的 fiber 会被卸载并重新运行。 | 1：Chord host 对 facet 之间的服务保持 Chord 的行为；映射进 Chord 的 DSH 服务仍会重启其适配器。 |
-| 故障隔离 | 每个 Session 一个 worker 进程。 | 所有 Session 共享 Host 进程，未捕获的异常或未处理的 rejection 会释放整个应用（[app-boot](../../../../packages/boot/app-boot/README.zh.md)）。 | 1–4 在 Host 中运行插件代码；5 消除这一差异。 |
-| Remote 声明 | host 根据运行时拿到的对象发布服务的远程成员。 | Remote 方法在构建时生成，Client 不在运行时发现 Host 服务（[remotes](../../../../packages/api/remotes/README.zh.md)）。 | 4 |
+| 故障隔离 | 每个 Session 一个 worker 进程。 | 所有 Session 共享 Host 进程，未捕获的异常或未处理的 rejection 会释放整个应用（app-boot (`../../../../packages/boot/app-boot/README.zh.md`)）。 | 1–4 在 Host 中运行插件代码；5 消除这一差异。 |
+| Remote 声明 | host 根据运行时拿到的对象发布服务的远程成员。 | Remote 方法在构建时生成，Client 不在运行时发现 Host 服务（remotes (`../../../../packages/api/remotes/README.zh.md`)）。 | 4 |
 | 共享状态 | 可复制的 JSON 状态，带操作批次、hydration 与缺口恢复，本地与远程通过同一 API 读取。 | 每个领域定义自己的快照与增量类型，或发布完整的投影值。 | 3、4 |
 | 运行时加载 | 每个 facet 一个 bundle，经完整性校验后在模块缓存之外加载。 | 包提前构建；已构建的安装不转译 TypeScript。 | 1 把 Chord 的打包器加为插件包的依赖。 |
 

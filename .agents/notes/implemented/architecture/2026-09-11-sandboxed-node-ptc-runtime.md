@@ -22,7 +22,7 @@ The host preserves `ELECTRON_RUN_AS_NODE` for child startup; the bootstrap remov
 
 File mode, observed denial and enforcement completeness travel in `PtcRunResult.sandbox` separately from the program outcome. Restricted execution fails if the required sandbox backend cannot launch. Full access is an explicit policy mode. Program success does not prove full enforcement, and neither the `process` descriptor nor the extra control pipe claims multi-tenant isolation.
 
-The [experimental Python provider](../../../../packages/experimental/ptc-runtime-python/README.md) shares the resolved file policy and sandbox diagnostics while retaining its local Unix execution and configured wall deadline. Per-call timeout overrides remain unsupported.
+The experimental Python provider (`../../../../packages/experimental/ptc-runtime-python/README.md`) shares the resolved file policy and sandbox diagnostics while retaining its local Unix execution and configured wall deadline. Per-call timeout overrides remain unsupported.
 
 ### Control and lifetime
 

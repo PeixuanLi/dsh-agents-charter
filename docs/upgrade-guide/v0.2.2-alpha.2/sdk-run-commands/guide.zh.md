@@ -9,7 +9,7 @@ description: "SDK run 识别原生命令，并在本次输入完成后返回 Run
 
 ## 变更
 
-Python 和 TypeScript 的 `run()` 通过原有入口接受字符串和内容块数组，始终返回 `RunResult`。受支持原生命令按定义身份和实际注册名识别。中英文别名跟随重命名的定义；无关的同名替代命令仍作为普通输入。见[支持的命令规则](../../../../packages/sdk/server/README.zh.md#command-input)。
+Python 和 TypeScript 的 `run()` 通过原有入口接受字符串和内容块数组，始终返回 `RunResult`。受支持原生命令按定义身份和实际注册名识别。中英文别名跟随重命名的定义；无关的同名替代命令仍作为普通输入。见支持的命令规则 (`../../../../packages/sdk/server/README.zh.md#command-input`)。
 
 `final_response` / `finalResponse` 包含最终助手文本；活动未输出助手文本时为空字符串。仅改变状态的命令返回原生 handler 的结果文本。`finish_reason` / `finishReason` 表示结束结果。每份结果都保留 Session id、根会话事件和会话树通知。仅改变状态的命令无需等待模型 turn；`/plan <task>` 等待其提交的活动，包括原生审阅及获批后的后续执行。目标创建和恢复跨越自动轮次等待，直到目标停止及最后的活动结束。底层严格命令调用仍在原生 handler 完成后返回 `CommandExecution`。
 

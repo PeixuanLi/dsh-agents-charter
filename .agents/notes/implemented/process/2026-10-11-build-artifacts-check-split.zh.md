@@ -30,12 +30,12 @@ Status: implemented
 
 - Client 编译读取仅源码元数据阶段生成的 Remote 声明。Desktop 打包仍在 Client 编译之前；改变该非数据依赖需要单独的证据。
 - 产物链保留 native → host-src 与 desktop-bundle → client-src 这两条非数据依赖；aggregate 检查在包编译后挂接；native 与元数据生成可以并行。
-- [`compile-referenced-projects.ts`](../../../../scripts/compile-referenced-projects.ts) 拥有包库步骤列表 `libraryBuildSteps`、references 参数构造 `referencedProjectsCompilerArgs`（相对路径传参，避开 Windows 命令行长度上限）与聚合检查参数 `aggregateCheckArgs`。vendor 发布演练（`host-libraries`）与 CI benchmark（`--noCheck`）串行执行同一步骤列表。
+- `compile-referenced-projects.ts` (`../../../../scripts/compile-referenced-projects.ts`) 拥有包库步骤列表 `libraryBuildSteps`、references 参数构造 `referencedProjectsCompilerArgs`（相对路径传参，避开 Windows 命令行长度上限）与聚合检查参数 `aggregateCheckArgs`。vendor 发布演练（`host-libraries`）与 CI benchmark（`--noCheck`）串行执行同一步骤列表。
 - check 步骤使用 project mode（`tsc -p`）：它读取 references 已有的声明而不编译任何 reference，incremental 状态写入聚合配置已有的 `tsconfig.{host,client}.tsbuildinfo`。`build` 与 `build:check` 使用同一条命令，因此诊断相同。
 
 ### 调度、失败与输出
 
-- [`scripts/build.ts`](../../../../scripts/build.ts) 拥有步骤表与三个范围，执行复用 [`scripts/run-gates.ts`](../../../../scripts/run-gates.ts) 的 `runAggregate`：每个步骤是一个带 `needs` 的 gate，shell-free 启动、按步骤缓冲输出、fail-fast 进程树终止、Windows `taskkill` 与宿主信号转发都沿用 run-gates 的实现。`build:artifacts` 为 `tsx scripts/build.ts --scope artifacts`，`build:check` 为 `--scope check`，`build` 不带 `--scope`，把两者作为一张图执行；`--profile` 只适用于产生产物的范围，与 `--scope check` 同用时参数解析失败。
+- `scripts/build.ts` (`../../../../scripts/build.ts`) 拥有步骤表与三个范围，执行复用 [`scripts/run-gates.ts`](../../../../scripts/run-gates.ts) 的 `runAggregate`：每个步骤是一个带 `needs` 的 gate，shell-free 启动、按步骤缓冲输出、fail-fast 进程树终止、Windows `taskkill` 与宿主信号转发都沿用 run-gates 的实现。`build:artifacts` 为 `tsx scripts/build.ts --scope artifacts`，`build:check` 为 `--scope check`，`build` 不带 `--scope`，把两者作为一张图执行；`--profile` 只适用于产生产物的范围，与 `--scope check` 同用时参数解析失败。
 - 并发上限取 `DSH_GATE_CONCURRENCY`，未设置时采用仓库 worker 预算；aggregate 检查可与后续产物步骤重叠。master 串行参考 lane 设置 `DSH_GATE_CONCURRENCY=1`，`build` 在那里按拓扑顺序串行执行，符合[串行参考决策](2026-07-21-serial-cross-platform-ci-reference.zh.md)，无需修改 workflow。
 - 缺省（本地）时，失败步骤的所有依赖方记为 skipped，正在运行的步骤和与失败无关的步骤继续运行到结束；执行集合只取决于各步骤的结果，因此一次运行报告所有相互独立的类型错误。`DSH_GATE_FAIL_FAST=1`（所有构建型 PR lane 已设置）时，第一个失败终止其余正在运行步骤的进程树，所有未完成步骤记为 skipped。
 - 失败步骤打印 `== FAILED <步骤> ==`、命令、退出原因与该步骤完整的缓冲输出，结尾汇总列出 failed 与 skipped 步骤；成功步骤只打印 PASS 行，`DSH_GATE_VERBOSE=1` 打印全部输出。任一步骤 failed 或 skipped 时退出码为 1，且不写 client build record。所有步骤继承 `clientBuildProcessEnvironment` 选定的公开 Client 环境。
@@ -48,7 +48,7 @@ Status: implemented
 | `build`、`build:official`、`Makefile` `build`、`scripts/publish-npm-baseline.ts`、`apps/desktop/scripts/package-target.ts`、`scripts/dev-bundle-registry.ts`、`release-publish.yml`、`sandbox.yml`、`e2e.yml` 与 `release.yml` 的非 PR 分支 | `build` / `build:official` | 有 |
 | `test:web`、`test:web:refresh`、`test:web:perf`、`test:web:stress`、`apps/desktop` `test:updates:local`、`test:bench` / `build:bench` | `build`；`build:bench` 运行 `build:native-system`、`build:lib` 与 benchmark tsdown | 有 |
 | `typecheck`（pre-push hook 运行它） | `build.ts --scope typecheck`：host-typert（只读源码的 Typert 生成 `generate-typert.ts`）→ 包编译，各 face 包编译后运行 `tsc -b tsconfig.{host,client}.json`；不含任何 bundle | 有 |
-| `dev:web`（[`scripts/dev-web.ts`](../../../../scripts/dev-web.ts)）、`dev:desktop`（`apps/desktop/scripts/dev.ts`） | `build:artifacts` | 启动前无；`dev:web` 启动后的 `tsc -b tsconfig.client.json --watch` 持续检查 Client 聚合根程序 |
+| `dev:web`（`scripts/dev-web.ts` (`../../../../scripts/dev-web.ts`)）、`dev:desktop`（`apps/desktop/scripts/dev.ts`） | `build:artifacts` | 启动前无；`dev:web` 启动后的 `tsc -b tsconfig.client.json --watch` 持续检查 Client 聚合根程序 |
 | `lint`、`lint:fix`、`doc-typecheck` 与 CI 的 Typert contracts gate 的前置步骤 | 仅源码 Typert 生成后进行 Host 包编译（`compile-referenced-projects.ts host-contracts`），不含任何 bundle | 无 |
 | CI node 24 / snapshots and artifacts（`check:ci:consumers`）、windows node 24 / build & observational（`check:ci:windows-blocking`） | `build` | 有，两个必需 lane |
 | CI node-compat 24.9 | `build:artifacts`（经 run-gates） | 无 |

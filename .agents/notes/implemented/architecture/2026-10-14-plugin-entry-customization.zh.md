@@ -8,7 +8,7 @@ Status: implemented
 
 `release/dsh-0.2.1` 的 Web 应用在三个区域显示插件入口：左侧栏的面板按钮（`sidebar.panellist`）、会话头部的 View 标签（`conversation.view`）和右侧栏起始页的工具卡片（右侧栏 tab 注册表的 guide 入口）。三处都按注册顺序显示全部入口，用户不能收起不常用的入口，插件越多三处越挤；用户也不能在这些位置直接浏览更多插件或开始创建插件。
 
-该功能随 `release/dsh-0.2.1` 发布，之后随 release 合回 master，因此相对 release 的改动要尽量少：不修改 slot 框架（`ui-slots`、`ui-renderer`），不新增 Cordis 服务，`ui-layout` 保持不变，client 插件包之间只共享类型（[Client 包导出规则](../../../../packages/client/AGENTS.md)）。持久化的数据要能被以后在 slot 层统一保存手动顺序与 Pin 状态的实现直接沿用。
+该功能随 `release/dsh-0.2.1` 发布，之后随 release 合回 master，因此相对 release 的改动要尽量少：不修改 slot 框架（`ui-slots`、`ui-renderer`），不新增 Cordis 服务，`ui-layout` 保持不变，client 插件包之间只共享类型（Client 包导出规则 (`../../../../packages/client/AGENTS.md`)）。持久化的数据要能被以后在 slot 层统一保存手动顺序与 Pin 状态的实现直接沿用。
 
 ## 决策
 

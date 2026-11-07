@@ -14,13 +14,13 @@ Web 服务通过 `web.searchProvider` 和 `web.fetchProvider` 两个独立字段
 
 ### 已注册的提供方可观察，可用性不可观察
 
-`WebSearchProvider` 和 `WebFetchProvider` 带有可选的 `title`（提供方的显示名称）和可选的多语言 `description`（说明该提供方适合什么、有什么代价或做不到什么）。`ctx.web.listProviders()` 返回 `{ search, fetch }`，二者均为按注册顺序排列的 `{ id, title?, description? }` 列表，`web` Remote namespace 将其暴露为 `web/listProviders`。每次注册和注销都会在注册表变更后触发无载荷的 `web/providers-changed` 事件；Web 服务会隔离监听器异常，因此观察者无法阻断注册表变更。[dsh-api-remotes](../../../../packages/api/remotes/README.zh.md) 挂载该 namespace 并转发该事件，Client 在收到通知和重连后重新读取列表。
+`WebSearchProvider` 和 `WebFetchProvider` 带有可选的 `title`（提供方的显示名称）和可选的多语言 `description`（说明该提供方适合什么、有什么代价或做不到什么）。`ctx.web.listProviders()` 返回 `{ search, fetch }`，二者均为按注册顺序排列的 `{ id, title?, description? }` 列表，`web` Remote namespace 将其暴露为 `web/listProviders`。每次注册和注销都会在注册表变更后触发无载荷的 `web/providers-changed` 事件；Web 服务会隔离监听器异常，因此观察者无法阻断注册表变更。dsh-api-remotes (`../../../../packages/api/remotes/README.zh.md`) 挂载该 namespace 并转发该事件，Client 在收到通知和重连后重新读取列表。
 
 列表包含 `available()` 返回 false 的提供方。选择器展示的是可固定选用的项，包括用户尚未配置凭据的提供方；而可用性取决于会话的模型路由、凭据状态等单次请求条件。因此可用性仍是执行期结果：`search()` 和 `fetch()` 在调用时解析所配置的提供方并抛出结构化 `WebError`，与 seam 记录一致。工具层仍从不枚举提供方。
 
 ### 分别选择
 
-「网页搜索与获取」页由 Search 下拉框写入 `web.searchProvider`，由 Fetch 下拉框写入 `web.fetchProvider`。每个下拉框以 `title`（缺省时用 `id`）列出该能力的所有已注册提供方，因此插件提供方无需修改页面即可出现，且 Host 未注册的已选 id 仍会照常显示。官方提供方不注册 `title`，由页面用自己的语言字典命名，并按固定顺序排在最前：搜索依次为 Search API（`deepseek-search-api`）与 Messages 搜索（`deepseek-official`），抓取依次为本地 HTTP 抓取（`http`）和 Fetch API（`deepseek-fetch-api`）。其他提供方按 Host 注册顺序排列。选择部署组合的默认提供方会清除已保存的覆盖值，而非冗余保存一份副本。[设置页 README](../../../../packages/client/ui-settings-web-search/README.zh.md) 负责页面控件说明。
+「网页搜索与获取」页由 Search 下拉框写入 `web.searchProvider`，由 Fetch 下拉框写入 `web.fetchProvider`。每个下拉框以 `title`（缺省时用 `id`）列出该能力的所有已注册提供方，因此插件提供方无需修改页面即可出现，且 Host 未注册的已选 id 仍会照常显示。官方提供方不注册 `title`，由页面用自己的语言字典命名，并按固定顺序排在最前：搜索依次为 Search API（`deepseek-search-api`）与 Messages 搜索（`deepseek-official`），抓取依次为本地 HTTP 抓取（`http`）和 Fetch API（`deepseek-fetch-api`）。其他提供方按 Host 注册顺序排列。选择部署组合的默认提供方会清除已保存的覆盖值，而非冗余保存一份副本。设置页 README (`../../../../packages/client/ui-settings-web-search/README.zh.md`) 负责页面控件说明。
 
 所有已注册的提供方都会列出；提供方没有可以把自己排除在下拉框之外的标志。本 Note 取代了 [Search 与 Fetch API 决策](../feature/2026-10-15-deepseek-search-fetch-api.zh.md)对「在设置页用下拉框列出所有已注册的提供方」的否决。独立的下拉框必须提供其他插件注册的提供方，而列出提供方所需的展示元数据只是可选的 `title` 和 `description`。说明放在注册信息里而不是页面词典里，这样官方与插件提供方都通过同一个字段说明自己，新提供方无需修改页面即可说明其取舍。被否决的通用编辑表单仍然成立：该页面只编辑 DeepSeek 提供方的设置，其他提供方保留各自的设置页。
 
@@ -34,11 +34,11 @@ Search 与 Fetch 跟随会话的 DeepSeek 凭据，设置页不为它们显示�
 
 在 YAML 中设置了非空 `searchBaseURL` 或 `searchApiKeyEnv`（Fetch 为 `fetchBaseURL` 或 `fetchApiKeyEnv`）的能力，则始终把其 `*ApiKeyEnv`（未设置时为 `DEEPSEEK_API_KEY`）下的密钥发往其 `*BaseURL`（未设置时为官方基础地址），从不发送账号令牌，因此内网或第三方端点只收到为它选择的密钥。每个能力有自己的字段，因为一个部署可以由不同网关提供搜索和抓取。这些字段只能在 YAML 中设置，空值视为未设置。schema 之外字段的已保存值，包括 `baseURL`、`apiKeyEnv` 和 `apiKey`，可以加载而不产生 schema 错误，且不生效。
 
-`@deepseek-ai/dsh-llm-deepseek` 的[凭据函数](../../../../packages/llm/llm-deepseek/src/credential.ts)为 DeepSeek 模型路由、Messages 搜索以及 Search 与 Fetch API 读取并校验 API 密钥、检查密钥是否存在、取得账号令牌，因此每个 DeepSeek 请求都以同一方式读取凭据库；账号模型路由、Messages 搜索以及 Search 与 Fetch API 还会作废被 HTTP 401 拒绝的令牌。内置配置不需要按 profile 覆盖凭据，因为只要 `DEEPSEEK_API_KEY` 或 DeepSeek API 密钥路由有密钥，API 密钥路径就能工作。
+`@deepseek-ai/dsh-llm-deepseek` 的凭据函数 (`../../../../packages/llm/llm-deepseek/src/credential.ts`)为 DeepSeek 模型路由、Messages 搜索以及 Search 与 Fetch API 读取并校验 API 密钥、检查密钥是否存在、取得账号令牌，因此每个 DeepSeek 请求都以同一方式读取凭据库；账号模型路由、Messages 搜索以及 Search 与 Fetch API 还会作废被 HTTP 401 拒绝的令牌。内置配置不需要按 profile 覆盖凭据，因为只要 `DEEPSEEK_API_KEY` 或 DeepSeek API 密钥路由有密钥，API 密钥路径就能工作。
 
 ### 默认值与已保存的选择
 
-[base 组合](../../../../packages/bundle/base/cordis.patch.yml)设置 `searchProvider: deepseek-search-api` 和 `fetchProvider: http`。搜索默认使用 Search API，因为它返回来源时无需 Harness 发起辅助模型请求。抓取默认使用本地 HTTP 抓取，因为它没有按次的 API 费用，执行 Harness 自身的 URL 校验和资源限制，并且可以访问内网和本地地址。Fetch API 仍可在下拉框中直接选择。
+base 组合 (`../../../../packages/bundle/base/cordis.patch.yml`)设置 `searchProvider: deepseek-search-api` 和 `fetchProvider: http`。搜索默认使用 Search API，因为它返回来源时无需 Harness 发起辅助模型请求。抓取默认使用本地 HTTP 抓取，因为它没有按次的 API 费用，执行 Harness 自身的 URL 校验和资源限制，并且可以访问内网和本地地址。Fetch API 仍可在下拉框中直接选择。
 
 已保存的选择——无论位于设置文档还是部署自身的组合中——优先于内置默认值，升级不会改写它。执行时从不替换选择：所选提供方缺失、不可用或失败时，操作以结构化错误失败，不会回退到其他搜索或抓取提供方。回退会把查询和凭据发往用户未选择的端点，并在不提示的情况下改变计费。
 
@@ -82,4 +82,4 @@ Messages 提供方负责声明并写入 `web/deepseek-search-llm-request`。声�
 
 ## 验证
 
-[web.spec.ts](../../../../packages/web/web/tests/web.spec.ts) 覆盖列表内容与顺序、标题、注册与撤销后的事件、重复注册被拒绝时不触发事件，以及监听器失败的隔离。[deepseek.spec.ts](../../../../packages/web/web-search-deepseek/tests/deepseek.spec.ts) 覆盖独立的 Messages 提供方，[credential-resolution.spec.ts](../../../../packages/web/web-deepseek-api/tests/credential-resolution.spec.ts) 针对两个能力覆盖账号路由上的账号令牌及其在 HTTP 401 后被作废、未登录时回退到 API 密钥、官方、非 DeepSeek 和会话之外的操作使用路由密钥与端点、没有该路由时使用 `DEEPSEEK_API_KEY` 与官方基础地址、从不发送令牌的 YAML 单独字段、两个能力相互独立、就绪判断与每次操作一致，以及被忽略的已移除字段；[composition.spec.ts](../../../../packages/web/web-deepseek-api/tests/composition.spec.ts) 通过 Loader 启动真实的模型路由。[remote-events.host.spec.ts](../../../../packages/api/remotes/tests/remote-events.host.spec.ts) 覆盖事件转发，[base.spec.ts](../../../../packages/bundle/base/tests/base.spec.ts) 固定内置默认值。设置页的 controller 与 card 测试以及[插件配置浏览器场景](../../../../apps/web/tests/plugin-config.e2e.ts)覆盖下拉框内容、Search 与 Fetch 的分别选择、DeepSeek API 不显示凭据控件，以及各提供方保留的设置。
+web.spec.ts (`../../../../packages/web/web/tests/web.spec.ts`) 覆盖列表内容与顺序、标题、注册与撤销后的事件、重复注册被拒绝时不触发事件，以及监听器失败的隔离。deepseek.spec.ts (`../../../../packages/web/web-search-deepseek/tests/deepseek.spec.ts`) 覆盖独立的 Messages 提供方，credential-resolution.spec.ts (`../../../../packages/web/web-deepseek-api/tests/credential-resolution.spec.ts`) 针对两个能力覆盖账号路由上的账号令牌及其在 HTTP 401 后被作废、未登录时回退到 API 密钥、官方、非 DeepSeek 和会话之外的操作使用路由密钥与端点、没有该路由时使用 `DEEPSEEK_API_KEY` 与官方基础地址、从不发送令牌的 YAML 单独字段、两个能力相互独立、就绪判断与每次操作一致，以及被忽略的已移除字段；composition.spec.ts (`../../../../packages/web/web-deepseek-api/tests/composition.spec.ts`) 通过 Loader 启动真实的模型路由。remote-events.host.spec.ts (`../../../../packages/api/remotes/tests/remote-events.host.spec.ts`) 覆盖事件转发，base.spec.ts (`../../../../packages/bundle/base/tests/base.spec.ts`) 固定内置默认值。设置页的 controller 与 card 测试以及插件配置浏览器场景 (`../../../../apps/web/tests/plugin-config.e2e.ts`)覆盖下拉框内容、Search 与 Fetch 的分别选择、DeepSeek API 不显示凭据控件，以及各提供方保留的设置。

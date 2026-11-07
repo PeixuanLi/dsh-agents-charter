@@ -10,11 +10,11 @@ Status: implemented
 
 ## 决策
 
-撤销 #932 中的五个提交，解决包移动冲突并保留后续独立行为。记录的合并提交属于更大的 #936 依赖链；撤销其第一父提交差异还会删除无关的仓库插件支持。[Vendor 修改记录](../../../../vendor/README.md#local-modifications) 按不变的固定来源记录每项保留的源码更改。
+撤销 #932 中的五个提交，解决包移动冲突并保留后续独立行为。记录的合并提交属于更大的 #936 依赖链；撤销其第一父提交差异还会删除无关的仓库插件支持。Vendor 修改记录 (`../../../../vendor/README.md#local-modifications`) 按不变的固定来源记录每项保留的源码更改。
 
 Loader 立即更改条目选项。EntryGroup 并发启动同级条目并记录应用失败；EntryTree 等待未完成的工作，但不因失败的 fiber 而拒绝。两者均不恢复旧插件或配置。Include 在文件无效时保留正在运行的配置树，但插件失败可能留下部分应用的配置树。
 
-应用消费者负责完成检查。CLI 在安装实时 patch 监视器前等待其回退 HMR 服务。目录选择器检查其挂载的条目。选择器和浏览器包运行器在移除条目前取得首次 fiber 释放的结果，并等待该结果后才报告拆卸完成。预设挂载等待其子树，并报告导入、激活和缺少服务的失败。[应用启动](../../../../packages/boot/app-boot/README.zh.md) 负责精确 patch 文件监视、激活检查和部分上下文清理。Web 启动在打印 URL 或打开浏览器前检查激活状态。这些适配维持应用反向补丁后已有的消费者行为。
+应用消费者负责完成检查。CLI 在安装实时 patch 监视器前等待其回退 HMR 服务。目录选择器检查其挂载的条目。选择器和浏览器包运行器在移除条目前取得首次 fiber 释放的结果，并等待该结果后才报告拆卸完成。预设挂载等待其子树，并报告导入、激活和缺少服务的失败。应用启动 (`../../../../packages/boot/app-boot/README.zh.md`) 负责精确 patch 文件监视、激活检查和部分上下文清理。Web 启动在打印 URL 或打开浏览器前检查激活状态。这些适配维持应用反向补丁后已有的消费者行为。
 
 Fiber、Entry 和 isolate 保持上游的更新返回行为。App boot 通过现有的 `internal/update` waterfall 观察被丢弃的重启 promise，并在检查 patch 重载前等待 fiber。游离的导入完成观察器处理 fiber 的两种结果；fiber 仍保留失败信息供显式检查。Include 的持久化遵循 vendor 修改记录中的 journal 适配：仍有未保存变更时，`flush()` 和 `stop()` 会拒绝。
 
@@ -32,4 +32,4 @@ Fiber、Entry 和 isolate 保持上游的更新返回行为。App boot 通过现
 
 插件激活失败可能保留新选项和失败的 fiber。要求插件处于激活状态的调用者必须在结算后检查；仅等待 `Loader.create()` 不能证明激活。自动插件回滚需要后续独立决策，并证明其恢复收益值得额外的生命周期实现。
 
-[实时 patch 测试](../../../../packages/boot/app-boot/tests/user-patches.spec.ts) 保留受控事件投递和原生监视覆盖，同时断言不回滚时的失败报告。[终端释放策略](../../../../packages/boot/app-boot/README.zh.md) 仍适用于致命错误和部分启动拆卸。Web preset 组合与真实 CLI webhook 创建的模型 Session 提供手动挂载插件之外的应用级验证。
+实时 patch 测试 (`../../../../packages/boot/app-boot/tests/user-patches.spec.ts`) 保留受控事件投递和原生监视覆盖，同时断言不回滚时的失败报告。终端释放策略 (`../../../../packages/boot/app-boot/README.zh.md`) 仍适用于致命错误和部分启动拆卸。Web preset 组合与真实 CLI webhook 创建的模型 Session 提供手动挂载插件之外的应用级验证。

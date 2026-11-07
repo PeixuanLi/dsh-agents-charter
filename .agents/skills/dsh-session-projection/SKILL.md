@@ -7,7 +7,7 @@ description: Use when creating, extending, or reviewing a DeepSeek Harness sessi
 
 ## Summary
 
-Keep recoverable session facts in Projection and expose them through their owning services. Read the [API and lifecycle](../../../packages/session/session-projection/README.md) for the supported preparation, registration, read, and cleanup contracts.
+Keep recoverable session facts in Projection and expose them through their owning services. Read the API and lifecycle (`../../../packages/session/session-projection/README.md`) for the supported preparation, registration, read, and cleanup contracts.
 
 1. Put all persisted or restorable session-derived state in Projection, including host-only state. Reuse an existing owner when suitable. Keep external resources and process-scoped ownership outside persisted state. Persist facts, not registration handles, promises, or runtime resources.
 

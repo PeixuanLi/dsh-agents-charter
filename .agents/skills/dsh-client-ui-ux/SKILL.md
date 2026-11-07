@@ -35,7 +35,7 @@ When a before/after comparison is needed, preserve the actual starting implement
 
 Before handoff, review or push, check only new cumulative interactions, missing required checks and invalidated evidence; do not repeat completed verification at each stage. Report results and material gaps accurately. Do not claim full coverage or visual acceptance when required scenes or checks are missing.
 
-These effort levels change only the additional design-review procedure. Existing [client test requirements](../../../packages/client/AGENTS.md), [GUI PR GIF requirements](../record-browser-gif/SKILL.md#every-gui-pull-request-includes-a-gif), and [designer/product approval](#design-review-escalation) still apply, including to local changes when their original triggers are met.
+These effort levels change only the additional design-review procedure. Existing client test requirements (`../../../packages/client/AGENTS.md`), [GUI PR GIF requirements](../record-browser-gif/SKILL.md#every-gui-pull-request-includes-a-gif), and [designer/product approval](#design-review-escalation) still apply, including to local changes when their original triggers are met.
 
 ## Select the rule owners
 
@@ -46,17 +46,17 @@ For layout changes, read the alignment and spacing references. Read the icon ref
 | Shared axes, text starts, centering, tree indentation, complete icon boxes | [Alignment](references/alignment.md) |
 | Semantic groups, inner/outer gaps, repeated rhythm, section separation | [Spacing and grouping](references/spacing.md) |
 | Interface icon selection and artwork; icon buttons and icon-only actions, tooltips, informational hover content, accessible labels and focus | [Icons](references/icons.md) |
-| Color, typography and existing treatments | [Visual foundation](#visual-foundation); [Web styling](../../../docs/web-styling.md) owns tokens/materials |
-| Component geometry, nested contours and state fills | [Geometry decisions](#component-geometry); [radius standard](../../../docs/ui-radius.md) owns values and exceptions |
+| Color, typography and existing treatments | [Visual foundation](#visual-foundation); Web styling (`../../../docs/web-styling.md`) owns tokens/materials |
+| Component geometry, nested contours and state fills | [Geometry decisions](#component-geometry); radius standard (`../../../docs/ui-radius.md`) owns values and exceptions |
 | Feedback lifetime, loading, overlays, scrolling and platform clearance | [Interaction and feedback](#interaction-and-feedback); [error handling](../dsh-error-handling/SKILL.md) owns failure guarantees |
 | Responsive layout rules, mobile-specific interactions, and truncation/ellipsis rules for components like text and buttons | [Responsive UI](../dsh-responsive-ui/SKILL.md) |
 | Official plugin artwork and feature previews | [Official artwork](../dsh-official-plugin-artwork/SKILL.md) |
-| Copy, locale ownership and component semantics | [Prose standard](../dsh-prose-standard/SKILL.md), [locale ownership](../../notes/implemented/architecture/2026-08-23-locale-owned-client-ui-copy.md), [primitives catalog](../../../packages/client/ui-primitives/README.md#component-catalog) |
-| Density, information hierarchy, combined control states and component choice | [Principle reference](../../../docs/ui-design-review-cases.md#density) sections 3–6 |
+| Copy, locale ownership and component semantics | [Prose standard](../dsh-prose-standard/SKILL.md), [locale ownership](../../notes/implemented/architecture/2026-08-23-locale-owned-client-ui-copy.md), primitives catalog (`../../../packages/client/ui-primitives/README.md#component-catalog`) |
+| Density, information hierarchy, combined control states and component choice | Principle reference (`../../../docs/ui-design-review-cases.md#density`) sections 3–6 |
 
 ## Reuse before adding
 
-Extend existing components, containers and interactions when the capability fits. Register right-sidebar content through a slot in the existing sidebar; do not create a separate sidebar. Follow [icon reuse](references/icons.md#reuse-existing-icons-first). Before restructuring, read [client instructions](../../../packages/client/AGENTS.md) and [client defensive patterns](../../../docs/defensive-patterns/client-components.md) for component/state ownership and layering.
+Extend existing components, containers and interactions when the capability fits. Register right-sidebar content through a slot in the existing sidebar; do not create a separate sidebar. Follow [icon reuse](references/icons.md#reuse-existing-icons-first). Before restructuring, read client instructions (`../../../packages/client/AGENTS.md`) and [client defensive patterns](../../../docs/defensive-patterns/client-components.md) for component/state ownership and layering.
 
 ## Visual foundation
 
@@ -68,16 +68,16 @@ Extend existing components, containers and interactions when the capability fits
 
 ## Component geometry
 
-Choose component role and size variant, then its container relationship. Compare height, radius, curve, inset and material together; equal radii alone do not establish coherence, and wrapping/expansion alone does not justify larger radii. [Radius standards](../../../docs/ui-radius.md#radius-scale) own values and exceptions.
+Choose component role and size variant, then its container relationship. Compare height, radius, curve, inset and material together; equal radii alone do not establish coherence, and wrapping/expansion alone does not justify larger radii. Radius standards (`../../../docs/ui-radius.md#radius-scale`) own values and exceptions.
 
 - **Inset:** coordinate inner/outer curves and inset. Radius subtraction is exact for concentric circular arcs; for superellipses, subtraction is only a nominal sizing rule, so inspect diagonal whitespace as well as side gaps.
 - **Flush or adjoining:** the enclosure owns exposed corners; internal joins stay square. Hover fills and pseudo-elements follow that contour without clipping menus or focus.
 - **Independent child card/group:** use its own role/size tier, not the dialog radius or subtraction of all parent padding.
 - **Circles/capsules:** preserve shape, including avatar container and image, using the theme's round-curve exception; ordinary controls use the shared curve.
 
-Keep fills, strokes and overlays geometrically stable across hover, pressed, selected, loading and disabled states. Reuse [card/elevation materials](../../../docs/ui-radius.md#settings-cards): shadows already include neutral hairlines; retain semantic state-colored borders without doubling neutral edges.
+Keep fills, strokes and overlays geometrically stable across hover, pressed, selected, loading and disabled states. Reuse card/elevation materials (`../../../docs/ui-radius.md#settings-cards`): shadows already include neutral hairlines; retain semantic state-colored borders without doubling neutral edges.
 
-Compare related controls, including small selection controls, at actual size in affected themes/states and relevant long-label/narrow layouts. Static checks reject unsupported declarations; rendered comparison judges fit. Consult [geometry cases](../../../docs/ui-design-review-cases.md#geometry) when needed. Apply to scoped changes, not bulk restyling.
+Compare related controls, including small selection controls, at actual size in affected themes/states and relevant long-label/narrow layouts. Static checks reject unsupported declarations; rendered comparison judges fit. Consult geometry cases (`../../../docs/ui-design-review-cases.md#geometry`) when needed. Apply to scoped changes, not bulk restyling.
 
 ## Interaction and feedback
 
@@ -110,7 +110,7 @@ Inspect the composition, then affected internal/cross-group relationships, dista
 
 ## Maintain one owner per rule
 
-Update the owning section or reference within this skill; do not expose its design specialties as separate skills. Keep examples in the [case reference](../../../docs/ui-design-review-cases.md); AGENTS and PR workflows link here instead of duplicating rules.
+Update the owning section or reference within this skill; do not expose its design specialties as separate skills. Keep examples in the case reference (`../../../docs/ui-design-review-cases.md`); AGENTS and PR workflows link here instead of duplicating rules.
 
 Rule changes state applicability, decisions, exceptions and observable verification; update a distinguishing case and remove superseded statements elsewhere. Declare migration versus future-edit scope without implying existing UI conforms. Automate only mechanically decidable checks. Local review tools consume repository rules and retain source/rule revisions rather than maintaining another standards copy.
 

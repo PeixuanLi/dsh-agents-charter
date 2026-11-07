@@ -10,7 +10,7 @@ Status: implemented
 
 ## 决策
 
-2026-10-16 核对的 [DeepSeek Search 与 Fetch 指南](https://api-docs.deepseek.com/zh-cn/guides/search)定义上游 API。[web-deepseek-api 插件](../../../../packages/web/web-deepseek-api/README.zh.md)通过现有 `web_search` 和 `web_fetch` 工具接入它。[Web 能力决策](../architecture/2026-06-24-web-capability-seam.zh.md)继续负责提供方选择、工具职责和抓取结果字段；[Web 提供方选择决策](../architecture/2026-10-29-web-provider-selection.zh.md)负责用户如何选择各个提供方，以及内置组合选择哪些提供方。
+2026-10-16 核对的 [DeepSeek Search 与 Fetch 指南](https://api-docs.deepseek.com/zh-cn/guides/search)定义上游 API。web-deepseek-api 插件 (`../../../../packages/web/web-deepseek-api/README.zh.md`)通过现有 `web_search` 和 `web_fetch` 工具接入它。[Web 能力决策](../architecture/2026-06-24-web-capability-seam.zh.md)继续负责提供方选择、工具职责和抓取结果字段；[Web 提供方选择决策](../architecture/2026-10-29-web-provider-selection.zh.md)负责用户如何选择各个提供方，以及内置组合选择哪些提供方。
 
 ### 协议选择与部署
 
@@ -40,7 +40,7 @@ HTTP 提供方继续负责自身的 URL 校验和资源限制。选择 DeepSeek 
 
 ### 旧版 Messages 搜索
 
-选中 `deepseek-official` 时，独立的 `dsh-web-search-deepseek` 提供方发送 Messages 搜索请求，见[选择决策](../architecture/2026-10-29-web-provider-selection.zh.md)。它的 `web/deepseek-search-llm-request` 会话事件类型（包括[持久化确认记录](../../../../docs/persistence-changes/2026-10-13-deepseek-search-thinking.zh.md)覆盖的可选请求体字段 `thinking: { type: 'disabled' }`）仍由 `dsh-web-search-deepseek` 声明并写入，因此包含该事件的已发布会话仍能打开。Messages 搜索发送该字段，是因为 Harness 丢弃生成的回答，辅助请求无需推理。
+选中 `deepseek-official` 时，独立的 `dsh-web-search-deepseek` 提供方发送 Messages 搜索请求，见[选择决策](../architecture/2026-10-29-web-provider-selection.zh.md)。它的 `web/deepseek-search-llm-request` 会话事件类型（包括持久化确认记录 (`../../../../docs/persistence-changes/2026-10-13-deepseek-search-thinking.zh.md`)覆盖的可选请求体字段 `thinking: { type: 'disabled' }`）仍由 `dsh-web-search-deepseek` 声明并写入，因此包含该事件的已发布会话仍能打开。Messages 搜索发送该字段，是因为 Harness 丢弃生成的回答，辅助请求无需推理。
 
 ## 考虑过的替代方案
 
@@ -52,7 +52,7 @@ HTTP 提供方继续负责自身的 URL 校验和资源限制。选择 DeepSeek 
 
 **把两个 API 放在 Messages 提供方内部，由提供方自己的开关切换。** Messages 提供方内的开关无法改变抓取路由，因此除非用户另外修改 `web.fetchProvider`，`web_fetch` 仍会走 HTTP；它还会把两个 API 的生命周期绑在 Messages 搜索上。独立注册让 Web 服务通过现有的提供方选择机制选择各个提供方，不会把任一 API 与 Messages 提供方绑定。
 
-**让 Messages 搜索与新 API 共用一套传输层。** 共享 Web 传输层会耦合不同的请求格式和失败映射。凭据值改为通过共享的 [`llm-deepseek` 凭据函数](../../../../packages/llm/llm-deepseek/src/credential.ts)获取；Messages 搜索与 Search/Fetch API 传输层保持独立。
+**让 Messages 搜索与新 API 共用一套传输层。** 共享 Web 传输层会耦合不同的请求格式和失败映射。凭据值改为通过共享的 `llm-deepseek` 凭据函数 (`../../../../packages/llm/llm-deepseek/src/credential.ts`)获取；Messages 搜索与 Search/Fetch API 传输层保持独立。
 
 **把 Search 和 Fetch 拆成两个包。** 指南从同一基础地址、以同一份凭据提供两个 API；拆成两个包会让指向同一部署的设置重复出现。分别选择不需要拆包，因为每个 API 注册自己的提供方 id。每种操作位于独立模块，任一 API 都可以单独修改。
 
@@ -70,7 +70,7 @@ Search 和 Fetch 各有账号级 5 QPS 限制，独立于模型并发，同一�
 
 ## 验证与尚未接入的 API 能力
 
-提供方测试覆盖请求映射、空结果、格式错误的响应、独立地址与推导地址、账号 token 鉴权及其在 HTTP 401 后被作废、取消与空白配置。设置测试及[插件配置浏览器场景](../../../../apps/web/tests/plugin-config.e2e.ts)覆盖暂存后保存、结果数，以及分别选择 Search 与 Fetch。[网页搜索回放](../../../../apps/web/tests/web-search-round.e2e.ts)与 [Fetch Session 回放](../../../../snapshots/session/deepseek-fetch/snapshot.yml)固定模型可见结果。2026-10-16，[真实提供方测试](../../../../packages/web/web-deepseek-api/tests/web-deepseek-api.e2e.ts)在公网地址通过了 Search 与 Fetch 验证；在内置配置上运行的一轮 headless 对话返回了八个来源并抓取到 Markdown，且没有辅助请求事件。上文的账号 token、网关和状态码观察来自同日的手动探测。
+提供方测试覆盖请求映射、空结果、格式错误的响应、独立地址与推导地址、账号 token 鉴权及其在 HTTP 401 后被作废、取消与空白配置。设置测试及插件配置浏览器场景 (`../../../../apps/web/tests/plugin-config.e2e.ts`)覆盖暂存后保存、结果数，以及分别选择 Search 与 Fetch。网页搜索回放 (`../../../../apps/web/tests/web-search-round.e2e.ts`)与 Fetch Session 回放 (`../../../../snapshots/session/deepseek-fetch/snapshot.yml`)固定模型可见结果。2026-10-16，真实提供方测试 (`../../../../packages/web/web-deepseek-api/tests/web-deepseek-api.e2e.ts`)在公网地址通过了 Search 与 Fetch 验证；在内置配置上运行的一轮 headless 对话返回了八个来源并抓取到 Markdown，且没有辅助请求事件。上文的账号 token、网关和状态码观察来自同日的手动探测。
 
 以下能力尚未包含在已实现的接入中：
 

@@ -10,8 +10,8 @@ This is a focused semantic review of Cordis ownership and lifecycle. Start a rep
 ## Sources of truth
 
 - [Repository conventions](../../../AGENTS.md): Cordis ownership requirements.
-- [Lifecycle and effects](../../../docs/cordis-tutorial/02-lifecycle-and-effects.md): effect acquisition and disposal.
-- [Services](../../../docs/cordis-tutorial/03-services.md): dependency tracking and service availability.
+- Lifecycle and effects (`../../../docs/cordis-tutorial/02-lifecycle-and-effects.md`): effect acquisition and disposal.
+- Services (`../../../docs/cordis-tutorial/03-services.md`): dependency tracking and service availability.
 - [Defensive patterns](../../../docs/defensive-patterns/general.md): quiescent teardown and required completion listeners.
 
 ## Review workflow
@@ -38,7 +38,7 @@ Correctly owned `ctx.on()`, `ctx.plugin()`, and `ctx.effect()` registrations alr
 
 Any service call or event delivery required to finish cleanup is a lifecycle dependency. Keep its actual resources and listeners usable until the consumer has settled, including final result publication and durable writes. A provider's disposal promise finishing after consumers does not prove its resources survived their cleanup.
 
-The current [fiber unload](../../../vendor/cordis/src/fiber.ts) starts sibling disposers concurrently. [Service withdrawal](../../../vendor/cordis/src/reflect.ts) awaits dependent fibers inside its own disposer, while sibling resource closers can already run. Adding `inject`, reversing registration order, or retaining a service reference does not fix that race. A listener can also belong to the consumer fiber and auto-unsubscribe alongside an operation's drain.
+The current fiber unload (`../../../vendor/cordis/src/fiber.ts`) starts sibling disposers concurrently. Service withdrawal (`../../../vendor/cordis/src/reflect.ts`) awaits dependent fibers inside its own disposer, while sibling resource closers can already run. Adding `inject`, reversing registration order, or retaining a service reference does not fix that race. A listener can also belong to the consumer fiber and auto-unsubscribe alongside an operation's drain.
 
 Require explicit ownership and awaited sequencing: stop admission, settle admitted consumers while their dependencies remain usable, then drain and release the resources. Scope new-admission rejection separately from completion of accepted operations. Use an explicitly composed effect or a resource-owning parent with an awaited consumer/service child; verify the actual captured disposer identities. `ctx.effect(function* ...)` serializes the disposers it collects, but a wrapper around an independently registered effect does not transfer ownership of the original effect. Top-level plugin generator yields are not a general promise of serial sibling disposal. Check failure paths as well: one cleanup error must not skip required abort, settlement, or resource release.
 

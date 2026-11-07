@@ -96,8 +96,8 @@ Pi isolates each Session in a worker process and plans to give plugins tools and
 | Property | Chord and Pi | DSH | Levels affected |
 |---|---|---|---|
 | Provider replacement | A consumer holds a handle that resolves the current provider on each access; a reload swaps the implementation behind it. | A fiber whose injected service changes is unloaded and re-run. | 1: the Chord host keeps Chord's behavior for services between facets; a DSH service mapped into Chord still restarts its adapter. |
-| Fault isolation | One worker process per Session. | All Sessions share the Host process, and an uncaught exception or unhandled rejection disposes the application ([app-boot](../../../../packages/boot/app-boot/README.md)). | 1–4 run plugin code in the Host; 5 removes the difference. |
-| Remote declaration | A host publishes a service's remote members from the object it was given at runtime. | Remote methods are generated at build time, and the Client does not discover Host services at runtime ([remotes](../../../../packages/api/remotes/README.md)). | 4 |
+| Fault isolation | One worker process per Session. | All Sessions share the Host process, and an uncaught exception or unhandled rejection disposes the application (app-boot (`../../../../packages/boot/app-boot/README.md`)). | 1–4 run plugin code in the Host; 5 removes the difference. |
+| Remote declaration | A host publishes a service's remote members from the object it was given at runtime. | Remote methods are generated at build time, and the Client does not discover Host services at runtime (remotes (`../../../../packages/api/remotes/README.md`)). | 4 |
 | Shared state | Replicated JSON state with operation batches, hydration, and gap recovery, read through one API locally and remotely. | Each domain defines its own snapshot and delta types, or publishes complete projection values. | 3, 4 |
 | Runtime loading | One bundle per facet, loaded outside the module cache after an integrity check. | Packages are built ahead of time; a built installation does not transpile TypeScript. | 1 adds Chord's bundler as a dependency of the plugin package. |
 

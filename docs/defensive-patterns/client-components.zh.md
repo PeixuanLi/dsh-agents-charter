@@ -2,7 +2,7 @@
 
 [English](client-components.md) | 中文
 
-关于客户端组件、其状态与 effect 的规则。详细纪律见 [packages/client/AGENTS.md](../../packages/client/AGENTS.md)；Slot 设计正家是 [slots.zh.md](../subsystems/slots.zh.md)，样式规则正家是 [web-styling.zh.md](../web-styling.zh.md)。以下每一节给出要求、评审判定方式、边界与例外，以及一正一反两个例子。
+关于客户端组件、其状态与 effect 的规则。详细纪律见 packages/client/AGENTS.md (`../../packages/client/AGENTS.md`)；Slot 设计正家是 slots.zh.md (`../subsystems/slots.zh.md`)，样式规则正家是 web-styling.zh.md (`../web-styling.zh.md`)。以下每一节给出要求、评审判定方式、边界与例外，以及一正一反两个例子。
 
 ## 状态经 Injection 到达
 
@@ -11,7 +11,7 @@ Slot 的组件经**自己注册项**的 inject 面获得它渲染所需的一切
 - 判定方式：在注册项与其渲染点上，作者都必须能回答两件事——被渲染组件订阅了哪些子状态，以及它收到的哪些 props 在多次渲染之间保持引用稳定。要盯住每个 prop 的可变性：每次渲染都重建的值（新对象、新数组、内联回调）即使内容没变也会向下传播重渲。
 - 不在范围内：组件自己的局部状态（折叠、悬停、草稿用的 `useState`）不属于注入内容；不订阅 React 之外任何东西的组件也不需要新席位。
 - 例外：新增 hook 席位会改动 Slot 契约，因此该改动要在 review 中说明影响面——哪些组件订阅什么；使用既有注入面不需要逐组件批准。
-- 修法：把注入收窄到该视图真正渲染的内容，每个读取项经一个 hook 席位暴露一个字段，用窄 action 集合取代 store 或 service 句柄。[组件输入](../subsystems/slots.zh.md#component-inputs) 正家负责 inject 工厂、标准 hook 席位，以及它们各自如何成为 prop。
+- 修法：把注入收窄到该视图真正渲染的内容，每个读取项经一个 hook 席位暴露一个字段，用窄 action 集合取代 store 或 service 句柄。组件输入 (`../subsystems/slots.zh.md#component-inputs`) 正家负责 inject 工厂、标准 hook 席位，以及它们各自如何成为 prop。
 
 注册项承载普通数据、一组窄 action 与一个 hook 席位；渲染点只传 owner 数据，组件只读它渲染的那个字段：
 
@@ -59,7 +59,7 @@ prop 是数据或回调；React 节点经声明的 slot 传递。把元素作为
 - 判定方式：组件的 props 类型、inject 工厂的返回值、或渲染点的 owner props 对象里出现 `ReactNode`、`ReactElement` 或 `() => JSX.Element`。
 - 不在范围内：已经发布的节点型字段继续可用。规则在改动波及它时触发，该改动把它改掉，而不是继续扩展它。
 - 例外：同一改动内无法完成改造时，由对应领域专家确认延期，且改动中记录该确认；作者不得自行确认。
-- 修法：在父级注册的 `children` 中声明该位置，用 `renderSlot` 渲染它，数据经子组件的 props 传入。[扩展规则](../subsystems/slots.zh.md#extension-rules) 正家负责哪个包可以声明和渲染哪个 slot。
+- 修法：在父级注册的 `children` 中声明该位置，用 `renderSlot` 渲染它，数据经子组件的 props 传入。扩展规则 (`../subsystems/slots.zh.md#extension-rules`) 正家负责哪个包可以声明和渲染哪个 slot。
 
 头部位置是一个声明的 child slot，因此宿主只传数据，标记由注册组件自己决定：
 
@@ -192,7 +192,7 @@ const activeTabId = globalThis.__activeTabId   // every tab reads the same value
 展示资源的元素经注入的 `useResource` hook 读取它，地址由资源的协议与地址给出。领域包装——一个 Tab、一个面板——在 `useResource` 之上组合自己的 hook，返回结构自由，但底下的取数、缓存与订阅不得重做。每个协议各来一条读取路径会把缓存与失效策略劈成两半，同一个地址可能在一处是活的、在另一处是旧的。
 
 - 判定方式：读取路径。`useResource<Protocol>(address)`，或内部调用它的业务 hook，合格；自建订阅加缓存、复制提供方的流处理、或 `useTabStream` 这类压平式通用 hook 不合格。
-- 不在范围内：与资源无关的局部 UI 状态——折叠、悬停、草稿——留在 `useState`，不给它资源地址。[客户端资源](../subsystems/client-resources.zh.md) 正家负责各个 status 的含义以及什么让资源保持打开。
+- 不在范围内：与资源无关的局部 UI 状态——折叠、悬停、草稿——留在 `useState`，不给它资源地址。客户端资源 (`../subsystems/client-resources.zh.md`) 正家负责各个 status 的含义以及什么让资源保持打开。
 - 例外：重塑快照自由，但把协议差异藏进条件分支的包装要在 review 中说明归属；新协议的 hook 由该协议的拥有者提供。
 - 修法：在领域 hook 内调用 `useResource`，把结果映射成组件要渲染的内容，删掉自建缓存。
 
@@ -234,7 +234,7 @@ export function useTabStream(id: string) {
 
 - 判定方式：注入面是窄接口还是 store 对象本身，以及句柄是在 `apply` 内构建还是在模块级构建。
 - 持久化：spec 的 `persist` 键就是全部机制，由框架执行；引擎实例暴露 `getSnapshot`、`subscribe`、烘焙好的 actions 与 `clearPersisted`，没有任何一方手工 hydrate。
-- 不在范围内：不改设置时，渲染状态放 store 没问题；组件局部状态也不是 store 内容。[Store 契约](../subsystems/slots.zh.md#component-inputs) 正家负责声明的 store 如何变成 props，[Web 客户端架构](../subsystems/web-client.zh.md) 正家负责业务数据住在哪里。
+- 不在范围内：不改设置时，渲染状态放 store 没问题；组件局部状态也不是 store 内容。Store 契约 (`../subsystems/slots.zh.md#component-inputs`) 正家负责声明的 store 如何变成 props，Web 客户端架构 (`../subsystems/web-client.zh.md`) 正家负责业务数据住在哪里。
 - 例外：在模块级导出 store 句柄一律禁止——模块缓存的身份在插件重载之间是一个伪装的单例；把注入面收窄成窄接口不需要单独批准。
 - 修法：把 inject 返回值里的 store 句柄换成组件渲染所需的字段与 action 回调，句柄留在 `apply` 内。
 
@@ -386,7 +386,7 @@ useEffect(() => {
 客户端包的每项构建调整都经该包的 tsdown 插件完成，包内不新开自己的构建分支。样式走 CSS Module，只有图像、GIF 与 SVG 需要内联——且内联到 CSS 而不是 JSX。TSX 里绝不内联大文本，`style` 对象只放运行期计算的值，因为静态值与多样式切换属于 CSS Module 的 class name。
 
 - 判定方式：包内新开构建分支而不是走 tsdown 插件；feature 样式里出现字面颜色、组件库或 Tailwind；TSX 里出现 base64 数据或大文本；`style` 对象承载静态值或样式切换。
-- 不在范围内：运行期计算的值（量到的 gutter、进度百分比）可以进 `style`，组件局部自定义属性也可以承载布局值。[组件规则](../web-styling.zh.md#component-rules) 正家负责 token、CSS Module 与 class name 规则。
+- 不在范围内：运行期计算的值（量到的 gutter、进度百分比）可以进 `style`，组件局部自定义属性也可以承载布局值。组件规则 (`../web-styling.zh.md#component-rules`) 正家负责 token、CSS Module 与 class name 规则。
 - 例外：新增构建分支或新的内联形态在落地前于 review 中说明理由，由所属包的规则决定是否保留。
 - 修法：把样式切换移进用 `className` 切换的 CSS Module class，base64 交给构建链写进 CSS，并从 TSX 模块里删掉大文本常量。
 
@@ -464,7 +464,7 @@ export function TurnList({ turns }: Props) {
 
 - 判定方式：diff 是否把业务专属的分支、字段或概念放进了功能自己包以外的任何一层。
 - 不在范围内：功能自己拥有的代码；以及确实属于通用需求、而不是某一个功能需要的共享层改动。
-- 例外：共享层的改动要带上所属领域专家的确认，并回归所有使用方；GUI 改动按 [packages/client/AGENTS.md](../../packages/client/AGENTS.md) 的最低检查自验。
+- 例外：共享层的改动要带上所属领域专家的确认，并回归所有使用方；GUI 改动按 packages/client/AGENTS.md (`../../packages/client/AGENTS.md`) 的最低检查自验。
 - 修法：把诉求吸收进功能包；确属通用需求时，在独立改动中连同 owner 的确认一起提升到共享层。
 
 功能自己拥有行渲染与排序规则，基座组件按原样消费：

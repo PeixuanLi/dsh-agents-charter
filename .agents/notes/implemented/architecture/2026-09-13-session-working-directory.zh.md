@@ -42,6 +42,6 @@ Playwright MCP 和 Chrome DevTools MCP 在获取 Session 的 MCP 连接时验证
 
 运行时提供一个目录 owner，并保留原始项目。消费者一起迁移，包括文件系统、shell、指令、技能、子代理和两种 SDK。目录可能在 harness 之外消失，因此在使用时执行验证和日志化恢复。即使可选上下文被禁用，必需运行时上下文也仍然可见。
 
-`{{cwd}}` 没有循环提供的值；依赖该内置变量的自定义 persona 会触发严格插值错误。部署方按照[系统提示词迁移说明](../../../../packages/core/system-prompt/README.zh.md)移除这些引用。当前目录与恢复目标均不可用时，提示词组装会拒绝模型轮次；[目录服务恢复说明](../../../../packages/session/working-directory/README.zh.md#known-limitations-and-deferred-work)要求恢复目录，或通过 SDK 或 Host 服务选择现有的绝对目录。
+`{{cwd}}` 没有循环提供的值；依赖该内置变量的自定义 persona 会触发严格插值错误。部署方按照系统提示词迁移说明 (`../../../../packages/core/system-prompt/README.zh.md`)移除这些引用。当前目录与恢复目标均不可用时，提示词组装会拒绝模型轮次；目录服务恢复说明 (`../../../../packages/session/working-directory/README.zh.md#known-limitations-and-deferred-work`)要求恢复目录，或通过 SDK 或 Host 服务选择现有的绝对目录。
 
 验证覆盖 Session 相互独立、相对路径变更、回放、取消、恢复、工具卸载、用户上下文渲染、provider 继承和真实目录操作。

@@ -6,7 +6,7 @@ Status: implemented
 
 ## 问题
 
-两个调用方需要同一个封闭决策——「这个具体操作可以继续吗？」：`tools/pre-execute` 的 `ask` 决策（包括 Claude-Code 钩子桥的 `permissionDecision: ask`）以及[沙箱 参考](../../../../packages/shell/tool-bash/README.zh.md) 中拒绝后的一次性升级重试。一个共享的 seam 使它们无需各自发明独立的结果词汇、通道路由、取消机制和审计轨迹，同时保证没有应答者的部署永远不会批准一个无法应答的请求。应答者可以是交互式宿主，也可以是自动化控制器。
+两个调用方需要同一个封闭决策——「这个具体操作可以继续吗？」：`tools/pre-execute` 的 `ask` 决策（包括 Claude-Code 钩子桥的 `permissionDecision: ask`）以及沙箱 参考 (`../../../../packages/shell/tool-bash/README.zh.md`) 中拒绝后的一次性升级重试。一个共享的 seam 使它们无需各自发明独立的结果词汇、通道路由、取消机制和审计轨迹，同时保证没有应答者的部署永远不会批准一个无法应答的请求。应答者可以是交互式宿主，也可以是自动化控制器。
 
 路由问题的核心是归属：权限请求必须到达拥有发起请求的 agent（智能体）的通道，对无人拥有的 agent 失败关闭，并且不侵入没有组合应答者的部署。
 
@@ -25,7 +25,7 @@ Status: implemented
   #   policy: never   # deployment default for sessions without an override; 'ask' when omitted
 ```
 
-仅有这条条目只提供机制，不提供通道：没有组合应答者时，每次 ask 都解析为 `unavailable`，发起请求的工具调用会被拒绝——无需配置即可做到故障时默认拒绝。组合 [ACP profile 应用](../../../../packages/bundle/acp-app/README.zh.md)即可闭环：其[仅面向自动化的桥接层](../simplification/2026-07-23-acp-automation-only-protocol.zh.md)注册一个应答者，向拥有该会话的客户端发送 `session/request_permission`，携带精确的工具调用 id 和一次性 allow/reject 选项。`policy: never` 是无人值守姿态：每次 ask 都会被确定性地自动拒绝，当前值也会加入运行时上下文快照。`policy` 在插件加载时对照封闭列表校验；非法值直接抛异常。
+仅有这条条目只提供机制，不提供通道：没有组合应答者时，每次 ask 都解析为 `unavailable`，发起请求的工具调用会被拒绝——无需配置即可做到故障时默认拒绝。组合 ACP profile 应用 (`../../../../packages/bundle/acp-app/README.zh.md`)即可闭环：其[仅面向自动化的桥接层](../simplification/2026-07-23-acp-automation-only-protocol.zh.md)注册一个应答者，向拥有该会话的客户端发送 `session/request_permission`，携带精确的工具调用 id 和一次性 allow/reject 选项。`policy: never` 是无人值守姿态：每次 ask 都会被确定性地自动拒绝，当前值也会加入运行时上下文快照。`policy` 在插件加载时对照封闭列表校验；非法值直接抛异常。
 
 组合部署的可观测行为：`allowed-once` 仅允许该次调用继续；拒绝、关闭和通道缺失以三种不同原因拒绝，模型可以区分；轮次内成功的请求会在发起请求的 agent 的会话日志上落一对持久化的 `approval/asked`/`approval/decided` 事件；授权不会在发起请求的调用结束后继续存在。空闲时的请求或审计追加失败会拒绝，而不会返回未经审计的决策。
 
@@ -63,7 +63,7 @@ tool/result      "escalated" — this one call ran under the wider mode; the gra
 
 #### 每会话策略层
 
-seam 还拥有[审批参考](../../../../packages/interaction/user-approval/README.zh.md)所描述的会话级 `'ask' | 'never'` 策略。生效策略由日志中记录的切换在部署默认值之上折叠而成。`'never'` 会在任何应答者运行之前，于 `request()` 内部解析为 `rejected`；`'ask'` 则派发请求，否则一路委派至 `unavailable`。两个当前值都会在每次模型请求前加入原子化的运行时上下文快照，因此策略切换无需单独叙述；每次审批请求仍会记录审计对。
+seam 还拥有审批参考 (`../../../../packages/interaction/user-approval/README.zh.md`)所描述的会话级 `'ask' | 'never'` 策略。生效策略由日志中记录的切换在部署默认值之上折叠而成。`'never'` 会在任何应答者运行之前，于 `request()` 内部解析为 `rejected`；`'ask'` 则派发请求，否则一路委派至 `unavailable`。两个当前值都会在每次模型请求前加入原子化的运行时上下文快照，因此策略切换无需单独叙述；每次审批请求仍会记录审计对。
 
 #### ACP 应答者
 
@@ -123,7 +123,7 @@ ACP 桥只应答其会话映射所拥有的精确 agent 对象。它携带既有
 - **谁决定一次调用是否需要 ask？** 策略生产者：返回 `permissionDecision: ask` 的钩子、任何 `tools/pre-execute` 监听器、或沙箱升级门禁。seam 和桥只负责路由和应答；二者都不注入自己对「什么值得弹出提示」的判断。
 - **用户关闭提示或轮次在 ask 进行中中止时会发生什么？** 关闭映射为 `cancelled` 并携带自己的拒绝文本。已中止的 signal 直接结算为 `cancelled` 而不派发；ask 进行中的中止丢弃迟到的应答。当两个审计追加都提交时，任一路径都记录恰好一对事件，绝不会两对。
 - **如果客户端以 harness 从未提供的选项应答呢？** 除已提供的 `allow_once` 之外的任何选项都映射为 `rejected`——来自不合规客户端的未知 optionId 永远不能授权。
-- **subagent 的审批如何路由？** 不路由：委派会把每个进程内子 agent 钉定为 `'never'`（[审批钉定参考](../../../../packages/subagent/subagent/README.zh.md)），因此子 agent 的每次 ask 都在任何应答者之前解析为 `rejected`，子 agent 则通过其运行时上下文一开始就会得知。`subagent-acp` 的子侧自动应答是独立的；将子 agent 的 ask 路由到父控制器已延后（§ 延后）。
+- **subagent 的审批如何路由？** 不路由：委派会把每个进程内子 agent 钉定为 `'never'`（审批钉定参考 (`../../../../packages/subagent/subagent/README.zh.md`)），因此子 agent 的每次 ask 都在任何应答者之前解析为 `rejected`，子 agent 则通过其运行时上下文一开始就会得知。`subagent-acp` 的子侧自动应答是独立的；将子 agent 的 ask 路由到父控制器已延后（§ 延后）。
 - **`policy: 'never'` 在运行时实际改变了什么？** 服务在派发任何应答者之前，将该会话的每次 ask 解析为 `rejected`（在服务内部，因此没有注册顺序能绕过它）；下一份原子化的运行时上下文快照会声明该策略；每次成功的自动拒绝都会记录审计对。
 - **热重载或应答者在会话中途卸载时会发生什么？** 应答者随其拥有的 fiber 一起 dispose，因此下一次 ask 降级为 `unavailable` 而非挂在死通道上；重新挂载会重新注册应答者，无需追赶状态。
 - **客户端从哪里获得审批上下文？** 请求携带精确的 `callId` 和发起方的人类可读 `reason`；通道适配器可自行关联更丰富的工具调用状态，而无需在审批 seam 中重复携带参数。

@@ -14,4 +14,4 @@ description: "Messages 模拟流为原生 SDK 消费方发布具名 SSE 事件�
 ## 迁移
 
 1. 消费具名 Messages 事件并解析其 `data` 字段。不要将流过滤为仅含无名事件。
-2. 验证完整文本响应、工具调用响应和测试使用的故障行为。[模拟服务器参考](../../../../packages/test-support/llm-mock-server/README.zh.md)说明了可用脚本。
+2. 验证完整文本响应、工具调用响应和测试使用的故障行为。模拟服务器参考 (`../../../../packages/test-support/llm-mock-server/README.zh.md`)说明了可用脚本。

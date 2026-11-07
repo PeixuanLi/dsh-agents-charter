@@ -6,7 +6,7 @@ English | [中文](2026-10-12-peer-principal-and-remote-access.zh.md)
 
 ## Problem
 
-A Remote method on the Host could not tell whom one call spoke for, and could not restrict callable methods by caller. The [`PeerScope`](../../../../packages/typert/protocol/src/types.ts) contract stated "Who the Peer is and what it may do are not recorded here"; [Connection](../../../../packages/client/connection/src/rpc-host.ts) had a single operator Peer, `admit()` returned it for every authenticated request, and the `/api` route and the interceptor's Fetch handler used it unconditionally instead of the admission result; [Gateway](../../../../packages/api/gateway/src/index.ts) silently fell back to `operatorPeer()` when a caller named no Peer.
+A Remote method on the Host could not tell whom one call spoke for, and could not restrict callable methods by caller. The `PeerScope` (`../../../../packages/typert/protocol/src/types.ts`) contract stated "Who the Peer is and what it may do are not recorded here"; Connection (`../../../../packages/client/connection/src/rpc-host.ts`) had a single operator Peer, `admit()` returned it for every authenticated request, and the `/api` route and the interceptor's Fetch handler used it unconditionally instead of the admission result; Gateway (`../../../../packages/api/gateway/src/index.ts`) silently fell back to `operatorPeer()` when a caller named no Peer.
 
 The first non-owner caller is a liveshare viewer. Viewer requests reach the owner's liveshare Host plugin through the Relay, and the plugin dispatched them in the owner's process as the operator, so the owner's Session treated a viewer's prompt as the owner's own input. PR #3854 pushed liveshare semantics into session-controller for this: the request body carries `origin`, every prompt writes a required `prompt/origin` event correlated by requestId, the controller folds origins, `serializeAdmission` extends to every prompt, and a new `api-session/external-admission` hook appears; liveshare maintains its own `READ_ENDPOINTS` allowlist and trims list/follow results; the frontend `clientWritePolicy` lives in ui-conversation, with three ways of reading it across five packages and seven places that hide UI by whether a callback was injected.
 
@@ -336,7 +336,7 @@ class RemoteAccessService {            // ctx.remoteAccess; Remote namespace rem
 | Evaluation timing | Each `decide()`, each `allows()`, and each snapshot computation calls `bindings()` once, with no caching; time-dependent state (such as expiry) applies immediately, and a long stream (such as `workspace/follow` or `session/control`) reflects added or removed bindings at its next per-item decision; snapshots are recomputed only after `invalidate()`, so a business package also calls `invalidate()` when a time event such as expiry happens |
 | Notification | When a business state change (grant, revocation, mode switch) alters a binding or a condition's answer, the business package must call `invalidate(principal?)`; snapshots are recomputed only after `invalidate()` and policy registration or removal |
 | `remote-access/denied` | Only a call refusal becomes an error, with details `{ action, reason }`, where reason is the reason a condition or `explain` gave, `no-allow`, `policy-failed`, or the `resource-invalid` the Gateway gives for invalid resources; a refused event is simply not pushed |
-| Required service | The Gateway declares `static inject = ['typert', 'remoteAccess']`; a composition that mounts the Gateway mounts remote-access, which [`bundle/base`](../../../../packages/bundle/base/cordis.patch.yml) assembles right after `typert-gateway`; the plugin manager protects it like the Gateway, so it cannot be disabled from the Plugins page |
+| Required service | The Gateway declares `static inject = ['typert', 'remoteAccess']`; a composition that mounts the Gateway mounts remote-access, which `bundle/base` (`../../../../packages/bundle/base/cordis.patch.yml`) assembles right after `typert-gateway`; the plugin manager protects it like the Gateway, so it cannot be disabled from the Plugins page |
 
 #### Example: share viewer
 
@@ -499,7 +499,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 | Invariant | Basis and enforcement point |
 |---|---|
 | Only in-process Host code supplies a principal, when it creates a Peer | `PeerScope.principal` is read-only; `createPeer()` has no route |
-| No wire field can set or override a principal | Principals never come from args, the envelope, headers, the query, or cookies. Extra top-level args fields fail `assertExactArguments`; the payload must be exactly `{ args }`; [`clientRequestSchema`](../../../../packages/client/connection/src/rpc-schema.ts) drops unknown envelope fields; a same-named field inside a request body is business data |
+| No wire field can set or override a principal | Principals never come from args, the envelope, headers, the query, or cookies. Extra top-level args fields fail `assertExactArguments`; the payload must be exactly `{ args }`; `clientRequestSchema` (`../../../../packages/client/connection/src/rpc-schema.ts`) drops unknown envelope fields; a same-named field inside a request body is business data |
 | Browser network admission yields the owner | Connections that pass [browser token authentication](../../implemented/architecture/2026-08-24-browser-token-authentication.md) receive `browserPeer` |
 | No implicit Peer | Neither the Gateway nor Connection supplies a default Peer; required parameters expose a missing Peer at compile time |
 | A disposed Peer cannot dispatch | `gateway/peer-disposed` |
@@ -511,7 +511,7 @@ GlobalStandardProps.useWorkspaceAccess: (workspaceId: WorkspaceId, action: Remot
 
 ### Recording the message source
 
-The `MessageSourceMap` entry in the [session-controller types](../../../../packages/api/session-controller/src/types.ts) gains an optional field:
+The `MessageSourceMap` entry in the session-controller types (`../../../../packages/api/session-controller/src/types.ts`) gains an optional field:
 
 ```text
 'user-rpc': {
@@ -527,8 +527,8 @@ Two producers build a `kind: 'user'` + `rpcId` user-message source inside a Remo
 
 | Producer | Location |
 |---|---|
-| `SessionController.prompt()` builds the source and `SessionCommandController.prompt(request, source)` only delivers it | [`session-controller/src/index.ts`](../../../../packages/api/session-controller/src/index.ts), [`commands.ts`](../../../../packages/api/session-controller/src/commands.ts) |
-| subagent `prompt()` (`BrowserPromptSource`); no role lists it, so a non-owner reaches it only through in-process Host code, not through the Gateway | [`subagent/src/index.ts`](../../../../packages/subagent/subagent/src/index.ts) |
+| `SessionController.prompt()` builds the source and `SessionCommandController.prompt(request, source)` only delivers it | `session-controller/src/index.ts` (`../../../../packages/api/session-controller/src/index.ts`), `commands.ts` (`../../../../packages/api/session-controller/src/commands.ts`) |
+| subagent `prompt()` (`BrowserPromptSource`); no role lists it, so a non-owner reaches it only through in-process Host code, not through the Gateway | `subagent/src/index.ts` (`../../../../packages/subagent/subagent/src/index.ts`) |
 
 Business code does not pass a principal down as a function parameter: the identity is read once from the invocation in the Remote method, and the built source travels down. The Agent inbox has no interception point that could add the field on enqueue (`followup` / `steer` accept built messages, and in-process producers such as the SDK and scheduling run outside Remote calls), so each producer records it, and the code-review rule covers new producers.
 
@@ -536,7 +536,7 @@ Business code does not pass a principal down as a function parameter: the identi
 |---|---|
 | `kind` is unchanged | Still `'user'`; existing `kind === 'user'` checks are unaffected |
 | Owner messages are unchanged | An owner call writes no field, so its source is byte-identical to the source before principals existed; a message without the field (including every older Session) is the owner's |
-| Not part of model requests | LLM adapters read only the model source ([`llm-deepseek/src/replay.ts`](../../../../packages/llm/llm-deepseek/src/replay.ts)) |
+| Not part of model requests | LLM adapters read only the model source (`llm-deepseek/src/replay.ts` (`../../../../packages/llm/llm-deepseek/src/replay.ts`)) |
 | Session format | `SESSION_FORMAT_VERSION` is not bumped; per the [persistence type-change cookbook](../../../../docs/cookbook/reviewing-persistence-type-changes.md) the change records an acknowledgement |
 
 Example consumer use, outside this Note's scope: tool guards and pre-step rechecks read `source.principal` of the user messages in a turn and judge by the non-owner caller when any message carries one; a turn mixing owner and viewer messages takes the strictest.
@@ -547,7 +547,7 @@ The review rule's home is the "`@Remote` marks capability methods" section of [R
 
 | Document | Content |
 |---|---|
-| [`docs/subsystems/typert.md`](../../../../docs/subsystems/typert.md), [`docs/api-gateway.md`](../../../../docs/api-gateway.md) | `PeerScope`, `RemoteInvocation`, `InvokeRemoteRequest`, explicit Peers, `resources` on `@Remote`, and the access-check order |
+| `docs/subsystems/typert.md` (`../../../../docs/subsystems/typert.md`), `docs/api-gateway.md` (`../../../../docs/api-gateway.md`) | `PeerScope`, `RemoteInvocation`, `InvokeRemoteRequest`, explicit Peers, `resources` on `@Remote`, and the access-check order |
 | READMEs of connection, gateway, typert-protocol, typert-registry, api-remotes, remote-access, session-controller, workspace-controller, ui-session, ui-workspace, ui-slots, and client-test-runtime | Peer / `browserPeer` in place of the operator; the remote-access role, binding, and policy contract; access hooks |
 
 ### Out of scope and future work
@@ -651,7 +651,7 @@ The review rule's home is the "`@Remote` marks capability methods" section of [R
 | Owner messages | The source is byte-identical to the source before this change; existing keyless recorded-session snapshots are unchanged | `pnpm run test:snapshot` needs no re-recording |
 | Persistence record | `verify-persistence-changes` passes | doc-sync |
 
-The SDK projections are unaffected: the TypeScript SDK server builds its own `{ kind: 'user' }` messages ([`sdk/server/src/server.ts`](../../../../packages/sdk/server/src/server.ts)) outside the Gateway and does not project the source; the Python SDK does not read the user source.
+The SDK projections are unaffected: the TypeScript SDK server builds its own `{ kind: 'user' }` messages (`sdk/server/src/server.ts` (`../../../../packages/sdk/server/src/server.ts`)) outside the Gateway and does not project the source; the Python SDK does not read the user source.
 
 ### Costs and limits
 

@@ -35,7 +35,7 @@ package.json 不变式（由 `pnpm run constraints` / `scripts/check-workspace-c
 | `tsconfig.base.json` | 已有分组无需编辑；新分组需为 `@deepseek-ai/dsh-*` 通配符添加 `./packages/<group>/*/src` 候选路径 |
 | `tsconfig.host.json`（Host 包）或 `tsconfig.client.json`（Client 包） | 在 `references` 中添加 `{ "path": "./packages/<group>/<pkg>" }`——普通包恰好属于一个 aggregate，绝不两个都加。`api/remotes` 因 Host 生成约定与 Client 消费约定之间存在顺序依赖而使用仓库专属拆分，新增包不得仿照（[布局](../development.zh.md#typescript-project-layout)） |
 
-`packages/client/*` 包改为 extends `tsconfig.base.client.json`（而非 `tsconfig.base.json`）；client 插件包还需在 package.json 声明 `dsh.client`、导出 `./client`、调用共享 tsdown preset（`packages/client/tsdown.client.ts`）——client 侧见 [packages/client/AGENTS.md](../../packages/client/AGENTS.md)。
+`packages/client/*` 包改为 extends `tsconfig.base.client.json`（而非 `tsconfig.base.json`）；client 插件包还需在 package.json 声明 `dsh.client`、导出 `./client`、调用共享 tsdown preset（`packages/client/tsdown.client.ts`）——client 侧见 packages/client/AGENTS.md (`../../packages/client/AGENTS.md`)。
 
 以下内容由 glob 或包 manifest（元数据清单）发现机制自动覆盖，无需手动编辑：根 `package.json` workspaces、`scripts/publint-all.ts`、`tsdown.config.ts`、`.oxlintrc.json`、`scripts/check-workspace-constraints.ts`。
 
@@ -105,9 +105,9 @@ Append-only, prefix-stable, replacing, or independent behavior, including the ex
 - **Consumer-visible gap** — exact missing operation or case, its consequence, and any maintainer constraint.
 ````
 
-根据实现填写 Model Experience。每个直接、条件、上限、生命周期或辅助的模型上下文条目使用一个 H3，包含上述三个有序 H4 字段，每个字段下有一个正文段落。引用包拥有的稳定文本：系统提示词放在引出它的字段下，用带标题的 H5 加 `markdown` 围栏表示，通常归入 `What the model sees`；其他短文本以命名占位符内联，其他长文本使用相同的嵌套形式。仅概述数据依赖或提供方拥有的文本。工具 schema 条目链接到生成的[工具目录](../tool-catalog.zh.md)中对应的锚定章节，仅说明该处缺失的差异。当作用域可以隐藏 prompt 或 schema 其中之一而不影响另一个时，将二者分开。填写 `KV Cache effect` 时，应区分仅追加增长、稳定重复的前缀、替换既有请求 token 和独立模型请求，并列出会使缓存复用失效、且由本包拥有的变化。“不使缓存失效”仅表示本包保留了已有的可复用前缀；缓存是否可用以及何时淘汰不属于本包约定。[行文标准](../../.agents/skills/dsh-prose-standard/SKILL.md)约束完整性与归属；验证器强制执行所需章节结构。
+根据实现填写 Model Experience。每个直接、条件、上限、生命周期或辅助的模型上下文条目使用一个 H3，包含上述三个有序 H4 字段，每个字段下有一个正文段落。引用包拥有的稳定文本：系统提示词放在引出它的字段下，用带标题的 H5 加 `markdown` 围栏表示，通常归入 `What the model sees`；其他短文本以命名占位符内联，其他长文本使用相同的嵌套形式。仅概述数据依赖或提供方拥有的文本。工具 schema 条目链接到生成的工具目录 (`../tool-catalog.zh.md`)中对应的锚定章节，仅说明该处缺失的差异。当作用域可以隐藏 prompt 或 schema 其中之一而不影响另一个时，将二者分开。填写 `KV Cache effect` 时，应区分仅追加增长、稳定重复的前缀、替换既有请求 token 和独立模型请求，并列出会使缓存复用失效、且由本包拥有的变化。“不使缓存失效”仅表示本包保留了已有的可复用前缀；缓存是否可用以及何时淘汰不属于本包约定。[行文标准](../../.agents/skills/dsh-prose-standard/SKILL.md)约束完整性与归属；验证器强制执行所需章节结构。
 
-没有上下文效果或仅有消费方拥有路径的包使用 [`SENTENCE_MODEL_EXPERIENCE`](../../scripts/verify-package-readme-model-experience.ts) 中经过审计的 `None, as ` 或 `Indirectly, through ` 语句，随后添加 `KV Cache effect` H4 和一个非空正文段落；与模型无关的通用包可以改为加入 `NO_MODEL_EXPERIENCE_SECTION`。两种情况都不要展开为对另一个包工作的描述。limitations [allowlist](../../scripts/verify-package-readme-limitations.ts) 独立管理。[已归档的Model Experience Agent Note](../../.agents/notes/archived/process/2026-07-12-package-model-experience-contract.md) 记录了设计动机。
+没有上下文效果或仅有消费方拥有路径的包使用 `SENTENCE_MODEL_EXPERIENCE` (`../../scripts/verify-package-readme-model-experience.ts`) 中经过审计的 `None, as ` 或 `Indirectly, through ` 语句，随后添加 `KV Cache effect` H4 和一个非空正文段落；与模型无关的通用包可以改为加入 `NO_MODEL_EXPERIENCE_SECTION`。两种情况都不要展开为对另一个包工作的描述。limitations allowlist (`../../scripts/verify-package-readme-limitations.ts`) 独立管理。[已归档的Model Experience Agent Note](../../.agents/notes/archived/process/2026-07-12-package-model-experience-contract.md) 记录了设计动机。
 
 <a id="plugin-display-metadata"></a>
 
@@ -147,7 +147,7 @@ Append-only, prefix-stable, replacing, or independent behavior, including the ex
 
 要在组合包卡片、详情和组件行显示图片，包根插件在导出清单顶层设置 `"icon": "./icon.svg"`，或在省略该字段时导出 `./icon`。子路径插件导出自己的图标，例如 `"./search/icon": "./search.svg"`。将每张图片加入 `files`。清单 `icon` 相对于清单所在目录；绝对路径、URL、目录外路径，以及解析到目录外的符号链接均被拒绝。导出的图标像 locale 资源一样经 Node exports 解析，且必须位于所属包内。支持不超过 256 KiB 的 SVG、PNG、JPEG（`.jpg`/`.jpeg`）和 WebP 文件。图片必须自包含；SVG 作为图片渲染，不作为内联 HTML。Host 返回 data URL，不激活插件。声明无效或文件不可读时，显示元信息诊断并保留有效文本，不再尝试导出的图标；图片缺失或无法解码时使用面板的默认插画。
 
-组合包还可以把 `meta.detail` 设为相对于包根目录的 Markdown 文件路径，例如在 `locale/en.json` 中设为 `"docs/DETAIL.md"`，在 `locale/zh.json` 中设为 `"docs/DETAIL.zh.md"`；读取时使用包根目录下的这些文件。路径使用 `/`，必须位于包内，以 `.md` 或 `.markdown` 结尾，且没有包字段回退；图片放在该文件旁边，并按 `check-workspace-constraints` 的要求，在 `files` 中紧接语言资源之后列出该文件的顶层目录，例如 `docs`。该文件必须位于包的子目录中且已存在；包根目录下的文档会被拒绝，因为其旁边的图片不会被发布。组合包在**插件**中的页面，以及启用[自定义插件索引组合包](../../packages/experimental/plugin-market-bundle/README.zh.md)时其索引条目页面，把当前界面语言对应的该文件作为插件的详细介绍文档显示。没有 `meta.detail` 时，它们显示包 README；索引条目页面在此之后还会回退到所声明仓库的 README；规则由[文档顺序](../../packages/util/plugin-detail/README.zh.md#document-order)定义。该文档面向用户编写，图片使用相对于该文件的路径引用。
+组合包还可以把 `meta.detail` 设为相对于包根目录的 Markdown 文件路径，例如在 `locale/en.json` 中设为 `"docs/DETAIL.md"`，在 `locale/zh.json` 中设为 `"docs/DETAIL.zh.md"`；读取时使用包根目录下的这些文件。路径使用 `/`，必须位于包内，以 `.md` 或 `.markdown` 结尾，且没有包字段回退；图片放在该文件旁边，并按 `check-workspace-constraints` 的要求，在 `files` 中紧接语言资源之后列出该文件的顶层目录，例如 `docs`。该文件必须位于包的子目录中且已存在；包根目录下的文档会被拒绝，因为其旁边的图片不会被发布。组合包在**插件**中的页面，以及启用自定义插件索引组合包 (`../../packages/experimental/plugin-market-bundle/README.zh.md`)时其索引条目页面，把当前界面语言对应的该文件作为插件的详细介绍文档显示。没有 `meta.detail` 时，它们显示包 README；索引条目页面在此之后还会回退到所声明仓库的 README；规则由文档顺序 (`../../packages/util/plugin-detail/README.zh.md#document-order`)定义。该文档面向用户编写，图片使用相对于该文件的路径引用。
 
 已安装 bundle 的卡片和详情、组件列表与配置详情、设置中的插件清单都展示这些元信息，包括禁用插件和预设内插件。读取时不激活插件。
 

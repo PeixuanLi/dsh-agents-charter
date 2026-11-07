@@ -10,7 +10,7 @@ Status: implemented
 
 ## Decision
 
-[`packages/schedule/schedule/src/domain.ts`](../../../../packages/schedule/schedule/src/domain.ts) 中的 `renderReminderFraming` 与 `renderRecurringReminderBatchFraming` 都输出同一条固定行，即模块常量 `SCHEDULED_MESSAGE_FRAMING`：`This is a scheduled message from the user`；它是该块的第二行，位于方括号标记（`[SCHEDULE REMINDER]`、`[SCHEDULE REMINDER BATCH]`）之后。动态字段行不变：单次消息仍追加 `schedule_id_json`、`occurrence_at`、`reminder_prompt_json`，周期批次仍追加 `reminders_json`。
+`packages/schedule/schedule/src/domain.ts` (`../../../../packages/schedule/schedule/src/domain.ts`) 中的 `renderReminderFraming` 与 `renderRecurringReminderBatchFraming` 都输出同一条固定行，即模块常量 `SCHEDULED_MESSAGE_FRAMING`：`This is a scheduled message from the user`；它是该块的第二行，位于方括号标记（`[SCHEDULE REMINDER]`、`[SCHEDULE REMINDER BATCH]`）之后。动态字段行不变：单次消息仍追加 `schedule_id_json`、`occurrence_at`、`reminder_prompt_json`，周期批次仍追加 `reminders_json`。
 
 这条固定行说明消息的来源：投递到该 Session 的一条定时任务。模型读到固定块中带有它的 user-role 消息时，会把随后的提醒载荷（单次消息的 `reminder_prompt_json`、批次的 `reminders_json`）当作用户安排的内容，而 Host 无法证明该文本由用户键入：`schedule_create` 与 `schedule_edit` 允许模型写入提示词，模型写入的提示词可以带上模型从网页、文件或命令输出中读到的文本。旧固定行把该载荷标记为不可信，本决策有意去掉这一指令，因此接受「模型生成的文本以用户来源行投递」这一残留风险。再引入条件：一旦出现经由模型写入提示词完成注入的实例，就恢复一句把载荷限定为提醒文本、而非新指令的说明；包内五处固定断言与 Web e2e 的 `expectReminderFraming` 是「此类改动必须是有意为之」的检查。固定行无法被动态字段伪造，这由编码保证：schedule id 与提示词是 JSON 字符串，发生时点是经校验的规范 RFC 3339 值，且各自只占一行，因此带有换行或形如 `occurrence_at:` 的提示词无法向该块增加固定行。[Host 拥有的定时消息](2026-09-16-host-schedule-storage.zh.md) 记下的其余决策不变，包括通过 Session controller 投递以及保存的投递记录。
 

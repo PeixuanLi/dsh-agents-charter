@@ -30,7 +30,7 @@ Status: rejected — 下列每一项替换在证据上都未达到净简化门�
 
 **数据与校验：**
 
-- **以 Ajv 承担 tools 的 JSON Schema 校验器**：[schema DSL 参考](../../../../packages/core/tools/README.zh.md)已明确否决接纳更大的 schema 语言；这个校验器还会做 Ajv 不做的、针对 realm 内建原型的检查。
+- **以 Ajv 承担 tools 的 JSON Schema 校验器**：schema DSL 参考 (`../../../../packages/core/tools/README.zh.md`)已明确否决接纳更大的 schema 语言；这个校验器还会做 Ajv 不做的、针对 realm 内建原型的检查。
 - **以 `structuredClone` 替换会话的 `snapshotJsonValue`/`isJsonValue`**：它是校验器加分离器，以「每个 getter 只读一次」和跨 realm 内建对象检查强制执行无损 JSON 边界；`structuredClone` 接受 Map/Date/-0，什么都不强制。有意保持零依赖、针对被模型篡改的 realm 做过加固的 `ptc-runtime-worker` 镜像实现同理。
 - **以 `fast-deep-equal` 替换会话接口面的 `isDeepEqualJson`**、**以 `safe-stable-stringify` 承担 repeat-tool-reminder 的规范化**：两项替换在机械层面都可行，但每一项都是拿约 17–20 行带注释、有测试的代码，去换一个核心包的第一个外部运行时依赖——在这个体量上是净亏损。
 - **以 zod/valibot 承担持久事件的严格解码器**（goal fold、tool-ralph、session）：它们是位于持久化边界、键集精确匹配、失败即明确报错、带事件专属报错信息的解码器；在仓库标准 schemastery 之外再放一个 schema 库是政策变更，不是删除。
@@ -39,8 +39,8 @@ Status: rejected — 下列每一项替换在证据上都未达到净简化门�
 
 **文件系统、子进程与终端：**
 
-- **以 `write-file-atomic` 承担 fs-local/storage-json 的原子写**：这些包缺少私有 0700 暂存目录、Win32 DACL 复制/`ReplaceFileW`、AbortSignal 支持和父目录 fsync——每一项都正是手写实现的意义所在。koffi Win32 绑定本身由 [Windows 持久发布参考](../../../../packages/session/session-persistence-jsonl/src/win32.ts)提供依据。
-- **以 `fzstd`/原生 zstd 包承担 JSONL 帧扫描**：`node:zlib` 内置的 zstd 已经负责压缩（[zstd 参考](../../../../packages/session/session-persistence-jsonl/README.zh.md)，其中明确否决了外部原生依赖）；剩下的 `scanZstdFrames` 为撕裂尾部修复*不做解压*地定位 RFC 8878 帧边界，没有任何包公开这项能力。
+- **以 `write-file-atomic` 承担 fs-local/storage-json 的原子写**：这些包缺少私有 0700 暂存目录、Win32 DACL 复制/`ReplaceFileW`、AbortSignal 支持和父目录 fsync——每一项都正是手写实现的意义所在。koffi Win32 绑定本身由 Windows 持久发布参考 (`../../../../packages/session/session-persistence-jsonl/src/win32.ts`)提供依据。
+- **以 `fzstd`/原生 zstd 包承担 JSONL 帧扫描**：`node:zlib` 内置的 zstd 已经负责压缩（zstd 参考 (`../../../../packages/session/session-persistence-jsonl/README.zh.md`)，其中明确否决了外部原生依赖）；剩下的 `scanZstdFrames` 为撕裂尾部修复*不做解压*地定位 RFC 8878 帧边界，没有任何包公开这项能力。
 - **以 `picomatch`/`tinyglobby`/`ignore` 承担 fs 搜索**：根本不存在 glob 引擎——依照 [bash 承载的发现工具决策](../../archived/feature/2026-07-09-bash-backed-grep-glob-discovery.md)，两个发现类工具都通过 shell 调用 ripgrep。
 - **以 `istextorbinary`/`chardet` 承担文本检测**：手写实现是约 15 行的 NUL 采样加 fatal 模式的 `TextDecoder`；启发式包体量更大，还会改变模型能读到哪些文件（模型可见的 `FS_NOT_TEXT` 漂移）。
 - **以 `shell-quote` 承担 POSIX 单引号包裹**：两个各 1 行、测试详尽的引号辅助函数，对上一个处于维护模式、有 CVE 历史、转义输出还不一样的包——安全边界不是省一行代码的地方。
@@ -52,7 +52,7 @@ Status: rejected — 下列每一项替换在证据上都未达到净简化门�
 
 **服务器与 HTTP：**
 
-- **以 `msw` 替换 llm-mock-server**：这个服务器的存在意义就是在线路上制造故障——socket 销毁、SSE（Server-Sent Events）中途断连、停滞、监听前拒绝——服务对象是真实的 HTTP 适配器和子进程；进程内拦截一样都表达不了。设计归 [llm-mock-server README](../../../../packages/test-support/llm-mock-server/README.zh.md) 所有。
+- **以 `msw` 替换 llm-mock-server**：这个服务器的存在意义就是在线路上制造故障——socket 销毁、SSE（Server-Sent Events）中途断连、停滞、监听前拒绝——服务对象是真实的 HTTP 适配器和子进程；进程内拦截一样都表达不了。设计归 llm-mock-server README (`../../../../packages/test-support/llm-mock-server/README.zh.md`) 所有。
 - **以 `hono`/`sirv` 承担 host/webserver**：核心是基于 disposer 的动态路由注册表（「注册即效果」约定、HMR 反注册）加 index HTML 变换挂点；hono 的路由器只增不减，静态中间件也无法伺服变换后的 index。总共约 244 行，确实很小。
 - **以 `@mozilla/readability`/`iconv-lite` 承担 web-fetch-http**：该提供方返回原始 HTML；字符集处理已经是内置的 `TextDecoder`；MIME 解析约 11 行；重定向跟随是同源安全策略。
 

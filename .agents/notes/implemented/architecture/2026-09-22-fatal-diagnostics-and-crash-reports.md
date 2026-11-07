@@ -28,11 +28,11 @@ Four decisions ship together.
 
 ## Relationship to earlier decisions
 
-This partially supersedes the [native Desktop fatal recovery](2026-09-15-desktop-native-fatal-recovery.md) note: the crash report file, not the Electron console, is now the record the dialog points to, and the dialog detail carries the report-path line; that note's dialog ownership, button set, and profile recovery remain active. The `uncaughtException` handling extends the release mechanism of the [fail-loud release](../../../../packages/boot/app-boot/README.md) note to synchronous throws.
+This partially supersedes the [native Desktop fatal recovery](2026-09-15-desktop-native-fatal-recovery.md) note: the crash report file, not the Electron console, is now the record the dialog points to, and the dialog detail carries the report-path line; that note's dialog ownership, button set, and profile recovery remain active. The `uncaughtException` handling extends the release mechanism of the fail-loud release (`../../../../packages/boot/app-boot/README.md`) note to synchronous throws.
 
 ## Relationship to the Desktop logging design
 
-Desktop continuously persists a bounded plugin-management journal with whitelisted facts, two rotating segments and a bounded write queue; its budgets and failure guarantees belong to the [Desktop README](../../../../apps/desktop/README.md). It excludes raw installation specs, error text and package-manager output. The broader Worker-owned continuous log remains deferred. Fatal crash reports independently retain raw errors and bounded stderr and renderer-console tails because these contain the field-diagnosis evidence; files are local and owner-only where supported. An isolated Worker appends bounded management history after the basic report is saved, preserving access to the basic report when collection fails or is still running. Recent operations provide context, not causal attribution.
+Desktop continuously persists a bounded plugin-management journal with whitelisted facts, two rotating segments and a bounded write queue; its budgets and failure guarantees belong to the Desktop README (`../../../../apps/desktop/README.md`). It excludes raw installation specs, error text and package-manager output. The broader Worker-owned continuous log remains deferred. Fatal crash reports independently retain raw errors and bounded stderr and renderer-console tails because these contain the field-diagnosis evidence; files are local and owner-only where supported. An isolated Worker appends bounded management history after the basic report is saved, preserving access to the basic report when collection fails or is still running. Recent operations provide context, not causal attribution.
 
 ## Testing
 

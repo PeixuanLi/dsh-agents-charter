@@ -23,7 +23,7 @@ Node 按文件 URL 缓存已求值的模块。profile 使用 pnpm 的 hoisted �
 
 ### 检测已变化的模块
 
-[`ModuleFiles`](../../../../packages/boot/hmr/src/module-files.ts) 为 profile 目录及其已链接包的真实目录之下已加载的 ES 和 CommonJS 模块记录 inode、大小和修改时间。dsh 安装目录中的模块不在此范围内。不记录状态变更时间：pnpm 通过硬链接从其 store 导入包，在其他位置添加链接会改变已加载文件的状态变更时间，而内容不变。记录发生在应用就绪时和每次重新组合之后；源码重载重新求值模块时，也为这些模块记录。重新组合记录的是它在替换任何模块之前读取的文件身份，因此重新组合期间发生的写入仍可被检测到；在重新组合期间首次加载的模块在结算后记录，避免下一次安装时发生不必要的重启。首次求值与记录之间的修改可能漏检；时间戳兜底仍覆盖重新组合之外首次加载的模块。就绪时的观察失败时，兜底从 HMR 构造时间开始，而非 Unix 纪元。文件已消失或身份不同的模块视为陈旧。在上次记录之后才首次加载的模块没有记录；若其文件的修改时间不早于该次记录时间减去 2 秒文件系统时间戳精度，则视为陈旧，因此不会漏掉在加载与下一次比较之间发生的重装。比较不参考版本号：lockfile 不为 `file:` 和 `link:` 依赖记录内容标识，而文件身份同样覆盖 registry、tarball、目录和 link 安装。
+`ModuleFiles` (`../../../../packages/boot/hmr/src/module-files.ts`) 为 profile 目录及其已链接包的真实目录之下已加载的 ES 和 CommonJS 模块记录 inode、大小和修改时间。dsh 安装目录中的模块不在此范围内。不记录状态变更时间：pnpm 通过硬链接从其 store 导入包，在其他位置添加链接会改变已加载文件的状态变更时间，而内容不变。记录发生在应用就绪时和每次重新组合之后；源码重载重新求值模块时，也为这些模块记录。重新组合记录的是它在替换任何模块之前读取的文件身份，因此重新组合期间发生的写入仍可被检测到；在重新组合期间首次加载的模块在结算后记录，避免下一次安装时发生不必要的重启。首次求值与记录之间的修改可能漏检；时间戳兜底仍覆盖重新组合之外首次加载的模块。就绪时的观察失败时，兜底从 HMR 构造时间开始，而非 Unix 纪元。文件已消失或身份不同的模块视为陈旧。在上次记录之后才首次加载的模块没有记录；若其文件的修改时间不早于该次记录时间减去 2 秒文件系统时间戳精度，则视为陈旧，因此不会漏掉在加载与下一次比较之间发生的重装。比较不参考版本号：lockfile 不为 `file:` 和 `link:` 依赖记录内容标识，而文件身份同样覆盖 registry、tarball、目录和 link 安装。
 
 ### 替换
 
@@ -31,7 +31,7 @@ Node 按文件 URL 缓存已求值的模块。profile 使用 pnpm 的 hoisted �
 
 `reconcileProfile()` 返回 `pending`，即每个只有重启后才能加载的陈旧模块及其原因（`host-module`、`unmanaged-plugin`，规划失败时为 `module-comparison`）。待处理模块保持陈旧，包括在上次记录之后才首次加载的模块，因此下一次重新组合会重试它们。在重新组合期间首次加载、且其文件在比较之后被修改的模块同样保持陈旧：激活可能在该写入之前已对其求值。列出或比较模块时发生的失败会保留原有记录，并设置 profile 级 `restartReason: module-comparison`，即使无法确定模块 URL。两种情况都不会阻止重新组合。激活失败（包括替换版本导入失败）会连同 Loader 的导入错误一起抛出；未变化的失败在后续重新组合中作为警告返回。Plugin Manager 把抛出的失败报告为带该诊断的 `failed`，把 `pending` 转为带其 `restartReason` 的 `restart-required`，除非操作报告 `overridden`。Web 页面本地化该原因，agent 工具据此生成一句 `nextStep`，因此没有任何界面解析诊断字符串。
 
-[打包 worker loader](../../../../packages/experimental/webworker-runtime/src/module-system/module-loader.ts) 在私有映射中保存已求值模块，其 `require` 不暴露缓存。HMR 无法通过 Node API 替换它们，因此报告需要重启。原生 Node 使用异步模块 hook 时仍暴露其缓存。
+打包 worker loader (`../../../../packages/experimental/webworker-runtime/src/module-system/module-loader.ts`) 在私有映射中保存已求值模块，其 `require` 不暴露缓存。HMR 无法通过 Node API 替换它们，因此报告需要重启。原生 Node 使用异步模块 hook 时仍暴露其缓存。
 
 ### Plugin Manager 与 runtime resolution
 
@@ -69,7 +69,7 @@ Node 按文件 URL 缓存已求值的模块。profile 使用 pnpm 的 hoisted �
 - 每次重新组合对 profile 的所有已加载文件执行一次 stat；有文件变化时才遍历模块图，宿主依赖图在首次使用时收集。
 - 不跟踪动态 `import()` 边：导入方继续运行，而其下一次动态导入会求值新文件。已存在的 Worker 和 TSX loader 线程保留各自的缓存。
 - 被替换的 Loader entry 在重新组合之前停止，之后启动一次；旧版本不会恢复。
-- profile 组合之外的 Loader entry 以替换后的代码重启，不重新进行兼容性检查（[限制](../../../../packages/boot/hmr/README.zh.md#known-limitations-and-deferred-work)）。
+- profile 组合之外的 Loader entry 以替换后的代码重启，不重新进行兼容性检查（限制 (`../../../../packages/boot/hmr/README.zh.md#known-limitations-and-deferred-work`)）。
 - `ModuleFiles` 属于单个 HMR 实例。重启 `hmr` 条目本身的重新组合会启动一个新实例，其首次观察记录当前文件，因此此时待处理的变化不再被报告或重试。
 - `pending` 描述整个 profile，因此由已链接工作区包纳入范围的宿主模块，会使后续无关操作也报告 `restart-required`，直到进程重启。
 - 若文件被替换为指向较旧 store 文件的硬链接，它保留较旧的修改时间；当其模块在上次记录之后才首次加载时，该变化不会被检测到。

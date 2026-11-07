@@ -6,7 +6,7 @@ Status: proposed
 
 ## Problem
 
-[`LocalSandboxProvider.confine()`](../../../../packages/sandbox/sandbox-local/src/index.ts) 在分派前规范化 `workspaceRoot` 并复制策略。POSIX 配置构建函数调用 [`workspaceWritableRoots()`](../../../../packages/sandbox/sandbox/src/roots.ts)，再次解析同一工作区。对于不授予工作区写权限的 POSIX 只读策略，公共预处理也会执行。
+`LocalSandboxProvider.confine()` (`../../../../packages/sandbox/sandbox-local/src/index.ts`) 在分派前规范化 `workspaceRoot` 并复制策略。POSIX 配置构建函数调用 `workspaceWritableRoots()` (`../../../../packages/sandbox/sandbox/src/roots.ts`)，再次解析同一工作区。对于不授予工作区写权限的 POSIX 只读策略，公共预处理也会执行。
 
 ## Proposal
 

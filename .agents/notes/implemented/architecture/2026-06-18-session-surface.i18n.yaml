@@ -15,20 +15,20 @@
   en: 788fc16ecdedc252
   zh: 14d05c2a1272de5d
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/decision/surfaceop-two-operations:
-  en: ff075eec0881094a
-  zh: 1f7768f28b8996d5
+  en: 9a95525029ed4469
+  zh: ed1a1f0c46050c8a
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/decision/surfacemanager-delta-based-not-full-rebuild:
   en: 0b10fd9c5166d17b
   zh: 02de01f70c03f70e
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/decision/persistence:
-  en: 9bb1f81b86b24760
-  zh: fe4948645dd0c66d
+  en: a4f9de9ff0fd1b08
+  zh: dd34a384ba7b7ea6
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/decision/crash-recovery:
   en: ee71f9c0f12b6a0e
   zh: 403b1723f808391d
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/decision/invariants:
-  en: 98f39e77083d67b7
-  zh: 634a9227fc2a7ec9
+  en: 751894ea8ba5d302
+  zh: f1229fcf0a053b7d
 /agent-note-session-surface-an-ordered-projection-over-the-event-log/alternatives-considered:
   en: 193157129e65e487
   zh: a0a73b8a9cbd78e6

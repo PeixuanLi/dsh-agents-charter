@@ -11,7 +11,7 @@ English | [中文](guide.zh.md)
 
 `sdk-minimal` advertises `read_image` alongside its persistent shell and `working_directory`. Automatic compaction sends an additional model request to summarize older history when context pressure reaches the configured threshold. The complete Session log remains stored as uncompressed JSONL. Images that exceed the route budget are permanently replaced by attachment/path placeholders so the request can retry. SDK prompt text does not execute `/compact`.
 
-Clients that pin tool names, benchmark prompt size, or count model requests must account for these defaults. Image reading requires an adapter route that declares image input. See the [bundle reference](../../../../packages/bundle/sdk-minimal/README.md) for configuration and model effects.
+Clients that pin tool names, benchmark prompt size, or count model requests must account for these defaults. Image reading requires an adapter route that declares image input. See the bundle reference (`../../../../packages/bundle/sdk-minimal/README.md`) for configuration and model effects.
 
 ## Migration
 

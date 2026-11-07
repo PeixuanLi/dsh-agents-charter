@@ -18,4 +18,4 @@ With `activate: true`, activation starts once the opening snapshot is computed, 
 2. For passive viewers, omit `activate` or set it to `false`.
 3. Verify that an activation-enabled stream still returns its opening snapshot, then check Agent availability separately. Do not treat receipt of the snapshot as completion of activation.
 
-See the [Session Controller reference](../../../../packages/api/session-controller/README.md) for history and state observation behavior.
+See the Session Controller reference (`../../../../packages/api/session-controller/README.md`) for history and state observation behavior.

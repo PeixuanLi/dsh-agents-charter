@@ -6,15 +6,15 @@ English | [中文](2026-09-19-shell-env-key-declarations.zh.md)
 
 ## Problem
 
-The [shell-environment registry](../../../../packages/shell/shell-env/src/index.ts) requires a description for every declared variable and exposes `list()` to enumerate it. Runtime collection uses only contributor identity, declared keys, and resolved values. [Bash](../../../../packages/shell/tool-bash/src/index.ts) and [PowerShell](../../../../packages/shell/tool-pwsh/src/index.ts) call `collect`; the [Web bundle](../../../../packages/bundle/web-app/src/index.ts) contributes `DSH_WEB_URL`. Searches found no fixed production caller of `list()` or consumer of its descriptions.
+The shell-environment registry (`../../../../packages/shell/shell-env/src/index.ts`) requires a description for every declared variable and exposes `list()` to enumerate it. Runtime collection uses only contributor identity, declared keys, and resolved values. Bash (`../../../../packages/shell/tool-bash/src/index.ts`) and PowerShell (`../../../../packages/shell/tool-pwsh/src/index.ts`) call `collect`; the Web bundle (`../../../../packages/bundle/web-app/src/index.ts`) contributes `DSH_WEB_URL`. Searches found no fixed production caller of `list()` or consumer of its descriptions.
 
-The method is nevertheless discoverable through the [Cordis inspection provider](../../../../packages/extensions/tool-cordis/src/providers.ts), so this is an explicit API contraction, not unreachable-code removal. The [original identity-and-log-location record](../../archived/feature/2026-07-10-agent-session-identity-and-log-location.md) anticipated diagnostics and future prompt/UI consumers. The current TODO and [README limitation](../../../../packages/shell/shell-env/README.md) still describe an incomplete catalog that omits built-in variables.
+The method is nevertheless discoverable through the Cordis inspection provider (`../../../../packages/extensions/tool-cordis/src/providers.ts`), so this is an explicit API contraction, not unreachable-code removal. The [original identity-and-log-location record](../../archived/feature/2026-07-10-agent-session-identity-and-log-location.md) anticipated diagnostics and future prompt/UI consumers. The current TODO and README limitation (`../../../../packages/shell/shell-env/README.md`) still describe an incomplete catalog that omits built-in variables.
 
 ## Proposal
 
 Represent a contributor's declaration as an explicit readonly collection of keys. Remove description objects, `BashEnvVariable`, `BashEnvVariableInfo`, `list()`, description-only validation, and the exhaustive-catalog TODO. Update the Web contributor, README pair, and generated service/type declarations together.
 
-Keep `register`, `collect`, reserved keys, ownership conflicts, undeclared-output refusal, deterministic environment output, and effect disposal. The [PowerShell parity reference](../../../../packages/shell/shell-env/README.md) continues to own the shared registry and both shell consumers. The proposal removes one public method, two metadata types, and their validation/enumeration tests; roughly 32 identified source lines disappear before the small key-membership adaptation.
+Keep `register`, `collect`, reserved keys, ownership conflicts, undeclared-output refusal, deterministic environment output, and effect disposal. The PowerShell parity reference (`../../../../packages/shell/shell-env/README.md`) continues to own the shared registry and both shell consumers. The proposal removes one public method, two metadata types, and their validation/enumeration tests; roughly 32 identified source lines disappear before the small key-membership adaptation.
 
 ## Alternatives considered
 

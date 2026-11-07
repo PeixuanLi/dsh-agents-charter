@@ -21,7 +21,7 @@ Surface metadata belongs only to the four surface event types (`system/message`,
 
 ### SurfaceOp: two operations
 
-The [source-backed `SurfaceOp` reference](../../../../docs/subsystems/session.md#surface-types) defines the exact union. Replacement objects contain only `op`, `startSeq`, and `endSeq`; endpoints use the `SessionSeq` brand.
+The source-backed `SurfaceOp` reference (`../../../../docs/subsystems/session.md#surface-types`) defines the exact union. Replacement objects contain only `op`, `startSeq`, and `endSeq`; endpoints use the `SessionSeq` brand.
 
 1. **Append** — add the new event seq to the tail. Used by `system/message`, `user/message`, `assistant/message`, `tool/result`. The loop passes `surfaceOp: 'append'` on all such appends and records `sourceEventSeqs` where applicable: `tool/result` records its `tool/call` source, while `assistant/message` owns its embedded stream directly.
 
@@ -37,7 +37,7 @@ Delta processing is O(1) when no new events and O(new events) when new events ar
 
 ### Persistence
 
-The fields are serialized as top-level JSON properties. JSONL preserves placement and source-event references without a separate column mapping. The [V3 canonical-envelope decision](2026-09-06-v3-canonical-session-envelopes.md) owns exact replacement keys and strict-acceptance rationale; the [V2-to-V3 specification](../../../../packages/session/session-format-v2-to-v3/README.md#canonical-envelopes) owns historical conversion. This note retains ordered-projection ownership and replacement rationale.
+The fields are serialized as top-level JSON properties. JSONL preserves placement and source-event references without a separate column mapping. The [V3 canonical-envelope decision](2026-09-06-v3-canonical-session-envelopes.md) owns exact replacement keys and strict-acceptance rationale; the V2-to-V3 specification (`../../../../packages/session/session-format-v2-to-v3/README.md#canonical-envelopes`) owns historical conversion. This note retains ordered-projection ownership and replacement rationale.
 
 ### Crash recovery
 
@@ -47,7 +47,7 @@ The `repair.ts` module synthesizes `tool/result` closers for orphaned tool calls
 
 `Session` validates `sourceEventSeqs` and `surfaceOp` at the always-on seed/append boundary: source lists are non-empty, unique, earlier, and known; `assistant/message` carries no source list; replacement endpoints exist in surface order; and `sourceEventSeqs` covers every shadowed node. These are single-record acceptance and storage-projection rules.
 
-Every surface-eligible event must carry `surfaceOp` or it would disappear from derived history. Typed `append` overloads enforce this for literal event types; runtime checks in `append` and the seed constructor cover widened unions and current loaded logs. Released validation and conversion belong to their versioned migration edges rather than generic Session code; see the [V2-to-V3 placement rules](../../../../packages/session/session-format-v2-to-v3/README.md#canonical-envelopes).
+Every surface-eligible event must carry `surfaceOp` or it would disappear from derived history. Typed `append` overloads enforce this for literal event types; runtime checks in `append` and the seed constructor cover widened unions and current loaded logs. Released validation and conversion belong to their versioned migration edges rather than generic Session code; see the V2-to-V3 placement rules (`../../../../packages/session/session-format-v2-to-v3/README.md#canonical-envelopes`).
 
 ## Alternatives considered
 

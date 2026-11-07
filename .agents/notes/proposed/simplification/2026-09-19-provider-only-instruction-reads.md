@@ -6,9 +6,9 @@ English | [中文](2026-09-19-provider-only-instruction-reads.zh.md)
 
 ## Problem
 
-[Instruction discovery](../../../../packages/context/agent-instructions/src/files.ts) maintains provider and direct-Node paths for metadata probes, root-marker discovery, and bounded reads. `nodeStatFile`, `nodeTextChunks`, and optional provider/target fields support the latter. The exported `discoverBaselineInstructionFiles` wrapper selects it; `loadBaselineInstructions` permits it when callers omit a provider.
+Instruction discovery (`../../../../packages/context/agent-instructions/src/files.ts`) maintains provider and direct-Node paths for metadata probes, root-marker discovery, and bounded reads. `nodeStatFile`, `nodeTextChunks`, and optional provider/target fields support the latter. The exported `discoverBaselineInstructionFiles` wrapper selects it; `loadBaselineInstructions` permits it when callers omit a provider.
 
-Every repository production caller supplies a provider. The [plugin](../../../../packages/context/agent-instructions/src/index.ts) reads `ctx.get('fs')` and returns when absent; [reconciliation](../../../../packages/context/agent-instructions/src/state.ts) requires `FileSystem`. Direct-Node consumers are tests. Maintaining both paths therefore adds separate error and cancellation coverage without serving a shipped product path.
+Every repository production caller supplies a provider. The plugin (`../../../../packages/context/agent-instructions/src/index.ts`) reads `ctx.get('fs')` and returns when absent; reconciliation (`../../../../packages/context/agent-instructions/src/state.ts`) requires `FileSystem`. Direct-Node consumers are tests. Maintaining both paths therefore adds separate error and cancellation coverage without serving a shipped product path.
 
 ## Proposal
 
@@ -16,9 +16,9 @@ Require `FileSystem` throughout discovery and loading, including both exported w
 
 Keep the plugin's missing-provider no-op and the pure `renderAgentInstructions` API. Preserve candidate precedence, source and rendered-output byte budgets, cancellation, symlink following, and error semantics: unavailable candidates cannot imply removal, while root-marker failures remain errors. The separate `skill-filesystem` owner retains its existing providerless behavior.
 
-Migrate direct helper tests to explicitly owned local or controlled providers. The [test suite](../../../../packages/context/agent-instructions/tests/agent-instructions.spec.ts) already mounts both. Preserve unique assertions and consolidate duplicate Node-mocking cases into provider coverage. Expected deletion is roughly 50–65 production lines before signature/documentation updates, plus redundant test machinery; measure the actual reduction during implementation.
+Migrate direct helper tests to explicitly owned local or controlled providers. The test suite (`../../../../packages/context/agent-instructions/tests/agent-instructions.spec.ts`) already mounts both. Preserve unique assertions and consolidate duplicate Node-mocking cases into provider coverage. Expected deletion is roughly 50–65 production lines before signature/documentation updates, plus redundant test machinery; measure the actual reduction during implementation.
 
-The [agent-instructions reference](../../../../packages/context/agent-instructions/README.md) owns the retained symlink-loading behavior. At implementation, update its provider-read descriptions and Chinese counterpart. The [archived workspace-context note](../../archived/feature/2026-06-24-workspace-context.md) remains frozen; this proposal requires no change to that historical record.
+The agent-instructions reference (`../../../../packages/context/agent-instructions/README.md`) owns the retained symlink-loading behavior. At implementation, update its provider-read descriptions and Chinese counterpart. The [archived workspace-context note](../../archived/feature/2026-06-24-workspace-context.md) remains frozen; this proposal requires no change to that historical record.
 
 ## Alternatives considered
 

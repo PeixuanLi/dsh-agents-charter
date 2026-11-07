@@ -4,7 +4,7 @@ Status: implemented
 
 [English](2026-07-29-terminal-llm-stream-failures.md) | 中文
 
-本说明取代[有界 LLM（大语言模型）请求恢复](2026-06-21-bounded-llm-request-recovery.zh.md)中的抛出错误身份和调用局部 sidecar 机制；该说明仍负责结构化失败事实、重试策略与持久尝试。[压缩（compaction）参考](../../../../packages/compaction/compaction-basic/README.zh.md)定义当前溢出恢复。
+本说明取代[有界 LLM（大语言模型）请求恢复](2026-06-21-bounded-llm-request-recovery.zh.md)中的抛出错误身份和调用局部 sidecar 机制；该说明仍负责结构化失败事实、重试策略与持久尝试。压缩（compaction）参考 (`../../../../packages/compaction/compaction-basic/README.zh.md`)定义当前溢出恢复。
 
 ## Problem
 

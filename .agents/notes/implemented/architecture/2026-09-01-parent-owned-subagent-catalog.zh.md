@@ -20,7 +20,7 @@ child descriptor 对恢复与 composition 仍然必要，但它不能作为 disc
 
 child header 与 `subagent/descriptor` 继续拥有恢复与 composition 权威。Activation 与精确 parent 关系继续拥有授权与投递权威。mode 与 label 只快照一次，同一份分离值写入 parent catalog fact 与 child descriptor。
 
-注册的 `subagentCatalog` projection 物化 parent fact。它将存储、追加、迭代和检查点校验交给 [`dsh-chunked-list`](../../../../packages/util/chunked-list/README.zh.md)，后者以每块 64 项的持久 stack 保存事实，因此 append 最多复制 head chunk，以有界 O(1) 工作完成。materialization 从旧到新访问 chunk，对 D 条事实以 O(D) 时间保留父目录事件顺序。并发创建按目录成功追加的顺序排列，与 child 时间戳和 id 无关。projection checkpoint 以 O(D) 克隆 state；projection-cache 继续异步写入，并使用既有创建、turn-end 与 disposal 强制点。
+注册的 `subagentCatalog` projection 物化 parent fact。它将存储、追加、迭代和检查点校验交给 `dsh-chunked-list` (`../../../../packages/util/chunked-list/README.zh.md`)，后者以每块 64 项的持久 stack 保存事实，因此 append 最多复制 head chunk，以有界 O(1) 工作完成。materialization 从旧到新访问 chunk，对 D 条事实以 O(D) 时间保留父目录事件顺序。并发创建按目录成功追加的顺序排列，与 child 时间戳和 id 无关。projection checkpoint 以 O(D) 克隆 state；projection-cache 继续异步写入，并使用既有创建、turn-end 与 disposal 强制点。
 
 工具库拥有 chunk 布局与共享容量常量；catalog 拥有事件校验、fork 过滤和行转换。catalog 投影状态版本 7 接受外部成员和子级名称，因此投影注册表会从 Session 事件重建不兼容缓存。载荷 v0 与 v1 保持不变；v2 记录外部执行；v3 为可继续和外部条目增加名称。
 
@@ -46,6 +46,6 @@ snapshot normalizer 会把 `childCreatedAt` 归零，因为它来自 process clo
 
 ## 后果
 
-Session observation 与 client snapshot 通过 `projections.values.subagentCatalog` 暴露直接子级列表。目录状态变化时，projection change feed 发布完整列表。每次 view 的成本为 O(D)，因此 D 次创建可能累计产生 O(D²) 的 view 工作量；这沿用现有 projection 机制。`listChildren()` 通过一次 live-preferred Session observation 读取父 projection；后代枚举按目录顺序递归调用同一读取函数。可达目录事实提供身份和成员关系，无需全局 Session 扫描或独立的子身份缓存路径。不可读分支保留为诊断；未进入目录的 Session 不在发现范围内。[Web projection 消费说明](../../../../packages/client/ui-subagent/README.zh.md) 说明浏览器加载与同步。
+Session observation 与 client snapshot 通过 `projections.values.subagentCatalog` 暴露直接子级列表。目录状态变化时，projection change feed 发布完整列表。每次 view 的成本为 O(D)，因此 D 次创建可能累计产生 O(D²) 的 view 工作量；这沿用现有 projection 机制。`listChildren()` 通过一次 live-preferred Session observation 读取父 projection；后代枚举按目录顺序递归调用同一读取函数。可达目录事实提供身份和成员关系，无需全局 Session 扫描或独立的子身份缓存路径。不可读分支保留为诊断；未进入目录的 Session 不在发现范围内。Web projection 消费说明 (`../../../../packages/client/ui-subagent/README.zh.md`) 说明浏览器加载与同步。
 
-[创建元数据排除说明](../../../../packages/subagent/subagent/README.zh.md) 说明目录事实为何不包含模型配置。
+创建元数据排除说明 (`../../../../packages/subagent/subagent/README.zh.md`) 说明目录事实为何不包含模型配置。

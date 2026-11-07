@@ -15,4 +15,4 @@ description: "当请求保留的图片超过 50 张时，pi-ai 路由现在会�
 
 1. 核对每个 pi-ai 提供方的单次请求图片上限。上限高于 50 时，在 `cordis.patch.yml` 的 `llm-pi-ai` 配置中把 `providers.<provider>.maxRequestImages` 设为该上限。
 2. 如需改变每次超限省略的图片数，设置 `providers.<provider>.imageOffloadCountQuantum`；它不得超过 `maxRequestImages`。
-3. 重新打开 profile 配置，确认保存的数值。参见[提供方配置参考](../../../../packages/llm/llm-pi-ai/README.zh.md)。
+3. 重新打开 profile 配置，确认保存的数值。参见提供方配置参考 (`../../../../packages/llm/llm-pi-ai/README.zh.md`)。

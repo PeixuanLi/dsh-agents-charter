@@ -11,7 +11,7 @@ English | [中文](guide.zh.md)
 
 Schedule management addresses every Host task by id. The native and Remote APIs share one service; the previous Session-bound `delete` and `update` methods are removed. Native creation takes a typed `timing`, and catalog results discriminate After, At, Every, Daily, Weekly, Cron, and RRULE with `kind`.
 
-The existing `schedule` domain writes version 2 and reads version 1 without startup writes, retaining its route, envelope, and layout. SQLite's physical schema stays at version 1. Back up the store before upgrading: the first successful v2 write stamps the unit v2, which a v1 binary refuses to open. Downgrade requires restoring that backup. Edits and delivery save current rows without a separate migration command. The plugin README owns the [stored schema, upgrade timing, and costs](../../../../packages/schedule/schedule/README.md#storage-format).
+The existing `schedule` domain writes version 2 and reads version 1 without startup writes, retaining its route, envelope, and layout. SQLite's physical schema stays at version 1. Back up the store before upgrading: the first successful v2 write stamps the unit v2, which a v1 binary refuses to open. Downgrade requires restoring that backup. Edits and delivery save current rows without a separate migration command. The plugin README owns the stored schema, upgrade timing, and costs (`../../../../packages/schedule/schedule/README.md#storage-format`).
 
 ## Migration
 

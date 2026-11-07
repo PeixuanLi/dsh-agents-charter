@@ -8,9 +8,9 @@ description: "把 DSH 页面或弹窗作为整体审查，按设计原则说明�
 
 ## 概览
 
-本手册用于明确要求的完整审查，以及由改动影响或回归风险决定需要采用的证据步骤。普通开发按 [UI 改动流程](../../.agents/skills/dsh-client-ui-ux/SKILL.md#required-review-loop)走轻量路径，不逐节执行本手册。[原则与案例参考](../ui-design-review-cases.zh.md)提供判断依据，不是必做清单。既有测试、GUI PR GIF 和设计／产品审批继续按原有规则执行。
+本手册用于明确要求的完整审查，以及由改动影响或回归风险决定需要采用的证据步骤。普通开发按 [UI 改动流程](../../.agents/skills/dsh-client-ui-ux/SKILL.md#required-review-loop)走轻量路径，不逐节执行本手册。原则与案例参考 (`../ui-design-review-cases.zh.md`)提供判断依据，不是必做清单。既有测试、GUI PR GIF 和设计／产品审批继续按原有规则执行。
 
-对齐审查先核对图标完整空间（含有意保留的内部留白）、文字列和间距，再检查实际轮廓。热区不等于图标框；不逐个拉齐 glyph 的像素边缘。判断顺序见[对齐原则](../ui-design-review-cases.zh.md#alignment)。
+对齐审查先核对图标完整空间（含有意保留的内部留白）、文字列和间距，再检查实际轮廓。热区不等于图标框；不逐个拉齐 glyph 的像素边缘。判断顺序见对齐原则 (`../ui-design-review-cases.zh.md#alignment`)。
 
 按[同前景色规则](../../.agents/skills/dsh-client-ui-ux/references/icons.md#placement-and-use)核对关联图标与文字，包括子菜单值与箭头、搜索占位文字与放大镜；检查明暗主题中的实际颜色和透明度，保留语义例外。
 
@@ -30,9 +30,9 @@ description: "把 DSH 页面或弹窗作为整体审查，按设计原则说明�
 
 确定用户任务和受影响页面或弹窗。涉及多个区域、使用方或设计取舍时记录范围；明确的局部修改不需要单独写计划。用户明确要求完整审查时，列出指定页面／弹窗及相关状态。不能把局部检查表述成整页结论。
 
-在这个范围内应用[判断优先级](../ui-design-review-cases.zh.md#judgment)：先检查对齐与空间分组，再审查密度、层级、状态、组件选型、图标光学和几何。每个发现写成可观察的关系，例如内容与隔壁组的距离反而小于与自身标签的距离。遵循用户指定的顺序和授权；完整审查可以发现多个相关问题，常规调整的实施授权不能替代[既有设计／产品审查要求](../../.agents/skills/dsh-client-ui-ux/SKILL.md#design-review-escalation)。
+在这个范围内应用判断优先级 (`../ui-design-review-cases.zh.md#judgment`)：先检查对齐与空间分组，再审查密度、层级、状态、组件选型、图标光学和几何。每个发现写成可观察的关系，例如内容与隔壁组的距离反而小于与自身标签的距离。遵循用户指定的顺序和授权；完整审查可以发现多个相关问题，常规调整的实施授权不能替代[既有设计／产品审查要求](../../.agents/skills/dsh-client-ui-ux/SKILL.md#design-review-escalation)。
 
-编辑前阅读[客户端 UI Skill](../../.agents/skills/dsh-client-ui-ux/SKILL.md)和适用架构。宽度与输入方式变更使用[响应式 Skill](../../.agents/skills/dsh-responsive-ui/SKILL.md)，令牌规则查阅[样式参考](../web-styling.zh.md)，圆角几何查阅[圆角标准](../ui-radius.zh.md)。本流程补充审查和证据步骤，不另建一套视觉令牌。
+编辑前阅读[客户端 UI Skill](../../.agents/skills/dsh-client-ui-ux/SKILL.md)和适用架构。宽度与输入方式变更使用[响应式 Skill](../../.agents/skills/dsh-responsive-ui/SKILL.md)，令牌规则查阅样式参考 (`../web-styling.zh.md`)，圆角几何查阅圆角标准 (`../ui-radius.zh.md`)。本流程补充审查和证据步骤，不另建一套视觉令牌。
 
 <a id="review-scope"></a>
 ### 按视觉影响选择范围
@@ -62,9 +62,9 @@ description: "把 DSH 页面或弹窗作为整体审查，按设计原则说明�
 
 ### 在整个界面内核对适用规范
 
-按[适用规范映射](../ui-design-review-cases.zh.md#review-baseline)收集本任务相关的当前圆角、材质、字体、组件、反馈、响应式和图案规则，记录明确例外与相关已有变体。个人或外部 skill 不同时，以仓库所有方为准；实现与所有方不同时，把差异保留为发现，不能默默任选一方。
+按适用规范映射 (`../ui-design-review-cases.zh.md#review-baseline`)收集本任务相关的当前圆角、材质、字体、组件、反馈、响应式和图案规则，记录明确例外与相关已有变体。个人或外部 skill 不同时，以仓库所有方为准；实现与所有方不同时，把差异保留为发现，不能默默任选一方。
 
-将[整页与整个弹窗的审查原则](../ui-design-review-cases.zh.md#whole-interface-review)应用于选定范围。保留整体构图上下文，先比较受影响区域与重复关系，再用局部 fixture 分析细节。明确的完整审查覆盖全部区域；局部修正需保留邻接的对齐、分组、嵌套圆角、裁切与焦点关系。
+将整页与整个弹窗的审查原则 (`../ui-design-review-cases.zh.md#whole-interface-review`)应用于选定范围。保留整体构图上下文，先比较受影响区域与重复关系，再用局部 fixture 分析细节。明确的完整审查覆盖全部区域；局部修正需保留邻接的对齐、分组、嵌套圆角、裁切与焦点关系。
 
 ### 把关系明确写出来
 
@@ -156,9 +156,9 @@ description: "把 DSH 页面或弹窗作为整体审查，按设计原则说明�
 
 按本次审查需要查阅对应归属文档。
 
-- [UI 设计原则与审查案例](../ui-design-review-cases.zh.md)——整页与整个弹窗的判断原则、适用规则及解释性案例。
+- UI 设计原则与审查案例 (`../ui-design-review-cases.zh.md`)——整页与整个弹窗的判断原则、适用规则及解释性案例。
 - [规则归属与维护](../../.agents/skills/dsh-client-ui-ux/SKILL.md#maintain-one-owner-per-rule)——原则的修改位置及本地工具的读取方式。
-- [Web UI 样式参考](../web-styling.zh.md)——组件复用与样式归属。
+- Web UI 样式参考 (`../web-styling.zh.md`)——组件复用与样式归属。
 
 <a id="dev-note"></a>
 ## 开发备注

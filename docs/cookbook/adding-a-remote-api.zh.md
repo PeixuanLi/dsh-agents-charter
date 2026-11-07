@@ -2,7 +2,7 @@
 
 [English](adding-a-remote-api.md) | 中文
 
-新增或改动一个 `ctx.remote` 端点按本页五步走：声明方法、声明失败、在包上注册、在 Client 消费、写测试。decorator 语义、lookup 解析、生成管线与 `/api` 路由属于机制，由 [API Gateway 参考](../api-gateway.zh.md)负责；本页给的是每一步的动作与必须遵守的约定。为什么是这套编程面，见 [Typert Remote 方法调用 Agent Note](../../.agents/notes/implemented/architecture/2026-08-02-typert-remote-method-calls.zh.md)；为什么失败面是单个 `RemoteError` 加一张码表，见[失败词汇 Agent Note](../../.agents/notes/implemented/architecture/2026-08-28-ctx-remote-failure-vocabulary.zh.md)。
+新增或改动一个 `ctx.remote` 端点按本页五步走：声明方法、声明失败、在包上注册、在 Client 消费、写测试。decorator 语义、lookup 解析、生成管线与 `/api` 路由属于机制，由 API Gateway 参考 (`../api-gateway.zh.md`)负责；本页给的是每一步的动作与必须遵守的约定。为什么是这套编程面，见 [Typert Remote 方法调用 Agent Note](../../.agents/notes/implemented/architecture/2026-08-02-typert-remote-method-calls.zh.md)；为什么失败面是单个 `RemoteError` 加一张码表，见[失败词汇 Agent Note](../../.agents/notes/implemented/architecture/2026-08-28-ctx-remote-failure-vocabulary.zh.md)。
 
 ## 1. 声明 API
 
@@ -89,7 +89,7 @@ export async function rename(noteId: string, title: string): Promise<void> {
 
 ## 3. 在包上注册
 
-`@Remote` 必须落在一个 Loader entry 插件包里；owner 是抽象 seam 时把控制器放进 `packages/api/` 下的对应包。包清单要补两个生成入口与 protocol 的 peer 依赖，Client 侧则由 `@deepseek-ai/dsh-api-remotes` 的 assembly 挂载该贡献并按需转口类型词汇。两个入口分别指向哪个生成产物、生成管线如何排序，见 [API Gateway 参考](../api-gateway.zh.md)。
+`@Remote` 必须落在一个 Loader entry 插件包里；owner 是抽象 seam 时把控制器放进 `packages/api/` 下的对应包。包清单要补两个生成入口与 protocol 的 peer 依赖，Client 侧则由 `@deepseek-ai/dsh-api-remotes` 的 assembly 挂载该贡献并按需转口类型词汇。两个入口分别指向哪个生成产物、生成管线如何排序，见 API Gateway 参考 (`../api-gateway.zh.md`)。
 
 ```json
 {

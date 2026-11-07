@@ -38,7 +38,7 @@ Client 已经持有消息中的完整图片引用，将其作为 `attachment` �
 
 附件读取不得查询或遍历 Session 历史。验证必须区分获准的跨 Session 图片读取与被 Gateway 拒绝的调用，并覆盖正常引用、无效 ID、固有元数据不符、可选显示字段原样保留、缺失和损坏的对象、旧历史页以及 fork 继承图片。性能证据必须区分历史扫描、存储操作和传输，不能把用户反馈的全部延迟归因于扫描。
 
-诊断脚本是 [`image-read.perf.ts`](../../../../packages/api/session-controller/tests/image-read.perf.ts)，通过配套的 [tsdown 配置](../../../../packages/api/session-controller/tests/image-read.perf.config.ts)编译。基线 worker 使用改动前的控制器与 `{ sessionId, attachmentId: ref.attachmentId }`；候选 worker 使用当前控制器与 `{ sessionId, attachment: ref }`。两者使用相同图片 fixture、工作量和输出校验，并通过同一套已构建的 Local store 执行 `readImage(ref)` 校验。在候选检出目录的根目录编译并运行：
+诊断脚本是 `image-read.perf.ts` (`../../../../packages/api/session-controller/tests/image-read.perf.ts`)，通过配套的 tsdown 配置 (`../../../../packages/api/session-controller/tests/image-read.perf.config.ts`)编译。基线 worker 使用改动前的控制器与 `{ sessionId, attachmentId: ref.attachmentId }`；候选 worker 使用当前控制器与 `{ sessionId, attachment: ref }`。两者使用相同图片 fixture、工作量和输出校验，并通过同一套已构建的 Local store 执行 `readImage(ref)` 校验。在候选检出目录的根目录编译并运行：
 
 ```sh
 pnpm exec tsdown --config-loader native --config packages/api/session-controller/tests/image-read.perf.config.ts

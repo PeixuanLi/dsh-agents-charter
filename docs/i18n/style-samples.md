@@ -14,9 +14,9 @@
 
 依赖约束规范：各类扩展插件仅依赖抽象接口，严禁直接依赖 `dsh-agent-loop`（该主循环支持替换实现）；`dsh-base` 与 `dsh-sdk-minimal` 等组合包可以组装具体循环。
 
-> This document covers **behavior**; type definitions live in [subsystems/](../subsystems/core.md), the per-event/service reference lives in the generated regions of [subsystems/](../subsystems/core.md), and package contracts in the package READMEs state each package's required configuration and behavior ([map](../../packages/README.md)).
+> This document covers **behavior**; type definitions live in subsystems/ (`../subsystems/core.md`), the per-event/service reference lives in the generated regions of subsystems/ (`../subsystems/core.md`), and package contracts in the package READMEs state each package's required configuration and behavior (map (`../../packages/README.md`)).
 
-本文档描述整体行为逻辑；类型定义存放于 [subsystems/](../subsystems/core.zh.md)；各类事件、服务的详细参考见 [subsystems/](../subsystems/core.zh.md) 中的生成区块；相应的 README 说明每个包（package）要求的配置和行为（[索引](../../packages/README.zh.md)）。
+本文档描述整体行为逻辑；类型定义存放于 subsystems/ (`../subsystems/core.zh.md`)；各类事件、服务的详细参考见 subsystems/ (`../subsystems/core.zh.md`) 中的生成区块；相应的 README 说明每个包（package）要求的配置和行为（索引 (`../../packages/README.zh.md`)）。
 
 ## ② 防御模式规则
 

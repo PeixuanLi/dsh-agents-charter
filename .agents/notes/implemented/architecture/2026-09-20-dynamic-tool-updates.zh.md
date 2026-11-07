@@ -34,8 +34,8 @@ DeepSeek 把投影后的更新转换为 system 角色的 `tool_addition` 和 `to
 
 工具列表和逻辑更新事件不依赖能力；只有发出的声明和消息不同。调用已移除但保留声明的工具时，通过现有 `UNKNOWN_TOOL` 路径失败。定义变化和不完整辅助前缀为保证声明一致而放弃前缀复用；仅当请求序列继续时，未变化的恢复才在 `in-history` 路由上保留缓存前缀。同时支持工具更新和历史内系统提示词的路由，在工具添加与提示词变化同时发生或晚于此前提示词更新时，保留此前消息。不支持工具更新的路由仍在工具变化时开启新序列；显式新序列和 surface 替换只在有效文本不同时归并提示词，否则保留存活的提示词节点。不增加持久字段或 Session 格式版本。
 
-手写的[无界面提示词／工具场景](../../../../snapshots/session/dynamic-tool-prompt-updates/snapshot.yml)钉住追加提示词与延迟工具添加同时发生的行为，并验证首次请求的消息保持不变。它复用稳定提示词场景的工具生命周期和 schema 期望值。
+手写的无界面提示词／工具场景 (`../../../../snapshots/session/dynamic-tool-prompt-updates/snapshot.yml`)钉住追加提示词与延迟工具添加同时发生的行为，并验证首次请求的消息保持不变。它复用稳定提示词场景的工具生命周期和 schema 期望值。
 
-[DeepSeek 替换场景](../../../../snapshots/session/deepseek-deferred-tools/snapshot.yml)通过 Messages 序列化验证向空工具集首次添加工具、重建后的基线、后续延迟添加，以及移除该后来激活的工具。根据 [DeepSeek 失败策略](../simplification/2026-11-02-deepseek-deferred-tool-failures.zh.md)，显式全延迟请求保持原样。这些检查验证请求构造，不代表已经测量重建带来的缓存收益。
+DeepSeek 替换场景 (`../../../../snapshots/session/deepseek-deferred-tools/snapshot.yml`)通过 Messages 序列化验证向空工具集首次添加工具、重建后的基线、后续延迟添加，以及移除该后来激活的工具。根据 [DeepSeek 失败策略](../simplification/2026-11-02-deepseek-deferred-tool-failures.zh.md)，显式全延迟请求保持原样。这些检查验证请求构造，不代表已经测量重建带来的缓存收益。
 
-[真实 DeepSeek SDK 测试](../../../../apps/cli/tests/profiles/sdk/dynamic-tool-cache.e2e.ts) 分别在指令不变和指令同时更新时测量原生工具新增后的首次请求。独有的用户历史确保仅命中共享系统提示词缓存无法满足前序输入断言。移除场景检查工具可用性，不要求保留缓存；每个用例均禁用重试。
+真实 DeepSeek SDK 测试 (`../../../../apps/cli/tests/profiles/sdk/dynamic-tool-cache.e2e.ts`) 分别在指令不变和指令同时更新时测量原生工具新增后的首次请求。独有的用户历史确保仅命中共享系统提示词缓存无法满足前序输入断言。移除场景检查工具可用性，不要求保留缓存；每个用例均禁用重试。

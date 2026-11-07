@@ -16,4 +16,4 @@ Judge actual whitespace at normal size, including padding, line-height, glyph wh
 
 When matching two visible gaps, name both pairs of endpoints and include each container’s padding, border and text line box. Equal visible gaps may require unequal margins. A control’s painted edge and a text glyph’s edge are different endpoints; keep that choice stable through review.
 
-Reuse page spacing and [style tokens](../../../../docs/web-styling.md), preserve [alignment](alignment.md) axes, and consult [cases](../../../../docs/ui-design-review-cases.md#grouping) for uncertain judgments. This skill defines no numeric scale.
+Reuse page spacing and style tokens (`../../../../docs/web-styling.md`), preserve [alignment](alignment.md) axes, and consult cases (`../../../../docs/ui-design-review-cases.md#grouping`) for uncertain judgments. This skill defines no numeric scale.

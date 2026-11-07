@@ -30,5 +30,5 @@ description: "自定义 ApprovalService 组合必须提供 sessionProjections �
    await ctx.plugin(ApprovalService)
    ```
 
-3. 由宿主和注册表完成会话恢复，再向同步读取方交付历史状态。遵循[注册表生命周期](../../../../packages/session/session-projection/README.zh.md)；不要在审批 getter 中加载历史，也不要在回放时触发运行时钩子。
+3. 由宿主和注册表完成会话恢复，再向同步读取方交付历史状态。遵循注册表生命周期 (`../../../../packages/session/session-projection/README.zh.md`)；不要在审批 getter 中加载历史，也不要在回放时触发运行时钩子。
 4. 确认激活完成，原有审批测试仍产生相同的结果和审计记录。注册错误必须使激活失败，不能切换到全日志回退路径。

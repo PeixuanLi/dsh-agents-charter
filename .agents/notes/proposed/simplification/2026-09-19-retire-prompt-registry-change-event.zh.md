@@ -6,15 +6,15 @@ Status: proposed
 
 ## 问题
 
-[`SystemPrompt`](../../../../packages/core/system-prompt/src/index.ts) 在提供方注册或 dispose（资源释放）时发出 `system-prompt/change`。仓库搜索未找到执行的产品监听者，但生成的 Host 发现目录会展示该事件。测试维护通知次数及监听者抛出异常后的回滚行为。即使没有第一方订阅者，它仍是具有维护义务的公开扩展。
+`SystemPrompt` (`../../../../packages/core/system-prompt/src/index.ts`) 在提供方注册或 dispose（资源释放）时发出 `system-prompt/change`。仓库搜索未找到执行的产品监听者，但生成的 Host 发现目录会展示该事件。测试维护通知次数及监听者抛出异常后的回滚行为。即使没有第一方订阅者，它仍是具有维护义务的公开扩展。
 
-活动的 [Remote 事件投递参考](../../../../packages/api/remotes/README.zh.md) 明确保留了这一扩展，尽管没有随产品提供的消费方。逐步骤组装早于该承诺，且用途不同：重新构建模型输入不能替代注册表变更的推送观测。
+活动的 Remote 事件投递参考 (`../../../../packages/api/remotes/README.zh.md`) 明确保留了这一扩展，尽管没有随产品提供的消费方。逐步骤组装早于该承诺，且用途不同：重新构建模型输入不能替代注册表变更的推送观测。
 
 ## 提案
 
 停用 `system-prompt/change`，接受已安装及动态编写的 Host 插件失去提示词注册表推送观测的代价。删除其声明、发出点、当前文档、生成的发现条目和通知专属测试。当前受支持的产品路径均不依赖此扩展。
 
-将 [`ScopedLayers`](../../../../packages/core/scope/src/store.ts) 构造函数的通知回调改为可选，并让 `SystemPrompt` 省略它；不提供无操作回调。更新此共享构造函数时，同时删除 [jobs-local](../../../../packages/jobs/jobs-local/src/index.ts) 和 [mcp-resources](../../../../packages/mcp/mcp-resources/src/index.ts) 中现有的无操作实参，并更新 jobs-local 相邻的通知说明。保留共享 effect、操作回滚、撤销顺序、层回收，以及 `tools/change` 及其生产消费方。保留提示词提供方求值、作用域覆盖和组装 invariant。
+将 `ScopedLayers` (`../../../../packages/core/scope/src/store.ts`) 构造函数的通知回调改为可选，并让 `SystemPrompt` 省略它；不提供无操作回调。更新此共享构造函数时，同时删除 jobs-local (`../../../../packages/jobs/jobs-local/src/index.ts`) 和 mcp-resources (`../../../../packages/mcp/mcp-resources/src/index.ts`) 中现有的无操作实参，并更新 jobs-local 相邻的通知说明。保留共享 effect、操作回滚、撤销顺序、层回收，以及 `tools/change` 及其生产消费方。保留提示词提供方求值、作用域覆盖和组装 invariant。
 
 实现时必须修订活动的 Remote 事件投递记录，说明本提案只取代其中保留 `system-prompt/change` 的承诺。从保留扩展的陈述中移除该事件，并链接到已实现的停用决策。让 Remote 投递记录保持活动并相互链接：其转发策略和其他扩展仍具有独立价值。不要重写或归档整个决策。
 

@@ -14,7 +14,7 @@ Node 提供方增加 `executionMode: vm-script` 和独立的 `scriptPersistence`
 
 本决策扩展[尽力保留 PTC 状态](2026-09-23-best-effort-persistent-ptc.zh.md)中的模式命名决策；其中的所有权、非持久存储及恢复决策仍然有效。Node 提供方一次性选择求值器，并在临时和保留生命周期之间共用受管进程机制。AsyncFunction、REPL 和 Script 仍是独立的求值器实现，进程复用不决定语法。
 
-VM Script 在受管子进程内使用独立 realm。顶层 await 使用 Node.js v26.6.0 REPL 转换，由 Acorn 和 acorn-walk 提供解析与遍历。在原生编译之前检测 await，因为非严格 Script 可以将 `await` 编译为标识符。适配后的 visitor 遍历方法的计算属性名，但不进入方法体。源码保留上游署名和许可；[包参考](../../../../packages/ptc-runtime/ptc-runtime-node/README.zh.md#known-limitations-and-deferred-work)负责声明与 realm 限制。
+VM Script 在受管子进程内使用独立 realm。顶层 await 使用 Node.js v26.6.0 REPL 转换，由 Acorn 和 acorn-walk 提供解析与遍历。在原生编译之前检测 await，因为非严格 Script 可以将 `await` 编译为标识符。适配后的 visitor 遍历方法的计算属性名，但不进入方法体。源码保留上游署名和许可；包参考 (`../../../../packages/ptc-runtime/ptc-runtime-node/README.zh.md#known-limitations-and-deferred-work`)负责声明与 realm 限制。
 
 ## 考虑过的替代方案
 

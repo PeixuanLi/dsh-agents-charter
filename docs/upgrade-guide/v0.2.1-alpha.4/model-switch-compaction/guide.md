@@ -27,4 +27,4 @@ With `compaction-basic` automatic mode enabled, a provider/model switch now chec
            maxTokens: 4096
    ```
 
-3. Replace `local` and `small-context` with the registered route. The policy's `maxTokens` caps summary output; the destination request's own output cap is separate. Keep the resolved retained budget below the trigger. Switch once with short history to verify configuration, then with long history to verify condensation. If the switch fails, correct the reported cause and retry, or choose a larger model. See the [package configuration reference](../../../../packages/compaction/compaction-basic/README.md#use-this-package).
+3. Replace `local` and `small-context` with the registered route. The policy's `maxTokens` caps summary output; the destination request's own output cap is separate. Keep the resolved retained budget below the trigger. Switch once with short history to verify configuration, then with long history to verify condensation. If the switch fails, correct the reported cause and retry, or choose a larger model. See the package configuration reference (`../../../../packages/compaction/compaction-basic/README.md#use-this-package`).

@@ -32,4 +32,4 @@ After a committed create, update, or delete, Schedule queues a change notice on 
 
 ## Consequences
 
-Tasks outlive Agents and are managed by id. Archive admission reports active Session targets; explicit stop deletes tasks. Host availability, cross-store at-least-once delivery, best-effort notices, and unbounded per-delivery concurrency remain limitations. The [Schedule reference](../../../../docs/subsystems/schedule.md) owns the exact current contracts and the [management upgrade guide](../../../../docs/upgrade-guide/v0.2.2-alpha.2/schedule-remote-host-tasks/guide.md) covers changed callers.
+Tasks outlive Agents and are managed by id. Archive admission reports active Session targets; explicit stop deletes tasks. Host availability, cross-store at-least-once delivery, best-effort notices, and unbounded per-delivery concurrency remain limitations. The Schedule reference (`../../../../docs/subsystems/schedule.md`) owns the exact current contracts and the [management upgrade guide](../../../../docs/upgrade-guide/v0.2.2-alpha.2/schedule-remote-host-tasks/guide.md) covers changed callers.

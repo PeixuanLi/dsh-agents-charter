@@ -9,17 +9,17 @@
   en: 41ffece5e72e022f
   zh: e813a3efb9c12646
 /agent-note-parallel-tool-call-execution-by-per-call-safety/decision:
-  en: 532bb7268d9b93ce
-  zh: ad47162233222ab0
+  en: bf905db686a328bf
+  zh: 2d10c20cfdf08051
 /agent-note-parallel-tool-call-execution-by-per-call-safety/scheduling-and-ordering:
-  en: 47010d626ab15117
-  zh: a5b77385d7a3e781
+  en: 8087275edfb993ae
+  zh: 56a09c6bf7b0d319
 /agent-note-parallel-tool-call-execution-by-per-call-safety/safety-contract:
   en: 16c4ee08b65ead23
   zh: df80d6e49982615b
 /agent-note-parallel-tool-call-execution-by-per-call-safety/configuration-and-declarations:
-  en: e112957ed8a48039
-  zh: 37d63f9ea4968fb2
+  en: aa6e772578587fac
+  zh: d1b35153d6fc14eb
 /agent-note-parallel-tool-call-execution-by-per-call-safety/verification:
   en: 224b6838130c113f
   zh: f3d7eb68ab5932fb
@@ -27,5 +27,5 @@
   en: 17becc038bb7df7c
   zh: 673d9a9bdfa39edf
 /agent-note-parallel-tool-call-execution-by-per-call-safety/consequences:
-  en: 20a3e29931e01aa0
-  zh: acbfc61dd710d960
+  en: f08493fbc72e1c9a
+  zh: dd557f0ca86ee235

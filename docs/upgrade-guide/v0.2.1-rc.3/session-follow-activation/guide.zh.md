@@ -18,4 +18,4 @@ description: "Session follow 调用方必须显式请求后台 Agent 激活。"
 2. 被动查看器可以省略 `activate` 或设为 `false`。
 3. 确认启用激活的流仍返回开场快照，再单独检查 Agent 是否可用。不要把收到快照当作激活完成。
 
-历史与状态观察行为见 [Session Controller 参考](../../../../packages/api/session-controller/README.zh.md)。
+历史与状态观察行为见 Session Controller 参考 (`../../../../packages/api/session-controller/README.zh.md`)。

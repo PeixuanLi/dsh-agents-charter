@@ -49,5 +49,5 @@ The `vercel-ai-gateway` model `alibaba/qwen-3-235b` is now non-reasoning. Protoc
 ## Migration
 
 1. In Settings → Models, replace removed IDs with supported models. Check endpoints, capabilities, and prices; IDs have no automatic replacement.
-2. Update selections in `cordis.patch.yml`, preset patches, and affected Sessions. Remove obsolete `providers.<provider>.modelOverrides.<id>` entries and replace removed IDs in `providers.<provider>.models` lists. See the [configuration reference](../../../../packages/llm/llm-pi-ai/README.md).
+2. Update selections in `cordis.patch.yml`, preset patches, and affected Sessions. Remove obsolete `providers.<provider>.modelOverrides.<id>` entries and replace removed IDs in `providers.<provider>.models` lists. See the configuration reference (`../../../../packages/llm/llm-pi-ai/README.md`).
 3. Review capacity and reasoning overrides against the endpoint's supported values. Start the profile, confirm the model has no configuration diagnostic, and send a short prompt.

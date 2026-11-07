@@ -15,4 +15,4 @@ For models whose capacity is absent from both configuration and the installed ca
 
 1. Check the actual limits of custom endpoints. In the `llm-pi-ai` configuration in `cordis.patch.yml`, set `providers.<provider>.defaultContextWindow` and `providers.<provider>.defaultMaxTokens` when those limits differ. To retain the previous defaults, use `262144` and `32768` respectively.
 2. For models with different limits on the same provider, set `contextWindow` and `maxTokens` on their `providers.<provider>.models` entries. An explicitly configured model `maxTokens` also supplies the Harness request default.
-3. Reopen the profile configuration and confirm the saved numeric values. See the [provider configuration reference](../../../../packages/llm/llm-pi-ai/README.md).
+3. Reopen the profile configuration and confirm the saved numeric values. See the provider configuration reference (`../../../../packages/llm/llm-pi-ai/README.md`).
