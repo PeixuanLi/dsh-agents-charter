@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for agents-md-symlink.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/agents-md-symlink.md
+/agent-instructions-and-the-claude-md-symlink:
+  en: f6043e5f8adbe7b7
+  zh: d1a30bcb5fa92e5b
+/agent-instructions-and-the-claude-md-symlink/rule-text:
+  en: b8102381889ae9f3
+  zh: 8d02e4f569b87bf6
+/agent-instructions-and-the-claude-md-symlink/enforcement:
+  en: 4e39af4bbc1d01bb
+  zh: 54c1a653799992f6
+/agent-instructions-and-the-claude-md-symlink/cost-and-prerequisites:
+  en: a3470289daa1691c
+  zh: 5d3426921b991e24
+/agent-instructions-and-the-claude-md-symlink/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/agent-instructions-and-the-claude-md-symlink/porting-checklist:
+  en: 8a7db81de89de050
+  zh: c226f51b05114eac
+/agent-instructions-and-the-claude-md-symlink/failure-mode:
+  en: 7c44926dad2022bd
+  zh: ff63a8272f3ebe45
