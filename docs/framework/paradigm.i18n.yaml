@@ -1,0 +1,16 @@
+# Bilingual-pair consistency record for paradigm.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/paradigm.md
+/framework-paradigm:
+  en: 11b5af70c675cbe8
+  zh: 1c9c68277caa2fc3
+/framework-paradigm/the-five-layers:
+  en: 11d664138a48c4c9
+  zh: 3a8fdbacecbd82be
+/framework-paradigm/four-assertions:
+  en: 23c6e876ee9a1ac2
+  zh: c3e4f2da2ea26f8b
+/framework-paradigm/provenance:
+  en: ef4895e9966d6bfc
+  zh: dfe0d443d6978e9d
