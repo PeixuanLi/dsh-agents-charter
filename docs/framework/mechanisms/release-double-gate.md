@@ -15,11 +15,11 @@ Both gates are workflows: the rehearsal is a required check on every PR, and the
 
 ## Cost and prerequisites
 
-One credential-free job plus a dispatch entry point — the cheapest pair of gates that still removes a human memory step from releasing. It presupposes an actual release process with consumers of the tagged artifacts; without one there is nothing to rehearse.
+One credential-free job plus a dispatch entry point — the cheapest pair of gates that still removes a human memory step from releasing. The gate applies from the first tagged release onward: it needs a CI job that builds the release artifact without credentials, and before any release exists there is nothing to rehearse.
 
 ## Team fit
 
-Solo ✗ · Small ✗ · Medium ✓ · Large ✓ — the gate presupposes a release process someone consumes; below that, publishing by hand is the whole mechanism and the double gate is ceremony.
+Solo ✓ · Small ✓ · Medium ✓ · Large ✓ — one CI job and one dispatch entry, worth running from the first tagged release onward; a repository with no release process yet has nothing for the rehearsal to cover.
 
 ## Porting checklist
 

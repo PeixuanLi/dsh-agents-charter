@@ -7,7 +7,7 @@ English | [中文](role-separation.zh.md)
 
 ## Rule text
 
-The layer's principle home is the [framework paradigm](../paradigm.md)'s four assertions, which begin from this layer: collaboration norms become machine-executable constraints, so any agent or human participant is replaceable; the assertions then quantify trust and end at the gate as every rule's end point. Root [AGENTS.md](../../../AGENTS.md) is the corpus that carries the split into every session: every participant loads the same short rules, and each rule names the gate that enforces it, so the powers stay separated by what the code executes rather than by anyone's mutual understanding.
+The layer's principle home is the [framework paradigm](../paradigm.md)'s four assertions, which begin from this layer: collaboration norms become machine-executable constraints, so any agent or human participant is replaceable; the assertions then quantify trust and end at the gate as every rule's end point. Root [AGENTS.md](../../../AGENTS.md) is the corpus that carries the split into every session: every participant loads the same short rules, and each rule names the gate that enforces it, so the powers stay separated by what the code executes rather than by anyone's mutual understanding. This layer enforces the three powers; the fourth role — Agent Notes keeping the rationale behind every rule — is the [L2](../layers/l2-external-memory.md) bridge.
 
 ## Enforcement
 
