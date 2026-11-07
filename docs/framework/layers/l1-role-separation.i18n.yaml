@@ -1,0 +1,13 @@
+# Bilingual-pair consistency record for l1-role-separation.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/layers/l1-role-separation.md
+/layer-1-role-separation:
+  en: a53b1bd1a4b4d0ed
+  zh: 5c1f6ca0613ab7ad
+/layer-1-role-separation/mechanisms-in-this-layer:
+  en: 572b4b22439c1e76
+  zh: 762a781ba099068e
+/layer-1-role-separation/porting-analysis:
+  en: 9d4db049a1ba6655
+  zh: b86c55380e3c7f07

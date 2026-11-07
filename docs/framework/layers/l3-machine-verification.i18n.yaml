@@ -1,0 +1,13 @@
+# Bilingual-pair consistency record for l3-machine-verification.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/layers/l3-machine-verification.md
+/layer-3-machine-verification:
+  en: 51d61520aa636f30
+  zh: d2de0d2940cf42cb
+/layer-3-machine-verification/mechanisms-in-this-layer:
+  en: fd260e03ed974bb5
+  zh: fa84ed7ed834f71a
+/layer-3-machine-verification/porting-analysis:
+  en: 03a3d2f74b0728e4
+  zh: 2d7f5c820539c8e4

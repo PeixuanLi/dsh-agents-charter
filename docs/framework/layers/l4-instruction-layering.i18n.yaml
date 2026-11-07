@@ -1,0 +1,13 @@
+# Bilingual-pair consistency record for l4-instruction-layering.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/layers/l4-instruction-layering.md
+/layer-4-instruction-layering:
+  en: 0bb19bee5a22f344
+  zh: 976bc888ca6736ed
+/layer-4-instruction-layering/mechanisms-in-this-layer:
+  en: 82c10648b4e8d910
+  zh: 3b6780912143f8da
+/layer-4-instruction-layering/porting-analysis:
+  en: 31186deeab5ca4f5
+  zh: 85f3b73c2a2191f7

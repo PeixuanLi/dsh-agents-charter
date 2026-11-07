@@ -1,0 +1,13 @@
+# Bilingual-pair consistency record for l2-external-memory.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/layers/l2-external-memory.md
+/layer-2-external-memory:
+  en: f3272ca2269841b8
+  zh: f8903c04197dbaba
+/layer-2-external-memory/mechanisms-in-this-layer:
+  en: e3849672a42fc358
+  zh: 6ab4b77895315360
+/layer-2-external-memory/porting-analysis:
+  en: 0780034d1cca31b7
+  zh: f9ad846a5b52ef4d

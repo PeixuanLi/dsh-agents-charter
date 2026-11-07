@@ -1,0 +1,13 @@
+# Bilingual-pair consistency record for l5-process-automation.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/layers/l5-process-automation.md
+/layer-5-process-automation:
+  en: 27656c14a8f3d8a0
+  zh: cf6d0a5746e60e8b
+/layer-5-process-automation/mechanisms-in-this-layer:
+  en: 6ede0071ea809638
+  zh: b91249edbb215a86
+/layer-5-process-automation/porting-analysis:
+  en: 874e6b82c2c64c9a
+  zh: e0dfc7c088f76121
