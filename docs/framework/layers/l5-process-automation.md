@@ -7,7 +7,7 @@ Process automation replaces hand-driven procedure with event-driven execution wh
 ## Mechanisms in this layer
 
 - [mechanisms/issue-state-machine.md](../mechanisms/issue-state-machine.md) — the event-driven work-item lifecycle: policy code loads from the default branch, and event data is input only
-- [mechanisms/pr-classification.md](../mechanisms/pr-classification.md) — native work-item types as the classification authority driving labels and process routing
+- [mechanisms/pr-classification.md](../mechanisms/pr-classification.md) — native Issue Types as the classification authority driving labels and process routing
 - [mechanisms/stacked-pr.md](../mechanisms/stacked-pr.md) — dependency-chained reviews governed by native stack objects: rewrites use `--force-with-lease`, and verification completes after every publish
 - [mechanisms/release-double-gate.md](../mechanisms/release-double-gate.md) — every change rehearses packaging without credentials, and a human dispatches the release from a tag
 
