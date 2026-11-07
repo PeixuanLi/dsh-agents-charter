@@ -6,12 +6,12 @@
 
 ## 本层机制
 
-- [mechanisms/gate-aggregate.md](../mechanisms/gate-aggregate.md) — 聚合运行器把全部检查编排为一个被执行的顶层入口
-- [mechanisms/markdown-gates.md](../mechanisms/markdown-gates.md) — 把文档当作产出介质加以执法的门禁：格式、字数预算、可编译的围栏代码块
-- [mechanisms/bilingual-pairing.md](../mechanisms/bilingual-pairing.md) — 双语配对：结构签名与分节指纹记录让每一对译文保持一致
-- [mechanisms/archive-seal.md](../mechanisms/archive-seal.md) — 归档封存：仅追加 manifest（元数据清单）中的内容指纹让归档历史具备防篡改证据
-- [mechanisms/local-narrow-ci-full.md](../mechanisms/local-narrow-ci-full.md) — 本地检查保持快速并按变更范围取最小证据；CI 拥有完整门禁矩阵
-- [mechanisms/verify-the-world.md](../mechanisms/verify-the-world.md) — 断言验证外部世界的状态，而不是 agent 的自述，因为关键词探测会让作弊的 agent 通过
+- [mechanisms/gate-aggregate.md](../mechanisms/gate-aggregate.zh.md) — 聚合运行器把全部检查编排为一个被执行的顶层入口
+- [mechanisms/markdown-gates.md](../mechanisms/markdown-gates.zh.md) — 把文档当作产出介质加以执法的门禁：格式、字数预算、可编译的围栏代码块
+- [mechanisms/bilingual-pairing.md](../mechanisms/bilingual-pairing.zh.md) — 双语配对：结构签名与分节指纹记录让每一对译文保持一致
+- [mechanisms/archive-seal.md](../mechanisms/archive-seal.zh.md) — 归档封存：仅追加 manifest（元数据清单）中的内容指纹让归档历史具备防篡改证据
+- [mechanisms/local-narrow-ci-full.md](../mechanisms/local-narrow-ci-full.zh.md) — 本地检查保持快速并按变更范围取最小证据；CI 拥有完整门禁矩阵
+- [mechanisms/verify-the-world.md](../mechanisms/verify-the-world.zh.md) — 断言验证外部世界的状态，而不是 agent 的自述，因为关键词探测会让作弊的 agent 通过
 
 ## 移植分析
 
