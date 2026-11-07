@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for prose-hygiene.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/prose-hygiene.md
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion:
+  en: 8c86c700801ba3a3
+  zh: 666b14606979c24d
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/rule-text:
+  en: 301312b71fb81339
+  zh: 979f00fdb9c3611f
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/enforcement:
+  en: 68a72dd0064f171f
+  zh: 158abba97646abb5
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/cost-and-prerequisites:
+  en: 1142f78c19a29235
+  zh: c3a3aa675b8529a6
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/porting-checklist:
+  en: c3b825713791a8dd
+  zh: 043bc9d5175e0da7
+/prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/failure-mode:
+  en: 6a4fe2eccc3931e1
+  zh: 69274437f8966b6c

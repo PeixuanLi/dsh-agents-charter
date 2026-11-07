@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for delete-first.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/delete-first.md
+/deletion-as-routine-maintenance:
+  en: f397208fb60399a6
+  zh: 2706c1e3dbed97b5
+/deletion-as-routine-maintenance/rule-text:
+  en: 9199aa0e0639ca39
+  zh: 4689814caa23dbae
+/deletion-as-routine-maintenance/enforcement:
+  en: 193e2e85cde6f1ec
+  zh: 5cfe4d025993dada
+/deletion-as-routine-maintenance/cost-and-prerequisites:
+  en: 850e5aad82d20b4e
+  zh: 3e9ec09daa2c9850
+/deletion-as-routine-maintenance/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/deletion-as-routine-maintenance/porting-checklist:
+  en: 162c6e0b18eda8ae
+  zh: 688b1ffecbf4683e
+/deletion-as-routine-maintenance/failure-mode:
+  en: 546fd9e48b491689
+  zh: 64b18ebc8ad7e9cb

@@ -4,6 +4,8 @@
 
 这里存放一类设计文档。**Agent Note** 记录影响本代码库的决策或提案：代码和文档无法承载的*为什么*以及*放弃了什么*。本文件规定 Agent Note 存放在哪里、何时需要写一份，以及[文件内格式](#the-file-format)。
 
+<a id="layout-and-naming"></a>
+
 ## 布局与命名
 
 每份 Agent Note 有两个维度，都编码在其**路径**中：`{lifecycle}/{class}/yyyy-mm-dd-topic-title.md`。
@@ -34,6 +36,8 @@
 | `testing` | 测试基础设施与策略。 |
 
 `architecture` 与 `process` 的界线：**architecture** 关乎我们交付的源码；**process** 关乎围绕源码的工具与工作流。（`refactor` 被有意排除：它与 `simplification` 重叠，而后者的判别标准「可观察行为是否改变」已经覆盖了它。）
+
+<a id="archiving-and-deletion"></a>
 
 ## 归档与删除
 

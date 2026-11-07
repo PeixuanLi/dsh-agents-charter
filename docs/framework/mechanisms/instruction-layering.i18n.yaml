@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for instruction-layering.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/instruction-layering.md
+/resident-rules-and-on-demand-skills:
+  en: 3c279a1f97958a7c
+  zh: 9eb6690cd20899e9
+/resident-rules-and-on-demand-skills/rule-text:
+  en: ae4fb244bfe2c1d2
+  zh: 0e4ca20adcbb25a9
+/resident-rules-and-on-demand-skills/enforcement:
+  en: d7a717bd53c5c8d7
+  zh: 78fbb9c4f366cad2
+/resident-rules-and-on-demand-skills/cost-and-prerequisites:
+  en: ef960cacf5f724c3
+  zh: ba2bee753d27f53f
+/resident-rules-and-on-demand-skills/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/resident-rules-and-on-demand-skills/porting-checklist:
+  en: f1995aba8cf02853
+  zh: d01b1ae1e7d2b9bc
+/resident-rules-and-on-demand-skills/failure-mode:
+  en: 4bb2396bd84b35b0
+  zh: cc145a4c83033fc5

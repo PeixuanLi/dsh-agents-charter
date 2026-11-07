@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for note-freshness.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-freshness.md
+/the-freshness-obligation:
+  en: b06e0635bb38aab6
+  zh: eb6c63469bbd1ae1
+/the-freshness-obligation/rule-text:
+  en: c439c5ad043be4af
+  zh: dff49da805899912
+/the-freshness-obligation/enforcement:
+  en: 94e9707e6e255dd6
+  zh: f8598bfa251596d9
+/the-freshness-obligation/cost-and-prerequisites:
+  en: 54d40f7741dbbc5e
+  zh: fe09bdfbc8cfe292
+/the-freshness-obligation/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/the-freshness-obligation/porting-checklist:
+  en: 6550edfd9c5e2a75
+  zh: 0b1ed03411a27787
+/the-freshness-obligation/failure-mode:
+  en: 7c87943afa979e22
+  zh: 83c6a754a8cb1dc3

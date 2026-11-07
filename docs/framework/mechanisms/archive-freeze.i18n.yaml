@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for archive-freeze.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/archive-freeze.md
+/archived-notes-are-frozen:
+  en: 8a554b6146c6c754
+  zh: 1128eb3d4d0acbf3
+/archived-notes-are-frozen/rule-text:
+  en: aaa8f0b2d830441c
+  zh: 3b0186f364dec2fe
+/archived-notes-are-frozen/enforcement:
+  en: 68ad461c8da59c90
+  zh: 7c0c5870465f560b
+/archived-notes-are-frozen/cost-and-prerequisites:
+  en: b9a079d52e32776e
+  zh: f18cb4c28aaed43c
+/archived-notes-are-frozen/team-fit:
+  en: 0634b1cd703e8b9c
+  zh: f1248ee90fc23968
+/archived-notes-are-frozen/porting-checklist:
+  en: 08f3410c5dde13ec
+  zh: 995aed29ab129349
+/archived-notes-are-frozen/failure-mode:
+  en: 75aedbbdd6c7c6ef
+  zh: a1e63a14fe3f551d

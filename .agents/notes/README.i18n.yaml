@@ -4,13 +4,13 @@
 #   pnpm run verify-translation-pairing --write .agents/notes/README.md
 /agent-notes:
   en: a10991a192c7b55d
-  zh: c2e5b938ece4f366
+  zh: 8453df56e8a77fce
 /agent-notes/layout-and-naming:
   en: 0a517dfc15d4af0a
   zh: 324bd9e13a0295e3
 /agent-notes/classification:
   en: 055a5e49f9af3dc2
-  zh: 9f7c78409cccfded
+  zh: 91b4f4475a8d951f
 /agent-notes/archiving-and-deletion:
   en: c68705a03c830029
   zh: 7460d0624f9d7918

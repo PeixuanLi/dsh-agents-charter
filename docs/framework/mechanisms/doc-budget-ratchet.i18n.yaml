@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for doc-budget-ratchet.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/doc-budget-ratchet.md
+/per-file-word-budgets-with-a-ratchet-that-only-tightens:
+  en: 41fa47fc6a96f856
+  zh: adbea8553c660d60
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/rule-text:
+  en: e9b446088edbc191
+  zh: 2a615c573008c44b
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/enforcement:
+  en: 16a3d26668a20c3b
+  zh: 1a69cf07db2b3503
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/cost-and-prerequisites:
+  en: cd8928ee8f1d3dd4
+  zh: 8c0662b14d0211d3
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/team-fit:
+  en: 7dd71b1539262879
+  zh: e385db680660b4c4
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/porting-checklist:
+  en: df209e5faf11287c
+  zh: 6bf9795342d2dd35
+/per-file-word-budgets-with-a-ratchet-that-only-tightens/failure-mode:
+  en: 98ff0977458b27ce
+  zh: e52422d731beb4b6

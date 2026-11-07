@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for note-triplet.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-triplet.md
+/the-english-chinese-and-sidecar-triplet:
+  en: 0adf28392161d110
+  zh: 5e1adfe64d6d984e
+/the-english-chinese-and-sidecar-triplet/rule-text:
+  en: 04a9f129d59bcf3f
+  zh: ff80a969dba314bc
+/the-english-chinese-and-sidecar-triplet/enforcement:
+  en: 39a1ef5ff0ad9c96
+  zh: 6c8e4fcfb555bb4b
+/the-english-chinese-and-sidecar-triplet/cost-and-prerequisites:
+  en: 99d09c525ae67607
+  zh: 61f267185e65653d
+/the-english-chinese-and-sidecar-triplet/team-fit:
+  en: 2941b0beb9a4d163
+  zh: a9ad8200dcd01962
+/the-english-chinese-and-sidecar-triplet/porting-checklist:
+  en: 40514d65152e133c
+  zh: 21c3eda0746fed8a
+/the-english-chinese-and-sidecar-triplet/failure-mode:
+  en: c47fc9c707009f52
+  zh: 5c50113e9cdfe1ce

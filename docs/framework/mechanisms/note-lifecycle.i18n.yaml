@@ -1,0 +1,25 @@
+# Bilingual-pair consistency record for note-lifecycle.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-lifecycle.md
+/note-lifecycle-encoded-in-directory-paths:
+  en: 4e221d2d751236a1
+  zh: 63ab5ba5dc7e8e38
+/note-lifecycle-encoded-in-directory-paths/rule-text:
+  en: fd34e95edadff15d
+  zh: 2c91af39c5734f4f
+/note-lifecycle-encoded-in-directory-paths/enforcement:
+  en: 604462f64b1a0c85
+  zh: 88ddcd2a477d90bb
+/note-lifecycle-encoded-in-directory-paths/cost-and-prerequisites:
+  en: f580110566b5de8c
+  zh: 6df15f3a6883f9f5
+/note-lifecycle-encoded-in-directory-paths/team-fit:
+  en: de7754b71b4a479e
+  zh: f9d10840304c5e32
+/note-lifecycle-encoded-in-directory-paths/porting-checklist:
+  en: 946846783d839fa2
+  zh: bd71d65e1d60f0fb
+/note-lifecycle-encoded-in-directory-paths/failure-mode:
+  en: e8bf9e330a4c7e69
+  zh: 122a6d591f2c1f43
