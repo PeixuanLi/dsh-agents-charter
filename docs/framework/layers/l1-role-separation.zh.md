@@ -6,8 +6,8 @@
 
 ## 本层机制
 
-- [mechanisms/role-separation.md](../mechanisms/role-separation.md) — 四角色权威分立（AI 产出、人类裁决、机器执行、Agent Note 保存理据），每条边界都以可执行代码表达
-- [mechanisms/weighted-review.md](../mechanisms/weighted-review.md) — 评审权威是可计算的公式，由指定 owner、代码所有权与贡献历史共同决定
+- [mechanisms/role-separation.zh.md](../mechanisms/role-separation.zh.md) — 四角色权威分立（AI 产出、人类裁决、机器执行、Agent Note 保存理据），每条边界都以可执行代码表达
+- [mechanisms/weighted-review.zh.md](../mechanisms/weighted-review.zh.md) — 评审权威是可计算的公式，由指定 owner、代码所有权与贡献历史共同决定
 
 ## 移植分析
 

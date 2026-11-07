@@ -6,10 +6,10 @@
 
 ## 本层机制
 
-- [mechanisms/issue-state-machine.md](../mechanisms/issue-state-machine.md) — 事件驱动的工作项生命周期：策略代码从默认分支加载，事件数据只是输入
-- [mechanisms/pr-classification.md](../mechanisms/pr-classification.md) — 原生 Issue Types 作为分类权威，驱动标签与流程路由
-- [mechanisms/stacked-pr.md](../mechanisms/stacked-pr.md) — 依赖式 PR 链（stacked PR）以原生 stack 对象治理：重写必带 `--force-with-lease`，每次发布后必须补验证
-- [mechanisms/release-double-gate.md](../mechanisms/release-double-gate.md) — 每次变更都以无凭证方式演练打包，发布由人从 tag 手动触发
+- [mechanisms/issue-state-machine.zh.md](../mechanisms/issue-state-machine.zh.md) — 事件驱动的工作项生命周期：策略代码从默认分支加载，事件数据只是输入
+- [mechanisms/pr-classification.zh.md](../mechanisms/pr-classification.zh.md) — 原生 Issue Types 作为分类权威，驱动标签与流程路由
+- [mechanisms/stacked-pr.zh.md](../mechanisms/stacked-pr.zh.md) — 依赖式 PR 链（stacked PR）以原生 stack 对象治理：重写必带 `--force-with-lease`，每次发布后必须补验证
+- [mechanisms/release-double-gate.zh.md](../mechanisms/release-double-gate.zh.md) — 每次变更都以无凭证方式演练打包，发布由人从 tag 手动触发
 
 ## 移植分析
 
