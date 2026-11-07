@@ -7,11 +7,11 @@ English | [中文](doc-budget-ratchet.zh.md)
 
 ## Rule text
 
-The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification in the PR. A ceiling that moves moves down, with at least 5% headroom; whenever a document shrinks, its ceiling tightens with it. The manifest budgets the five standing docs: the two instruction files (root and docs/), the architecture overview, the Cordis primer, and the testing policy.
+The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification recorded in the PR. Down is the default direction: a ceiling tightens whenever its document shrinks, keeping roughly 5% headroom — the slack the manifest tolerates; upward moves use only the justified raise above. The manifest budgets the five standing docs: the two instruction files (root and docs/), the architecture overview, the Cordis primer, and the testing policy.
 
 ## Enforcement
 
-`pnpm run verify-doc-budgets` ([scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)) counts words per listed file (`wc -w` style) and fails any file over ceiling; a missing file fails too, so renaming or deleting a budgeted doc must update the manifest in the same change. `--list` reports usage against ceiling.
+`pnpm run verify-doc-budgets` ([scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)) holds the mechanical half: word count against ceiling for each listed file (`wc -w` style), failing any file over ceiling; a missing file fails too, so renaming or deleting a budgeted doc must update the manifest in the same change. `--list` reports usage against ceiling. The convention half — ratchet direction and raise justification — holds at review, not in the gate.
 
 ## Cost and prerequisites
 

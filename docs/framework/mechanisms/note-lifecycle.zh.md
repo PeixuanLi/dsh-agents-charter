@@ -23,7 +23,7 @@ Solo ✗ · Small ✓ · Medium ✓ · Large ✓
 
 ## 移植清单
 
-- 创建四个状态目录：`mkdir -p .agents/notes/{proposed,implemented,rejected,archived}`。
+- 创建四个状态目录：`mkdir -p .agents/notes/{proposed,implemented,rejected,archived}`——花括号展开需要 POSIX shell（Windows 上用 Git Bash）；cmd/PowerShell 会创建一个字面名称的目录，随后分类门禁会显式拒绝它。
 - 命名遵循 `{lifecycle}/{class}/yyyy-mm-dd-topic-title.md`，日期取 git 历史中的首次提出时间。
 - 类别只从封闭集合（`feature`、`bug-fix`、`simplification`、`architecture`、`process`、`testing`）中选取；新增类别要在同一变更中同时更新门禁与 README 小节。
 - 笔记之间用相对 Markdown 链接交叉引用，从不使用纯文字或编号。

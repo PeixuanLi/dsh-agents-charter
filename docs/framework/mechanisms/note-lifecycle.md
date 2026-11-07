@@ -23,7 +23,7 @@ Solo ✗ · Small ✓ · Medium ✓ · Large ✓
 
 ## Porting checklist
 
-- Create the four state directories: `mkdir -p .agents/notes/{proposed,implemented,rejected,archived}`.
+- Create the four state directories: `mkdir -p .agents/notes/{proposed,implemented,rejected,archived}` — brace expansion needs a POSIX shell (Git Bash on Windows); cmd/PowerShell create one literal directory name and the classification gate then fails loudly.
 - Name notes `{lifecycle}/{class}/yyyy-mm-dd-topic-title.md`, the date being first proposal per git history.
 - Pick classes only from the closed set (`feature`, `bug-fix`, `simplification`, `architecture`, `process`, `testing`); adding one updates the gate and the README section in the same change.
 - Cross-link notes with relative markdown links, never bare prose or numbers.
