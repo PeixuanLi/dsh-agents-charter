@@ -2,33 +2,21 @@
 # section, a hash of its English and Chinese blocks outside code blocks and generated regions.
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write README.md
-/deepseek-harness:
-  en: 83553af01f0525f7
-  zh: 157c8cedbb4fd9a9
-/deepseek-harness/developer-preview:
-  en: df11aeeaadb9d765
-  zh: ad48279871b3d73b
-/deepseek-harness/run:
-  en: 4e0248e4c6474fc6
-  zh: eb2fb8d78c7d6bc0
-/deepseek-harness/run/run-from-npm:
-  en: d8df43c6face5958
-  zh: a5dfa9e9ca78153b
-/deepseek-harness/run/run-from-source:
-  en: 819e3f7c144d0d64
-  zh: de815f040975dba7
-/deepseek-harness/community-and-support:
-  en: 20acf6451fdc869b
-  zh: d06246dd019ecef7
-/deepseek-harness/contributing:
-  en: 9232a13c4aa152b4
-  zh: ccf20bd036e7bff1
-/deepseek-harness/development:
-  en: aecb0a2eb9be0a16
-  zh: 11219bb29ebf1b8a
-/deepseek-harness/citation:
-  en: 6704e9e5a8d49a91
-  zh: 85c9cdd8d56f8e9d
-/deepseek-harness/license:
-  en: aef7500267001754
-  zh: 158134ea44dd0280
+/dsh-agents-charter:
+  en: 9e35c697f361dbef
+  zh: adf0e404f72296f1
+/dsh-agents-charter/what-is-inside:
+  en: 374794d1a54f4512
+  zh: c84ee7d129d77f87
+/dsh-agents-charter/quick-start:
+  en: 7c61c63089d70bd8
+  zh: 3c76eda07977513a
+/dsh-agents-charter/start-reading:
+  en: 8769132a20bf9703
+  zh: f364ec7742f580d1
+/dsh-agents-charter/sources-and-related:
+  en: 2a0ff9df1c289bab
+  zh: 1e5815cb6a132baa
+/dsh-agents-charter/license:
+  en: 82fa813f0a93522d
+  zh: 515a7c32bfa7dddf

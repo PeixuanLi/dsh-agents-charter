@@ -1,77 +1,35 @@
-# DeepSeek Harness
+# dsh-agents-charter
 
 English | [中文](README.zh.md)
 
-DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
+`dsh-agents-charter` is the agents collaboration charter: collaboration norms that lived as human tacit understanding, reduced to machine-executable constraints — AI agents produce, humans decide, gates enforce. Every rule ends as a command that can turn CI red, and the rationale behind every rule stays in the repository. The repository is extracted from DeepSeek Harness as a living reference implementation with two planes: the execution plane enforces the constraints, and the spec layer specifies them.
 
-It is built on an **everything-is-a-plugin** architecture and powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://arxiv.org/abs/2608.25512).
+## What is inside
 
-Documentation: [https://deepseek-harness.github.io/deepseek-harness/](https://deepseek-harness.github.io/deepseek-harness/)
+| Part | Contents |
+|---|---|
+| Spec layer | [docs/framework/](docs/framework/README.md) — the framework paradigm, five layer chapters, 22 mechanism cards, and adoption profiles P0–P3 |
+| Execution plane | The `scripts/` governance gates run through one aggregate, the `AGENTS.md` constraint system, the Agent Notes corpus under `.agents/notes/`, and the skills under `.agents/skills/` |
+| Reference appendix | [reference/github/](reference/github/README.md) — the upstream L1/L5 GitHub-process configurations, restored byte-exact |
 
-## Developer preview
-
-DeepSeek Harness is in _developer preview_ and iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
-
-Review the [safety notice](SAFETY.md) before running the project.
-
-## Run
-
-### Run from `npm`
-
-Install `Node.js`, then run:
+## Quick start
 
 ```sh
-npx @deepseek-ai/dsh web
+pnpm install        # Node.js >= 24.9, pnpm 11
+pnpm run doc-sync   # 16 governance gates green
+pnpm run test       # 344 specs
 ```
 
-The command starts the Web UI at `http://127.0.0.1:3080` by default and opens it in the default browser for a local launch. An SSH launch only prints the host URL because the SSH client or editor owns the local forwarded address. Pass `--no-open` to run the server without opening a browser. See Web UI guide (`docs/user/guide/index.md`).
+The tree has no build step, and nothing in it reads model credentials — no API key is needed.
 
-### Run from source
+## Start reading
 
-To run from a repository checkout:
+Start at the [spec layer](docs/framework/README.md), continue with the [framework paradigm](docs/framework/paradigm.md), then pick an adoption tier in the [profiles](docs/framework/profiles.md). To contribute constraints to the execution plane, read [AGENTS.md](AGENTS.md); the [development guide](docs/development.md) owns the daily workflow.
 
-```sh
-git clone https://github.com/deepseek-ai/deepseek-harness.git
-cd deepseek-harness
-pnpm install
-pnpm run build
-pnpm dsh web
-```
+## Sources and related
 
-`pnpm run build` prepares the repository artifacts. `pnpm dsh web` uses those built artifacts without rebuilding.
-
-## Community and support
-
-- Submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).
-- Add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your plugin repository for discoverability.
-- Join <a href="https://discord.gg/4MrtZUhpxg">DeepSeek Harness Discord community</a>.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Development
-
-Start with the [development guide](docs/development.md) and [architecture documentation](docs/architecture.md).
-
-`pnpm run dev:web` builds, serves, and rebuilds client bundles on source edits in one terminal, and `make help` lists the matching Make targets for Web and Desktop; the guide's application commands section owns the full table.
-
-For agents, follow [AGENTS.md](AGENTS.md).
-
-## Citation
-
-```bibtex
-@misc{deepseek-harness2026,
-  title={DeepSeek Harness: Everything is a Plugin},
-  author={DeepSeek-AI},
-  year={2026},
-  publisher={GitHub},
-  howpublished={\url{https://github.com/deepseek-ai/deepseek-harness}},
-}
-```
+This charter derives from [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness); the reference pages and the reference skills inside keep their upstream text. [ai-mono-template](https://github.com/PeixuanLi/ai-mono-template) is a JS monorepo instance built on the same paradigm.
 
 ## License
 
 [MIT](LICENSE)
-
-Third-party dependencies and their licenses are disclosed in THIRD_PARTY_NOTICES.md (`THIRD_PARTY_NOTICES.md`).
