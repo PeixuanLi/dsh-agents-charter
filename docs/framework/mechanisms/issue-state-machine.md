@@ -11,7 +11,7 @@ The mechanism has no resident rule text; its source is the event-driven workflow
 
 ## Enforcement
 
-The workflows are the enforcement: state changes happen when an event fires, so hand-maintained status visibly drifts from what the events produced. `Ported-config reference: reference/github/issue-lifecycle.yml and reference/github/issue-policy.yml` (restored in milestone M3).
+The workflows are the enforcement: state changes happen when an event fires, so hand-maintained status visibly drifts from what the events produced. Ported-config reference: the `issue-lifecycle.yml` and `issue-policy.yml` workflows, restored under [reference/github/](../../../reference/github/README.md).
 
 ## Cost and prerequisites
 

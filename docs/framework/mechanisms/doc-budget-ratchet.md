@@ -7,7 +7,7 @@ English | [中文](doc-budget-ratchet.zh.md)
 
 ## Rule text
 
-The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification recorded in the PR. Down is the default direction: a ceiling tightens whenever its document shrinks, keeping roughly 5% headroom — the slack the manifest tolerates; upward moves use only the justified raise above. The manifest budgets the five standing docs: the two instruction files (root and docs/), the architecture overview, the Cordis primer, and the testing policy.
+The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification recorded in the PR. Down is the default direction: a ceiling tightens whenever its document shrinks, keeping roughly 5% headroom — the slack the manifest tolerates; upward moves use only the justified raise above. The manifest budgets the standing docs: the instruction files (root and docs/), the architecture overview, the Cordis primer, the testing policy, and the framework's own pages (README, paradigm, profiles, and the five layer chapters).
 
 ## Enforcement
 

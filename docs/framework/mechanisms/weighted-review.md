@@ -11,7 +11,7 @@ No rule text for this mechanism is resident: the formulas and their policy code 
 
 ## Enforcement
 
-A required check recomputes every reviewer's weight from the formula on each PR and allows merge only at the threshold; the `CHANGES_REQUESTED` block applies independently of points. `Ported-config reference: reference/github/review-ownership/ and reference/github/weighted-approval*.yml` (restored in milestone M3).
+A required check recomputes every reviewer's weight from the formula on each PR and allows merge only at the threshold; the `CHANGES_REQUESTED` block applies independently of points. Ported-config reference: [review-ownership/](../../../reference/github/review-ownership/README.md) and the `weighted-approval*.yml` workflows, restored under [reference/github/](../../../reference/github/README.md).
 
 ## Cost and prerequisites
 

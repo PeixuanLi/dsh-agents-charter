@@ -11,7 +11,7 @@ The mechanism has no resident rule text; it is two workflows. The first runs on 
 
 ## Enforcement
 
-Both gates are workflows: the rehearsal is a required check on every PR, and the release exists only as a manual dispatch on a tag — never an automatic step on push. `Ported-config reference: reference/github/release.yml` (restored in milestone M3).
+Both gates are workflows: the rehearsal is a required check on every PR, and the release exists only as a manual dispatch on a tag — never an automatic step on push. Ported-config reference: the `release.yml` workflow, restored under [reference/github/](../../../reference/github/README.md).
 
 ## Cost and prerequisites
 

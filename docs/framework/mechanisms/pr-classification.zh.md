@@ -11,7 +11,7 @@
 
 ## 执法
 
-模板在创作时执法，方式是把 kind 问题只问一次；每个下游消费方都从原生类型重新推导自己的视图，而不是重新解析文字，这让分类因为有活干而保持诚实。`Ported-config reference: reference/github/pull_request_template.md and reference/github/ISSUE_TEMPLATE/`（里程碑 M3 恢复）。
+模板在创作时执法，方式是把 kind 问题只问一次；每个下游消费方都从原生类型重新推导自己的视图，而不是重新解析文字，这让分类因为有活干而保持诚实。移植配置参照：[pull_request_template.md](../../../reference/github/pull_request_template.md) 与 `ISSUE_TEMPLATE/` 的表单，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
 
 ## 成本与前提
 

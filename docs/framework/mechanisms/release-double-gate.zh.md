@@ -11,7 +11,7 @@
 
 ## 执法
 
-两道闸都是 workflow：演练是每个 PR 上的必需检查，发布只作为 tag 上的人工 dispatch 存在——绝不是 push 上的自动步骤。`Ported-config reference: reference/github/release.yml`（里程碑 M3 恢复）。
+两道闸都是 workflow：演练是每个 PR 上的必需检查，发布只作为 tag 上的人工 dispatch 存在——绝不是 push 上的自动步骤。移植配置参照：`release.yml` workflow，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
 
 ## 成本与前提
 

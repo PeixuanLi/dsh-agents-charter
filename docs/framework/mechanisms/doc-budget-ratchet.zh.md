@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-纳入预算的文件及其上限记录在 `scripts/doc-budgets.manifest.json` 中。[AGENTS.md](../../../AGENTS.md#editing-these-instructions) 拥有编辑规则：清晰度允许时就压缩；只有当必需内容确实需要更多空间时才上调上限，并在 PR（Pull Request）中记录理由。默认方向朝下：文档每次变短，上限随之收紧，收紧时保留约 5% 的余量——这是 manifest（元数据清单）容许的松弛量；向上移动只走上文那条有理由的上调。当前 manifest 预算五份常设文档：两份指令文件（根目录与 docs/）、架构概述、Cordis 入门与测试策略。
+纳入预算的文件及其上限记录在 `scripts/doc-budgets.manifest.json` 中。[AGENTS.md](../../../AGENTS.md#editing-these-instructions) 拥有编辑规则：清晰度允许时就压缩；只有当必需内容确实需要更多空间时才上调上限，并在 PR（Pull Request）中记录理由。默认方向朝下：文档每次变短，上限随之收紧，收紧时保留约 5% 的余量——这是 manifest（元数据清单）容许的松弛量；向上移动只走上文那条有理由的上调。当前 manifest 预算常设文档：指令文件（根目录与 docs/）、架构概述、Cordis 入门、测试策略，以及框架自身页面（README、范式、profile 与五个层章节）。
 
 ## 执法
 

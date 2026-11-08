@@ -11,7 +11,7 @@ The classification has no resident rule text; its source is the pull request tem
 
 ## Enforcement
 
-The template enforces at authoring time by asking the kind question once and only once, and every downstream consumer re-derives its view from the native types instead of re-parsing prose, which keeps the classification honest by giving it work to do. `Ported-config reference: reference/github/pull_request_template.md and reference/github/ISSUE_TEMPLATE/` (restored in milestone M3).
+The template enforces at authoring time by asking the kind question once and only once, and every downstream consumer re-derives its view from the native types instead of re-parsing prose, which keeps the classification honest by giving it work to do. Ported-config reference: [pull_request_template.md](../../../reference/github/pull_request_template.md) and the `ISSUE_TEMPLATE/` forms, restored under [reference/github/](../../../reference/github/README.md).
 
 ## Cost and prerequisites
 
