@@ -1,0 +1,28 @@
+# Bilingual-pair consistency record for profiles.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/framework/profiles.md
+/adoption-profiles:
+  en: 860f6dcce3c1aa71
+  zh: 4bb162a191baefab
+/adoption-profiles/read-the-warnings-first:
+  en: 9e4056f8337c3331
+  zh: 1183ccdf08d0c0d8
+/adoption-profiles/p0-principles:
+  en: 6ef06f33e342a332
+  zh: c10bdec1a7200f2f
+/adoption-profiles/p1-script-level:
+  en: f0355818b53b7447
+  zh: 98c52f39e7fa1982
+/adoption-profiles/p2-engineering-level:
+  en: e96f52810933de75
+  zh: 5f6b73604f48236f
+/adoption-profiles/p3-heavyweight:
+  en: 73b275e65eb41279
+  zh: 8ebda9f45dbb472d
+/adoption-profiles/porting-order:
+  en: 0beb3971be10a452
+  zh: 69bada3c6530b9bf
+/adoption-profiles/milestones:
+  en: 8c7e5feb32d6664f
+  zh: b48f6cdc18bdfefb

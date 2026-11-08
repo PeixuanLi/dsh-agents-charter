@@ -10,7 +10,7 @@ Start at [the framework paradigm](paradigm.md) for the model and its four assert
 
 ## Using the framework
 
-Adoption is per-mechanism: pick cards by team tier, follow each card's porting checklist, and take the card's Enforcement section as the acceptance check — run the command where the card names one. Tier-bundled profiles land in this directory as `profiles.md` in milestone M3, and the L1/L5 cards' reference configurations restore under `reference/github/` in the same milestone.
+Adoption is per-mechanism: pick cards by team tier, follow each card's porting checklist, and take the card's Enforcement section as the acceptance check — run the command where the card names one. Tier-bundled profiles live in [profiles.md](profiles.md), and the L1/L5 cards' reference configurations are restored under [reference/github/](../../reference/github/README.md).
 
 ## This corpus governs itself
 

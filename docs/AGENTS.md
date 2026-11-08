@@ -50,7 +50,7 @@ When the gate goes red:
 2. **Condense** content that belongs here but can be shorter.
 3. **Raise** the ceiling only when the words need the space; justify the manifest diff in the PR. A too-low ceiling is a budget bug.
 
-Ceilings are guardrails, not reduction targets. At or below target, retain at least 5% headroom; above target, freeze the ceiling until relocation or condensation brings the document under target. Lower a ceiling only when the document still has room. Targets: root `AGENTS.md` ≤ 1,180; this file ≤ 1,260; `architecture.md` ≤ 2,420; `cordis-primer.md` ≤ 605; `testing.md` ≤ 1,350; the framework pages `framework/README.md` ≤ 310, `framework/paradigm.md` ≤ 410, and the layer chapters `framework/layers/l1-role-separation.md` ≤ 230, `l2-external-memory.md` ≤ 350, `l3-machine-verification.md` ≤ 300, `l4-instruction-layering.md` ≤ 250, `l5-process-automation.md` ≤ 250. Review governs unbudgeted tiers.
+Ceilings are guardrails, not reduction targets. At or below target, retain at least 5% headroom; above target, freeze the ceiling until relocation or condensation brings the document under target. Lower a ceiling only when the document still has room. Targets: root `AGENTS.md` ≤ 1,180; this file ≤ 1,260; `architecture.md` ≤ 2,420; `cordis-primer.md` ≤ 605; `testing.md` ≤ 1,350; the framework pages `framework/README.md` ≤ 310, `framework/paradigm.md` ≤ 410, `framework/profiles.md` ≤ 500, and the layer chapters `framework/layers/l1-role-separation.md` ≤ 230, `l2-external-memory.md` ≤ 350, `l3-machine-verification.md` ≤ 300, `l4-instruction-layering.md` ≤ 250, `l5-process-automation.md` ≤ 250. Review governs unbudgeted tiers.
 
 ## The slop checklist
 

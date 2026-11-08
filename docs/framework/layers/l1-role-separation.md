@@ -11,4 +11,4 @@ Role separation replaces the unspoken division of labor between humans and agent
 
 ## Porting analysis
 
-The role split itself ports as written convention, but weighted review is tier-sensitive: the weight formula needs a mid-size or larger team with stable membership, because it draws value from code ownership and contribution history that only accumulate over time. The minimal porting path is to designate review owners and adopt the formula while contribution volume is still growing, not after. This layer's reference configurations — the weighted-review governance — are restored in milestone M3 under `reference/github/`.
+The role split itself ports as written convention, but weighted review is tier-sensitive: the weight formula needs a mid-size or larger team with stable membership, because it draws value from code ownership and contribution history that only accumulate over time. The minimal porting path is to designate review owners and adopt the formula while contribution volume is still growing, not after. This layer's reference configurations — the weighted-review governance — are restored under [reference/github/](../../../reference/github/README.md).
