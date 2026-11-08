@@ -10,8 +10,8 @@ Start at [the framework paradigm](paradigm.md) for the model and its four assert
 
 ## Using the framework
 
-Adoption is per-mechanism: pick cards by team tier, follow each card's porting checklist, and run the card's enforcement command as the acceptance check. Tier-bundled profiles — the P0 through P3 packages — land in this directory as `profiles.md` in milestone M3, and the L1/L5 cards' reference configurations restore under `reference/github/` in the same milestone.
+Adoption is per-mechanism: pick cards by team tier, follow each card's porting checklist, and take the card's Enforcement section as the acceptance check — run the command where the card names one. Tier-bundled profiles land in this directory as `profiles.md` in milestone M3, and the L1/L5 cards' reference configurations restore under `reference/github/` in the same milestone.
 
 ## This corpus governs itself
 
-This directory lives inside the reference implementation and is subject to its own gates: `verify-translation-pairing` checks each bilingual pair, `verify-md-links` checks every link target, `verify-md-wrap` keeps each paragraph to one physical line, `verify-doc-budgets` applies where a page is registered, and `verify-concrete-terms` rejects its banned term. Spec-implementation drift fails CI exactly like any other defect, so do not add ungoverned pages here.
+This directory lives inside the reference implementation and is subject to its own gates: `verify-translation-pairing` checks each bilingual pair, `verify-md-links` checks every link target, `verify-md-wrap` keeps each paragraph to one physical line, `verify-doc-budgets` applies where a page is registered, and `verify-concrete-terms` rejects its banned label. Spec-implementation drift fails CI exactly like any other defect, so do not add ungoverned pages here.
