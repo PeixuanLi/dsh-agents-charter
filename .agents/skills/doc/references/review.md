@@ -2,7 +2,7 @@
 
 ## Summary
 
-Review documentation by whether a reader completes an outcome, not by whether every template heading exists. Verify prose against code and tests, preserve exact contracts, and keep package READMEs useful to consumers while exposing enough implementation detail for maintainers. Run current repository gates; the `session-persistence-jsonl` README pair is the reference example of the format.
+Review documentation by whether a reader completes an outcome, not by whether every template heading exists. Verify prose against code and tests, preserve exact contracts, and keep package READMEs useful to consumers while exposing enough implementation detail for maintainers. Run current repository gates; the `session-persistence-jsonl` README pair from the originating harness is the reference example of the format.
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Check each material statement against its strongest owner. Use package metadata 
 
 For every operational claim — a CLI command, a config snippet, a default value, an error message, a platform difference — the evidence is running it, not reading it. Execute the exact command or mount the exact configuration against the current checkout before the page may state its behavior; quote only observed output, warnings, and failures. Claims that depend on unavailable keys or networks name their verification owner instead of asserting behavior. For pre-existing pages, compare against latest `origin/master` and re-verify stale statements against code.
 
-Classify the package before reviewing its install guidance: `bundle.patch` in `package.json` makes it a bundle (installable via `plugin --profile <name> add <package>`, the only shape that command activates as a layer); an `apply` export or default service export makes it a plugin (mounted as a `cordis.yml` row); a plain module API makes it a library (a dependency with no install path). Reject install guidance written for another shape.
+Classify the package before reviewing its install guidance — the `plugin` command forms below are the originating harness's and are not runnable in this repository: `bundle.patch` in `package.json` makes it a bundle (installable via `plugin --profile <name> add <package>`, the only shape that command activates as a layer); an `apply` export or default service export makes it a plugin (mounted as a `cordis.yml` row); a plain module API makes it a library (a dependency with no install path). Reject install guidance written for another shape.
 
 Retain a statement only when it helps the target reader act, reason, or avoid misuse. Move rationale, history, test walkthroughs, duplicate catalogs, and unrelated package detail to their owners.
 
@@ -46,7 +46,7 @@ Do not restate JSDoc or generated catalogs. Link the owner and explain only the 
 
 ## Reference example
 
-The `session-persistence-jsonl` README pair (English (`../../../../packages/session/session-persistence-jsonl/README.md`), Chinese (`../../../../packages/session/session-persistence-jsonl/README.zh.md`)) demonstrates the format in production: searchable YAML whose `kind` selects this package-reference standard, a four-sentence Summary, a linked Table of Contents, a user-facing use section covering selection, configuration, layout, durability, and reading, a GitHub-native `<details>` fold for developer-facing design and storage details, Further Exploration, canonical Model Experience and Known Limitations sections, and a final Dev Note. Use its structure, evidence standards, and bilingual alignment as the model for package READMEs and cross-package pages; ground every claim in its owning source and evidence.
+The `session-persistence-jsonl` README pair in the originating harness (English at `../../../../packages/session/session-persistence-jsonl/README.md`, Chinese at `../../../../packages/session/session-persistence-jsonl/README.zh.md`) demonstrates the format in production: searchable YAML whose `kind` selects this package-reference standard, a four-sentence Summary, a linked Table of Contents, a user-facing use section covering selection, configuration, layout, durability, and reading, a GitHub-native `<details>` fold for developer-facing design and storage details, Further Exploration, canonical Model Experience and Known Limitations sections, and a final Dev Note. Use its structure, evidence standards, and bilingual alignment as the model for package READMEs and cross-package pages; ground every claim in its owning source and evidence.
 
 ## Verification
 

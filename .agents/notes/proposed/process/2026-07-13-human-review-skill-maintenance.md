@@ -1,4 +1,4 @@
-# Agent Note: Periodic human-review maintenance for dsh-code-review
+# Agent Note: Periodic human-review maintenance for code-review
 
 Status: proposed
 
@@ -6,11 +6,11 @@ English | [中文](2026-07-13-human-review-skill-maintenance.zh.md)
 
 ## Problem
 
-The `dsh-code-review` skill records failure modes that require reviewer judgment, but one-off audits are expensive to repeat and easy to scope inconsistently. Treating every comment as a lesson produces checklist bloat; treating merge, thread resolution, or an author's “fixed” reply as proof of adoption promotes feedback that the final code may not implement. The maintenance process needs enough evidence and independent review to fail closed without requiring a webhook service, durable event state, or automatic repository promotion before the workflow has proven useful.
+The `code-review` skill records failure modes that require reviewer judgment, but one-off audits are expensive to repeat and easy to scope inconsistently. Treating every comment as a lesson produces checklist bloat; treating merge, thread resolution, or an author's “fixed” reply as proof of adoption promotes feedback that the final code may not implement. The maintenance process needs enough evidence and independent review to fail closed without requiring a webhook service, durable event state, or automatic repository promotion before the workflow has proven useful.
 
 ## Proposal
 
-Periodic out-of-repo maintenance. A private tool, kept on the skill maintainer's machine rather than committed to this repository, runs against a clean full-history checkout at refreshed `origin/master`. The intended scheduler runs daily with a two-UTC-day overlap; manual runs accept another `--since` duration or repeated `--pr` arguments for an explicit set. The scan is idempotent against the current skill and stores no repository cursor. The only repository file changed by promotion is [.agents/skills/dsh-code-review/SKILL.md](../../../skills/code-review/SKILL.md); the draft PR lists the source feedback URLs or IDs and adoption evidence without exposing the private adapter logs.
+Periodic out-of-repo maintenance. A private tool, kept on the skill maintainer's machine rather than committed to this repository, runs against a clean full-history checkout at refreshed `origin/master`. The intended scheduler runs daily with a two-UTC-day overlap; manual runs accept another `--since` duration or repeated `--pr` arguments for an explicit set. The scan is idempotent against the current skill and stores no repository cursor. The only repository file changed by promotion is [.agents/skills/code-review/SKILL.md](../../../skills/code-review/SKILL.md); the draft PR lists the source feedback URLs or IDs and adoption evidence without exposing the private adapter logs.
 
 ```mermaid
 flowchart TD

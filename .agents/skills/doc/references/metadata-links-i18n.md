@@ -33,7 +33,7 @@ kind: "package-reference"
 
 1. The README is `packages/README.md` or `packages/<group>/README.md` → `package-group`.
 2. The package manifest declares `bundle.patch` → `package-bundle`.
-3. The package is in the audited library registry of `scripts/doc-standard.spec.ts` → `package-library`.
+3. The package's `src/index.ts` entry is a plain module API — no `apply` export and no default service export → `package-library`.
 4. Everything else — a service default export or an `apply` plugin — is `package-reference`.
 
 | `kind` | Repository position | Template | Standard |
@@ -47,7 +47,7 @@ kind: "package-reference"
 | `persistence-format` | `docs/persistence-changes/historical-formats/vN.md` and its Chinese sibling | [persistence-format.md](../templates/persistence-format.md) | Selected historical format: source evidence, complete root schemas and reachable types; the current writer uses the generated catalog. |
 | `upgrade-guide` | `docs/upgrade-guide/v<version>/<item>/guide.md` and its Chinese sibling | [upgrade-guide.md](../templates/upgrade-guide.md) | Upgrade path: one externally perceptible break from the directory's release to the next, with `Change` and `Migration` sections in at most 500 English words. |
 
-Before assigning `package-library` or `package-bundle`, inspect the facts: read `package.json` for `bundle.patch` and `src/index.ts` for the entry shape (`apply` export or a default service export is a plugin; a plain module API is a library). `plugin --profile <name> add <package>` installs any npm dependency, but the profile reconcile activates a layer only for a package that declares `bundle.patch`; never present that command as an install path for a library or a plain plugin. The documentation check derives the expected kind from these same facts, rejects another value, and rejects `name`, `audience`, `tags`, and README-local `i18n` metadata. Add a new kind only with a distinct template, an unambiguous repository position or declared owner, and a focused check that maps documents to it.
+Before assigning `package-library` or `package-bundle`, inspect the facts: read `package.json` for `bundle.patch` and `src/index.ts` for the entry shape (`apply` export or a default service export is a plugin; a plain module API is a library). `plugin --profile <name> add <package>` — an originating-harness command form, not runnable in this repository — installs any npm dependency, but the profile reconcile activates a layer only for a package that declares `bundle.patch`; never present that command as an install path for a library or a plain plugin. The documentation check derives the expected kind from these same facts, rejects another value, and rejects `name`, `audience`, `tags`, and README-local `i18n` metadata. Add a new kind only with a distinct template, an unambiguous repository position or declared owner, and a focused check that maps documents to it.
 
 ## Description quality
 

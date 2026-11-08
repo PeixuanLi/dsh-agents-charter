@@ -2,6 +2,8 @@
 
 ## Summary
 
+This reference describes the originating harness's documentation tree and its page-order gates; this repository keeps it as a reference skeleton, and [docs/AGENTS.md](../../../../docs/AGENTS.md) owns the live tree's placement rules.
+
 Each page gives a newcomer a short front door before it exposes operational or implementation depth. Cross-package learning and engineering material lives under a deliberate `docs/` hierarchy, while package contracts stay beside code. Small rule files own one independently searchable requirement, but arbitrary fragmentation is not a goal. The final Dev Note isolates active working context from the stable explanation above it.
 
 ## Table of Contents

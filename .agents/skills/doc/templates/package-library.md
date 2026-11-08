@@ -1,6 +1,6 @@
 # Template: package-library
 
-Use this template for a package with no plugin surface: its entry exports a plain module API and it registers nothing into a composition. Examples: `boot/app-boot`, `util/*`, `sdk/protocol`, `typert/generator`. The `boot/app-boot` README pair is the worked example.
+Use this template for a package with no plugin surface: its entry exports a plain module API and it registers nothing into a composition. Examples: `boot/app-boot`, `util/*`, `sdk/protocol`, `typert/generator`. The `boot/app-boot` README pair in the originating harness is the worked example.
 
 A library README differs from a package reference in three ways: no "install into a profile" guidance (a library is a dependency, not a layer), no mount configuration (there is no `cordis.yml` row), and a Model Experience section only in the audited form the gate assigns (most libraries are `none` or `indirect`).
 

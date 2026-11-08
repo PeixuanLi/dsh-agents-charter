@@ -2,7 +2,7 @@
 
 ## Summary
 
-Page-level style preferences that make documentation pages scannable and difficult to misread: a short Summary, controlled technical English, `-----` separators between major parts, `<details>` folds that keep section titles visible, and disciplined emphasis. The template is the `session-persistence-jsonl` README pair.
+Page-level style preferences that make documentation pages scannable and difficult to misread: a short Summary, controlled technical English, `-----` separators between major parts, `<details>` folds that keep section titles visible, and disciplined emphasis. The template is the `session-persistence-jsonl` README pair from the originating harness.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Page-level style preferences that make documentation pages scannable and difficu
 
 ## Short summary
 
-Open every authored page with a short `Summary`: three to five sentences in one paragraph stating what the reader can do or observe, why the reader cares, the operating model, and the most important boundary. The Table of Contents and the sections carry the detail; placement and section order live in [structure-hierarchy.md](structure-hierarchy.md). An English package README Summary is additionally limited to 100 `wc -w`-style words by `verify-package-readme-summaries`.
+Open every authored page with a short `Summary`: three to five sentences in one paragraph stating what the reader can do or observe, why the reader cares, the operating model, and the most important boundary. The Table of Contents and the sections carry the detail; placement and section order live in [structure-hierarchy.md](structure-hierarchy.md). An English package README Summary was additionally limited to 100 `wc -w`-style words by the originating harness's `verify-package-readme-summaries` gate.
 
 ## Controlled technical English
 
