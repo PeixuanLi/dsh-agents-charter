@@ -11,7 +11,7 @@
 
 ## 执法
 
-一个必需检查在每个 PR（Pull Request）上按公式重算每位评审者的权重，只在达到阈值时允许合并；`CHANGES_REQUESTED` 阻断独立于分数生效。移植配置参照：[review-ownership/](../../../reference/github/review-ownership/README.md) 与 `weighted-approval*.yml` 两个 workflow，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
+一个必需检查在每个 PR（Pull Request）上按公式重算每位评审者的权重，只在达到阈值时允许合并；`CHANGES_REQUESTED` 阻断独立于分数生效。移植的参照配置：[review-ownership/](../../../reference/github/review-ownership/README.md) 与 `weighted-approval*.yml` 两个 workflow，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
 
 ## 成本与前提
 

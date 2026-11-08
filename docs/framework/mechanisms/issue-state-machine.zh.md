@@ -11,7 +11,7 @@
 
 ## 执法
 
-workflow 就是执法：状态变更只在事件触发时发生，人工维护的状态因此会以可见的方式偏离事件产出的状态。移植配置参照：`issue-lifecycle.yml` 与 `issue-policy.yml` 两个 workflow，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
+workflow 就是执法：状态变更只在事件触发时发生，人工维护的状态因此会以可见的方式偏离事件产出的状态。移植的参照配置：`issue-lifecycle.yml` 与 `issue-policy.yml` 两个 workflow，恢复于 [reference/github/](../../../reference/github/README.md) 之下。
 
 ## 成本与前提
 
