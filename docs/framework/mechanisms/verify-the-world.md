@@ -7,7 +7,7 @@ English | [中文](verify-the-world.zh.md)
 
 ## Rule text
 
-[docs/testing.md](../../../docs/testing.md) states the principle under its own heading: an e2e assertion re-runs the command or re-reads the file externally, and asserts untouched files are byte-identical — because a keyword probe on the agent's own output lets a cheating agent pass. The check must observe what the world looks like after the run, not what the run says about itself.
+The principle: an e2e assertion re-runs the command or re-reads the file externally and asserts untouched files are byte-identical; the adopting project states it in its testing doc. A keyword probe on the agent's own output lets a cheating agent pass — the check must observe what the world looks like after the run, not what the run says about itself.
 
 ## Enforcement
 
