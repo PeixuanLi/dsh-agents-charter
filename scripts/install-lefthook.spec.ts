@@ -209,10 +209,11 @@ function runInstaller(
 
 // Every case builds scratch worktrees and drives them through spawned Git and
 // Node subprocesses, so the suite is bound by process creation rather than by
-// its assertions. The value matches ACF_COVERAGE_TEST_TIMEOUT_MS, which the
-// Windows coverage lane passes as --testTimeout: a describe value overrides that
-// flag rather than yielding to it, so a smaller one here lowers what the lane
-// grants every case in this file, none of which carries an allowance of its own.
+// its assertions. The value matches the originating harness's Windows
+// coverage-lane timeout (there spelled DSH_COVERAGE_TEST_TIMEOUT_MS, passed
+// as --testTimeout): a describe value overrides that flag rather than yielding
+// to it, so a smaller one here lowers what the lane grants every case in this
+// file, none of which carries an allowance of its own.
 // Rationale and the paired hook budget are in
 // .agents/notes/archived/testing/2026-08-29-windows-lane-hook-and-lefthook-budget.md.
 describe('worktree-local Lefthook installer', { timeout: 90_000 }, () => {
