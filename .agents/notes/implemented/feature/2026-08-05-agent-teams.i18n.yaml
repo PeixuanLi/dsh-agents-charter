@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-05-agent-teams.md
 /agent-note-durable-agent-teams-over-continuable-children:
-  en: c914d8148bfc4bf9
-  zh: a8115f87c0ac6cae
+  en: 257086616dcf3dd1
+  zh: f81c0565f7d61ca1
 /agent-note-durable-agent-teams-over-continuable-children/problem:
   en: f72b83f129aad831
   zh: 50940d56e44c100d
 /agent-note-durable-agent-teams-over-continuable-children/decision:
-  en: 38ab9cfd80ebb50a
-  zh: dde810ccd9a0a11d
+  en: 580a9e7f483d0668
+  zh: 4945ee3af094a77b
 /agent-note-durable-agent-teams-over-continuable-children/profile-delegation:
   en: 434f9b2f5a3ae76d
   zh: 0ea1ee06ff9225ed

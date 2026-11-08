@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-alternatives.md
 /the-mandatory-alternatives-considered-section:
-  en: 120f938277bce37f
-  zh: 25f60e7505447291
+  en: 2b46830c773e23b3
+  zh: 66b8e6dbad20abb6
 /the-mandatory-alternatives-considered-section/rule-text:
-  en: df470211e9d1538e
-  zh: bffacb63a48473f4
+  en: c98299e7e95b9eac
+  zh: 0910a0890c580578
 /the-mandatory-alternatives-considered-section/enforcement:
   en: aa7ffe803da9045a
   zh: a0c20ececd7d8270

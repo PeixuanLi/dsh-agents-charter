@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/release-double-gate.md
 /rehearse-every-pr-dispatch-the-release-by-hand:
-  en: 16e3924c53215c61
-  zh: f452eeeec930d50e
+  en: a1bc5cf83b0a6aca
+  zh: 37d47e05f715ee67
 /rehearse-every-pr-dispatch-the-release-by-hand/rule-text:
   en: f36461c378ebf51c
   zh: a9d8f19515781709

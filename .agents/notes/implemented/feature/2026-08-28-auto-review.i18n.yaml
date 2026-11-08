@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-28-auto-review.md
 /agent-note-experimental-auto-review-before-each-tool-call:
-  en: 66cfb9da0816f4f2
-  zh: 79f66b9713964a5e
+  en: f1bdbdb55d1997a4
+  zh: 65ad652c5dacdd25
 /agent-note-experimental-auto-review-before-each-tool-call/problem:
   en: 492ba2355360d81a
   zh: 825c0e7ab1cf4beb

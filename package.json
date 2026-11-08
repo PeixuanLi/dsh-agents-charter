@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-root",
+  "name": "agents-collab-framework",
   "version": "0.2.2-rc.1",
   "license": "MIT",
   "private": true,

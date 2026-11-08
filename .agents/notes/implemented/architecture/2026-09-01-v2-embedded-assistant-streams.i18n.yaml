@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-09-01-v2-embedded-assistant-streams.md
 /agent-note-embed-assistant-streams-in-v2-attempt-settlements:
-  en: ada7ae6629d0d4e4
-  zh: cc1f9a43e87d2dee
+  en: 98347d943423354c
+  zh: 4f7e089652dd012b
 /agent-note-embed-assistant-streams-in-v2-attempt-settlements/problem:
   en: 9e95306554ecd1ca
   zh: 40478697fbc94e33
@@ -15,8 +15,8 @@
   en: ce0e164a47640898
   zh: 3a20a0f5acfe64bb
 /agent-note-embed-assistant-streams-in-v2-attempt-settlements/decision/released-v1-to-v2-migration:
-  en: c1b5a775aa073a9a
-  zh: 45a16998d636aec1
+  en: 7ed766c90da8f01f
+  zh: 6ca7ca5dbb585b2c
 /agent-note-embed-assistant-streams-in-v2-attempt-settlements/verification:
   en: 64b75fcbb0c3f819
   zh: 6fe01443a7abec72

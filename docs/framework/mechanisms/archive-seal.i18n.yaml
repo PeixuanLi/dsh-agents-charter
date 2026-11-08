@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/archive-seal.md
 /the-archive-seal-compares-against-a-git-baseline:
-  en: b5fff5f61853c0e5
-  zh: 9a1fe6ccdc023528
+  en: 129ca7a3cfd3e88f
+  zh: 4e741ff3653014c5
 /the-archive-seal-compares-against-a-git-baseline/rule-text:
   en: d3403e3caa08d7ad
   zh: f793c7af2c2da042
@@ -12,8 +12,8 @@
   en: 917f4a6f0de45096
   zh: b8199b96ee681616
 /the-archive-seal-compares-against-a-git-baseline/cost-and-prerequisites:
-  en: a44316fbfbb2fe52
-  zh: 3376dc810877e830
+  en: 01e8cdfd792a613a
+  zh: 71e2669ca4a428ca
 /the-archive-seal-compares-against-a-git-baseline/team-fit:
   en: 0634b1cd703e8b9c
   zh: f1248ee90fc23968

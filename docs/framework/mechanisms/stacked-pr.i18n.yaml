@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/stacked-pr.md
 /stacked-prs-rewrite-under-lease-and-sync-verifies-immediately:
-  en: db7683eeffb63888
-  zh: ca3d44195b8da7f5
+  en: 5ddb487d0995e5ad
+  zh: 01bc642ee7fec1dc
 /stacked-prs-rewrite-under-lease-and-sync-verifies-immediately/rule-text:
   en: 75126ec4e88a8476
   zh: a2f52ecd75a94648

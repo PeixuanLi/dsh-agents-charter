@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/pr-classification.md
 /one-kind-per-pr-areas-are-multi-select:
-  en: 77ef1b52bc696815
-  zh: 9767c36b67df4d98
+  en: 97627870ea2f287e
+  zh: c973a8367d7b76c8
 /one-kind-per-pr-areas-are-multi-select/rule-text:
   en: 44c09764c980210f
   zh: 7e717c6f2893513e
@@ -12,8 +12,8 @@
   en: fb6574795ffad807
   zh: 0e7a16c93118be14
 /one-kind-per-pr-areas-are-multi-select/cost-and-prerequisites:
-  en: fe907e0061e1dd1e
-  zh: 4acdefe0b3de7f3f
+  en: 592480a5b4bb2d2c
+  zh: 12998312ba752f1e
 /one-kind-per-pr-areas-are-multi-select/team-fit:
   en: acf29ed32faa5b10
   zh: 779db09523d66dac

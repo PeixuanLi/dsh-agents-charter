@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-07-02-tool-render-intent-union.md
 /agent-note-tagged-render-intent-union-for-tool-call-presentation:
-  en: 6878ae6114b73d14
-  zh: 35af5ea10ffb2258
+  en: 2596f7c7043d94a0
+  zh: 66afd961e2b2cefb
 /agent-note-tagged-render-intent-union-for-tool-call-presentation/problem:
   en: 3a4b92dca651b979
   zh: 6b10ce7ba3681180

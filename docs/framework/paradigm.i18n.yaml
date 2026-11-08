@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/paradigm.md
 /framework-paradigm:
-  en: 644217b4ee182fbe
-  zh: a29e57218581764f
+  en: 09ff47eb71c34d25
+  zh: 2da9612f566f78fa
 /framework-paradigm/the-five-mechanism-layers:
-  en: 532316430e7a82e9
-  zh: c5198061e313c9b3
+  en: 69b4bdf342723ac2
+  zh: 14b21b576aacf6ba
 /framework-paradigm/four-assertions:
   en: 0d737efe00e85408
   zh: 6b253e272ac954a1

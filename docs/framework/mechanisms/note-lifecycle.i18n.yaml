@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-lifecycle.md
 /note-lifecycle-encoded-in-directory-paths:
-  en: 4e221d2d751236a1
-  zh: 63ab5ba5dc7e8e38
+  en: fc269c6744e872ae
+  zh: a63bd8fb02e34a08
 /note-lifecycle-encoded-in-directory-paths/rule-text:
-  en: fd34e95edadff15d
-  zh: 2c91af39c5734f4f
+  en: 37d78f55e61f6789
+  zh: d6255b36c2fa26ab
 /note-lifecycle-encoded-in-directory-paths/enforcement:
   en: 604462f64b1a0c85
   zh: 88ddcd2a477d90bb

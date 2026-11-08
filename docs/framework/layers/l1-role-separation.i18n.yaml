@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/layers/l1-role-separation.md
 /layer-1-role-separation:
-  en: a53b1bd1a4b4d0ed
-  zh: 5c1f6ca0613ab7ad
+  en: 06a253d9532120f4
+  zh: c95d6e96b77b382a
 /layer-1-role-separation/mechanisms-in-this-layer:
-  en: 494dacd4fa2ddb1a
-  zh: 64d52445f36e9a01
+  en: be7c30beadd25fa7
+  zh: 8dd9a513592e3270
 /layer-1-role-separation/porting-analysis:
   en: 33f408f8f66ec267
   zh: 3e4a77f8ad88a2f5

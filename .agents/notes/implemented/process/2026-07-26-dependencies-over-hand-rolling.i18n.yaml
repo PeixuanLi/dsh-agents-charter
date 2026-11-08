@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-07-26-dependencies-over-hand-rolling.md
 /agent-note-prefer-maintained-dependencies-over-hand-rolling:
-  en: 5cf63576459c1942
-  zh: c3f2dbc5e4656693
+  en: 427faa9a047957f1
+  zh: 770247846304cf60
 /agent-note-prefer-maintained-dependencies-over-hand-rolling/problem:
   en: d711f539fb48911c
   zh: 4e34ea6627e0f8cb

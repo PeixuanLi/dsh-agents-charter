@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/issue-state-machine.md
 /issue-state-is-moved-by-events:
-  en: b3d469e70973dbe1
-  zh: ec5158b7e647bc4e
+  en: 59f72b42eba76cf4
+  zh: 9e9c5d61ece58146
 /issue-state-is-moved-by-events/rule-text:
   en: 457eec89a1997964
   zh: e40b8a86ae252898

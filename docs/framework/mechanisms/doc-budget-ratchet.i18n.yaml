@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/doc-budget-ratchet.md
 /per-file-word-budgets-with-a-ratchet-that-only-tightens:
-  en: 41fa47fc6a96f856
-  zh: adbea8553c660d60
+  en: a35e851a96e7b28d
+  zh: 516094b9afcb3c04
 /per-file-word-budgets-with-a-ratchet-that-only-tightens/rule-text:
   en: cca2bedeb7162c79
   zh: 03e95b37094b2367

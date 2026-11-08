@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/layers/l5-process-automation.md
 /layer-5-process-automation:
-  en: 27656c14a8f3d8a0
-  zh: cf6d0a5746e60e8b
+  en: 22831e06851de87f
+  zh: 16f61356c9352b37
 /layer-5-process-automation/mechanisms-in-this-layer:
-  en: 482c05498b909b81
-  zh: 0d0e6eaafbed8cf7
+  en: 515c765871e60941
+  zh: 7adf502d1640b520
 /layer-5-process-automation/porting-analysis:
   en: 874e6b82c2c64c9a
   zh: 73016514025b0f2f

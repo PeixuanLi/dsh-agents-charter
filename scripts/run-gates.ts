@@ -64,7 +64,7 @@ interface RunningGate {
   promise: Promise<GateResult>
 }
 
-/** The worker count an aggregate uses when `DSH_GATE_CONCURRENCY` is unset, with its diagnostic source. */
+/** The worker count an aggregate uses when `ACF_GATE_CONCURRENCY` is unset, with its diagnostic source. */
 export interface ConcurrencyDefault {
   workers: number
   source: string
@@ -89,21 +89,21 @@ async function main(args: string[]): Promise<number> {
 
 /**
  * Run one aggregate through the real child-process executor with the CLI's
- * environment-selected scheduling and reporting: `DSH_GATE_CONCURRENCY`
- * overrides the worker default, `DSH_GATE_FAIL_FAST=1` stops at the first
+ * environment-selected scheduling and reporting: `ACF_GATE_CONCURRENCY`
+ * overrides the worker default, `ACF_GATE_FAIL_FAST=1` stops at the first
  * blocking failure, and every settled gate plus a final summary is printed.
  * @param name - aggregate name printed in the start line.
  * @param gates - complete aggregate to execute.
- * @param concurrencyDefault - worker count used when `DSH_GATE_CONCURRENCY` is unset.
+ * @param concurrencyDefault - worker count used when `ACF_GATE_CONCURRENCY` is unset.
  * @returns 1 when a blocking gate failed or was skipped, otherwise 0.
  */
 export async function runAggregate(name: string, gates: Gate[], concurrencyDefault: ConcurrencyDefault): Promise<number> {
-  const concurrencyOverride = process.env.DSH_GATE_CONCURRENCY
-  const maxConcurrency = concurrencyFromEnv('DSH_GATE_CONCURRENCY', concurrencyDefault.workers)
+  const concurrencyOverride = process.env.ACF_GATE_CONCURRENCY
+  const maxConcurrency = concurrencyFromEnv('ACF_GATE_CONCURRENCY', concurrencyDefault.workers)
   const concurrencySource = concurrencyOverride === undefined || concurrencyOverride === ''
     ? concurrencyDefault.source
-    : '$DSH_GATE_CONCURRENCY'
-  const failFast = flagEnabled('DSH_GATE_FAIL_FAST')
+    : '$ACF_GATE_CONCURRENCY'
+  const failFast = flagEnabled('ACF_GATE_FAIL_FAST')
   const startedAt = performance.now()
   console.log(`run-gates: ${name} running ${gates.length} gate(s) with ${maxConcurrency} worker(s) from ${concurrencySource}${failFast ? ', fail-fast after first blocking failure' : ''}.`)
 
@@ -118,7 +118,7 @@ export async function runAggregate(name: string, gates: Gate[], concurrencyDefau
  * The options the CLI entrypoint hands to the scheduler. Host signal
  * forwarding always follows fail-fast: children are detached only then, so
  * without it the forwarding would have no tree to drain.
- * @param failFast - whether `DSH_GATE_FAIL_FAST` is enabled.
+ * @param failFast - whether `ACF_GATE_FAIL_FAST` is enabled.
  * @returns the scheduler options for the entrypoint.
  */
 export function cliGateOptions(failFast: boolean): RunGatesOptions {
@@ -985,7 +985,7 @@ export function formatGateResultReason(result: GateResult): string {
 }
 
 function printResult(result: GateResult): void {
-  const verbose = process.env.DSH_GATE_VERBOSE === '1'
+  const verbose = process.env.ACF_GATE_VERBOSE === '1'
   const seconds = (result.durationMs / 1000).toFixed(2)
   if (result.status === 'passed' && !verbose) {
     console.log(`run-gates: PASS ${result.gate.label} (${seconds}s)`)

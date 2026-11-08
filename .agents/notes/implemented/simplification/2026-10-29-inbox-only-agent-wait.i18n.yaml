@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/simplification/2026-10-29-inbox-only-agent-wait.md
 /agent-note-inbox-only-agent-waits:
-  en: 8a451f9706af8dea
-  zh: 9818b5abdee12a9c
+  en: 341918e846a129e6
+  zh: 741e5bdc6c0758a0
 /agent-note-inbox-only-agent-waits/problem:
   en: 7a6e28745bda3305
   zh: e862166572cb9a9f

@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/defensive-patterns/conversation-and-session.md
 /conversation-and-session-rules:
-  en: 79d035c57d21fcb6
-  zh: 2287ffdc9eb5710f
+  en: 13645b7d845864e9
+  zh: 112daacb8d4e1794
 /conversation-and-session-rules/projection-is-the-only-read-and-compute-path:
   en: 07807d5124d1dcd0
   zh: 73d90584ad86676c

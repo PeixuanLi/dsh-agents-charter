@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/proposed/simplification/2026-10-18-single-workspace-canonicalization.md
 /agent-note-canonicalize-each-sandbox-workspace-once:
-  en: d9beb1e7a988d598
-  zh: 9ff16ea850cb3d57
+  en: 6075d228bd720e1f
+  zh: a1f628fb7f020b75
 /agent-note-canonicalize-each-sandbox-workspace-once/problem:
   en: e5c8865205d0cd6b
   zh: f1f3bcc793338761

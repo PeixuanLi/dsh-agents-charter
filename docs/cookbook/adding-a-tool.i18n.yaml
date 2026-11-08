@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/cookbook/adding-a-tool.md
 /tool-authoring-reference:
-  en: 586a9232cb807e4d
-  zh: d97becb56364b7c5
+  en: f1d5e6bd42f88d03
+  zh: 88a9ef191885deb0
 /tool-authoring-reference/the-minimal-shape:
   en: 2cc80a2a79e23005
   zh: 87e43383055890ce
@@ -15,17 +15,17 @@
   en: bb95b01a459cae44
   zh: d8c8a9d080a3c34e
 /tool-authoring-reference/execution-policy-and-observation:
-  en: ebaaca55f4262b86
-  zh: 600d16b890a6b494
+  en: b4e1768005a72755
+  zh: c4a98ea00cbd2edd
 /tool-authoring-reference/ptc-mode-reaches-your-tool-for-free:
   en: fbf1445eb0ace505
   zh: a0e9c84cb9cd9afc
 /tool-authoring-reference/how-your-tool-renders-in-a-ui:
-  en: e4520ce47c43ef22
-  zh: 13971ee10f90d30b
+  en: bc0a2c9ed7090bcf
+  zh: d2b15725175523e6
 /tool-authoring-reference/web-client-presentation:
-  en: 4a8bc6993ec4dcc1
-  zh: 9cf5f5cb2bf1d08a
+  en: 104a653d2636aa19
+  zh: c7255ec1061f7d5f
 /tool-authoring-reference/verification:
-  en: 834e4936552af0a7
-  zh: ece3d791dc1e2a26
+  en: 8071b8f2af7081b3
+  zh: 77a2147520ae2d44

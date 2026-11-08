@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/prose-hygiene.md
 /prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion:
-  en: 8c86c700801ba3a3
-  zh: 666b14606979c24d
+  en: ff2aa8eb46f33243
+  zh: 9404d3102bb17558
 /prose-hygiene-the-slop-checklist-and-the-reasoning-trace-criterion/rule-text:
   en: 301312b71fb81339
   zh: 979f00fdb9c3611f

@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-freshness.md
 /the-freshness-obligation:
-  en: b06e0635bb38aab6
-  zh: eb6c63469bbd1ae1
+  en: 982e1dfabe26c184
+  zh: 20cbaa9c37050a44
 /the-freshness-obligation/rule-text:
-  en: c439c5ad043be4af
-  zh: dff49da805899912
+  en: d8669ee879f1ac2d
+  zh: 5cd3a8d0bf1ce7cc
 /the-freshness-obligation/enforcement:
   en: 94e9707e6e255dd6
   zh: f8598bfa251596d9

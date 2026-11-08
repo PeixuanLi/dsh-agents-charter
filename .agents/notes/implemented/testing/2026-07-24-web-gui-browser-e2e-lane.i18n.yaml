@@ -3,17 +3,17 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/testing/2026-07-24-web-gui-browser-e2e-lane.md
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui:
-  en: acbf72f6a3c5bea9
-  zh: 4d655027ac2b78db
+  en: 0ee514f9cd0cf455
+  zh: 54045b4371dec4a8
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/problem:
-  en: 63a2f51853b2c530
-  zh: 2babef0ecce89b21
+  en: 7dc9c4b224d35b81
+  zh: 0f3aca52946c47b3
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/decision:
   en: 7984c9a74f329215
   zh: 76e02ab3067a0177
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/decision/scaffold-apps-web-tests-scaffold-ts:
-  en: 3d09cd693966a674
-  zh: 4cda02850961f8d0
+  en: 9d8bbaaa232f1d6a
+  zh: e10e39df2fcd8e24
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/decision/determinism-rules:
   en: 76a438c8708ed487
   zh: dd005a972e7b37a1
@@ -27,8 +27,8 @@
   en: f016104680663491
   zh: 561b01f81d3b43a4
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/decision/ci-stance:
-  en: a4c484181696bc31
-  zh: e2cb9d7a476edb62
+  en: 2b8089ebbf820f4d
+  zh: 3f5039ce4a4c5ba9
 /agent-note-keyless-browser-e2e-lane-for-the-web-gui/prior-art:
   en: 7472e212043721dd
   zh: 61dd9f5a8e12730b

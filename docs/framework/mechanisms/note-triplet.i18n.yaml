@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/note-triplet.md
 /the-english-chinese-and-sidecar-triplet:
-  en: 0adf28392161d110
-  zh: 5e1adfe64d6d984e
+  en: 3a3109b3d0e10b16
+  zh: 970610fa5fa9e7ea
 /the-english-chinese-and-sidecar-triplet/rule-text:
-  en: 04a9f129d59bcf3f
-  zh: ff80a969dba314bc
+  en: e749d58288bcf6b1
+  zh: a72ed8443512630f
 /the-english-chinese-and-sidecar-triplet/enforcement:
   en: 39a1ef5ff0ad9c96
   zh: 6c8e4fcfb555bb4b

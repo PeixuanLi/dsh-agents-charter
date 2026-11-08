@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-08-10-npm-release-sequences.md
 /agent-note-private-npm-publication-as-three-independent-sequences:
-  en: 176f873a6b094838
-  zh: 9baeba69cbaea9cf
+  en: c6f4558e2edabef9
+  zh: bd07a608c7408e8d
 /agent-note-private-npm-publication-as-three-independent-sequences/problem:
   en: b94462e04e350571
   zh: 07cef78e4cf7a9ac
@@ -36,8 +36,8 @@
   en: 5b8944286a080d95
   zh: bb8e6607fe6eb77f
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/workflow-shape-pack-on-pr-push-publish-from-a-manual-dispatch-workflow:
-  en: ea0acc6409da4d5c
-  zh: ac0bd2fe41f4fe67
+  en: 8dffcc069c1614c0
+  zh: 10b9ae38c94844a0
 /agent-note-private-npm-publication-as-three-independent-sequences/decision/repository-changes-this-carried:
   en: c505237cad2c4128
   zh: 55364ba462536680

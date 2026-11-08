@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-07-26-ci-failover-runbook.md
 /agent-note-ci-failover-runbook-hosted-pools-in-house-pool:
-  en: 677b522817e84e2f
-  zh: f8518a7033b0fd54
+  en: 03eb4f8ecc59b51a
+  zh: 12e0346bf6b6f639
 /agent-note-ci-failover-runbook-hosted-pools-in-house-pool/problem:
   en: edc0b7ffb2cab6c4
   zh: 66c94b6cc3500384

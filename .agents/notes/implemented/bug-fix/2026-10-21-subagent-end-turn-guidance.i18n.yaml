@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/bug-fix/2026-10-21-subagent-end-turn-guidance.md
 /agent-note-subagent-end-turn-guidance-stays-in-the-delegation-paragraph:
-  en: bfafb6d348cf2d21
-  zh: 191bedbfa12b6329
+  en: a28f9c9a21df47a7
+  zh: c2e80f3d08991fdc
 /agent-note-subagent-end-turn-guidance-stays-in-the-delegation-paragraph/problem:
   en: 36ff1fff46915956
   zh: 198c8ca7efaeb5b6

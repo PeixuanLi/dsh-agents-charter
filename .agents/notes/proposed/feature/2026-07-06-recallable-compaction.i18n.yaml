@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/proposed/feature/2026-07-06-recallable-compaction.md
 /agent-note-recallable-compaction-index-checkpoints-a-state-checkpoint-and-in-session-history-recall:
-  en: 597e215825c64eb9
-  zh: 1986c2ec32437386
+  en: b0ac04658c74f683
+  zh: e293b7f2695cdaa2
 /agent-note-recallable-compaction-index-checkpoints-a-state-checkpoint-and-in-session-history-recall/problem:
   en: 98419c56fc9d4f6f
   zh: 30271b2ad21dc596

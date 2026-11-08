@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/proposed/feature/2026-10-29-event-triggered-automation-tasks.md
 /agent-note-event-triggered-automation-tasks:
-  en: fe57a78907eab083
-  zh: 4ac96eeb365ac012
+  en: 215ab2e2f8da1590
+  zh: fdf813de260c5149
 /agent-note-event-triggered-automation-tasks/problem:
   en: f7f7ef29d10aafec
   zh: f4c4da5ae4a4ad3c

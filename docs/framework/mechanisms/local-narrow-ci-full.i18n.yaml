@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/local-narrow-ci-full.md
 /local-runs-stay-narrow-ci-owns-the-full-matrix:
-  en: fdc40c4ee5e329ca
-  zh: 38036ed3c74169e0
+  en: b3c936b18f4ae68f
+  zh: 06962cc50a2df89e
 /local-runs-stay-narrow-ci-owns-the-full-matrix/rule-text:
   en: 8df7e0525fe5825c
   zh: 783d0c195cc8ec4d

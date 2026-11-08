@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-08-23-client-derived-tool-presentation.md
 /agent-note-client-derived-presentation-from-raw-session-tool-events:
-  en: de8d02e979715600
-  zh: 1db4d0364c30a7e3
+  en: 8bbdd143782f6385
+  zh: 248b66e505f4e97e
 /agent-note-client-derived-presentation-from-raw-session-tool-events/problem:
   en: 9f34c53e647c69ca
   zh: 551776c7cc9618b5
@@ -222,8 +222,8 @@
   en: d7e581086940fafa
   zh: d452320fee6ef875
 /agent-note-client-derived-presentation-from-raw-session-tool-events/relationship-to-existing-decisions:
-  en: a3ceb7da3b7f8ff0
-  zh: 948c24c63b68925a
+  en: e1665b384f92fd9a
+  zh: 048ff298e6f30a01
 /agent-note-client-derived-presentation-from-raw-session-tool-events/deferred:
   en: a60c9007c9d26dfd
   zh: 225b1f7544bca324

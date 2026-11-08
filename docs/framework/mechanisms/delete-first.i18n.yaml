@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/delete-first.md
 /deletion-as-routine-maintenance:
-  en: f397208fb60399a6
-  zh: 2706c1e3dbed97b5
+  en: 96f15777bad2da14
+  zh: e7640acc74932bd1
 /deletion-as-routine-maintenance/rule-text:
-  en: 7ff7475d701ce9d9
-  zh: 088e7a9a11b35d4c
+  en: 1c25a1aa5fcb03a7
+  zh: 13ffd5f4ad5853ec
 /deletion-as-routine-maintenance/enforcement:
   en: 193e2e85cde6f1ec
   zh: 5cfe4d025993dada

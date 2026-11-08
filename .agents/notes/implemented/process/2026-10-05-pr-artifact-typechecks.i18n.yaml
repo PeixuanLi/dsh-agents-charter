@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-10-05-pr-artifact-typechecks.md
 /agent-note-pr-artifact-builds-and-aggregate-typescript-checks:
-  en: a25e7cdcad03934f
-  zh: 48e31429730e0885
+  en: bcf0ea43fcc710a8
+  zh: e09a635fae84c434
 /agent-note-pr-artifact-builds-and-aggregate-typescript-checks/problem:
   en: e5c984fa32cc5e69
   zh: 25d5742b2106d830
 /agent-note-pr-artifact-builds-and-aggregate-typescript-checks/decision:
-  en: 17f56af423cccce1
-  zh: 368aed6791b29879
+  en: 7eed81093fec5617
+  zh: 4cb5b8cbbd992c17
 /agent-note-pr-artifact-builds-and-aggregate-typescript-checks/alternatives-considered:
   en: f61da066f9ddcd62
   zh: 816fd6e0063017cd

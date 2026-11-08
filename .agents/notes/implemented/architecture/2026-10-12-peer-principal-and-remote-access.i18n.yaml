@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-10-12-peer-principal-and-remote-access.md
 /agent-note-peer-principals-and-method-level-remote-access-control:
-  en: 0c0fd0f567bd5c89
-  zh: 464e34d05737a7bc
+  en: bef019d74ab06359
+  zh: c171bad5cc7beaeb
 /agent-note-peer-principals-and-method-level-remote-access-control/problem:
   en: 711233d5948fd080
   zh: 787a67ceaabdb2bc
@@ -27,8 +27,8 @@
   en: a01ac57fc71a84f0
   zh: 3e488ef3da5e4b8c
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/method-level-access-control:
-  en: 725a2d4145c0a75e
-  zh: b98a64532cadeaba
+  en: 0ad9079bd8f7ce9a
+  zh: 0a1c9dcb1acea495
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/method-level-access-control/correspondence-with-rbac:
   en: a78a2410eb52f777
   zh: a868bf1b0e690c9f
@@ -63,17 +63,17 @@
   en: aeed63a00121f538
   zh: 66c215f22470a32d
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/recording-the-message-source:
-  en: 27f0cd416f72a791
-  zh: a9087c22ba201d30
+  en: 3e218e226512a35a
+  zh: 4a6cdf721d89aa42
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/code-review-rule-and-documentation:
-  en: 42863f809e4f30a2
-  zh: d8a40aabf86644d3
+  en: 90525f3996812b70
+  zh: 009ff69cd3debf74
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/out-of-scope-and-future-work:
   en: b5643bc6e617593d
   zh: 8de2e21c2143b8d5
 /agent-note-peer-principals-and-method-level-remote-access-control/decision/relation-to-existing-notes:
-  en: 7d88f65f12a792a3
-  zh: a266e782b2d6de47
+  en: 11e29e2e6ae3cf40
+  zh: 50249fff48576f95
 /agent-note-peer-principals-and-method-level-remote-access-control/alternatives-considered:
   en: 60da38bca6e9c3d6
   zh: 61ea578fe8185b61

@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/layers/l2-external-memory.md
 /layer-2-external-memory:
-  en: f3272ca2269841b8
-  zh: f8903c04197dbaba
+  en: 68344aae5ba9027b
+  zh: 84874db7d19e7adc
 /layer-2-external-memory/mechanisms-in-this-layer:
-  en: 92523e6bda9b9240
-  zh: 8624bd6a30fe248c
+  en: 098fbbb86eff9c9a
+  zh: 119fd2d69b9c63eb
 /layer-2-external-memory/porting-analysis:
   en: 0780034d1cca31b7
   zh: f9ad846a5b52ef4d

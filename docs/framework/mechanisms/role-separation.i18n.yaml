@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/role-separation.md
 /ai-produces-humans-decide-machines-enforce:
-  en: 922566656a987de2
-  zh: f36577ea1ea794f1
+  en: c4dd863f519ced1c
+  zh: 96c34e5a6cd67f40
 /ai-produces-humans-decide-machines-enforce/rule-text:
-  en: 853ebeb0f06a08ce
-  zh: 249a6b8ade427d3d
+  en: c1691b1e612b03f5
+  zh: cec19d21a9ca5d8c
 /ai-produces-humans-decide-machines-enforce/enforcement:
-  en: dfd3e23234d9c5d3
-  zh: ef9fb4c9f19b3b70
+  en: 7187eb6f5d6b6eb8
+  zh: aed36fc97be324bd
 /ai-produces-humans-decide-machines-enforce/cost-and-prerequisites:
   en: b6ba2a4883b7a3a0
   zh: 0b8a6f9c7a218b52

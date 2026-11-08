@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/markdown-gates.md
 /documentation-is-machine-checked-output:
-  en: c6e7dca8bfe336e5
-  zh: aa4be2806e244c1c
+  en: a18483c23ed8d1a4
+  zh: d0ee06d3fa8d9611
 /documentation-is-machine-checked-output/rule-text:
   en: 7c77edf918f1f2f5
   zh: 7f3427067a46b535

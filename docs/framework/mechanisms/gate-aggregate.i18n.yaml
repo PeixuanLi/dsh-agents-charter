@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/gate-aggregate.md
 /the-gate-runner-as-tested-engineering-code:
-  en: cbc705df63612cd9
-  zh: 304b4c05e4ac7876
+  en: b9f83862e6688169
+  zh: 74bde590b49eef20
 /the-gate-runner-as-tested-engineering-code/rule-text:
   en: ebdd935afaa85259
   zh: 223275781390c83e

@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/agents-md-symlink.md
 /agent-instructions-and-the-claude-md-symlink:
-  en: f6043e5f8adbe7b7
-  zh: d1a30bcb5fa92e5b
+  en: c7f1fa25d6a13029
+  zh: 4660a16ffc45a880
 /agent-instructions-and-the-claude-md-symlink/rule-text:
   en: 88c2c4b5355f67e3
   zh: 88e22e82bea5e54b

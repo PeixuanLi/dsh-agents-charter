@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/defensive-patterns/remote-and-api.md
 /remote-and-api-rules:
-  en: afe0088b4e95812c
-  zh: c99e3f0c3e44f9dd
+  en: bf443c3cd88ab783
+  zh: 79e753436f7b62f5
 /remote-and-api-rules/a-new-remote-capability-gets-its-own-service:
   en: ac59f08c425d449c
   zh: 49aa09dc6e329c48
 /remote-and-api-rules/remote-marks-capability-methods:
-  en: b3879051f838e390
-  zh: f4eb9303ed7a6744
+  en: 9e89221231efcb0b
+  zh: dc41d2358c04d54f
 /remote-and-api-rules/packages-api-carries-generic-orchestration-only:
   en: af4f97406d7ab39e
   zh: 80d42556db2962bf

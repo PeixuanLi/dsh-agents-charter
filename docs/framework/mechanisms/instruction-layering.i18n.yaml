@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/mechanisms/instruction-layering.md
 /resident-rules-and-on-demand-skills:
-  en: 3c279a1f97958a7c
-  zh: 9eb6690cd20899e9
+  en: 04a0d639228dc575
+  zh: 68de8b333f17f40b
 /resident-rules-and-on-demand-skills/rule-text:
-  en: ae4fb244bfe2c1d2
-  zh: 0e4ca20adcbb25a9
+  en: 98ae92a722a15eeb
+  zh: 90fe332b39abad61
 /resident-rules-and-on-demand-skills/enforcement:
   en: d7a717bd53c5c8d7
   zh: 78fbb9c4f366cad2

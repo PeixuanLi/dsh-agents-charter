@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/testing/2026-06-19-real-api-e2e-ci.md
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api:
-  en: 705c6fd43858bdac
-  zh: 2bbc6491368fb4c0
+  en: 923b8f7e18b43b4d
+  zh: 47f7acb3557a4d6c
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/problem:
-  en: 71d1b0acfb73e98b
-  zh: db8ee626a7a1a06e
+  en: 701f8f11bcc8d645
+  zh: 2acd583c678e331a
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision:
   en: f21c8fdfcb91832c
   zh: 950c1c2cab49a02f
@@ -15,8 +15,8 @@
   en: e4745c43611b96bb
   zh: 8fb980401b0c5e9b
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision/cost-is-not-the-constraint-reliability-is:
-  en: 88b945361b1d4804
-  zh: 0887a653945f4dda
+  en: 5291f2c4040fbca8
+  zh: 461ebbb0de363458
 /agent-note-real-api-e2e-in-ci-against-the-external-deepseek-api/decision/triggers-trusted-events-only:
   en: 42a2fb15f00aec3a
   zh: c4775447c863d209

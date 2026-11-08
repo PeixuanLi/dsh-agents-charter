@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/layers/l3-machine-verification.md
 /layer-3-machine-verification:
-  en: 51d61520aa636f30
-  zh: d2de0d2940cf42cb
+  en: 9cbf4c5118131843
+  zh: 82d87612f4063c11
 /layer-3-machine-verification/mechanisms-in-this-layer:
-  en: 678e1f4d3708e0c8
-  zh: 82e88ce6a44f83f1
+  en: e8ed62825c73fe7d
+  zh: d49c30b258df707d
 /layer-3-machine-verification/porting-analysis:
   en: 03a3d2f74b0728e4
   zh: 2d7f5c820539c8e4

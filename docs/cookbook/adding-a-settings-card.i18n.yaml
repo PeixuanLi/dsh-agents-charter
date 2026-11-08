@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/cookbook/adding-a-settings-card.md
 /cookbook-live-configuration-forms:
-  en: ce4e603c0a07dd43
-  zh: 8609e754f25bdc0c
+  en: 0cdc3894acf41b9e
+  zh: 20e397bdc3d05de8
 /cookbook-live-configuration-forms/1-declare-live-fields:
   en: a758ea63530ecf34
   zh: 0ce644333a8a4e85

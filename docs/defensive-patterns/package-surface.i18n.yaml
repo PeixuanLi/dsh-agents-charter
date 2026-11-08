@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/defensive-patterns/package-surface.md
 /package-surface-rules:
-  en: f84790dcfba97922
-  zh: 7c0579826e692a6f
+  en: ebac3743cddcba0a
+  zh: 925c72531da126a5
 /package-surface-rules/a-plugin-package-exports-what-the-loader-loads:
-  en: 748b7639ef227d86
-  zh: 5632fceefc4fcaf8
+  en: 9ec0217d238759aa
+  zh: d2a5281ab179edbb
 /package-surface-rules/two-package-shapes-and-both-are-dynamic-plugin-packages:
-  en: 39fabb954d208874
-  zh: 03a66c9f921af294
+  en: 4ae6f9cc28454fd5
+  zh: 7d68adac836656a4
 /package-surface-rules/package-json-exports-uses-the-standard-key-set:
   en: 692ded0ff903609d
   zh: c871ab58ca92ad70
@@ -21,8 +21,8 @@
   en: 97d704fa6bc012fd
   zh: 82e1c5ff28ca307a
 /package-surface-rules/a-new-resolve-hook-is-refused-outright:
-  en: b420ae3e228432d5
-  zh: 0c49c4a9c3a5262c
+  en: 9f4a054fb8d672b9
+  zh: 452e70b46055306c
 /package-surface-rules/package-modules-do-not-await-at-module-scope:
   en: 668fcbbf2c100529
   zh: 6fb57b6b2f46d0b7

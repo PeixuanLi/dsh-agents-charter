@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/cookbook/extension-cookbook.md
 /cookbook-extension-plugin-shapes:
-  en: 1ca36ab7adc6d29b
-  zh: 30bac8fdc70b83ff
+  en: 2fce074a89c81ac5
+  zh: 7450ee397ffb8adf
 /cookbook-extension-plugin-shapes/a-tool-plugin:
-  en: 39704ef102f2f2f7
-  zh: 8771f9c19450b347
+  en: aa40792b520191fd
+  zh: 89acb0edb90062de
 /cookbook-extension-plugin-shapes/a-hook-plugin-permission-gate-example:
-  en: 9e67a75370812101
-  zh: e8a77dd7bd758ea8
+  en: 93f9f6e4b500840f
+  zh: 9a2a245500ea9958
 /cookbook-extension-plugin-shapes/a-ui-plugin:
   en: 9067074f12d32d13
   zh: 9294879955c30391
@@ -21,5 +21,5 @@
   en: f0a28d07c0bb4d1b
   zh: 840962f512cb4031
 /cookbook-extension-plugin-shapes/the-feature-mechanism-map:
-  en: 487319ea4a976cd3
-  zh: e3152501b72f8918
+  en: 16ae25198cba3ed9
+  zh: e674852c5eb5cb84

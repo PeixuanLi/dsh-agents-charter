@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/testing/2026-09-04-session-open-performance-gate.md
 /agent-note-required-ci-performance-gate-for-opening-large-sessions:
-  en: 3e87960dd29e5814
-  zh: 7abaea0b9397e16d
+  en: 0ac51b21f81881b8
+  zh: 5e94ceeca224635b
 /agent-note-required-ci-performance-gate-for-opening-large-sessions/problem:
   en: 00ba1f66195351e2
   zh: a738b81adceda351
 /agent-note-required-ci-performance-gate-for-opening-large-sessions/decision:
-  en: f206fbefae81438a
-  zh: f9d513d4d06ea445
+  en: 78a7169cab3064f9
+  zh: bdd2f3d2edbf8f62
 /agent-note-required-ci-performance-gate-for-opening-large-sessions/calibration-evidence:
   en: f1001a139470f6b7
   zh: b7b46f96b84b1271

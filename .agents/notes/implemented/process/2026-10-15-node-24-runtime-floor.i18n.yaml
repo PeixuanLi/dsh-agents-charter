@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-10-15-node-24-runtime-floor.md
 /agent-note-node-runtime-floor-and-compatibility-coverage:
-  en: 256156264ba84f11
-  zh: 29680265e82fc2c6
+  en: 4dc285c975ff207c
+  zh: a0bdd31a9337733e
 /agent-note-node-runtime-floor-and-compatibility-coverage/problem:
   en: 1e45546d7452029f
   zh: d99966ac42bb193f
 /agent-note-node-runtime-floor-and-compatibility-coverage/decision:
-  en: 796a89f0cc8deb24
-  zh: 5edcd443f635e4a6
+  en: 6db8a49c3a5f9595
+  zh: a832673bb7ccbabc
 /agent-note-node-runtime-floor-and-compatibility-coverage/consequences:
   en: 224ce4b13f297f8b
   zh: 1bb5f8ebdf3243b3

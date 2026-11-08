@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-07-29-dsh-source-launch-tsx-esm.md
 /agent-note-dsh-source-launch-through-the-tsx-esm-hook:
-  en: dba6c39089c0a062
-  zh: e92676f73fb2f510
+  en: 44b8264ea2aabfb7
+  zh: 9c45fc85a0e85f15
 /agent-note-dsh-source-launch-through-the-tsx-esm-hook/problem:
   en: f39555c693b44573
   zh: 79cf40a8522a4e99
