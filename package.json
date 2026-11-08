@@ -36,6 +36,7 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/js-yaml": "^4.0.9",
+    "@types/jsdom": "^28.0.3",
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.20.1",
     "eslint-plugin-sonarjs": "^4.2.0",
@@ -44,6 +45,7 @@
     "lefthook": "^2.1.12",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-gfm": "^3.1.0",
+    "mermaid": "11.17.2",
     "micromark-extension-gfm": "^3.0.0",
     "oxlint": "1.81.0",
     "oxlint-tsgolint": "7.0.2001",
