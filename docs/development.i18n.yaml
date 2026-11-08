@@ -3,47 +3,32 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/development.md
 /development-guide:
-  en: ab44b744d6e6901a
-  zh: e9bc49364ef18e6e
+  en: 7893a6d381813ca3
+  zh: ab2943da1ec451e9
 /development-guide/setup-tutorial:
   en: 5207d17725c07a27
   zh: 258884c4300ac63a
 /development-guide/setup-tutorial/prerequisites:
-  en: 9b498bb8024d7b45
-  zh: 777a38803e2f80be
-/development-guide/setup-tutorial/windows-and-wsl-2:
-  en: e86be579be6f1813
-  zh: 14f6a220337d0861
+  en: a09193310db8d23d
+  zh: df0bccf8b56edce3
 /development-guide/setup-tutorial/first-time-setup:
-  en: 52b730a209276963
-  zh: c2eb0bb2b82f419e
-/development-guide/contributor-reference:
-  en: 3221d1076554001f
-  zh: 29f166be6a5c04d9
-/development-guide/contributor-reference/typescript-project-layout:
-  en: 8156e5a02c6f1ba1
-  zh: 96332bd26b48da14
-/development-guide/contributor-reference/environment-variables:
-  en: dba2c72ee6ffa930
-  zh: b65c27fbb9129ec8
-/development-guide/contributor-reference/git-integrations:
-  en: 45278960b70d0fb5
-  zh: 3302ea0ecc147532
-/development-guide/contributor-reference/ci-gates:
-  en: 12a7403be6f8920a
-  zh: 94371d7952d4bcb3
-/development-guide/contributor-reference/daily-commands:
-  en: 08aa6ec1cdabfeb7
-  zh: dcce5ae9d3c829d0
-/development-guide/contributor-reference/profile-runs:
-  en: 7ce6264a6a06dc4a
-  zh: e12b684f2bef942b
-/development-guide/contributor-reference/application-commands:
-  en: df29a672dc120a40
-  zh: e91d68c9e8a879b6
-/development-guide/contributor-reference/todo-markers:
-  en: 85b38f78d87fc88f
-  zh: 00d5eb625e7dfb61
-/development-guide/contributor-reference/documenting-types-verbatim-ts-type-equiv:
-  en: 4995ae9a9bc4ceb4
-  zh: 310a03a3b61d7cc0
+  en: f4ce342c9f809fa6
+  zh: cd42b0482fba8493
+/development-guide/typescript-project-layout:
+  en: ed5bd4e452006d7d
+  zh: d97dd5383a58fe1d
+/development-guide/environment-variables:
+  en: 6d65c90880cbe7b5
+  zh: 3be9da2a2134a495
+/development-guide/git-integrations:
+  en: a249ca584e49ffaa
+  zh: 930f453df59d87f7
+/development-guide/daily-commands:
+  en: 1125278abe7e4e78
+  zh: a53c9d87bd474224
+/development-guide/todo-markers:
+  en: b0ecda6b0d5fb0f1
+  zh: 93e66f7d95ee6212
+/development-guide/what-has-no-lane-here:
+  en: 38c79a4e48d5e34e
+  zh: 16e50e775640fb7b

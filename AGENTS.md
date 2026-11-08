@@ -53,7 +53,7 @@ Before pushing, follow [pre-push-checks](.agents/skills/pre-push-checks/SKILL.md
 
 ## Secrets / .env
 
-No script or skill in this repository reads model credentials; `DEEPSEEK_API_KEY` survives only in sample fixtures and retained reference material (Agent Notes, upgrade guides, [docs/development.md](docs/development.md)). Never commit credentials.
+No script or skill in this repository reads model credentials; `DEEPSEEK_API_KEY` survives only in sample fixtures and retained reference material (Agent Notes, upgrade guides). Never commit credentials.
 
 ## Conventions
 

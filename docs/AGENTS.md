@@ -26,7 +26,7 @@ Each fact has one home: the tier whose job it is; elsewhere, link there.
 | [defensive-patterns/](defensive-patterns/README.md) | Rules this repository enforces in review, split by artifact: one general bug-class page plus per-domain pages | Decision rationale (→ Agent Notes) |
 | [postmortem/](postmortem/README.md) | Incident stories — the only tier where war-story narrative belongs | — |
 | [cookbook/](cookbook/adding-a-package.md) | Step-by-step how-tos with numbered verify steps | Design rationale (→ the Agent Note each guide links) |
-| [development.md](development.md) | Contributor setup, daily workflow, and a summary of CI; a bilingual pair under the [i18n contract](i18n/README.md) | Runtime/version rationale (→ Agent Notes), check-by-check lists that drift from `package.json` scripts |
+| [development.md](development.md) | Contributor setup and daily workflow; a bilingual pair under the [i18n contract](i18n/README.md) | Runtime/version rationale (→ Agent Notes), check-by-check lists that drift from `package.json` scripts |
 | Skills (`.agents/skills/`) | Reusable workflows and specialized decision standards | Product and runtime contracts (→ docs or source) |
 
 Placement: bugs → postmortems; rationale → Agent Notes; procedures → cookbooks; standing orders → root `AGENTS.md` with a rationale link; review-enforced rules → `defensive-patterns/`; framework mechanism specifications → `framework/`.
@@ -50,7 +50,7 @@ When the gate goes red:
 2. **Condense** content that belongs here but can be shorter.
 3. **Raise** the ceiling only when the words need the space; justify the manifest diff in the PR. A too-low ceiling is a budget bug.
 
-Ceilings are guardrails, not reduction targets. At or below target, the gate enforces 5% headroom; above target, freeze the ceiling until the document is under target. Lower a ceiling only when the document has room. Targets: root `AGENTS.md` ≤ 1,180; this file ≤ 1,260; `architecture.md` ≤ 2,540; `cordis-primer.md` ≤ 640; `testing.md` ≤ 570; the framework pages `framework/README.md` ≤ 310, `framework/paradigm.md` ≤ 410, `framework/profiles.md` ≤ 550, and the layer chapters `framework/layers/l1-role-separation.md` ≤ 230, `l2-external-memory.md` ≤ 350, `l3-machine-verification.md` ≤ 300, `l4-instruction-layering.md` ≤ 250, `l5-process-automation.md` ≤ 250. Review governs unbudgeted tiers.
+Ceilings are guardrails, not reduction targets. At or below target, the gate enforces 5% headroom; above target, freeze the ceiling until the document is under target. Lower a ceiling only when the document has room. Targets: root `AGENTS.md` ≤ 1,180; this file ≤ 1,260; `architecture.md` ≤ 2,540; `cordis-primer.md` ≤ 640; `development.md` ≤ 1,110; `testing.md` ≤ 570; the framework pages `framework/README.md` ≤ 310, `framework/paradigm.md` ≤ 410, `framework/profiles.md` ≤ 550, and the layer chapters `framework/layers/l1-role-separation.md` ≤ 230, `l2-external-memory.md` ≤ 350, `l3-machine-verification.md` ≤ 300, `l4-instruction-layering.md` ≤ 250, `l5-process-automation.md` ≤ 250. Review governs unbudgeted tiers.
 
 ## The slop checklist
 
