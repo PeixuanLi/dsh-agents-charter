@@ -412,7 +412,7 @@ describe('translation scope discovery', () => {
     expect(isTranslationScopeFile(file)).toBe(false)
   })
 
-  it('excludes only the reference appendix root, not reference-named paths elsewhere', () => {
+  it('excludes only the `reference/` prefix, not reference-named paths elsewhere', () => {
     expect(isTranslationScopeFile('reference/github/review-ownership/README.md')).toBe(false)
     expect(isTranslationScopeFile('reference/README.md')).toBe(false)
     expect(isTranslationScopeFile('reference/github/README.zh.md')).toBe(false)

@@ -45,7 +45,7 @@ The gate's limit, stated plainly: **a green gate means the pair was confirmed co
 
 ## Scope and exclusions
 
-**Scope**: the root `CONTRIBUTING.md`, `BRAND_GUIDELINES.md`, and `SAFETY.md` documents, every non-vendor README, and every active document under `.agents/notes/**`, `docs/**`, and `python/**`. README matching is case-insensitive on the basename and covers future directories without another manifest edit. Dependency and ignored build-output trees, the frozen `.agents/notes/archived/` tree, and the monolingual `reference/` appendix of restored upstream reference configurations are discovery exclusions, not evolving translation source.
+**Scope**: the root `CONTRIBUTING.md`, `BRAND_GUIDELINES.md`, and `SAFETY.md` documents, every non-vendor README, and every active document under `.agents/notes/**`, `docs/**`, and `python/**`. README matching is case-insensitive on the basename and covers future directories without another manifest edit. Dependency and ignored build-output trees, the frozen `.agents/notes/archived/` tree, and the monolingual `reference/` appendix of restored upstream configurations are discovery exclusions, not evolving translation source.
 
 **Outside scope**: a bundle's detail documents under `packages/<group>/<package>/docs/`, which locale `meta.detail` names for the plugin page. The page shows the file for the active UI language, so these documents carry no in-document language switcher and no consistency record; [`verify-md-links`](../../scripts/verify-md-links.ts) and [`verify-md-wrap`](../../scripts/verify-md-wrap.ts) still check both languages, and review keeps them in step.
 
@@ -61,7 +61,6 @@ Generated English sources omit the language switcher that ordinary authored sour
 - `docs/AGENTS.md`, `.agents/notes/**/AGENTS.md`, and their `CLAUDE.md` instruction symlinks — agent instructions, maintained in English only like the root `AGENTS.md`.
 - `docs/i18n/terminology.md` and [style-samples.md](style-samples.md) — both are bilingual by construction.
 - [translation-prompt.md](translation-prompt.md) — the automated pipeline's prompt template; its body is machine-consumed verbatim, so a paired translation would change pipeline behavior.
-- review-ownership/README.md (`../../.github/review-ownership/README.md`) — repository-internal approval policy maintained in English only.
 - `.agents/notes/archived/` — frozen historical triplets. [`verify-archived-agent-notes`](../../scripts/verify-archived-agent-notes.ts) validates their completeness and content seals; translation maintenance must never rewrite them.
 
 **Universal requirement**: every current or future document in scope must merge as a complete bilingual pair. [scripts/translation-pairing.manifest.json](../../scripts/translation-pairing.manifest.json) contains only explicit exclusions; there is no per-file rollout list, date cutoff, or README-specific policy class.
