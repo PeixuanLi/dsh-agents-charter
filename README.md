@@ -16,8 +16,8 @@ English | [中文](README.zh.md)
 
 ```sh
 pnpm install        # Node.js >= 24.9, pnpm 11
-pnpm run doc-sync   # 16 governance gates green
-pnpm run test       # 344 specs
+pnpm run doc-sync   # expect all governance gates green
+pnpm run test       # expect the full spec suite green
 ```
 
 The tree has no build step, and nothing in it reads model credentials — no API key is needed.
