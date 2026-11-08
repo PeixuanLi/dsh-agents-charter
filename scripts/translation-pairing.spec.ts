@@ -411,6 +411,14 @@ describe('translation scope discovery', () => {
   ])('excludes non-source or non-README path %s', (file) => {
     expect(isTranslationScopeFile(file)).toBe(false)
   })
+
+  it('excludes only the reference appendix root, not reference-named paths elsewhere', () => {
+    expect(isTranslationScopeFile('reference/github/review-ownership/README.md')).toBe(false)
+    expect(isTranslationScopeFile('reference/README.md')).toBe(false)
+    expect(isTranslationScopeFile('reference/github/README.zh.md')).toBe(false)
+    expect(isTranslationScopeFile('docs/github/review-ownership/README.md')).toBe(true)
+    expect(isTranslationScopeFile('docs/reference/README.md')).toBe(true)
+  })
 })
 
 describe('translation structural signature', () => {

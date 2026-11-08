@@ -144,6 +144,7 @@ export const TRANSLATION_SCOPE_GLOB_EXCLUDES = [
   'apps/web/dist/**',
   '.artifacts/**',
   'python/sdk-runtime/src/deepseek_harness_runtime/runtime/**',
+  'reference/**',
   'vendor/**',
 ]
 
@@ -160,6 +161,7 @@ function isTranslationSourceExcluded(file: string): boolean {
 /** Whether one discovered Markdown or sidecar path belongs to the bilingual source corpus. */
 export function isTranslationScopeFile(file: string): boolean {
   return !file.startsWith('.agents/notes/archived/')
+    && !file.startsWith('reference/')
     && !isTranslationSourceExcluded(file) && (README_ARTIFACT.test(file)
     || ROOT_PAIRED_DOCUMENT_ARTIFACT.test(file)
     || file.startsWith('.agents/notes/')
