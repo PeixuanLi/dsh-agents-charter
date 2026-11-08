@@ -10,7 +10,7 @@ The `dsh-code-review` skill records failure modes that require reviewer judgment
 
 ## Proposal
 
-Periodic out-of-repo maintenance. A private tool, kept on the skill maintainer's machine rather than committed to this repository, runs against a clean full-history checkout at refreshed `origin/master`. The intended scheduler runs daily with a two-UTC-day overlap; manual runs accept another `--since` duration or repeated `--pr` arguments for an explicit set. The scan is idempotent against the current skill and stores no repository cursor. The only repository file changed by promotion is [.agents/skills/dsh-code-review/SKILL.md](../../../skills/dsh-code-review/SKILL.md); the draft PR lists the source feedback URLs or IDs and adoption evidence without exposing the private adapter logs.
+Periodic out-of-repo maintenance. A private tool, kept on the skill maintainer's machine rather than committed to this repository, runs against a clean full-history checkout at refreshed `origin/master`. The intended scheduler runs daily with a two-UTC-day overlap; manual runs accept another `--since` duration or repeated `--pr` arguments for an explicit set. The scan is idempotent against the current skill and stores no repository cursor. The only repository file changed by promotion is [.agents/skills/dsh-code-review/SKILL.md](../../../skills/code-review/SKILL.md); the draft PR lists the source feedback URLs or IDs and adoption evidence without exposing the private adapter logs.
 
 ```mermaid
 flowchart TD

@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-[lefthook.yml](../../../lefthook.yml) 把钩子保持得很窄——pre-commit 检查暂存的翻译配对记录、归档元数据、暂存 lint 与空白；pre-push 只运行一条 `pnpm run typecheck`——头部注释写明了分界：本地检查点保持快速，`doc-sync` 聚合拥有仓库级门禁矩阵。证据选择规则住在 [dsh-pre-push-checks skill（技能）](../../../.agents/skills/dsh-pre-push-checks/SKILL.md)：运行能对该回归失败的最窄检查，绝不手动重复已通过的检查；只有显式要求、诊断 CI 失败或变更宽到无法收敛时才完整演练。
+[lefthook.yml](../../../lefthook.yml) 把钩子保持得很窄——pre-commit 检查暂存的翻译配对记录、归档元数据、暂存 lint 与空白；pre-push 只运行一条 `pnpm run typecheck`——头部注释写明了分界：本地检查点保持快速，`doc-sync` 聚合拥有仓库级门禁矩阵。证据选择规则住在 [pre-push-checks skill（技能）](../../../.agents/skills/pre-push-checks/SKILL.md)：运行能对该回归失败的最窄检查，绝不手动重复已通过的检查；只有显式要求、诊断 CI 失败或变更宽到无法收敛时才完整演练。
 
 ## 执法
 

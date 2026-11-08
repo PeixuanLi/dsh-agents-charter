@@ -7,7 +7,7 @@ English | [中文](prose-hygiene.zh.md)
 
 ## Rule text
 
-The [dsh-prose-standard skill](../../../.agents/skills/dsh-prose-standard/SKILL.md) owns the standard: preserve the complete proposition, treat `contract`, `boundary`, and `shape` as terms to check before use rather than banned words, and keep a complete contract at the point of use with one home per explanation. The [dsh-trim-cot-leakage skill](../../../.agents/skills/dsh-trim-cot-leakage/SKILL.md) owns the one test: could a reader at HEAD, with no access to any session transcript, PR thread, or uncommitted draft, resolve every reference and verify every claim? Both skills are guidance applied at writing and review time; the machine-checked slice is the ambiguous origin label banned by convention (`prove` + `nance`, per AGENTS.md).
+The [prose-standard skill](../../../.agents/skills/prose-standard/SKILL.md) owns the standard: preserve the complete proposition, treat `contract`, `boundary`, and `shape` as terms to check before use rather than banned words, and keep a complete contract at the point of use with one home per explanation. The [dsh-trim-cot-leakage skill](../../../.agents/skills/dsh-trim-cot-leakage/SKILL.md) owns the one test: could a reader at HEAD, with no access to any session transcript, PR thread, or uncommitted draft, resolve every reference and verify every claim? Both skills are guidance applied at writing and review time; the machine-checked slice is the ambiguous origin label banned by convention (`prove` + `nance`, per AGENTS.md).
 
 ## Enforcement
 
@@ -23,7 +23,7 @@ Solo ✓ · Small ✓ · Medium ✓ · Large ✓
 
 ## Porting checklist
 
-- Adopt both skills with trigger-precise descriptions (`dsh-prose-standard`, `dsh-trim-cot-leakage`).
+- Adopt both skills with trigger-precise descriptions (`prose-standard`, `dsh-trim-cot-leakage`).
 - Sweep inherited prose once with the one test before trusting review to hold the line.
 - Wire the banned-label gate into CI: `pnpm run verify-concrete-terms`.
 - Re-run `pnpm run verify-concrete-terms` after every docs change.

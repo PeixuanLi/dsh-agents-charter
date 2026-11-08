@@ -10,7 +10,7 @@ Status: proposed
 
 ## 提案
 
-在仓库外定期维护。一项保存在 skill 维护者机器上、而不提交到本仓库的私有工具，会针对刷新至 `origin/master` 的干净完整历史 checkout 运行。预期的调度器每天运行，并使用两天的 UTC 重叠窗口；手动运行可以通过另一个 `--since` 时长或重复的 `--pr` 参数指定显式集合。扫描相对于当前 skill 是幂等的，不存储仓库游标。推广时唯一会变更的仓库文件是 [.agents/skills/dsh-code-review/SKILL.md](../../../skills/dsh-code-review/SKILL.md)；draft PR（Pull Request）列出源反馈 URL 或 ID 和采纳证据，不会公开私有适配器日志。
+在仓库外定期维护。一项保存在 skill 维护者机器上、而不提交到本仓库的私有工具，会针对刷新至 `origin/master` 的干净完整历史 checkout 运行。预期的调度器每天运行，并使用两天的 UTC 重叠窗口；手动运行可以通过另一个 `--since` 时长或重复的 `--pr` 参数指定显式集合。扫描相对于当前 skill 是幂等的，不存储仓库游标。推广时唯一会变更的仓库文件是 [.agents/skills/dsh-code-review/SKILL.md](../../../skills/code-review/SKILL.md)；draft PR（Pull Request）列出源反馈 URL 或 ID 和采纳证据，不会公开私有适配器日志。
 
 ```mermaid
 flowchart TD

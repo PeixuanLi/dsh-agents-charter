@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-[dsh-prose-standard skill（技能）](../../../.agents/skills/dsh-prose-standard/SKILL.md) 拥有标准本身：保全完整命题，把 `contract`、`boundary`、`shape` 当作使用前需要核对的词而不是禁词，在使用点保留完整约定，每个解释只有一个归属。[dsh-trim-cot-leakage skill](../../../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 拥有那一条判据：一位位于 HEAD、看不到任何会话记录、PR（Pull Request）线程或未提交草稿的读者，能否解析每个引用并核验每个论断？两个 skill 都是写作与评审时应用的指引；机器可查的部分是被约定禁用的模糊来源标签（AGENTS.md 中的 `prove` + `nance`）。
+[prose-standard skill（技能）](../../../.agents/skills/prose-standard/SKILL.md) 拥有标准本身：保全完整命题，把 `contract`、`boundary`、`shape` 当作使用前需要核对的词而不是禁词，在使用点保留完整约定，每个解释只有一个归属。[dsh-trim-cot-leakage skill](../../../.agents/skills/dsh-trim-cot-leakage/SKILL.md) 拥有那一条判据：一位位于 HEAD、看不到任何会话记录、PR（Pull Request）线程或未提交草稿的读者，能否解析每个引用并核验每个论断？两个 skill 都是写作与评审时应用的指引；机器可查的部分是被约定禁用的模糊来源标签（AGENTS.md 中的 `prove` + `nance`）。
 
 ## 执法
 
@@ -23,7 +23,7 @@ Solo ✓ · Small ✓ · Medium ✓ · Large ✓
 
 ## 移植清单
 
-- 以精确触发条件的 description 采纳两个 skill（`dsh-prose-standard`、`dsh-trim-cot-leakage`）。
+- 以精确触发条件的 description 采纳两个 skill（`prose-standard`、`dsh-trim-cot-leakage`）。
 - 用那条判据对继承文本做一次清扫，再把防线交给评审。
 - 把被禁标签门禁接进 CI：`pnpm run verify-concrete-terms`。
 - 每次文档变更后重跑 `pnpm run verify-concrete-terms`。

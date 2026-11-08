@@ -11,7 +11,7 @@ Root [AGENTS.md](../../../AGENTS.md) states the convention under "Choose PR hist
 
 ## Enforcement
 
-`Convention — the pre-push checklist owns stack hygiene`. The drift surface is a pushed rewrite, which happens between commands no CI gate wraps; auditing outgoing stacks against the checklist is the natural gate when drift is first observed, and the [dsh-pre-push-checks skill](../../../.agents/skills/dsh-pre-push-checks/SKILL.md) states the sequence — lease-protected rewrites, sync followed immediately by post-sync validation, and no readiness claim before the evidence passes.
+`Convention — the pre-push checklist owns stack hygiene`. The drift surface is a pushed rewrite, which happens between commands no CI gate wraps; auditing outgoing stacks against the checklist is the natural gate when drift is first observed, and the [pre-push-checks skill](../../../.agents/skills/pre-push-checks/SKILL.md) states the sequence — lease-protected rewrites, sync followed immediately by post-sync validation, and no readiness claim before the evidence passes.
 
 ## Cost and prerequisites
 

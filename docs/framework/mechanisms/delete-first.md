@@ -11,7 +11,7 @@ English | [中文](delete-first.zh.md)
 
 ## Enforcement
 
-`Convention — the archive gate audits what remains, not what was deleted`. `pnpm run verify-archived-agent-notes` checks whatever the team chose to keep; the deletion itself is review judgment, calibrated by the [dsh-archive-agent-notes skill](../../../.agents/skills/dsh-archive-agent-notes/SKILL.md).
+`Convention — the archive gate audits what remains, not what was deleted`. `pnpm run verify-archived-agent-notes` checks whatever the team chose to keep; the deletion itself is review judgment, calibrated by the [archive-agent-notes skill](../../../.agents/skills/archive-agent-notes/SKILL.md).
 
 ## Cost and prerequisites
 

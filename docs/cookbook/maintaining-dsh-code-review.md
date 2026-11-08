@@ -2,7 +2,7 @@
 
 English | [中文](maintaining-dsh-code-review.zh.md)
 
-The [`dsh-code-review`](../../.agents/skills/dsh-code-review/SKILL.md) skill is kept current by a single designated operator running a private periodic maintenance tool. This cookbook is the entry point for that operator — and for anyone taking over the role — and for repo contributors who want to understand why skill updates arrive as small periodic PRs rather than one-off audits. The workflow itself is specified in the [human-review skill-maintenance Agent Note](../../.agents/notes/proposed/process/2026-07-13-human-review-skill-maintenance.md).
+The [`code-review`](../../.agents/skills/code-review/SKILL.md) skill is kept current by a single designated operator running a private periodic maintenance tool. This cookbook is the entry point for that operator — and for anyone taking over the role — and for repo contributors who want to understand why skill updates arrive as small periodic PRs rather than one-off audits. The workflow itself is specified in the [human-review skill-maintenance Agent Note](../../.agents/notes/proposed/process/2026-07-13-human-review-skill-maintenance.md).
 
 ## What the maintainer receives
 
@@ -55,7 +55,7 @@ That is the common case after every nonempty classification stage has produced a
 
 The mechanism lives on one machine. Interruptions the operator handles as they arise:
 
-- **Daily run missed.** The two-day overlap window catches one skipped day automatically; longer gaps recover by running the wrapper manually with `DSH_CODE_REVIEW_SINCE=<Nd>`. Overlapping windows are idempotent: guidance already in the current skill is classified `covered` and does not re-enter as a candidate.
+- **Daily run missed.** The two-day overlap window catches one skipped day automatically; longer gaps recover by running the wrapper manually with `ACF_CODE_REVIEW_SINCE=<Nd>`. Overlapping windows are idempotent: guidance already in the current skill is classified `covered` and does not re-enter as a candidate.
 - **Adapter provider outage.** The tool refuses to run when the two reviewer commands resolve to byte-identical executables. A single batch whose adapter response fails schema or id validation is failed closed at the batch level (every item in the batch marked unclear) and the run continues; the raw output is preserved for debugging. If either adapter produces no valid result for any nonempty batch in an operation, the run fails, writes a failure record, and notifies the operator; it never collapses a total-provider outage into "no candidate."
 - **Handoff to another maintainer.** Open a follow-up Agent Note that supersedes the current one: either move the mechanism into the repository or record the new operator's private setup. Do not silently transfer the tool — the "single-maintainer bus factor" in the Agent Note's Risks section is the reason the handoff needs a documented decision.
 

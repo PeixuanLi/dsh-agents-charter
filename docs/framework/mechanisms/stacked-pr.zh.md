@@ -11,7 +11,7 @@
 
 ## 执法
 
-`Convention — the pre-push checklist owns stack hygiene`。漂移面是一次已推送的重写，它发生在任何 CI 门禁能包裹的命令之外；漂移首次出现时，对照清单审计出站 stack 就是自然的门禁，[dsh-pre-push-checks skill](../../../.agents/skills/dsh-pre-push-checks/SKILL.md) 写明了顺序——带租约的重写、sync 后立即补验证、证据通过前不得声称就绪。
+`Convention — the pre-push checklist owns stack hygiene`。漂移面是一次已推送的重写，它发生在任何 CI 门禁能包裹的命令之外；漂移首次出现时，对照清单审计出站 stack 就是自然的门禁，[pre-push-checks skill](../../../.agents/skills/pre-push-checks/SKILL.md) 写明了顺序——带租约的重写、sync 后立即补验证、证据通过前不得声称就绪。
 
 ## 成本与前提
 

@@ -1,15 +1,15 @@
 ---
-name: dsh-archive-agent-notes
-description: Use when adding, auditing, pruning, archiving, restoring, or reviewing Agent Notes in deepseek-harness; checks every new note for superseded active records, deletes small UI and purely mechanical records, classifies other implemented notes by future decision value, deletes rejected notes that no longer prevent a tempting fallacy, and applies the frozen archived/{kind} triplet and manifest rules.
+name: archive-agent-notes
+description: Use when adding, auditing, pruning, archiving, restoring, or reviewing Agent Notes in this repository; checks every new note for superseded active records, deletes small UI and purely mechanical records, classifies other implemented notes by future decision value, deletes rejected notes that no longer prevent a tempting fallacy, and applies the frozen archived/{kind} triplet and manifest rules.
 ---
 
-# Archive DeepSeek Harness Agent Notes
+# Archive Agent Notes
 
 Reduce the active decision corpus without erasing history that can still guide work. Judge every note semantically; word count and age are discovery aids, never archive criteria.
 
 ## Read the contracts
 
-Read [the Agent Note rules](../../notes/README.md), [the archive instructions](../../notes/archived/AGENTS.md), and the applicable active lifecycle instructions before classifying. Use current code, configuration, package docs, generated catalogs, newer Agent Notes, and inbound links to establish whether a rationale still owns or constrains anything.
+Read [the Agent Note rules](../../notes/README.md), [the archive instructions](../../notes/archived/AGENTS.md), and the applicable active lifecycle instructions before classifying. Use current code, configuration, docs, generated catalogs, newer Agent Notes, and inbound links to establish whether a rationale still owns or constrains anything.
 
 ## Check supersession when adding a note
 
@@ -63,6 +63,6 @@ After the triplet is sealed, never edit, move, translate, reformat, or delete it
 
 ## Validate and report
 
-Run the archive verifier's focused test, `pnpm run verify-archived-agent-notes`, `pnpm run doc-sync`, `pnpm run lint`, and `git diff --check`; select any additional evidence through [dsh-pre-push-checks](../dsh-pre-push-checks/SKILL.md).
+Run the archive verifier's focused test, `pnpm run verify-archived-agent-notes`, `pnpm run doc-sync`, `pnpm run lint`, and `git diff --check`; select any additional evidence through [pre-push-checks](../pre-push-checks/SKILL.md).
 
 Report active implemented notes kept, implemented notes deleted or archived, rejected notes kept/deleted, proposed notes rejected if any, and every genuinely borderline case with its word count and chosen outcome. Do not claim archived outbound links are valid: the archive verifier intentionally never checks them.

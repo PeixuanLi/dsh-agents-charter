@@ -11,7 +11,7 @@
 
 ## 执法
 
-`Convention — the archive gate audits what remains, not what was deleted`。`pnpm run verify-archived-agent-notes` 检查团队选择保留的部分；删除本身是评审判断，由 [dsh-archive-agent-notes skill](../../../.agents/skills/dsh-archive-agent-notes/SKILL.md) 校准。
+`Convention — the archive gate audits what remains, not what was deleted`。`pnpm run verify-archived-agent-notes` 检查团队选择保留的部分；删除本身是评审判断，由 [archive-agent-notes skill](../../../.agents/skills/archive-agent-notes/SKILL.md) 校准。
 
 ## 成本与前提
 

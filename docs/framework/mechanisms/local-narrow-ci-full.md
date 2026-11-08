@@ -7,7 +7,7 @@ English | [中文](local-narrow-ci-full.zh.md)
 
 ## Rule text
 
-[lefthook.yml](../../../lefthook.yml) keeps the hooks narrow — pre-commit checks staged translation-pairing records, archive metadata, staged lint, and whitespace; pre-push runs one typecheck — and its header comment states the split: keep local checkpoints fast, the `doc-sync` aggregate owns the repository-wide gate matrix. The evidence-selection rule lives in the [dsh-pre-push-checks skill](../../../.agents/skills/dsh-pre-push-checks/SKILL.md): run the narrowest check that would fail for the regression, never manually repeat a passing check, and rehearse the full suite only on explicit request, for CI diagnosis, or for an irreducibly repository-wide change.
+[lefthook.yml](../../../lefthook.yml) keeps the hooks narrow — pre-commit checks staged translation-pairing records, archive metadata, staged lint, and whitespace; pre-push runs one typecheck — and its header comment states the split: keep local checkpoints fast, the `doc-sync` aggregate owns the repository-wide gate matrix. The evidence-selection rule lives in the [pre-push-checks skill](../../../.agents/skills/pre-push-checks/SKILL.md): run the narrowest check that would fail for the regression, never manually repeat a passing check, and rehearse the full suite only on explicit request, for CI diagnosis, or for an irreducibly repository-wide change.
 
 ## Enforcement
 

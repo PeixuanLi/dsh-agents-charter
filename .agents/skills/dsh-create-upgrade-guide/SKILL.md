@@ -33,7 +33,7 @@ While the root version is unchanged, the current version directory describes the
 
 ## Format
 
-Start from the [upgrade-guide template](../dsh-doc/templates/upgrade-guide.md). `verify-upgrade-guides` enforces:
+Start from the [upgrade-guide template](../doc/templates/upgrade-guide.md). `verify-upgrade-guides` enforces:
 
 - frontmatter with exactly `kind: upgrade-guide` and a one-sentence `description` naming what breaks; add a key only together with its gate check, then backfill every guide;
 - one `#` title, then exactly the `## Change` and `## Migration` sections in `guide.md`, and `## 变更` and `## 迁移` in `guide.zh.md`, in that order;
@@ -43,7 +43,7 @@ Start from the [upgrade-guide template](../dsh-doc/templates/upgrade-guide.md). 
 
 When a guide needs more than 500 words, the extra text belongs elsewhere: link source files or symbols instead of restating code, move rationale into an [Agent Note](../../notes/README.md), and turn repeated mechanical steps into a script or `dsh` command that the guide invokes.
 
-Follow [dsh-prose-standard](../dsh-prose-standard/SKILL.md). Write the Chinese counterpart in the same change under the [bilingual pairing rules](../../../docs/AGENTS.md), then record the pair with `pnpm run verify-translation-pairing --write docs/upgrade-guide/v<version>/<item>/guide.md`.
+Follow [prose-standard](../prose-standard/SKILL.md). Write the Chinese counterpart in the same change under the [bilingual pairing rules](../../../docs/AGENTS.md), then record the pair with `pnpm run verify-translation-pairing --write docs/upgrade-guide/v<version>/<item>/guide.md`.
 
 ## Verify
 
