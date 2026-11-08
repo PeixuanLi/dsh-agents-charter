@@ -5,6 +5,8 @@ disable-model-invocation: true
 user-invocable: true
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # Translating DeepSeek-Harness docs
 
 ## Invocation boundary

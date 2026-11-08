@@ -4,6 +4,8 @@ description: Use when creating a deepseek-harness pull request, or when updating
 user-invocable: false
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # Writing PR descriptions
 
 This skill defines what a deepseek-harness PR description contains, how to write it, and when to update it. The PR template (`../../../.github/pull_request_template.md`) supplies only the section headings and placeholders; this skill owns the requirements for each section. Every PR description follows this skill, including PRs created with `gh pr create --body-file`, which skips the template.

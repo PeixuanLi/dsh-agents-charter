@@ -3,6 +3,8 @@ name: dsh-error-handling
 description: Apply error-handling principles when designing or reviewing failures, recovery, retries, background tasks, and user-visible error reports.
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # DeepSeek Harness Error Handling
 
 Define failures, their owners, and what remains safe after failure.

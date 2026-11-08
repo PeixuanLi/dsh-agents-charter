@@ -3,6 +3,8 @@ name: dsh-responsive-ui
 description: Use when designing, implementing, or reviewing responsive client layouts, mobile and touch detection, text truncation, title wrapping, icon-only controls, mobile hover, tooltips and keyboard behavior, and focus during width changes in DeepSeek Harness.
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # Responsive client UI
 
 For visual reviews, select the [impact scope](../../../docs/cookbook/reviewing-ui-design.md#review-scope), then apply these behavioral requirements and the UI review baseline (`../../../docs/ui-design-review-cases.md#review-baseline`). Compare affected wrapping and layout relationships in the whole page or modal's context while preserving drafts, focus and action access. Inspect all regions for an explicit full-interface review. Examples do not define coverage; fitting the viewport alone is insufficient.

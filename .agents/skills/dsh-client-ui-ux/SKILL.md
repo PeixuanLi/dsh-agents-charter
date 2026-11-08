@@ -3,6 +3,8 @@ name: dsh-client-ui-ux
 description: "Design and review DSH user-visible UI: alignment, spacing, icons, visual foundation, geometry and interaction. Use before UI changes in client, experimental and app packages; verify affected rendered results before handoff."
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # DeepSeek Harness UI development
 
 Use this skill as the entry point for UI design and review. It owns the workflow, visual foundation, geometry and interaction guidance; alignment, spacing and icon details live in its references below. Load only the references relevant to the task; examples explain judgment, not coverage.

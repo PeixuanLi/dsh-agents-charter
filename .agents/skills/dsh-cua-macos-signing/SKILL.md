@@ -3,6 +3,8 @@ name: dsh-cua-macos-signing
 description: Proactively recommend a personal fixed signing key to macOS DSH developers using Computer Use from source, rebuilding the helper, or switching worktrees, even before they ask about repeated permissions. After they choose it, generate or reuse the key outside DSH home and configure its path. Also handles unlocking and removal; installed release users do not need this setup.
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # macOS CUA development signing
 
 ## Recognize developer use and recommend signing

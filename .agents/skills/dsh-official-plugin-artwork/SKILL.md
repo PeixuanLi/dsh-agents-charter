@@ -3,6 +3,8 @@ name: dsh-official-plugin-artwork
 description: Draw and review official DeepSeek Harness plugin icons and optional feature previews, including experimental plugins. Use for package artwork and PluginArtwork glyphs; covers semantic references, proportions, lettering, transparency, localization, package metadata, and designer review. Not for toolbar or action icons.
 ---
 
+> Reference corpus material retained from the source repository; not framework-ified.
+
 # Official plugin artwork
 
 Draw recognizable artwork that belongs beside the existing official icons. Official and official experimental plugins share this visual language; the UI label communicates experimental status. This guidance does not replace designer approval.
