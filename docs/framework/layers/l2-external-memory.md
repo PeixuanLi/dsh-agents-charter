@@ -11,7 +11,7 @@ External memory replaces the tacit channel of asking a person or rereading a con
 - [mechanisms/note-alternatives.md](../mechanisms/note-alternatives.md) — the mandatory `Alternatives considered` section: a decision record that omits what it beat is rejected because it invites re-litigation
 - [mechanisms/note-freshness.md](../mechanisms/note-freshness.md) — the freshness obligation: note facts update in the same change as the code they describe, and a changed decision means a new note with cross-links, never appended history
 - [mechanisms/archive-freeze.md](../mechanisms/archive-freeze.md) — archived notes are frozen: fingerprints enter an append-only manifest, and archived content is never edited or cited as current authority
-- [mechanisms/delete-first.md](../mechanisms/delete-first.md) — deletion as routine maintenance: mechanical edits are deleted outright, superseded notes are deleted at merge, and only historically valuable notes are archived
+- [mechanisms/delete-first.md](../mechanisms/delete-first.md) — deletion as routine maintenance: mechanical edits are deleted outright, superseded notes are consolidated into their successor and deleted, and only historically valuable notes are archived
 
 ## Porting analysis
 

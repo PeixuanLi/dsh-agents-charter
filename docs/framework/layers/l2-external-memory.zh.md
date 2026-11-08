@@ -11,7 +11,7 @@
 - [mechanisms/note-alternatives.md](../mechanisms/note-alternatives.zh.md) — 强制的 `Alternatives considered` 小节：不写打败过什么的决策记录会被拒绝，因为它招致重新翻案
 - [mechanisms/note-freshness.md](../mechanisms/note-freshness.zh.md) — 保鲜义务：笔记事实与所述代码在同一变更中更新；改变决策意味着新笔记加互链，而不是追加变更史
 - [mechanisms/archive-freeze.md](../mechanisms/archive-freeze.zh.md) — 归档即冻结：指纹进入仅追加的 manifest（元数据清单），归档内容永不修改，也不作为现行权威引用
-- [mechanisms/delete-first.md](../mechanisms/delete-first.zh.md) — 删除是常规运维：机械改动直接删除，被取代的笔记在合并时删除，只有具历史价值的内容才归档
+- [mechanisms/delete-first.md](../mechanisms/delete-first.zh.md) — 删除是常规运维：机械改动直接删除，被取代的笔记并入承接笔记后删除，只有具历史价值的内容才归档
 
 ## 移植分析
 
