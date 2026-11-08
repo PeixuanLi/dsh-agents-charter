@@ -1,7 +1,14 @@
 {
-  "AGENTS.md": 2080,
-  "docs/AGENTS.md": 1430,
+  "AGENTS.md": 1170,
+  "docs/AGENTS.md": 1260,
   "docs/architecture.md": 2420,
   "docs/cordis-primer.md": 605,
-  "docs/testing.md": 1350
+  "docs/testing.md": 1350,
+  "docs/framework/README.md": 310,
+  "docs/framework/paradigm.md": 410,
+  "docs/framework/layers/l1-role-separation.md": 230,
+  "docs/framework/layers/l2-external-memory.md": 350,
+  "docs/framework/layers/l3-machine-verification.md": 300,
+  "docs/framework/layers/l4-instruction-layering.md": 250,
+  "docs/framework/layers/l5-process-automation.md": 250
 }
