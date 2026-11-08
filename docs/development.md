@@ -2,7 +2,7 @@
 
 English | [中文](development.zh.md)
 
-The daily workflow of this governance corpus: install dependencies once, edit documents and gate scripts, run the checks that cover the change, and commit through the hooks. The setup tutorial takes a new contributor from prerequisites to a checked checkout; the reference sections that follow own the TypeScript layout, the environment variables, the Git integrations, and the daily command set. [testing.md](testing.md) owns evidence selection; root [AGENTS.md](../AGENTS.md) owns the standing orders.
+The daily workflow of this governance corpus: install dependencies once, edit documents and gate scripts, run the checks that cover the change, and commit through the hooks. The setup tutorial takes a new contributor from prerequisites to a verified checkout; the reference sections that follow own the TypeScript layout, the environment variables, the Git integrations, the daily command set, and the TODO-tag semantics. [testing.md](testing.md) owns evidence selection; [AGENTS.md](AGENTS.md) owns the documentation standard; root [AGENTS.md](../AGENTS.md) owns the standing orders.
 
 ## Setup tutorial
 
@@ -34,7 +34,7 @@ Run `pnpm run typecheck` once on a fresh clone; setup is complete when it exits 
 
 This tree has one TypeScript program. `tsconfig.json` includes `scripts/**/*.ts` and nothing else, compiles under `strict` with `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`, and never emits: scripts run through tsx and their specs through vitest, so there is no build output, no project references, and no source/artifact plane split. Each gate script's Vitest spec is colocated beside it as `*.spec.ts`.
 
-The multi-package compiler-face layout — the Host and Client aggregates and the project-reference graph that ties them — is originating-harness reference: it describes the upstream harness this corpus derives from, not this tree. The pages linking here ([adding a package](cookbook/adding-a-package.md), [package surface rules](defensive-patterns/package-surface.md), and the [Typert Remote note](../.agents/notes/implemented/architecture/2026-08-02-typert-remote-method-calls.md)) document that layout; this section is its anchor point in this corpus.
+The multi-package compiler-face layout — the Host and Client aggregates and the project-reference graph that ties them — is originating-harness reference: it describes the upstream harness this corpus derives from, not this tree. The pages linking here — including [adding a package](cookbook/adding-a-package.md), [adding a vendored package](cookbook/adding-a-vendored-package.md), and the [Typert Remote note](../.agents/notes/implemented/architecture/2026-08-02-typert-remote-method-calls.md) — document that layout; this section is its anchor point in this corpus.
 
 ## Environment variables
 
@@ -81,4 +81,4 @@ Pick the tag that matches the urgency so anyone scanning the code can tell a rel
 
 ## What has no lane here
 
-This tree has no build, coverage, or CI lanes: no bundling, no coverage percentage, no platform matrix. Those lanes belong to the upstream harness whose layout the reference pages describe, or to the adopting project — the [L3 porting analysis](framework/layers/l3-machine-verification.md) prices them. The gates plus the Vitest suite are this corpus's full verification surface ([tiers and evidence](testing.md)).
+This tree has no build, coverage, or CI lanes: no bundling, no coverage percentage, no platform matrix. Those lanes belong to the upstream harness whose layout the reference pages describe, or to the adopting project — the [L3 porting analysis](framework/layers/l3-machine-verification.md) prices them. The verification surface that remains is [testing.md](testing.md)'s tiers and evidence.

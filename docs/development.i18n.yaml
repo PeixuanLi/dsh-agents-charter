@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/development.md
 /development-guide:
-  en: 7893a6d381813ca3
-  zh: ab2943da1ec451e9
+  en: 31caa6703424cf5f
+  zh: bf89c1c2724aea89
 /development-guide/setup-tutorial:
   en: 5207d17725c07a27
   zh: 258884c4300ac63a
@@ -13,22 +13,22 @@
   zh: df0bccf8b56edce3
 /development-guide/setup-tutorial/first-time-setup:
   en: f4ce342c9f809fa6
-  zh: cd42b0482fba8493
+  zh: aa80eb18a779aa21
 /development-guide/typescript-project-layout:
-  en: ed5bd4e452006d7d
-  zh: d97dd5383a58fe1d
+  en: 744d5fe39ae6f2e7
+  zh: ef40e44695306ab7
 /development-guide/environment-variables:
   en: 6d65c90880cbe7b5
-  zh: 3be9da2a2134a495
+  zh: e62b4fad05c95020
 /development-guide/git-integrations:
   en: a249ca584e49ffaa
-  zh: 930f453df59d87f7
+  zh: 5f6166385187de62
 /development-guide/daily-commands:
   en: 1125278abe7e4e78
-  zh: a53c9d87bd474224
+  zh: c01a97ebb4a6c45c
 /development-guide/todo-markers:
   en: b0ecda6b0d5fb0f1
   zh: 93e66f7d95ee6212
 /development-guide/what-has-no-lane-here:
-  en: 38c79a4e48d5e34e
-  zh: 16e50e775640fb7b
+  en: dcbde56d379c126c
+  zh: b722d674f5f19663
