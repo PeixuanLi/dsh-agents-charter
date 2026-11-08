@@ -7,11 +7,11 @@
 
 ## 规则正文
 
-纳入预算的文件及其上限记录在 `scripts/doc-budgets.manifest.json` 中。[AGENTS.md](../../../AGENTS.md#editing-these-instructions) 拥有编辑规则：清晰度允许时就压缩；只有当必需内容确实需要更多空间时才上调上限，并在 PR（Pull Request）中记录理由。默认方向朝下：文档每次变短，上限随之收紧，收紧时保留约 5% 的余量——这是 manifest（元数据清单）容许的松弛量；向上移动只走上文那条有理由的上调。当前 manifest 预算常设文档：指令文件（根目录与 docs/）、架构概述、Cordis 入门、测试策略，以及框架自身页面（README、范式、profile 与五个层章节）。
+纳入预算的文件及其上限记录在 `scripts/doc-budgets.manifest.json` 中。[AGENTS.md](../../../AGENTS.md#editing-these-instructions) 拥有编辑规则：清晰度允许时就压缩；只有当必需内容确实需要更多空间时才上调上限，并在 PR（Pull Request）中记录理由。默认方向朝下：文档每次变短，上限随之收紧，收紧时保留至少 5% 的余量，由 `verify-doc-budgets` 强制执行；向上移动只走上文那条有理由的上调。当前 manifest 预算常设文档：指令文件（根目录与 docs/）、架构概述、Cordis 入门、测试策略，以及框架自身页面（README、范式、profile 与五个层章节）。
 
 ## 执法
 
-`pnpm run verify-doc-budgets`（[scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)）持有机械的一半：按 `wc -w` 口径统计每份在册文件的字数与上限对比，超过上限即失败；文件缺失同样失败，因此重命名或删除预算内文档必须在同一变更中更新 manifest。`--list` 报告用量与上限的对比。约定的一半——棘轮方向与上调理由——在评审时守住，不在门禁里。
+`pnpm run verify-doc-budgets`（[scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)）持有机械的一半：按 `wc -w` 口径统计每份在册文件的字数与上限对比，超过上限或余量不足 5% 即失败；文件缺失同样失败，因此重命名或删除预算内文档必须在同一变更中更新 manifest。`--list` 报告用量与上限的对比。约定的一半——棘轮方向与上调理由——在评审时守住，不在门禁里。
 
 ## 成本与前提
 

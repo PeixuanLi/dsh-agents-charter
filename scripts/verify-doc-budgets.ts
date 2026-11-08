@@ -21,14 +21,28 @@ const HEADROOM_FACTOR = 1.05
 /** Absorbs binary representation error in `words * HEADROOM_FACTOR` comparisons. */
 const HEADROOM_EPSILON = 1e-9
 
-/** `wc -w` equivalent: count whitespace-delimited tokens. */
+/** `--list` status column width; every marker pads to it so count columns align. */
+const STATUS_WIDTH = 6
+
+/** Render one `--list` row with fixed-width status, word-count, and ceiling columns. */
+function formatRow(status: string, words: string, ceiling: string, path: string): string {
+  return `${status.padEnd(STATUS_WIDTH)}${words.padStart(6)} / ${ceiling.padEnd(6)} ${path}`
+}
+
+/**
+ * `wc -w` equivalent: count whitespace-delimited tokens.
+ * @param text - document text to measure.
+ * @returns the number of whitespace-delimited tokens.
+ */
 export function countWords(text: string): number {
   return text.split(/\s+/).filter(Boolean).length
 }
 
 /** Budget evaluation over a manifest: display rows and gate failures. */
 export interface DocBudgetReport {
+  /** One `--list` display row per manifest entry, in manifest order. */
   rows: string[]
+  /** One failure message per violated budget; empty when every budget passes. */
   failures: string[]
 }
 
@@ -47,13 +61,13 @@ export function evaluateDocBudgets(
 
   for (const [path, ceiling] of Object.entries(manifest)) {
     if (!Number.isInteger(ceiling) || ceiling <= 0) {
-      rows.push(`BAD   ${'—'.padStart(6)} / ${String(ceiling).padEnd(6)} ${path}`)
+      rows.push(formatRow('BAD', '—', String(ceiling), path))
       failures.push(`${path}: ceiling must be a positive integer, got ${ceiling}`)
       continue
     }
     const text = readBudgeted(path)
     if (text === undefined) {
-      rows.push(`MISS  ${'—'.padStart(6)} / ${String(ceiling).padEnd(6)} ${path}`)
+      rows.push(formatRow('MISS', '—', String(ceiling), path))
       failures.push(`${path}: budgeted file does not exist (renamed or deleted? update scripts/doc-budgets.manifest.json in the same change)`)
       continue
     }
@@ -61,7 +75,7 @@ export function evaluateDocBudgets(
     const minimum = Math.ceil(words * HEADROOM_FACTOR)
     const withinCeiling = words <= ceiling
     const hasHeadroom = ceiling + HEADROOM_EPSILON >= words * HEADROOM_FACTOR
-    rows.push(`${!withinCeiling ? 'OVER' : hasHeadroom ? 'ok  ' : 'TIGHT'}  ${String(words).padStart(6)} / ${String(ceiling).padEnd(6)} ${path}`)
+    rows.push(formatRow(!withinCeiling ? 'OVER' : hasHeadroom ? 'ok' : 'TIGHT', String(words), String(ceiling), path))
     if (!withinCeiling) {
       failures.push(`${path}: ${words} words exceeds the ${ceiling}-word ceiling — relocate or condense per docs/AGENTS.md (raising the ceiling requires justification in the PR)`)
     } else if (!hasHeadroom) {

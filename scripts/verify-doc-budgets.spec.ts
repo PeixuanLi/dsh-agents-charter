@@ -20,13 +20,13 @@ describe('documentation budget evaluation', () => {
   it('accepts a document within ceiling with at least 5% headroom', () => {
     const report = evaluate({ 'docs/guide.md': documentOf(100) }, { 'docs/guide.md': 120 })
     expect(report.failures).toEqual([])
-    expect(report.rows[0]).toMatch(/^ok\s+100 \/ 120\s+docs\/guide\.md$/)
+    expect(report.rows).toEqual(['ok       100 / 120    docs/guide.md'])
   })
 
   it('accepts a ceiling at exactly 5% headroom', () => {
     const report = evaluate({ 'docs/guide.md': documentOf(100) }, { 'docs/guide.md': 105 })
     expect(report.failures).toEqual([])
-    expect(report.rows[0]).toMatch(/^ok\s+100 \/ 105\s+docs\/guide\.md$/)
+    expect(report.rows).toEqual(['ok       100 / 105    docs/guide.md'])
   })
 
   it('fails a within-ceiling budget that leaves under 5% headroom', () => {
@@ -34,7 +34,7 @@ describe('documentation budget evaluation', () => {
     expect(report.failures).toEqual([
       'docs/guide.md: 103-word ceiling leaves under 5% headroom at 100 words (minimum 105) — raise the ceiling to the justified budget per docs/AGENTS.md',
     ])
-    expect(report.rows[0]).toMatch(/^TIGHT\s+100 \/ 103\s+docs\/guide\.md$/)
+    expect(report.rows).toEqual(['TIGHT    100 / 103    docs/guide.md'])
   })
 
   it('fails an over-ceiling document with the relocation-first message alone', () => {
@@ -42,6 +42,7 @@ describe('documentation budget evaluation', () => {
     expect(report.failures).toEqual([
       'docs/guide.md: 100 words exceeds the 90-word ceiling — relocate or condense per docs/AGENTS.md (raising the ceiling requires justification in the PR)',
     ])
+    expect(report.rows).toEqual(['OVER     100 / 90     docs/guide.md'])
   })
 
   it('fails a missing budgeted file', () => {
@@ -49,12 +50,14 @@ describe('documentation budget evaluation', () => {
     expect(report.failures).toEqual([
       'docs/gone.md: budgeted file does not exist (renamed or deleted? update scripts/doc-budgets.manifest.json in the same change)',
     ])
+    expect(report.rows).toEqual(['MISS       — / 100    docs/gone.md'])
   })
 
-  it.each([0, -10])('fails a non-positive ceiling %s', (ceiling) => {
+  it.each([0, -10, 12.5])('fails a non-positive or non-integer ceiling %s', (ceiling) => {
     const report = evaluate({ 'docs/guide.md': documentOf(100) }, { 'docs/guide.md': ceiling })
     expect(report.failures).toEqual([
       `docs/guide.md: ceiling must be a positive integer, got ${ceiling}`,
     ])
+    expect(report.rows).toEqual([`BAD        — / ${String(ceiling).padEnd(6)} docs/guide.md`])
   })
 })

@@ -7,11 +7,11 @@ English | [中文](doc-budget-ratchet.zh.md)
 
 ## Rule text
 
-The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification recorded in the PR. Down is the default direction: a ceiling tightens whenever its document shrinks, keeping roughly 5% headroom — the slack the manifest tolerates; upward moves use only the justified raise above. The manifest budgets the standing docs: the instruction files (root and docs/), the architecture overview, the Cordis primer, the testing policy, and the framework's own pages (README, paradigm, profiles, and the five layer chapters).
+The budgeted files and their ceilings live in `scripts/doc-budgets.manifest.json`. [AGENTS.md](../../../AGENTS.md#editing-these-instructions) owns the editing rule: condense when clarity survives; raise a ceiling only when the required content genuinely needs more space, with the justification recorded in the PR. Down is the default direction: a ceiling tightens whenever its document shrinks, keeping at least 5% headroom, which `verify-doc-budgets` enforces; upward moves use only the justified raise above. The manifest budgets the standing docs: the instruction files (root and docs/), the architecture overview, the Cordis primer, the testing policy, and the framework's own pages (README, paradigm, profiles, and the five layer chapters).
 
 ## Enforcement
 
-`pnpm run verify-doc-budgets` ([scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)) holds the mechanical half: word count against ceiling for each listed file (`wc -w` style), failing any file over ceiling; a missing file fails too, so renaming or deleting a budgeted doc must update the manifest in the same change. `--list` reports usage against ceiling. The convention half — ratchet direction and raise justification — holds at review, not in the gate.
+`pnpm run verify-doc-budgets` ([scripts/verify-doc-budgets.ts](../../../scripts/verify-doc-budgets.ts)) holds the mechanical half: word count against ceiling for each listed file (`wc -w` style), failing any file over ceiling and any ceiling with under 5% headroom over its document; a missing file fails too, so renaming or deleting a budgeted doc must update the manifest in the same change. `--list` reports usage against ceiling. The convention half — ratchet direction and raise justification — holds at review, not in the gate.
 
 ## Cost and prerequisites
 
