@@ -7,7 +7,7 @@ English | [中文](gate-aggregate.zh.md)
 
 ## Rule text
 
-Package scripts own the public aggregate names; the runner [scripts/run-gates.ts](../../../scripts/run-gates.ts) owns what executes under them: validated dependency graphs, environment-selected scheduling, and process diagnostics. The two aggregates are `doc-sync`, the full documentation matrix, and `doc-quick`, its build-free subset exposed as `pnpm run test:docs`. Each gate declares its ordering with `needs`/`after` dependency edges; worker count is bounded — a default from available parallelism, overridden through `DSH_GATE_CONCURRENCY`; and `DSH_GATE_FAIL_FAST=1` stops the aggregate at the first blocking failure, terminating running children and tearing down each process tree, not just the direct child.
+Package scripts own the public aggregate names; the runner [scripts/run-gates.ts](../../../scripts/run-gates.ts) owns what executes under them: validated dependency graphs, environment-selected scheduling, and process diagnostics. The two aggregates are `doc-sync`, the full documentation matrix, and `doc-quick`, its build-free subset exposed as `pnpm run test:docs`. Each gate declares its ordering with `needs`/`after` dependency edges; worker count is bounded — a default from available parallelism, overridden through `ACF_GATE_CONCURRENCY`; and `ACF_GATE_FAIL_FAST=1` stops the aggregate at the first blocking failure, terminating running children and tearing down each process tree, not just the direct child.
 
 ## Enforcement
 
@@ -25,7 +25,7 @@ Solo ✗ · Small ✓ · Medium ✓ · Large ✓
 
 - Name the aggregate as a package script; the runner owns the graph, never an ad-hoc shell chain.
 - Declare gate ordering as `needs`/`after` edges instead of launch order by luck.
-- Keep concurrency bounded: a worker-cap default with an override knob (`DSH_GATE_CONCURRENCY`).
+- Keep concurrency bounded: a worker-cap default with an override knob (`ACF_GATE_CONCURRENCY`).
 - Wire fail-fast with signal forwarding so the first blocking failure kills the whole process tree.
 - Keep the runner under unit test; scheduling and teardown are code with regressions.
 - Verify: `pnpm run doc-sync`.

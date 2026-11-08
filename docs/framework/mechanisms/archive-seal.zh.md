@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-归档格式、三件套与不可变 manifest 的辅助逻辑在 [scripts/archived-agent-notes.ts](../../../scripts/archived-agent-notes.ts)；sha256 manifest 只追加，校验从 git 读取基线——`DSH_ARCHIVE_BASE_REF` 指定引用，默认 `HEAD`（CI 提供其可信的变更前提交）。封存把现存内容与基线封存的内容对比：任何变化或缺失的 hash 都会失败，归档历史因此无法被无声改写。
+归档格式、三件套与不可变 manifest 的辅助逻辑在 [scripts/archived-agent-notes.ts](../../../scripts/archived-agent-notes.ts)；sha256 manifest 只追加，校验从 git 读取基线——`ACF_ARCHIVE_BASE_REF` 指定引用，默认 `HEAD`（CI 提供其可信的变更前提交）。封存把现存内容与基线封存的内容对比：任何变化或缺失的 hash 都会失败，归档历史因此无法被无声改写。
 
 ## 执法
 
@@ -24,7 +24,7 @@ Solo ✗ · Small ✗ · Medium ✓ · Large ✓
 ## 移植清单
 
 - 归档时封存：`pnpm run verify-archived-agent-notes --write`；既有封存永不改变。
-- CI 中从可信引用读取基线：设置 `DSH_ARCHIVE_BASE_REF`；本地默认以 `HEAD` 为基线。
+- CI 中从可信引用读取基线：设置 `ACF_ARCHIVE_BASE_REF`；本地默认以 `HEAD` 为基线。
 - 把移除当作迁移：一条公开的批量移除提交，封存随后改守新基线。
 - 验证：`pnpm run verify-archived-agent-notes`。
 

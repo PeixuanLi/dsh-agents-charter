@@ -7,7 +7,7 @@
 
 ## 规则正文
 
-聚合的公开名称由 package script 持有；运行器 [scripts/run-gates.ts](../../../scripts/run-gates.ts) 持有在它之下执行的部分：经过校验的依赖图、由环境选择的调度行为，以及进程诊断。两个聚合分别是 `doc-sync`（完整文档矩阵）与 `doc-quick`（它的免构建子集，以 `pnpm run test:docs` 暴露）。每个门禁用 `needs`/`after` 依赖边声明顺序；工作进程数有界——默认取自可用并行度，通过 `DSH_GATE_CONCURRENCY` 覆盖；`DSH_GATE_FAIL_FAST=1` 在首个阻断性失败处停止聚合，终止仍在运行的子进程，并清理整棵进程树而不只是直接子进程。
+聚合的公开名称由 package script 持有；运行器 [scripts/run-gates.ts](../../../scripts/run-gates.ts) 持有在它之下执行的部分：经过校验的依赖图、由环境选择的调度行为，以及进程诊断。两个聚合分别是 `doc-sync`（完整文档矩阵）与 `doc-quick`（它的免构建子集，以 `pnpm run test:docs` 暴露）。每个门禁用 `needs`/`after` 依赖边声明顺序；工作进程数有界——默认取自可用并行度，通过 `ACF_GATE_CONCURRENCY` 覆盖；`ACF_GATE_FAIL_FAST=1` 在首个阻断性失败处停止聚合，终止仍在运行的子进程，并清理整棵进程树而不只是直接子进程。
 
 ## 执法
 
@@ -25,7 +25,7 @@ Solo ✗ · Small ✓ · Medium ✓ · Large ✓
 
 - 把聚合命名为 package script；依赖图由运行器持有，绝不放进临时拼装的 shell 链。
 - 门禁顺序用 `needs`/`after` 边声明，不靠启动顺序碰运气。
-- 保持并发有界：工作进程数取默认上限，并留出覆盖旋钮（`DSH_GATE_CONCURRENCY`）。
+- 保持并发有界：工作进程数取默认上限，并留出覆盖旋钮（`ACF_GATE_CONCURRENCY`）。
 - 接上快速失败与信号转发，让首个阻断性失败终止整棵进程树。
 - 让运行器保持单元测试覆盖；调度与清理都是会产生回归的代码。
 - 验证：`pnpm run doc-sync`。

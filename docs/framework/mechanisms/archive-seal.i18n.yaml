@@ -6,8 +6,8 @@
   en: 129ca7a3cfd3e88f
   zh: 4e741ff3653014c5
 /the-archive-seal-compares-against-a-git-baseline/rule-text:
-  en: d3403e3caa08d7ad
-  zh: f793c7af2c2da042
+  en: f65f57b3ba55302d
+  zh: deb8d62fd1a9cb7c
 /the-archive-seal-compares-against-a-git-baseline/enforcement:
   en: 917f4a6f0de45096
   zh: b8199b96ee681616
@@ -18,8 +18,8 @@
   en: 0634b1cd703e8b9c
   zh: f1248ee90fc23968
 /the-archive-seal-compares-against-a-git-baseline/porting-checklist:
-  en: 02168dfa3c6fe23d
-  zh: da7a391aa4e03410
+  en: c865c3b896c2dd0f
+  zh: f6835f28c474eba8
 /the-archive-seal-compares-against-a-git-baseline/failure-mode:
   en: 913602b7562360f4
   zh: e030d5fa2781811b

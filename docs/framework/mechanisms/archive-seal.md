@@ -7,7 +7,7 @@ English | [中文](archive-seal.zh.md)
 
 ## Rule text
 
-The archive-format, triplet, and immutable-manifest helpers live in [scripts/archived-agent-notes.ts](../../../scripts/archived-agent-notes.ts); the sha256 manifest is append-only, and verification reads its baseline from git — `DSH_ARCHIVE_BASE_REF` names the ref, defaulting to `HEAD` (CI supplies its trusted pre-change commit). The seal compares what remains against what the baseline sealed: any changed or missing hash fails, so archive history cannot be rewritten quietly.
+The archive-format, triplet, and immutable-manifest helpers live in [scripts/archived-agent-notes.ts](../../../scripts/archived-agent-notes.ts); the sha256 manifest is append-only, and verification reads its baseline from git — `ACF_ARCHIVE_BASE_REF` names the ref, defaulting to `HEAD` (CI supplies its trusted pre-change commit). The seal compares what remains against what the baseline sealed: any changed or missing hash fails, so archive history cannot be rewritten quietly.
 
 ## Enforcement
 
@@ -24,7 +24,7 @@ Solo ✗ · Small ✗ · Medium ✓ · Large ✓
 ## Porting checklist
 
 - Seal at archival time: `pnpm run verify-archived-agent-notes --write`; existing seals never change.
-- Read the baseline from a trusted ref in CI by setting `DSH_ARCHIVE_BASE_REF`; locally the default `HEAD` is the baseline.
+- Read the baseline from a trusted ref in CI by setting `ACF_ARCHIVE_BASE_REF`; locally the default `HEAD` is the baseline.
 - Treat removal as a transition: one disclosed mass-removal commit, then the seal holds against the new baseline.
 - Verify: `pnpm run verify-archived-agent-notes`.
 
