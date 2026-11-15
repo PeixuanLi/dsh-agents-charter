@@ -22,10 +22,10 @@ pnpm install
 
 The installer writes worktree-local Lefthook hooks under `$GIT_DIR/acf-hooks`, marks that directory with an ownership marker, and points the worktree's `core.hooksPath` at it, so each worktree owns its hooks and no hook artifact lands in the working tree. It refuses to replace a user-owned `core.hooksPath` or overwrite an unowned hooks directory instead of forcing either; the [worktree-local hooks Agent Note](../.agents/notes/implemented/process/2026-07-27-worktree-local-lefthook.md) owns the hook-path safety contract. The installer handles the Windows specifics itself (`.cmd` shim quoting, CRLF-stripped Git output, delayed access to a deleted lock), so no separate toolchain or WSL setup is needed. If the hooks are missing because dependencies were restored from cache or `postinstall` was skipped, run `node scripts/install-lefthook.mjs`; after moving a checkout, rerun the wrapper to regenerate the owned path.
 
-A checkout whose hooks predate the current marker owner or hooks-directory name is refused. Remedy once per checkout, deleting the stale gitdir hooks directory:
+A checkout whose hooks predate the current marker owner, marker version, or hooks-directory name is refused. Remedy once per checkout, deleting the stale gitdir hooks directory:
 
 ```sh
-git config --worktree --unset-all core.hooksPath && rm -rf "$(git rev-parse --absolute-git-dir)/acf-hooks" && pnpm install
+git config --worktree --unset-all core.hooksPath; rm -rf "$(git rev-parse --absolute-git-dir)/acf-hooks"; pnpm install
 ```
 
 Run `pnpm run typecheck` once on a fresh clone; setup is complete when it exits successfully.
