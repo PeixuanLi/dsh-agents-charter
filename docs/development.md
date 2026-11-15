@@ -79,6 +79,10 @@ Use one of three comment tags to flag known issues in the code, ordered by urgen
 
 Pick the tag that matches the urgency so anyone scanning the code can tell a release blocker from a someday-maybe.
 
+## CI
+
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs typecheck, lint, the spec suite, and `doc-sync` on every pull request and master push, on one Linux lane, and closes with the single `all checks passed` verdict for branch protection; Dependabot opens weekly npm and GitHub Actions update pull requests.
+
 ## What has no lane here
 
-This tree has no build, coverage, or CI lanes: no bundling, no coverage percentage, no platform matrix. Those lanes belong to the upstream harness whose layout the reference pages describe, or to the adopting project — the [L3 porting analysis](framework/layers/l3-machine-verification.md) prices them. The verification surface that remains is [testing.md](testing.md)'s tiers and evidence.
+This tree has no build, coverage, or platform-matrix lanes: no bundling, no coverage percentage, no platform matrix. Those lanes belong to the upstream harness whose layout the reference pages describe, or to the adopting project — the [L3 porting analysis](framework/layers/l3-machine-verification.md) prices them. The verification surface that remains is [testing.md](testing.md)'s tiers and evidence.

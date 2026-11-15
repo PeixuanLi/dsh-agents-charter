@@ -81,6 +81,10 @@ git config --worktree --unset-all core.hooksPath; rm -rf "$(git rev-parse --abso
 
 请选择与紧急程度匹配的标签，让浏览代码的人一眼分清「发布阻塞」和「有空再说」。
 
+## CI
+
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) 在每次 pull request 和 master 推送时，于一条 Linux lane 上运行 typecheck、lint、spec 套件和 `doc-sync`，并以分支保护所需的单一 `all checks passed` 裁决收尾；Dependabot 每周为 npm 依赖和 GitHub Actions 版本开启更新 pull request。
+
 ## 本树没有的 lane
 
-本树没有构建、覆盖率或 CI lane：没有打包、没有覆盖率百分比、没有平台矩阵。这些 lane 属于参照页面所描述的上游 harness，或属于采纳本框架的项目——[L3 移植分析](framework/layers/l3-machine-verification.zh.md)为它们定价。剩下的验证面就是 [testing.md](testing.zh.md)（测试策略）的档位与证据。
+本树没有构建、覆盖率或平台矩阵 lane：没有打包、没有覆盖率百分比、没有平台矩阵。这些 lane 属于参照页面所描述的上游 harness，或属于采纳本框架的项目——[L3 移植分析](framework/layers/l3-machine-verification.zh.md)为它们定价。剩下的验证面就是 [testing.md](testing.zh.md)（测试策略）的档位与证据。
