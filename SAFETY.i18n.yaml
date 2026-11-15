@@ -5,15 +5,12 @@
 /safety:
   en: 6b955a8278d2534d
   zh: 698d9da8394b9e20
-/safety/experimental-status:
-  en: 39a995a6c819f73e
-  zh: e577df19392736ac
-/safety/sandbox-limitations:
-  en: a2b6cf1311f3abb6
-  zh: c3694663312f4d6c
-/safety/responsible-use:
-  en: ca3e9da7c0b360fe
-  zh: c0a6891a197d48cd
-/safety/no-warranty-or-liability:
-  en: 71a2989f530f2018
-  zh: e90e55f11068a91f
+/safety/what-this-repository-ships:
+  en: 33dd555affc437b4
+  zh: 20b7028d4983e5c0
+/safety/reporting:
+  en: 84288bb56faec4ce
+  zh: d4128988161f74e2
+/safety/reference-configurations:
+  en: c6d1f5b659bdaa12
+  zh: 2c1073a94804ba32

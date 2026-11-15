@@ -2,26 +2,14 @@
 
 [English](SAFETY.md) | 中文
 
-## 实验性状态
+## 本仓库交付什么
 
-DeepSeek Harness 是实验性的开发者预览软件。它尚未接受安全审计，不得视为安全或可用于生产环境的软件。
+本仓库是一份治理语料：文档、治理门禁与参照配置。它不交付任何运行时产品，也不运行任何网络服务，仓库中没有内容读取模型凭据（[密钥策略](AGENTS.md#secrets--env)）。
 
-本项目可以执行模型生成的代码与命令、加载第三方插件，并访问向其开放的网络、进程、凭据和文件。错误的模型输出、缺陷、配置错误、恶意输入或不可信插件可能损坏宿主计算机、修改或删除文件、泄露数据或凭据，或造成其他非预期影响。
+## 报告
 
-## 沙箱限制
+门禁脚本或其他维护文件的缺陷与漏洞，请通过本仓库的 [GitHub 安全公告](https://github.com/PeixuanLi/dsh-agents-charter/security/advisories/new)或 [issue](https://github.com/PeixuanLi/dsh-agents-charter/issues) 报告。上游 DeepSeek Harness 的产品安全事项属于 [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)，不属于本仓库。
 
-沙箱、审批提示与权限控制可以降低风险，但不保证隔离，也不能保证防止损害。即使限制得到正确执行，也无法保护本项目获准访问的资源。
+## 参照配置
 
-不要把 DeepSeek Harness 当作不可信工作负载唯一的安全控制措施。
-
-## 负责任地使用
-
-- 仅向本项目授予所需的最小权限和访问范围。
-- 优先在一次性虚拟机、容器或专用环境中运行。
-- 备份本项目可以访问的文件。
-- 除非你接受相关风险，否则不要向其暴露敏感凭据或数据。
-- 在允许运行前检查插件、配置和拟执行命令。
-
-## 不提供保证，不承担责任
-
-请在充分了解相关风险的前提下使用 DeepSeek Harness。本软件依照 [MIT License](LICENSE) 提供，不附带任何保证。在适用法律允许的最大范围内，对于使用本项目造成的计算机损坏、数据丢失或泄露、文件丢失或其他损害，作者和版权持有人不承担责任。
+[参照附录](reference/github/README.md)逐字恢复上游的 GitHub workflow 配置，因此这些文件会提到本仓库不存在的上游服务与密钥。部署它们是移植者的责任，包括附录列出的[移植前置条件](reference/github/README.md#porting-prerequisites)。

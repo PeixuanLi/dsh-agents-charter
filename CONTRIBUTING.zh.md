@@ -2,22 +2,16 @@
 
 [English](CONTRIBUTING.md) | 中文
 
-感谢你愿意为 DeepSeek Harness 作出贡献！
+本仓库是一份治理语料：文档与门禁脚本本身就是产出，因此大多数贡献修改的是文档、门禁或 Agent Note，而不是应用代码。[AGENTS.md](AGENTS.md) 中的约束体系约束每一项变更；[开发指南](docs/development.zh.md)拥有搭建教程与日常工作流。
 
-我们深信开源社区的力量，这份信念从项目最初就塑造着 DeepSeek Harness。
+## 一项变更承载什么
 
-DeepSeek Harness 仍处于早期阶段，并在积极开发中。很抱歉，我们目前无法接受外部 PR（Pull Request）。不过，贡献代码远非帮助本仓库建设的唯一途径。你还可以通过许多其他方式参与进来：
+文档伴随每一项变更：在同一个 PR（Pull Request）中更新受影响的页面与约定（[文档标准](docs/AGENTS.md)）。双语配对两侧一起更新，再用 `pnpm run verify-translation-pairing --write <en-path>` 重录伴随记录（[配对约定](docs/i18n/README.zh.md)）；字数预算保持成立（[预算](docs/AGENTS.md#wordcount-budgets)）。按[测试策略](docs/testing.zh.md)与 [pre-push-checks](.agents/skills/pre-push-checks/SKILL.md) skill（技能）选取覆盖变更面的证据。
 
-- 在 GitHub Discussions 中发现并报告问题或 bug：
-  - 为你希望引起团队关注的讨论投票。我们的团队规模很小，可能无法回复每个帖子，但我们会持续关注，并在分配资源时将这些讨论纳入考虑。
-- 为生态系统作出贡献：
-  - 创建令你感兴趣的插件，并分享给其他人：
-    - 为你的 GitHub 项目添加 `dsh-plugin` 话题，让其他人更容易找到你的插件。
-  - 撰写有关 DeepSeek Harness 的博客文章和操作指南。
-  - 回答问题并帮助其他社区成员。
+## 推送之前
 
-DeepSeek Harness 的设计支持深度定制。我们并不认为官方仓库中的包天然就比社区开发的包更重要。你可以将本仓库看作一种理念、一份官方示例以及一处灵感来源，而不是我们要求社区遵循的方向。
+运行覆盖你 diff 的检查：语料变更运行 `pnpm run doc-sync`，门禁变更运行所属的 Vitest spec。绝不静默门禁——红灯门禁标记的是缺陷或一条必须修改的规则，而不是需要绕开的障碍。
 
-我们已经看到社区中涌现出令人期待的项目，也希望生态系统继续沿着自己的方向发展。
+## Issue 与 pull request
 
-探索未至之境。
+请在 [GitHub](https://github.com/PeixuanLi/dsh-agents-charter) 上提交 issue 与 pull request。
