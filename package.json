@@ -40,7 +40,7 @@
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.20.1",
     "eslint-plugin-sonarjs": "^4.2.0",
-    "js-yaml": "^4.3.2",
+    "js-yaml": "^5.5.0",
     "jsdom": "29.1.1",
     "lefthook": "^2.1.12",
     "mdast-util-from-markdown": "^2.0.3",
