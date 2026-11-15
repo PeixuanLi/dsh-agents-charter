@@ -10,7 +10,7 @@
 
 ## 推送之前
 
-运行覆盖你 diff 的检查：语料变更运行 `pnpm run doc-sync`，门禁变更运行所属的 Vitest spec。绝不静默门禁——红灯门禁标记的是缺陷或一条必须修改的规则，而不是需要绕开的障碍。
+运行覆盖你 diff 的检查：语料变更运行 `pnpm run doc-sync`，门禁变更运行所属的 Vitest spec。绝不让门禁静默————红灯门禁标记的是缺陷或一条必须修改的规则，而不是需要绕开的障碍。
 
 ## Issue 与 pull request
 
