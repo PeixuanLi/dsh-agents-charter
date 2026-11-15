@@ -47,7 +47,7 @@ profile 是按团队投入排序的机制卡片打包：P0 只需成文规则，
 - [每个 PR 一种 kind；area 多选](mechanisms/pr-classification.zh.md)
 - [依赖式 PR 链在租约下重写，sync 后立即验证](mechanisms/stacked-pr.zh.md)
 
-这些机制从恢复于 [reference/github/](../../reference/github/README.md) 的参照配置部署，该目录位于本规范目录之外。验收：加权评审 workflow 在 org app、secrets 与稳定成员就位后即可部署；issue workflow 只有在移植者补齐参照 README 点名的未恢复 `.github/issue-management/` 引擎后才可部署。
+这些机制从恢复于 [reference/github/](../../reference/github/README.md) 的参照配置部署，该目录位于本规范目录之外。验收：加权评审 workflow 在 org app、secrets 与稳定成员就位后即可部署；issue workflow 在移植者提供 Project App、改写 org 钉死值后即可部署。
 
 ## 移植顺序
 

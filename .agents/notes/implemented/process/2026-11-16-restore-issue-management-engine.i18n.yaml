@@ -1,0 +1,19 @@
+# Bilingual-pair consistency record for 2026-11-16-restore-issue-management-engine.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-11-16-restore-issue-management-engine.md
+/agent-note-restore-the-issue-management-engine-into-the-reference-appendix:
+  en: 3d5bd50690aa9360
+  zh: d5862edd82b2949b
+/agent-note-restore-the-issue-management-engine-into-the-reference-appendix/problem:
+  en: 94f20f88cb4c4e04
+  zh: 967a8d611665c5f1
+/agent-note-restore-the-issue-management-engine-into-the-reference-appendix/decision:
+  en: 597cda25ac16042f
+  zh: b535ab874c3c92df
+/agent-note-restore-the-issue-management-engine-into-the-reference-appendix/alternatives-considered:
+  en: e78b87e49bda30ca
+  zh: 7c83949c4e225c4d
+/agent-note-restore-the-issue-management-engine-into-the-reference-appendix/consequences:
+  en: f1d614c3bf6bef92
+  zh: e6129fc1ab3eb9ca

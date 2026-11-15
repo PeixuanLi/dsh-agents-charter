@@ -47,7 +47,7 @@ Acceptance: `verify-agent-note-format`, `verify-doc-budgets`, `verify-archived-a
 - [One kind per PR; areas are multi-select](mechanisms/pr-classification.md)
 - [Stacked PRs rewrite under lease, and sync verifies immediately](mechanisms/stacked-pr.md)
 
-These mechanisms deploy from the reference configurations restored under [reference/github/](../../reference/github/README.md), which lives outside this spec directory. Acceptance: the weighted-review workflow deploys with an org app, secrets, and stable membership in place; the issue workflows deploy only once the porter supplies the not-restored issue-management engine the reference README names.
+These mechanisms deploy from the reference configurations restored under [reference/github/](../../reference/github/README.md), which lives outside this spec directory. Acceptance: the weighted-review workflow deploys with an org app, secrets, and stable membership in place; the issue workflows deploy once the porter supplies the Project App and rewrites the org pins.
 
 ## Porting order
 
