@@ -2,7 +2,7 @@
 
 English | [中文](README.zh.md)
 
-This directory is the extractable spec layer of the agents collaboration framework over its living reference implementation — one repository spanning the execution plane and this spec layer. The framework turns collaboration norms that previously depended on human tacit understanding into machine-executable constraints: AI agents produce the output, humans decide direction, machines enforce the rules, and Agent Notes keep the rationale. The [framework paradigm](paradigm.md) states the model — its five mechanism layers and four assertions — and names the sources this corpus derives from.
+This directory is the extractable spec layer of [dsh-agents-charter](../../README.md) over its living reference implementation — one repository spanning the execution plane and this spec layer. The framework turns collaboration norms that previously depended on human tacit understanding into machine-executable constraints: AI agents produce the output, humans decide direction, machines enforce the rules, and Agent Notes keep the rationale. The [framework paradigm](paradigm.md) states the model — its five mechanism layers and four assertions — and names the sources this corpus derives from.
 
 ## How to read this spec
 

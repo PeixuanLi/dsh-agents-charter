@@ -22,10 +22,10 @@ pnpm install
 
 安装器把 worktree 本地的 Lefthook 钩子写入 `$GIT_DIR/acf-hooks`，在该目录中放置所有权标记，并把该 worktree 的 `core.hooksPath` 指向它，因此每个 worktree 拥有自己的钩子，工作树中不会出现任何钩子产物。遇到用户自有的 `core.hooksPath` 或无所有权标记的钩子目录时，安装器直接拒绝，而不是强行覆盖；[worktree 本地钩子 Agent Note](../.agents/notes/implemented/process/2026-07-27-worktree-local-lefthook.zh.md) 拥有钩子路径的安全约定。安装器自行处理 Windows 细节（`.cmd` shim 的引号解析、Git 输出的 CRLF 剥离、已删除锁文件的延迟访问），因此既不需要单独的工具链，也不需要 WSL。如果依赖从缓存恢复或 `postinstall` 被跳过导致钩子缺失，请运行 `node scripts/install-lefthook.mjs`；移动检出目录后，请重新运行安装器以重新生成自有路径。
 
-如果检出的钩子早于 `dsh-hooks` → `acf-hooks` 改名，安装器会拒绝其 worktree `core.hooksPath`。每个检出修复一次即可（gitdir 下陈旧的 `dsh-hooks` 目录可以删除）：
+如果检出的钩子早于当前的标记 owner 或钩子目录名，安装器会拒绝。每个检出修复一次，删除 gitdir 下陈旧的钩子目录：
 
 ```sh
-git config --worktree --unset-all core.hooksPath && pnpm install
+git config --worktree --unset-all core.hooksPath && rm -rf "$(git rev-parse --absolute-git-dir)/acf-hooks" && pnpm install
 ```
 
 新克隆后请先运行一次 `pnpm run typecheck`；它成功退出即表示搭建完成。

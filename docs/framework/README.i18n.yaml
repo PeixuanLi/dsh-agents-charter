@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/framework/README.md
 /agents-collaboration-framework:
-  en: 20f63b7fb465d7cc
-  zh: 59942e8940d0ade3
+  en: af57980f4258292d
+  zh: 923e0dd9f6ea6f77
 /agents-collaboration-framework/how-to-read-this-spec:
   en: f4faa8117d63d7e6
   zh: 74d44c55e5e1c748

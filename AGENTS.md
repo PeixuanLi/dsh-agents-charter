@@ -1,6 +1,6 @@
 # AGENTS.md
 
-`agents-collab-framework` is a dual-plane repository. The execution plane is the living constraint system this file governs — the `scripts/` governance gates and the `.agents/` corpus; the spec layer is [docs/framework/README.md](docs/framework/README.md), the five-layer mechanism catalog extracted from it. Read [scripts/AGENTS.md](scripts/AGENTS.md) before changing `scripts/`; documentation follows [docs/AGENTS.md](docs/AGENTS.md).
+`dsh-agents-charter` is a dual-plane repository. The execution plane is the living constraint system this file governs — the `scripts/` governance gates and the `.agents/` corpus; the spec layer is [docs/framework/README.md](docs/framework/README.md), the five-layer mechanism catalog extracted from it. Read [scripts/AGENTS.md](scripts/AGENTS.md) before changing `scripts/`; documentation follows [docs/AGENTS.md](docs/AGENTS.md).
 
 ## Repository layout
 

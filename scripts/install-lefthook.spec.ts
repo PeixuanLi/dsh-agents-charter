@@ -663,7 +663,7 @@ syncBuiltinESMExports()
       join(externalHooks, '.acf-lefthook-owned'),
       `${JSON.stringify({
         version: 1,
-        owner: 'agents-collab-framework worktree-local lefthook hooks',
+        owner: 'dsh-agents-charter worktree-local lefthook hooks',
         hooksPath: externalHooks,
       })}\n`,
       0o600,
