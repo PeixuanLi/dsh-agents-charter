@@ -2,7 +2,7 @@
 
 This tree is the L1/L5 GitHub-process reference configuration set of the upstream DeepSeek Harness: weighted review ownership, the issue policy lifecycle with its `issue-management/` policy engine, the pull-request and issue templates, and the dsh release packaging workflow. The 33 files were restored byte-exact from revision `fcc0ad4621` — the last full tree before the skeleton strip, and simultaneously the newest revision of every file. Upstream they live under `.github/`; here `reference/github/<path>` corresponds to `.github/<path>`. The adoption path through these configurations starts at [docs/framework/profiles.md](../../docs/framework/profiles.md).
 
-The tree is pure reference material. Nothing here is wired into this repository's CI or gates, and none of it is part of the governed corpus; it has the same status as the 16 reference-corpus skills under `.agents/skills/`, each marked with the "reference corpus material" banner. Files keep their upstream bytes, so they name upstream paths and scripts that do not exist in this tree.
+The tree is pure reference material. Nothing here is wired into this repository's CI or gates, and none of it is part of the governed corpus; it has the same status as the 16 reference-corpus skills under `.agents/skills/`, each marked with the "reference corpus material" banner. Files keep their upstream bytes, so they name upstream paths and scripts that do not exist in this tree. A deployed, personal-account adaptation of the issue mechanism lives at `.github/issue-management/` with both issue workflows; [the port Agent Note](../../.agents/notes/implemented/process/2026-11-16-port-issue-management-personal.md) records the adaptation, and this tree stays the canonical upstream bytes.
 
 ## Contents
 

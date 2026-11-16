@@ -1,0 +1,22 @@
+# Bilingual-pair consistency record for 2026-11-16-port-issue-management-personal.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-11-16-port-issue-management-personal.md
+/agent-note-port-the-issue-mechanism-to-a-personal-account:
+  en: 394a9b681a41dcdc
+  zh: 920edab06ed9cabb
+/agent-note-port-the-issue-mechanism-to-a-personal-account/problem:
+  en: f053c7224931c76d
+  zh: 9f9d80b2e52948bc
+/agent-note-port-the-issue-mechanism-to-a-personal-account/decision:
+  en: cf01b896dbdbe6ea
+  zh: 39eeff8877d5151b
+/agent-note-port-the-issue-mechanism-to-a-personal-account/alternatives-considered:
+  en: 1eb9625627275608
+  zh: e18ee2b66ffd5ee2
+/agent-note-port-the-issue-mechanism-to-a-personal-account/consequences:
+  en: 8e51a60606fa60ef
+  zh: d5ec5168211af064
+/agent-note-port-the-issue-mechanism-to-a-personal-account/testing:
+  en: b051cb288400f1a8
+  zh: 8bc9f62c9e24cced
