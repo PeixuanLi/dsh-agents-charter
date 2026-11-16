@@ -24,7 +24,7 @@ pnpm run test       # expect the full spec suite green
 
 ## 开始阅读
 
-从[规范层](docs/framework/README.zh.md)入手，接着读[框架范式](docs/framework/paradigm.zh.md)，再在[采纳 profile](docs/framework/profiles.zh.md) 中选择档位。要为执行面贡献约束，请阅读 [AGENTS.md](AGENTS.md)；日常工作流见[开发指南](docs/development.zh.md)。
+[采纳指南](docs/adoption-guide.zh.md)用一页为开发者、开发负责人与项目经理定位。从[规范层](docs/framework/README.zh.md)入手，接着读[框架范式](docs/framework/paradigm.zh.md)，再在[采纳 profile](docs/framework/profiles.zh.md) 中选择档位。要为执行面贡献约束，请阅读 [AGENTS.md](AGENTS.md)；日常工作流见[开发指南](docs/development.zh.md)。
 
 ## 来源与相关
 

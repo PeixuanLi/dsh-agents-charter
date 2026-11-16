@@ -24,7 +24,7 @@ The tree has no build step, and nothing in it reads model credentials — no API
 
 ## Start reading
 
-Start at the [spec layer](docs/framework/README.md), continue with the [framework paradigm](docs/framework/paradigm.md), then pick an adoption tier in the [profiles](docs/framework/profiles.md). To contribute constraints to the execution plane, read [AGENTS.md](AGENTS.md); the [development guide](docs/development.md) owns the daily workflow.
+The [adoption guide](docs/adoption-guide.md) orients developers, development leads, and project managers in one page. Start at the [spec layer](docs/framework/README.md), continue with the [framework paradigm](docs/framework/paradigm.md), then pick an adoption tier in the [profiles](docs/framework/profiles.md). To contribute constraints to the execution plane, read [AGENTS.md](AGENTS.md); the [development guide](docs/development.md) owns the daily workflow.
 
 ## Sources and related
 

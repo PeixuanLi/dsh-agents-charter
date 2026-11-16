@@ -1,0 +1,22 @@
+# Bilingual-pair consistency record for adoption-guide.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/adoption-guide.md
+/adoption-guide:
+  en: 8a8d61f71f1184fb
+  zh: 7a331678aab14c7a
+/adoption-guide/scenario-capabilities-and-dependencies:
+  en: a4a4b1fa5fb7e50f
+  zh: b68572155a4f5dca
+/adoption-guide/across-the-development-lifecycle:
+  en: 79fff1155ab88fbd
+  zh: a007907ae1810ddb
+/adoption-guide/in-ai-assisted-operations:
+  en: aae42c3887ea2488
+  zh: 2d54c91552bc50f6
+/adoption-guide/claude-code-and-opencode-from-one-rule-source:
+  en: c63831e9a86c8b2c
+  zh: f4fce6ebbcd5acd8
+/adoption-guide/the-adoption-ladder:
+  en: 61358adb270606ba
+  zh: 03f2a810a6ec2f6a
