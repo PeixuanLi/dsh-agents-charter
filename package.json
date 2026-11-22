@@ -41,7 +41,7 @@
     "@types/node": "^26.6.6",
     "eslint-plugin-sonarjs": "^4.2.0",
     "js-yaml": "^5.5.0",
-    "jsdom": "29.1.1",
+    "jsdom": "31.0.1",
     "lefthook": "^2.1.12",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-gfm": "^3.1.0",
